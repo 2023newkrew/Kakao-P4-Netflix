@@ -1,18 +1,22 @@
-import Banner from "./components/Banner/Banner";
-import CardSlide from "./components/CardSlide/CardSlide";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
+import Banner from "@components/banner/Banner";
+import CardSlide from "@components/cardSlide/CardSlide";
+import Footer from "@components/footer/Footer";
+import Header from "@components/header/Header";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Header />
       <Banner />
       <CardSlide />
       <CardSlide />
       <CardSlide />
+      <CardSlide />
+      <CardSlide />
+      <CardSlide />
+      <CardSlide />
       <Footer />
-    </div>
+    </>
   );
 };
 
