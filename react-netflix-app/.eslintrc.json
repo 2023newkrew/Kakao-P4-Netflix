@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime", "google"],
+  "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime", "google", "plugin:prettier/recommended"],
 
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -15,8 +15,6 @@
   },
   "plugins": ["react", "eslint-plugin-react"],
   "rules": {
-    "max-len": ["error", 120],
-    "no-trailing-spaces": ["error", { "ignoreComments": true }],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "require-jsdoc": "off",
