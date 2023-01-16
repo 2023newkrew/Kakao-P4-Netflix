@@ -1,6 +1,6 @@
 import { Route, Routes as ReactRouterRoutes, Navigate } from 'react-router-dom';
-import { routes } from './constants/route.contant';
-import { Route as RouteType } from './models/route.model';
+import { routes } from '@constants/route.contant';
+import { Route as RouteType } from '@models/route.model';
 
 export default function Routes() {
   return (
