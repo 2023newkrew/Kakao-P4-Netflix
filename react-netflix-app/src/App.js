@@ -1,19 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import tw, { styled } from 'twin.macro';
 
+const PageContainer = tw.div`bg-[#123123] h-full w-full`;
+const Header = styled.header`
+  background: #1e293b;
+  ${tw`text-white`};
+`;
 function App() {
   return (
-    <div className="App">
-      <header className="p-4 pt-2">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PageContainer>
+      <Header>헤더</Header>
+    </PageContainer>
   );
 }
 
