@@ -15,3 +15,8 @@
   position: fixed;
   background-color: rgb(20, 20, 20);
 }
+
+.header .header__check-top {
+  position: absolute;
+  width: 100%;
+}

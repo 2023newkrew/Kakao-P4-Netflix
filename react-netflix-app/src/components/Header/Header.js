@@ -1,24 +1,34 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styles from "./Header.css";
 import HeaderLeft from "./HeaderLeft/HeaderLeft";
 import HeaderRight from "./HeaderRight/HeaderRight";
 
 export default function Header() {
-  const headerRef = useRef(null);
+  const [isTop, setIsTop] = useState(true);
+  const topCheckerRef = useRef(null);
+  const observerRef = useRef(
+    new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        entry.intersectionRatio === 0 ? setIsTop(false) : setIsTop(true);
+      });
+    })
+  );
+
   useEffect(() => {
-    document.addEventListener("scroll", (event) => {
-      if (window.scrollY !== 0) {
-        headerRef.current.classList.add("not-top");
-      } else {
-        headerRef.current.classList.remove("not-top");
-      }
-    });
+    observerRef.current.observe(topCheckerRef.current);
+
+    return () => {
+      observerRef.current.disconnect();
+    };
   }, []);
 
   return (
-    <div className="header" ref={headerRef}>
-      <HeaderLeft />
-      <HeaderRight />
-    </div>
+    <>
+      <div className="header__check-top" ref={topCheckerRef}></div>
+      <div className={"header" + (isTop ? "" : " not-top")}>
+        <HeaderLeft />
+        <HeaderRight />
+      </div>
+    </>
   );
 }
