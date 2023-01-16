@@ -1,0 +1,37 @@
+.search_container {
+  height: 100%;
+  flex: 0.15;
+
+  min-width: 290px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  .input_container {
+    height: 100%;
+    width: 100%;
+    
+
+    display: flex;
+
+    .input_image{
+      flex:0.1;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    img {
+      height: 30px;
+    }
+  }
+
+    input {
+      flex: 1;
+      height: 100%;
+      border: 0px;
+      color: white;
+    }
+  }
+}
