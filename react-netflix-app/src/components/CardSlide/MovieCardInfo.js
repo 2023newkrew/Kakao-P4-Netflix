@@ -10,7 +10,7 @@ import genre from "../../json/genre.json";
 const MovieCardInfo = ({ movie }) => {
   function movieCategory() {
     const movieCategoryIdList = movie.genre_ids;
-    const movieCategory = movieCategoryIdList.map((value) => <li>{genre[value]}</li>);
+    const movieCategory = movieCategoryIdList.map((value, index) => <li key={index}>{genre[value]}</li>);
     return movieCategory;
   }
 

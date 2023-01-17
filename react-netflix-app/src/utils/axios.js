@@ -10,11 +10,9 @@ class Axios {
     const response = await axios.get(`${this.API_URL}/3/movie/${bannerMovie.id}/videos?api_key=${this.API_KEY}`);
     const bannerMovieTrailerURLs = response.data.results;
 
-    for (let index = 0; index < bannerMovieTrailerURLs.length; index++) {
-      if (bannerMovieTrailerURLs[index].type === "Trailer") {
-        return bannerMovieTrailerURLs[index].key;
-      }
-    }
+    const bannerMovieTrailerURL = bannerMovieTrailerURLs.find((element) => element.type === "Trailer");
+
+    return bannerMovieTrailerURL.key;
   }
 
   async fetchBannerMovie() {

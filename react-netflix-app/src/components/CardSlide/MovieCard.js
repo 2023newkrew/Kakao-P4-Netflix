@@ -11,7 +11,7 @@ const MovieCard = ({ movie }) => {
   return (
     <div className="movieCard_container" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
       <img className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} />
-      {hover && <MovieCardInfo movie={movie} hover={hover} />}
+      {hover && <MovieCardInfo movie={movie} />}
     </div>
   );
 };

@@ -21,14 +21,12 @@ const Banner = () => {
   }, []);
 
   if (bannerMovie === undefined) return <div>값을 렌더링하는 중입니다.</div>;
-  else {
-    return (
-      <div className="banner_container">
-        <BannerMovie bannerMovie={bannerMovie} />
-        <BannerInfo bannerMovie={bannerMovie} />
-      </div>
-    );
-  }
+  return (
+    <div className="banner_container">
+      <BannerMovie bannerMovie={bannerMovie} />
+      <BannerInfo bannerMovie={bannerMovie} />
+    </div>
+  );
 };
 
 export default Banner;
