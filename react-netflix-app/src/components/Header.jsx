@@ -43,7 +43,7 @@ export default function Header() {
     <HeaderLayout>
       <Navigation>
         <Logo>
-          <LogoImage width="100%" height="100%" />
+          <LogoImage />
         </Logo>
         <MenuList>
           <MenuItem>홈</MenuItem>
@@ -54,10 +54,10 @@ export default function Header() {
           <MenuItem>언어별로 찾아보기</MenuItem>
         </MenuList>
         <Button>
-          <SearchIcon fill="white" />
+          <SearchIcon />
         </Button>
         <Button>
-          <NotificationsIcon fill="white" />
+          <NotificationsIcon />
         </Button>
       </Navigation>
     </HeaderLayout>

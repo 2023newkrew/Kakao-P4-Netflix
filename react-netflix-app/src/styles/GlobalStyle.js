@@ -7,4 +7,10 @@ export default createGlobalStyle`
   body {
     color: white;
   }
+
+  svg {
+    width: ${(props) => props.width || '100%'};
+    height: ${(props) => props.height || '100%'};
+    fill: ${(props) => props.fill || 'white'};
+  }
 `;
