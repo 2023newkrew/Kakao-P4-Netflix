@@ -9,12 +9,14 @@ import useConst from '../../hooks/useConst';
 
 const reducer = (state, action) => {
   const { length, page, displayNumber } = state;
+  const maxPage = length - displayNumber;
 
   switch (action.type) {
     case 'page':
     {
       const { value } = action;
-      if (value < 0 || value > length - displayNumber) return state;
+      if (value < 0) return { ...state, page: 0 };
+      if (value > maxPage) return { ...state, page: maxPage };
       return { ...state, page: value };
     }
     case 'displayNumber':
@@ -72,17 +74,13 @@ function MovieList({ initialMovies }) {
     return () => { mqls.forEach((mql) => mql.removeEventListener('change', handleChangeEvent)); };
   }, []);
 
-  const maxPage = length - displayNumber;
-
   const handleLeftScrollButtonClick = () => {
-    if (page === 0) return;
-    const nextPage = page - 1;
+    const nextPage = page - displayNumber;
     dispatch({ type: 'page', value: nextPage });
   };
 
   const handleRightScrollButtonClick = () => {
-    if (page === maxPage) return;
-    const nextPage = page + 1;
+    const nextPage = page + displayNumber;
     dispatch({ type: 'page', value: nextPage });
   };
 
@@ -105,6 +103,8 @@ function MovieList({ initialMovies }) {
   useChange((prevPage) => {
     animateMoveListElement(prevPage, page);
   }, page);
+
+  const maxPage = length - displayNumber;
 
   return (
     <>
