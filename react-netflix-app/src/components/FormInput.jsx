@@ -9,7 +9,7 @@ const FormInput = ({ type = 'text', placeholder, errorMessage, rules, value }) =
 
   return (
     <InputContainer>
-      <InputField isError={!!!errorMessage}>
+      <InputField isError={!errorMessage}>
         <Input type={type} {...rules} />
         <PlaceLabel className="placeLabel" onClick={setInputFocus} hasValue={value}>
           {placeholder}
