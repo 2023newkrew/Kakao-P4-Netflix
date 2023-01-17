@@ -1,30 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
+
 .cardSlide_container {
+  position: relative;
   width: 100%;
-  height: 30%;
+  height: 40%;
 
   margin: 3vw 0;
-  padding-left: 60px;
-  
 
   display: flex;
   flex-direction: column;
 
   .cardSlide_title {
-    color:white;
+    color: white;
     font-family: 'Black Han Sans', sans-serif;
 
     font-size: 40px;
     padding: 10px 20px;
   }
 
-  .cardSlide_wrapper{
-    display: flex;
-
+  .cardSlide_wrapper {
+    position: relative;
+    overflow: auto;
     width: 100%;
-    height: 80%;
+    height: 100%;
 
-    
+    display: flex;
+    align-items: center;
+
+    .cardSlide_leftButton {
+      position: absolute;
+      left: 0;
+      z-index: 9999;
+    }
+
+    .cardSlide_rightButton {
+      position: absolute;
+      right: 0;
+      z-index: 9999;
+    }
+
+    .cardSlide_slide {
+      display: flex;
+
+      width: 100%;
+      height: 100%;
+
+      padding-left: 20px;
+    }
   }
 }
