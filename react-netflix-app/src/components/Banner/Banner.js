@@ -3,6 +3,8 @@ import "@scss/banner/banner.scss";
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
+import BannerMovie from "./BannerMovie";
+import BannerInfo from "./BannerInfo";
 
 const Banner = () => {
   const [bannerMovie, setBannerMovie] = useState();
@@ -19,24 +21,17 @@ const Banner = () => {
       const popularMovieList = response.data.results;
       const random = Math.floor(Math.random() * popularMovieList.length);
 
-      console.log(popularMovieList);
-
       setBannerMovie(popularMovieList[random]);
     }
     fetchAndSetBannerMovie();
   }, []);
 
-  if (bannerMovie === undefined) {
-    return <div>값을 렌더링하는 중입니다.</div>;
-  } else {
-    const bannerMovieImageURL = process.env.REACT_APP_IMAGE_API_URL + `/${bannerMovie.backdrop_path || bannerMovie.poster_path}`;
-
+  if (bannerMovie === undefined) return <div>값을 렌더링하는 중입니다.</div>;
+  else {
     return (
       <div className="banner_container">
-        <img className="banner_image" src={bannerMovieImageURL} alt="배너 영화 이미지" />
-        <div className="banner_info">
-          <div className="banner_title">{bannerMovie.title}</div>
-        </div>
+        <BannerMovie bannerMovie={bannerMovie} />
+        <BannerInfo bannerMovie={bannerMovie} />
       </div>
     );
   }

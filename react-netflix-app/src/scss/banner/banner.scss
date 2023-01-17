@@ -1,34 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
-
 .banner_container {
   width: 100%;
   height: 100%;
 
-  .banner_image {
 
-    width: 100%;
-    height: 100%;
-  }
-
-  .banner_info {
-    float: left;
-    position: absolute;
-
-    width: 40%;
-    height: 70%;
-    min-width: 400px;
-
-    top: 50%;
-    left: 2%;
-
-    color: white;
-
-    .banner_title {
-      font-size: 120px;
-
-      font-family: 'Black Han Sans', sans-serif;
-      font-weight: bold;
-      -webkit-text-stroke: 2px black;
-    }
-  }
 }

@@ -9,7 +9,7 @@ const Search = () => {
         <div className="input_image">
           <img src={magnifyGlass} alt="입력 돋보기 이미지" />
         </div>
-        <input />
+        <input placeholder="제목, 사람, 장르" />
       </div>
     </div>
   );
