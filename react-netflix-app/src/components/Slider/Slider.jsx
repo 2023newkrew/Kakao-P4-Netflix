@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SliderCard from "components/SliderCard/SliderCard";
+import { SliderCard } from "components";
 
 const Slider = ({ keyword }) => {
   const [contents, setContents] = useState([{ title: "더글로리" }]);
