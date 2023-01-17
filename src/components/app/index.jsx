@@ -7,9 +7,9 @@ function App() {
   return (
     <>
       오늘의 영화
-      <MovieList movies={movies} />
+      <MovieList initialMovies={movies} />
       내일의 영화
-      <MovieList movies={movies} />
+      <MovieList initialMovies={movies} />
     </>
   );
 }

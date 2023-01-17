@@ -1,10 +1,11 @@
 import './index.scss';
 import React, {
-  useEffect, useReducer, useRef, useState,
+  useEffect, useReducer, useRef,
 } from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card';
 import useChange from '../../hooks/useChange';
+import useConst from '../../hooks/useConst';
 
 const reducer = (state, action) => {
   const { length, page, displayNumber } = state;
@@ -47,8 +48,9 @@ const ScreenWidthQueryToDisplayNumber = {
 
 const createMqls = () => Object.values(ScreenWidthQuery).map(window.matchMedia);
 
-function MovieList({ movies }) {
-  const [mqls] = useState(createMqls);
+function MovieList({ initialMovies }) {
+  const movies = useConst(initialMovies);
+  const mqls = useConst(createMqls);
 
   const [{ page, length, displayNumber }, dispatch] = useReducer(
     reducer,
@@ -146,7 +148,7 @@ function MovieList({ movies }) {
 }
 
 MovieList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired })).isRequired,
+  initialMovies: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired })).isRequired,
 };
 
 export default MovieList;
