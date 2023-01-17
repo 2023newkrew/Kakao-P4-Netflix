@@ -1,6 +1,6 @@
 import { getHero } from '@apis/home';
 import { useEffect, useState } from 'react';
-import { HeroContainer, HeroContent, HeroTitle } from './styles';
+import { HeroContainer, HeroContent, HeroOverview, HeroTitle } from './styles';
 
 const Hero = () => {
   const [lastestMovie, setLatestMovie] = useState(null);
@@ -16,7 +16,8 @@ const Hero = () => {
   return (
     <HeroContainer backdropPath={lastestMovie?.backdrop_path}>
       <HeroContent>
-        {lastestMovie && <HeroTitle>{lastestMovie.original_title}</HeroTitle>}
+        {lastestMovie && <HeroTitle>{lastestMovie.title}</HeroTitle>}
+        {lastestMovie && <HeroOverview>{lastestMovie.overview}</HeroOverview>}
       </HeroContent>
     </HeroContainer>
   );
