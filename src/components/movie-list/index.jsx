@@ -8,23 +8,32 @@ import useChange from '../../hooks/useChange';
 import useConst from '../../hooks/useConst';
 
 const reducer = (state, action) => {
-  const { length, page, displayNumber } = state;
-  const maxPage = length - displayNumber;
+  const { offset, length, displayNumber } = state;
+  const maxOffset = length - displayNumber;
 
   switch (action.type) {
-    case 'page':
+    case 'offset':
     {
       const { value } = action;
-      if (value < 0) return { ...state, page: 0 };
-      if (value > maxPage) return { ...state, page: maxPage };
-      return { ...state, page: value };
+
+      if (value < 0) {
+        return { ...state, offset: 0 };
+      }
+
+      if (value > maxOffset) {
+        return { ...state, offset: maxOffset };
+      }
+
+      return { ...state, offset: value };
     }
     case 'displayNumber':
     {
       const { value } = action;
-      if (page > length - value) {
-        return { ...state, page: length - value, displayNumber: value };
+
+      if (offset > length - value) {
+        return { ...state, offset: length - value, displayNumber: value };
       }
+
       return { ...state, displayNumber: value };
     }
     default:
@@ -54,10 +63,10 @@ function MovieList({ initialMovies }) {
   const movies = useConst(initialMovies);
   const mqls = useConst(createMqls);
 
-  const [{ page, length, displayNumber }, dispatch] = useReducer(
+  const [{ offset, length, displayNumber }, dispatch] = useReducer(
     reducer,
     {
-      page: 0,
+      offset: 0,
       length: movies.length,
       displayNumber: ScreenWidthQueryToDisplayNumber[mqls.find(({ matches }) => matches).media],
     },
@@ -75,13 +84,13 @@ function MovieList({ initialMovies }) {
   }, []);
 
   const handleLeftScrollButtonClick = () => {
-    const nextPage = page - displayNumber;
-    dispatch({ type: 'page', value: nextPage });
+    const nextOffset = offset - displayNumber;
+    dispatch({ type: 'offset', value: nextOffset });
   };
 
   const handleRightScrollButtonClick = () => {
-    const nextPage = page + displayNumber;
-    dispatch({ type: 'page', value: nextPage });
+    const nextOffset = offset + displayNumber;
+    dispatch({ type: 'offset', value: nextOffset });
   };
 
   const movieListElementRef = useRef(null);
@@ -100,11 +109,11 @@ function MovieList({ initialMovies }) {
     movieListElementRef.current.animate(keyframes, options);
   };
 
-  useChange((prevPage) => {
-    animateMoveListElement(prevPage, page);
-  }, page);
+  useChange((prevOffset) => {
+    animateMoveListElement(prevOffset, offset);
+  }, offset);
 
-  const maxPage = length - displayNumber;
+  const maxOffset = length - displayNumber;
 
   return (
     <>
@@ -113,16 +122,14 @@ function MovieList({ initialMovies }) {
         {' '}
         {displayNumber}
       </div>
-      <div style={{ color: page < 0 || page > maxPage ? 'red' : 'unset' }}>
+      <div style={{ color: offset < 0 || offset > maxOffset ? 'red' : 'unset' }}>
         페이지:
         {' '}
-        {page}
+        {offset}
         {' '}
         /
         {' '}
-        {maxPage}
-        {' '}
-        (좌우 방향키로 변경)
+        {maxOffset}
       </div>
       <div className="movie-list-wrapper">
         <ul className="movie-list" ref={movieListElementRef}>
@@ -134,8 +141,8 @@ function MovieList({ initialMovies }) {
             ))
           }
         </ul>
-        <button type="button" className="scroll-left-button" onClick={handleLeftScrollButtonClick} disabled={page === 0}>◀</button>
-        <button type="button" className="scroll-right-button" onClick={handleRightScrollButtonClick} disabled={page === maxPage}>▶</button>
+        <button type="button" className="scroll-left-button" onClick={handleLeftScrollButtonClick} disabled={offset === 0}>◀</button>
+        <button type="button" className="scroll-right-button" onClick={handleRightScrollButtonClick} disabled={offset === maxOffset}>▶</button>
       </div>
     </>
   );
