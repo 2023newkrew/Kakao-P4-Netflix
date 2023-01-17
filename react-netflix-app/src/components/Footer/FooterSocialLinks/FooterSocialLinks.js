@@ -3,11 +3,11 @@ import facebookIcon from "../../../assets/facebookIcon.svg";
 import instagramIcon from "../../../assets/instagramIcon.svg";
 import twitterIcon from "../../../assets/twitterIcon.svg";
 import youtubeIcon from "../../../assets/youtubeIcon.svg";
-import styles from "./FooterSocialLinks.css";
+import { SocialLinksContainer } from "./styles";
 
 export default function FooterSocialLinks() {
   return (
-    <div className="footer__social-links">
+    <SocialLinksContainer>
       <a className="footer__social-links__facebook-icon">
         <img src={facebookIcon} />
       </a>
@@ -20,6 +20,6 @@ export default function FooterSocialLinks() {
       <a className="footer__social-links__youtube-icon">
         <img src={youtubeIcon} />
       </a>
-    </div>
+    </SocialLinksContainer>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
-import styles from "./Header.css";
 import HeaderLeft from "./HeaderLeft/HeaderLeft";
 import HeaderRight from "./HeaderRight/HeaderRight";
+import { CheckTopDiv, HeaderContainer } from "./styles";
 
 export default function Header() {
   const [isTop, setIsTop] = useState(true);
@@ -24,11 +24,11 @@ export default function Header() {
 
   return (
     <>
-      <div className="header__check-top" ref={topCheckerRef}></div>
-      <div className={"header" + (isTop ? "" : " not-top")}>
+      <CheckTopDiv ref={topCheckerRef}></CheckTopDiv>
+      <HeaderContainer isTop={isTop}>
         <HeaderLeft />
         <HeaderRight />
-      </div>
+      </HeaderContainer>
     </>
   );
 }

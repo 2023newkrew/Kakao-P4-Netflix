@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./FooterLinks.css";
+import { UnOrderedList } from "./styles";
 
 export default function FooterLinks() {
   return (
-    <ul className="footer__links">
+    <UnOrderedList>
       <li>
         <a>화면 해설</a>
       </li>
@@ -40,6 +40,6 @@ export default function FooterLinks() {
       <li>
         <a>문의하기</a>
       </li>
-    </ul>
+    </UnOrderedList>
   );
 }
