@@ -16,6 +16,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   position: ${(props) => (props.isTop ? "absolute" : "fixed")};
   transition: background-color 0.4s;
+  z-index: 10;
 `;
 
 export { CheckTopDiv, HeaderContainer };

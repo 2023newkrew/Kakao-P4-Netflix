@@ -1,14 +1,12 @@
 import React from "react";
+import MainPost from "./MainPost/MainPost.js";
+import MainRow from "./MainRow/MainRow.js";
 
 export default function Main() {
   return (
     <div className="main">
-      <img src="https://via.placeholder.com/800x300" />
-      <img src="https://via.placeholder.com/800x300" />
-      <img src="https://via.placeholder.com/800x300" />
-      <img src="https://via.placeholder.com/800x300" />
-      <img src="https://via.placeholder.com/800x300" />
-      <img src="https://via.placeholder.com/800x300" />
+      <MainPost />
+      <MainRow />
     </div>
   );
 }
