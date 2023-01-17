@@ -4,6 +4,7 @@ import { HeaderContainer, HeaderContent, LogoLink, PrimaryMenus, SecondaryMenus,
 import SearchIcon from '@icons/search.svg';
 import AlarmIcon from '@icons/alarm.svg';
 import Logo from '@icons/logo.png';
+import throttle from '@/utils/throttle';
 
 const primaryMenus = [
   {
@@ -31,13 +32,14 @@ const primaryMenus = [
 const useHeaderStyle = () => {
   const headerRef = useRef(null);
   useEffect(() => {
-    const handleHeaderBackground = () => {
+    const handleHeaderBackground = throttle(() => {
       if (window.scrollY > 0) {
         headerRef.current.style.setProperty('background-color', 'rgb(20,20,20)');
       } else {
         headerRef.current.style.setProperty('background-color', 'transparent');
       }
-    };
+    }, 100);
+
     window.addEventListener('scroll', handleHeaderBackground);
 
     return () => {
