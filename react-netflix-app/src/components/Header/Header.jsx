@@ -1,7 +1,19 @@
 import React from "react";
 
+import {
+  HeaderContainer,
+  HaderContent,
+  Nav,
+  NavItem,
+  NavTabs,
+  NavTab,
+  Logo,
+  BorderImage,
+} from "components/Header/Header.style";
+
 import logoImage from "assets/logo.png";
 import notiImage from "assets/noti.svg";
+import userImage from "assets/user.png";
 
 const Header = ({}) => {
   const navTabs = () => {
@@ -15,44 +27,47 @@ const Header = ({}) => {
       "언어별로 찾아보기",
     ];
     return (
-      <ul className="navigation-tabs">
+      <NavTabs>
         {tabList.map((tabText, index) => {
           return (
-            <li className="navigation-tab" key={index}>
-              <a href="/#" className="current">
-                {tabText}
-              </a>
-            </li>
+            <NavTab key={index}>
+              <a href="/#">{tabText}</a>
+            </NavTab>
           );
         })}
-      </ul>
+      </NavTabs>
     );
   };
 
   return (
-    <header className="header">
-      <nav className="navigation">
-        <div className="navigation__container">
-          <a className="navigation-logo" href="/#">
-            <img src={logoImage} alt="logo" />
-          </a>
-          {navTabs()}
-        </div>
-        <div className="navigation__container">
-          <div className="navigation__element">Search</div>
-          <div className="navigation__element">
-            <a className="navigation__kids-btn" href="/#">
-              키즈
-            </a>
-          </div>
-          <div className="navigation__element">
-            <button className="navigation__notification-btn" type="button">
+    <HeaderContainer>
+      <HaderContent>
+        <Nav>
+          <NavItem>
+            <Logo href="/#">
+              <img src={logoImage} alt="logo" />
+            </Logo>
+          </NavItem>
+          <NavItem>{navTabs()}</NavItem>
+        </Nav>
+        <Nav>
+          <NavItem>Search</NavItem>
+          <NavItem>
+            <a href="/#">키즈</a>
+          </NavItem>
+          <NavItem>
+            <button type="button">
               <img src={notiImage} alt="noti" />
             </button>
-          </div>
-        </div>
-      </nav>
-    </header>
+          </NavItem>
+          <NavItem>
+            <button type="button">
+              <BorderImage src={userImage} alt="user profile" radius="4px" />
+            </button>
+          </NavItem>
+        </Nav>
+      </HaderContent>
+    </HeaderContainer>
   );
 };
 

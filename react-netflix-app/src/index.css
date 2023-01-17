@@ -100,7 +100,10 @@ video {
 }
 
 body {
+  width: 100%;
+  background-color: #141414;
   font: 14px sans-serif;
+  color: #fff;
 }
 
 button {
@@ -118,4 +121,8 @@ a {
 
 li {
   list-style: none;
+}
+
+img[src*="svg"] {
+  filter: invert(1);
 }
