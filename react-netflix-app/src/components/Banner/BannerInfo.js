@@ -4,7 +4,6 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import "@scss/banner/bannerInfo.scss";
 
 const BannerInfo = ({ bannerMovie }) => {
-  console.log(bannerMovie);
   return (
     <div className="bannerInfo_container">
       <div className="bannerInfo_title">{bannerMovie.title}</div>

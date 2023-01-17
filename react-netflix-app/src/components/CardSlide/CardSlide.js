@@ -1,7 +1,11 @@
 import "@scss/cardSlide/cardSlide.scss";
 
-const CardSlide = () => {
-  return <div className="cardSlide_container">CardSlide</div>;
+const CardSlide = ({ title }) => {
+  return (
+    <div className="cardSlide_container">
+      <div className="cardSlide_title"></div>
+    </div>
+  );
 };
 
 export default CardSlide;

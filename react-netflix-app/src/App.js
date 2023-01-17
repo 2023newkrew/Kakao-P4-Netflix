@@ -8,8 +8,8 @@ const App = () => {
     <>
       <Header />
       <Banner />
-      <CardSlide />
-      <CardSlide />
+      <CardSlide title={"지금 뜨는 콘텐츠"} />
+      <CardSlide title={""} />
       <CardSlide />
       <CardSlide />
       <CardSlide />
