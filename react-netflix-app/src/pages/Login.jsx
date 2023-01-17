@@ -37,16 +37,27 @@ const Login = () => {
   const email = watch('email');
   const password = watch('password');
 
-  const handleValidSubmit = (data) => {
-    console.log('login submit', data);
-    navigate('/');
+  const login = async () => {
+    return new Promise((resolve) => {
+      resolve({
+        data: {
+          id: 1,
+          name: 'musc.le',
+        },
+      });
+    });
+  };
+  const onValidSubmit = async () => {
+    const { data } = await login();
+    console.log(data);
+    navigate('/', { replace: true });
   };
 
   return (
     <PageContainer>
       <PageContent>
         <PageTitle>로그인</PageTitle>
-        <form onSubmit={handleSubmit(handleValidSubmit)}>
+        <form onSubmit={handleSubmit(onValidSubmit)}>
           <FormInput
             type="text"
             placeholder="이메일 주소나 전화번호를 입력하세요"
