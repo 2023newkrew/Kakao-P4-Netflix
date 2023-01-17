@@ -41,15 +41,26 @@ npm start / yarn start
 |@recoil|/src/recoil|전역상태변수 모음|
 |@utils|/src/utils|순수함수 모음|
 
+---
 
-"paths": {
-      "@apis/*": ["src/apis/*"],
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@constants/*": ["src/constants/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@models/*": ["src/models/*"],
-      "@pages/*": ["src/pages/*"],
-      "@recoil/*": ["src/recoil/*"],
-      "@utils/*": ["src/utils/*"] 
-    }
+<h2>Code Convention</h2>
+
+```
+#   Component : Pascal Case
+#   Function  : camelCase
+#   Variables : camelCase
+```
+
+---
+
+<h2>Commit Message Convention</h2>
+
+```
+#   init    : 초기화
+#   feat    : 기능 추가
+#   fix     : 버그
+#   style   : 스타일
+#   docs    : 문서
+#   test    : 테스트
+#   chore   : 기타
+```
