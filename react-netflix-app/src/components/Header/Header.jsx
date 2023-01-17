@@ -3,8 +3,9 @@ import React from "react";
 import logoImage from "assets/logo.png";
 import notiImage from "assets/noti.svg";
 
-export default function Header() {
+const Header = ({}) => {
   const navTabs = () => {
+    // 이런거 어디에서 관리하지!?
     const tabList = [
       "홈",
       "시리즈",
@@ -29,28 +30,30 @@ export default function Header() {
   };
 
   return (
-    <div className="header">
-      <div className="header-container">
-        <div className="navigation">
+    <header className="header">
+      <nav className="navigation">
+        <div className="navigation__container">
           <a className="navigation-logo" href="/#">
             <img src={logoImage} alt="logo" />
           </a>
           {navTabs()}
-          <div className="navigation">
-            <div className="navigation-element">Search</div>
-            <div className="navigation-element">
-              <a className="navigation__kids-btn" href="/#">
-                키즈
-              </a>
-            </div>
-            <div className="navigation-element">
-              <button className="navigation__notification-btn" type="button">
-                <img src={notiImage} alt="noti" />
-              </button>
-            </div>
+        </div>
+        <div className="navigation__container">
+          <div className="navigation__element">Search</div>
+          <div className="navigation__element">
+            <a className="navigation__kids-btn" href="/#">
+              키즈
+            </a>
+          </div>
+          <div className="navigation__element">
+            <button className="navigation__notification-btn" type="button">
+              <img src={notiImage} alt="noti" />
+            </button>
           </div>
         </div>
-      </div>
-    </div>
+      </nav>
+    </header>
   );
-}
+};
+
+export default Header;
