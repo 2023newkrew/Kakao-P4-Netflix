@@ -1,5 +1,9 @@
+import { Text } from '@components/Text';
+
 export default function Main() {
   return (
-    <main>main page!!!</main>
+    <Text>
+      환영합니다.
+    </Text>
   );
 }
