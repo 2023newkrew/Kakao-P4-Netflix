@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import usePrevious from './usePrevious';
 
-const useChange = (value, callback) => {
+const useChange = (callback, value) => {
   const previousValue = usePrevious(value);
 
   useEffect(() => {

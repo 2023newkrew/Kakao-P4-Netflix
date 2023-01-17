@@ -110,9 +110,9 @@ function MovieList({ movies }) {
     movieListElementRef.current.animate(keyframes, options);
   };
 
-  useChange(page, (prevPage) => {
+  useChange((prevPage) => {
     animateMoveListElement(prevPage, page);
-  });
+  }, page);
 
   return (
     <>
