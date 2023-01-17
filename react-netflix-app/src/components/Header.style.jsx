@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
-import { breakpoints } from '../styles/theme';
+import { breakpoints } from '@styles/theme';
 
 export const HeaderContainer = tw.header`fixed top-0 right-0 left-0 z-[1] h-[60px] text-xl`;
 

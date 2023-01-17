@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import { ErrorMessage, Input, InputContainer, InputField, PlaceLabel } from './FormInput.style';
+import { ErrorMessage, Input, InputContainer, InputField, PlaceLabel } from '@components/FormInput.style';
 
 const FormInput = ({ type = 'text', placeholder, errorMessage, rules, value }) => {
   const setInputFocus = (event) => {

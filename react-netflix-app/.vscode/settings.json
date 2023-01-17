@@ -16,5 +16,6 @@
   "eslint.useESLintClass": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true
-  }
+  },
+  "js/ts.implicitProjectConfig.checkJs": true
 }

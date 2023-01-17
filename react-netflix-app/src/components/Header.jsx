@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderContainer, HeaderContent, LogoLink, PrimaryMenus, SecondaryMenus, MenuItem } from './Header.style';
-import SearchIcon from '../assets/icons/search.svg';
-import AlarmIcon from '../assets/icons/alarm.svg';
-import Logo from '../assets/icons/logo.png';
+import SearchIcon from '@icons/search.svg';
+import AlarmIcon from '@icons/alarm.svg';
+import Logo from '@icons/logo.png';
 
 const primaryMenus = [
   {

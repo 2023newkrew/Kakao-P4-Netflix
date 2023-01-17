@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import FormInput from '../components/FormInput';
+import FormInput from '@components/FormInput';
 import { PageContainer, PageContent, PageTitle, SubmitButton } from './Login.style';
 
 const loginForm = {
