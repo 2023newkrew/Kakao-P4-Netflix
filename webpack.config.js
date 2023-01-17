@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: path.resolve(__dirname, 'src/index.jsx'),
   output: {
     filename: '[name][contenthash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -42,9 +42,6 @@ module.exports = {
     new MiniCssExtractPlugin(),
   ],
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
     extensions: ['.js', '.jsx'],
   },
 };
