@@ -64,10 +64,7 @@ function MovieList({ initialMovies }) {
   useEffect(() => {
     const handleChangeEvent = ({ matches, media }) => {
       if (matches) {
-        dispatch({
-          type: 'displayNumber',
-          value: ScreenWidthQueryToDisplayNumber[media],
-        });
+        dispatch({ type: 'displayNumber', value: ScreenWidthQueryToDisplayNumber[media] });
       }
     };
 
@@ -77,24 +74,17 @@ function MovieList({ initialMovies }) {
 
   const maxPage = length - displayNumber;
 
-  useEffect(() => {
-    const handleKeydownEvent = (event) => {
-      if (event.code === 'ArrowRight') {
-        if (page === maxPage) return;
-        const nextPage = page + 1;
-        dispatch({ type: 'page', value: nextPage });
-      }
+  const handleLeftScrollButtonClick = () => {
+    if (page === 0) return;
+    const nextPage = page - 1;
+    dispatch({ type: 'page', value: nextPage });
+  };
 
-      if (event.code === 'ArrowLeft') {
-        if (page === 0) return;
-        const nextPage = page - 1;
-        dispatch({ type: 'page', value: nextPage });
-      }
-    };
-
-    window.addEventListener('keydown', handleKeydownEvent);
-    return () => window.removeEventListener('keydown', handleKeydownEvent);
-  }, [page, maxPage]);
+  const handleRightScrollButtonClick = () => {
+    if (page === maxPage) return;
+    const nextPage = page + 1;
+    dispatch({ type: 'page', value: nextPage });
+  };
 
   const movieListElementRef = useRef(null);
   const animateMoveListElement = (from, to) => {
@@ -134,15 +124,19 @@ function MovieList({ initialMovies }) {
         {' '}
         (좌우 방향키로 변경)
       </div>
-      <ul className="movie-list" ref={movieListElementRef}>
-        {
-          movies.map((movie) => (
-            <li className="movie-list-item" key={movie.id}>
-              <MovieCard movie={movie} />
-            </li>
-          ))
-        }
-      </ul>
+      <div className="movie-list-wrapper">
+        <ul className="movie-list" ref={movieListElementRef}>
+          {
+            movies.map((movie) => (
+              <li className="movie-list-item" key={movie.id}>
+                <MovieCard movie={movie} />
+              </li>
+            ))
+          }
+        </ul>
+        <button type="button" className="scroll-left-button" onClick={handleLeftScrollButtonClick} disabled={page === 0}>left</button>
+        <button type="button" className="scroll-right-button" onClick={handleRightScrollButtonClick} disabled={page === maxPage}>right</button>
+      </div>
     </>
   );
 }
