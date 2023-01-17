@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   top: 0;
   display: flex;
   align-items: center;
-  background-color: var(--background-color);
+  background: var(--background-color);
   width: 100%;
   height: 64px;
 
@@ -15,7 +15,7 @@ export const HeaderContainer = styled.header`
   ${({ isTop }) =>
     isTop &&
     css`
-      background-color: transparent;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent);
     `}
 `;
 
