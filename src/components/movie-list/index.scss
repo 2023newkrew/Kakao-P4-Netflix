@@ -4,6 +4,7 @@
   --display-gap: 0.4%;
   --display-number: 2;
   --lr-padding: 4%;
+  --border-radius: 4px;
 
   @media screen and (min-width: 480px) {
     --display-number: 3;
@@ -31,7 +32,8 @@
 
     .movie-list-item {
       flex-shrink: 0;
-      border: 1px solid black;
+      border-radius: var(--border-radius);
+      overflow: hidden;
 
       display: flex;
       width: calc((100% - var(--display-gap) * (var(--display-number) - 1)) / var(--display-number));
@@ -46,8 +48,16 @@
     width: calc(var(--lr-padding) - var(--display-gap));
 
     border: none;
-    background-color: rgba($color: #000000, $alpha: 0.5);
+    background-color: rgba($color: #000000, $alpha: 0.25);
     cursor: pointer;
+    color: white;
+    transition: 0.2s;
+    border-radius: var(--border-radius);
+
+    &:disabled {
+      cursor: initial;
+      opacity: 0;
+    }
   }
 
   .scroll-left-button {

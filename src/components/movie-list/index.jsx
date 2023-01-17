@@ -134,8 +134,8 @@ function MovieList({ initialMovies }) {
             ))
           }
         </ul>
-        <button type="button" className="scroll-left-button" onClick={handleLeftScrollButtonClick} disabled={page === 0}>left</button>
-        <button type="button" className="scroll-right-button" onClick={handleRightScrollButtonClick} disabled={page === maxPage}>right</button>
+        <button type="button" className="scroll-left-button" onClick={handleLeftScrollButtonClick} disabled={page === 0}>◀</button>
+        <button type="button" className="scroll-right-button" onClick={handleRightScrollButtonClick} disabled={page === maxPage}>▶</button>
       </div>
     </>
   );
