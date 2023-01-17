@@ -4,25 +4,29 @@ const plugin = require('tailwindcss/plugin');
 module.exports = {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        netflix: '#e50914',
+      },
+    },
   },
   plugins: [
     plugin(function ({ addBase, theme }) {
       addBase({
         h1: {
-          fontSize: theme('fontSize.2xl'),
+          fontSize: 32,
           fontWeight: theme('fontWeight.bold'),
         },
         h2: {
-          fontSize: theme('fontSize.xl'),
+          fontSize: 28,
           fontWeight: theme('fontWeight.semibold'),
         },
         h3: {
-          fontSize: theme('fontSize.lg'),
+          fontSize: 24,
           fontWeight: theme('fontWeight.semibold'),
         },
         h3: {
-          fontSize: theme('fontSize.md'),
+          fontSize: 20,
           fontWeight: theme('fontWeight.semibold'),
         },
         input: {

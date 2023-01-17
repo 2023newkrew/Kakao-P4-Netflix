@@ -5,9 +5,17 @@
 html,
 body {
   height: 100%;
+  width: 100%;
   margin: 0;
   line-height: 1.5;
   color: #121212;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #fff;
+  background: #141414;
+}
+body {
+  word-break: keep-all;
 }
 #root {
   display: flex;
