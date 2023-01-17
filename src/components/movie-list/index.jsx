@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card';
+import usePrevious from '../../hooks/usePrevious';
 
 const reducer = (state, action) => {
   const { length, page, displayNumber } = state;
@@ -72,6 +73,27 @@ function MovieList({ movies }) {
     return () => { mqls.forEach((mql) => mql.removeEventListener('change', handleChangeEvent)); };
   }, []);
 
+  const maxPage = length - displayNumber;
+
+  useEffect(() => {
+    const handleKeydownEvent = (event) => {
+      if (event.code === 'ArrowRight') {
+        if (page === maxPage) return;
+        const nextPage = page + 1;
+        dispatch({ type: 'page', value: nextPage });
+      }
+
+      if (event.code === 'ArrowLeft') {
+        if (page === 0) return;
+        const nextPage = page - 1;
+        dispatch({ type: 'page', value: nextPage });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeydownEvent);
+    return () => window.removeEventListener('keydown', handleKeydownEvent);
+  }, [page, maxPage]);
+
   const movieListElementRef = useRef(null);
   const animateMoveListElement = (from, to) => {
     const keyframes = [
@@ -88,32 +110,11 @@ function MovieList({ movies }) {
     movieListElementRef.current.animate(keyframes, options);
   };
 
-  const maxPage = length - displayNumber;
+  const prevPage = usePrevious(page);
 
   useEffect(() => {
-    const handleKeydownEvent = (event) => {
-      if (event.code === 'ArrowRight') {
-        if (page === maxPage) return;
-        const nextPage = page + 1;
-        dispatch({ type: 'page', value: nextPage });
-        animateMoveListElement(page, nextPage);
-      }
-
-      if (event.code === 'ArrowLeft') {
-        if (page === 0) return;
-        const nextPage = page - 1;
-        dispatch({ type: 'page', value: nextPage });
-        animateMoveListElement(page, nextPage);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeydownEvent);
-    return () => window.removeEventListener('keydown', handleKeydownEvent);
-  }, [page, maxPage]);
-
-  useEffect(() => {
-    animateMoveListElement(page, page);
-  }, [displayNumber]);
+    animateMoveListElement(prevPage, page);
+  }, [page]);
 
   return (
     <>
