@@ -9,8 +9,12 @@ export const HeaderContent = styled.nav`
   background-image: linear-gradient(180deg,rgba(0,0,0,.7) 10%,transparent);
   transition: background-color 0.4s;
 `;
-export const LogoLink = tw(Link)`
-  mr-6 inline-block cursor-pointer text-[25px] text-netflix 
+export const LogoLink = styled(Link)`
+  ${tw`mr-6 flex items-center cursor-pointer h-full`}
+
+  & > img {
+    height: 24px;
+  }
 `;
 export const PrimaryMenus = styled.ul`
   ${tw`flex items-center`}

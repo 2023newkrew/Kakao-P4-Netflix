@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderContainer, HeaderContent, LogoLink, PrimaryMenus, SecondaryMenus, MenuItem } from './Header.style';
+import SearchIcon from '../assets/icons/search.svg';
+import AlarmIcon from '../assets/icons/alarm.svg';
+import Logo from '../assets/icons/logo.png';
 
 const primaryMenus = [
   {
@@ -52,7 +55,7 @@ const Header = () => {
     <HeaderContainer>
       <HeaderContent ref={headerRef}>
         <LogoLink aria-label="넷플릭스" to="/">
-          NETFLIX
+          <img src={Logo} alt="넷플릭스 로고" />
         </LogoLink>
         <PrimaryMenus>
           <MenuItem>
@@ -66,13 +69,14 @@ const Header = () => {
         </PrimaryMenus>
         <SecondaryMenus>
           <MenuItem>
-            <button>검색</button>
+            <button>
+              <img src={SearchIcon} alt="검색 아이콘" />
+            </button>
           </MenuItem>
           <MenuItem>
-            <Link to="/">키즈</Link>
-          </MenuItem>
-          <MenuItem>
-            <button>알림</button>
+            <button>
+              <img src={AlarmIcon} alt="알람 아이콘" />
+            </button>
           </MenuItem>
           <MenuItem>
             <button>프로필</button>
