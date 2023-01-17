@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card';
-import usePrevious from '../../hooks/usePrevious';
+import useChange from '../../hooks/useChange';
 
 const reducer = (state, action) => {
   const { length, page, displayNumber } = state;
@@ -110,11 +110,9 @@ function MovieList({ movies }) {
     movieListElementRef.current.animate(keyframes, options);
   };
 
-  const prevPage = usePrevious(page);
-
-  useEffect(() => {
+  useChange(page, (prevPage) => {
     animateMoveListElement(prevPage, page);
-  }, [page]);
+  });
 
   return (
     <>
