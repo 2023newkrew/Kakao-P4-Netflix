@@ -12,10 +12,10 @@ const BannerMovie = ({ bannerMovie }) => {
 
     async function fetchAndSetBannerMovieVideoURL() {
       const fetchBannerMovieURL = await API.fetchBannerMovieVideoURL(bannerMovie);
-      console.log(fetchBannerMovieURL);
       setBannerMovieURL(fetchBannerMovieURL);
     }
   }, []);
+
   if (bannerMovieURL === undefined) return <div>값을 렌더링하는 중입니다.</div>;
   else {
     const bannerMovieImageURL = process.env.REACT_APP_IMAGE_API_URL + `/${bannerMovie.backdrop_path || bannerMovie.poster_path}`;

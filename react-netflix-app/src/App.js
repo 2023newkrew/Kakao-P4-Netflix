@@ -8,13 +8,11 @@ const App = () => {
     <>
       <Header />
       <Banner />
-      <CardSlide title={"지금 뜨는 콘텐츠"} />
-      <CardSlide title={""} />
-      <CardSlide />
-      <CardSlide />
-      <CardSlide />
-      <CardSlide />
-      <CardSlide />
+      <CardSlide title={"액션"} genreId={28} />
+      <CardSlide title={"가족"} genreId={10751} />
+      <CardSlide title={"애니메이션"} genreId={16} />
+      <CardSlide title={"공포"} genreId={27} />
+
       <Footer />
     </>
   );
