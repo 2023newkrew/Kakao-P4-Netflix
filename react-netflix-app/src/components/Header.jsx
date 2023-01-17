@@ -5,9 +5,11 @@ import { ReactComponent as SearchIcon } from '../assets/search.svg';
 import { ReactComponent as NotificationsIcon } from '../assets/notifications.svg';
 
 const HeaderLayout = styled.header`
+  position: fixed;
   width: 100%;
   height: 72px;
-  background-color: black;
+  background: linear-gradient(black, transparent);
+  z-index: 1;
 `;
 
 const Navigation = styled.nav`
