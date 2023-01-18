@@ -12,4 +12,4 @@ const SliderCard = ({ index, content }) => {
   );
 };
 
-export default SliderCard;
+export default React.memo(SliderCard);
