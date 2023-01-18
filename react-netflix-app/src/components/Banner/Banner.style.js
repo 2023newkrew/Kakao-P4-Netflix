@@ -48,20 +48,29 @@ export const BannerContent = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   width: 36%;
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
   z-index: 10;
 `;
 
-// title 사이즈는 props로?
-// 제목 글자수 따라 가변적이게 해도 좋을듯
-export const ContentTitle = styled.h1`
-  font-size: 7vw;
+const EllipsisText = styled.p`
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+
+// 제목 글자수 따라 가변적이게 해도 좋을듯-> 일단 말줄임 처리
+export const ContentTitle = styled(EllipsisText)`
+  font-size: 5.2vw;
   font-weight: bold;
   margin-bottom: 30px;
 `;
 
-export const ContentDesc = styled.p`
+export const ContentDesc = styled(EllipsisText)`
   font-size: 1.2vw;
   line-height: normal;
+  -webkit-line-clamp: 4;
 `;
 
 export const ContentButtonBox = styled.div`

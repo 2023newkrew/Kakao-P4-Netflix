@@ -8,7 +8,7 @@ export const HeaderContainer = styled.header`
   margin-bottom: 20px;
   padding: 20px 0;
   background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent);
-  z-index: 10;
+  z-index: 100;
 `;
 
 export const HaderContent = styled.div`
