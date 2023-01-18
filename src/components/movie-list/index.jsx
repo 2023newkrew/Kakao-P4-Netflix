@@ -39,6 +39,12 @@ function MovieList({ movies }) {
   // offset은 0보다 크거나 같고, movies.length - displayNumber보다 작거나 같아야합니다.
   // 그런데 movies.length는 MovieList의 프로퍼티입니다.
   // 프로퍼티 movies의 변경에 따라 상태 offset가 규칙에 맞는 값을 동기적으로 가지도록 할 수 있는 방법이 없을지 고민입니다.
+
+  // 문제가 되는 하나의 사례입니다:
+  // movies.length가 20이고 offset은 10, displayNumber가 6인 상태에서
+  // movies.length가 8로 변경되는 경우
+  // offset이 movies.length - displayNumber보다 큰 값을 가진 상태로 렌더링되기 때문에 문제가 될 수 있습니다.
+
   const reducer = (state, action) => {
     const { offset, displayNumber } = state;
     const maxOffset = length - displayNumber;
