@@ -13,10 +13,11 @@ interface TextProps {
   wordBreak?: boolean;    
 }
 
-export const Text = styled.span<TextProps>`
+export const Text = styled.p<TextProps>`
   font-size: ${props => props.fontSize || FONT_SIZE.s};
   font-weight: ${props => props.fontWeight || FONT_WEIGHT.regular};
   color: ${props => props.color || COLORS.white};
   text-align: ${props => props.textAlign || 'left'};
   word-break: ${props => props.wordBreak ? 'break-all' : 'normal'};
+  line-height: 200%;
 `;

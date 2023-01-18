@@ -1,25 +1,35 @@
 import { getPopularMovies } from '@apis/movies';
-import { Text } from '@components/Text';
+import { Image } from '@components/common/Image';
+import MovieList from '@components/movie/MovieList';
+import { MoviePoster } from '@components/movie/MoviePoster';
+import { COLORS } from '@constants/colors.contant';
+import { MovieType } from '@models/movies.model';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 export default function Main() {
-  
   const [loading, setLoading] = useState(false);
-  const [popularMovies, setPopularMovies] = useState([]);
+  const [randomMovie, setRandomMovie] = useState<MovieType | undefined>();
+  const [popularMovies, setPopularMovies] = useState<MovieType[]>([]);
+  
   useEffect(() => {
     const fetchPopularMovies = async() => {
       const { data, status } = await getPopularMovies();
-      console.log(data);
-      setPopularMovies(data);
+      const { page, results, total_pages, total_results } = data;
+      const randomNumber = Math.floor(Math.random() * results.length);
+
+      setPopularMovies(results);
+      setRandomMovie(results[randomNumber]);
       setLoading(true);
     };
     fetchPopularMovies();
   }, []);
 
-  if (!loading) return <></>;
+  if (!loading || !randomMovie) return <></>;
   return (
-    <Text>
-      환영합니다.
-    </Text>
+    <>
+      <MoviePoster movie={randomMovie}/>
+      <MovieList movies={popularMovies}/>
+    </>
   );
 }

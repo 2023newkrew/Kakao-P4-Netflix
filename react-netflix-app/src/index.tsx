@@ -1,5 +1,5 @@
-import { Header } from '@components/Header';
-import { Layout } from '@components/Layout';
+import { Header } from '@components/layout/Header';
+import { Layout } from '@components/layout/Layout';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';

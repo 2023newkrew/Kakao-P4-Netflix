@@ -1,9 +1,9 @@
 const FONT_SIZE = {
-  xl: '50px',
-  l: '26px',
-  m: '18px',
-  s: '16px',
-  xs: '12px'
+  xl: '5rem',
+  l: '2.6rem',
+  m: '1.8rem',
+  s: '1.6rem',
+  xs: '1.2rem'
 } as const;
 const FONT_WEIGHT = {
   regular: '400',

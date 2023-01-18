@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as LogoSVG } from '@assets/icon-netflix.svg';
-import { Button } from '@components/Button';
+import { Button } from '@components/common/Button';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -28,6 +28,7 @@ const Container = styled.header`
   padding: 40px 56px;
   display: flex;
   margin: 0 auto;
+  z-index: 99;
 `;
 const Logo = styled(LogoSVG)`
   width: 134px;
