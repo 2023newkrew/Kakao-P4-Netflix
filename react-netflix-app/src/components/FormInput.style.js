@@ -8,14 +8,14 @@ export const InputField = styled.div`
   ${({ isError }) => (isError ? 'border:none' : 'border-bottom: 2px solid #e87c05')}
 `;
 export const Input = styled.input`
-  ${tw`h-[50px] w-full rounded-md border-0 bg-[#333333] leading-[50px] text-white focus:bg-[#454545] pt-4 pb-0 px-5 z-0`}
+  ${tw`h-[50px] w-full rounded-md border-0 bg-[#333333] leading-[50px] text-white focus:bg-[#454545] pt-4 pb-0 px-5`}
   &:focus + .placeLabel {
     ${tw`text-[11px] translate-y-0 top-0`}
   }
 `;
 
 export const PlaceLabel = styled.label`
-  ${tw`absolute top-1/2 left-5 text-[#8c8c8c] text-[16px] -translate-y-1/2 -z-0`}
+  ${tw`absolute top-1/2 left-5 text-[#8c8c8c] text-[16px] -translate-y-1/2`}
   ${({ hasValue }) => (hasValue ? tw`text-[11px] translate-y-0 top-0` : ``)}
   transition: font 0.1s ease, top 0.1s ease, transform 0.1s ease;
 `;
