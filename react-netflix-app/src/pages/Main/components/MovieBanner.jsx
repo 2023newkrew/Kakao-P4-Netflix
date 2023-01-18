@@ -2,7 +2,6 @@ import { Banner } from '@pages/Main/MainPage.style';
 import sampleVideo from '@assets/videos/sample.mp4';
 
 const MovieBanner = () => {
-  // const [isPlaying] = useState(true);
   return (
     <Banner.Container>
       <Banner.BackgroundLayer>

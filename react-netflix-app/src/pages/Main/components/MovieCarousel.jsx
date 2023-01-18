@@ -9,6 +9,7 @@ import { breakpoints } from '@/styles/theme';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useState } from 'react';
 
 const swiperOptions = {
   pagination: {
@@ -39,17 +40,30 @@ const swiperOptions = {
 };
 
 const MovieCarousel = ({ movies }) => {
+  const [canHover, setCanHover] = useState(true);
+
+  const resetHovering = () => {
+    setTimeout(() => {
+      setCanHover(true);
+    }, 1000);
+  };
   return (
     <CarouselContainer>
-      {/* <SliderControlButton>이전</SliderControlButton> */}
       <MovieSwiper {...swiperOptions}>
         {movies.map((movie) => (
-          <SwiperSlide key={movie.id} style={{ width: '25%' }}>
-            <MovieCard movie={movie} />
+          <SwiperSlide
+            key={movie.id}
+            onMouseEnter={() => {
+              if (!canHover) {
+                return;
+              }
+              setCanHover(false);
+            }}
+          >
+            <MovieCard movie={movie} onMouseLeave={resetHovering} hover={canHover} />
           </SwiperSlide>
         ))}
       </MovieSwiper>
-      {/* <SliderControlButton>다음</SliderControlButton> */}
     </CarouselContainer>
   );
 };
