@@ -7,8 +7,12 @@ export default function MainColumn(props) {
 
   return (
     <MainColumnContainer>
-      {imgList.map((item) => (
-        <MainColumnItem key={item.id} imgSrc={item.backdrop_path} />
+      {imgList.map((item, idx) => (
+        <MainColumnItem
+          key={item.id}
+          imgSrc={item.backdrop_path}
+          setImageContainerSize={props.setImageContainerSize && idx === 0 ? props.setImageContainerSize : null}
+        />
       ))}
     </MainColumnContainer>
   );

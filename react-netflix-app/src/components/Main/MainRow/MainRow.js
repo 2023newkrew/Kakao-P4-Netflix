@@ -1,30 +1,51 @@
-import React, { useEffect, useState } from "react";
-import TheMovieDBAPI from "../../../util/TheMovieDBAPI";
+import React, { useEffect, useRef, useState } from "react";
+import Util from "../../../util/Util";
 import MainColumn from "./MainColumn/MainColumn";
-import { MainRowContainer } from "./styles";
-const separateList = (arr, size) => {
-  const newList = [];
-  for (let i = 0; i < arr.length; i += size) {
-    newList.push(arr.slice(i, i + size));
-  }
-  return newList;
+import { MainRowContainer, MainRowSlider, MainRowLeftArrow, MainRowRightArrow } from "./styles";
+
+const handleClickArrow = (setColIndex, dir) => {
+  const value = dir === "left" ? -1 : 1;
+  setColIndex((prev) => prev + value);
 };
 
-export default function MainRow() {
-  const [imgList, setimgList] = useState([]);
-  useEffect(() => {
-    const fetchTopRatedMovie = async () => {
-      const topRatedMovieList = await TheMovieDBAPI.getTopRatedMovieList();
-      setimgList(topRatedMovieList);
-    };
+export default function MainRow({ fetchMethod }) {
+  const [separatedList, setSeparatedList] = useState([]);
+  const [colIndex, setColIndex] = useState(0);
+  const [imageContainerSize, setImageContainerSize] = useState(null);
+  const SEPARATE_COUNT = 4;
 
+  useEffect(() => {
+    /* 데이터 fetch */
+    const fetchTopRatedMovie = async () => {
+      const topRatedMovieList = await fetchMethod();
+      setSeparatedList(Util.separateList(topRatedMovieList, SEPARATE_COUNT));
+    };
     fetchTopRatedMovie();
   }, []);
+
   return (
     <MainRowContainer>
-      {imgList.length > 0
-        ? separateList(imgList, 4).map((subList, idx) => <MainColumn key={idx} imgList={subList} />)
-        : null}
+      <MainRowSlider
+        translateValue={
+          imageContainerSize !== null ? colIndex * imageContainerSize * separatedList[colIndex].length : 0
+        }
+      >
+        {/* 생성 및 삭제와 같은 변화가 없을 것이라고 예상하기에 key에 인덱스 값으로 부여 */}
+        {separatedList !== null
+          ? separatedList.map((subList, idx) => (
+              <MainColumn
+                key={idx}
+                imgList={subList}
+                setImageContainerSize={idx === 0 ? setImageContainerSize : null}
+              />
+            ))
+          : null}
+      </MainRowSlider>
+      <MainRowLeftArrow isLeftEnd={colIndex === 0} onClick={() => handleClickArrow(setColIndex, "left")} />
+      <MainRowRightArrow
+        isRightEnd={colIndex === separatedList.length - 1}
+        onClick={() => handleClickArrow(setColIndex, "right")}
+      />
     </MainRowContainer>
   );
 }
