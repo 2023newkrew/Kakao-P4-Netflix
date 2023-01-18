@@ -27,42 +27,43 @@ const ScreenWidthQueryToDisplayNumber = {
 
 const mediaQueryLists = Object.values(ScreenWidthQuery).map(window.matchMedia);
 
-const reducer = (state, action) => {
-  const { offset, length, displayNumber } = state;
-  const maxOffset = length - displayNumber;
-
-  switch (action.type) {
-    case 'offset': {
-      const { value } = action;
-
-      if (value < 0) {
-        return { ...state, offset: 0 };
-      }
-
-      if (value > maxOffset) {
-        return { ...state, offset: maxOffset };
-      }
-
-      return { ...state, offset: value };
-    }
-    case 'displayNumber': {
-      const { value } = action;
-
-      if (offset > length - value) {
-        return { ...state, offset: length - value, displayNumber: value };
-      }
-
-      return { ...state, displayNumber: value };
-    }
-    default:
-      throw new Error();
-  }
-};
-
 function MovieList({ movies }) {
-  const [{ offset, length, displayNumber }, dispatch] = useReducer(reducer, {
+  const { length } = movies;
+
+  const reducer = (state, action) => {
+    const { offset, displayNumber } = state;
+    const maxOffset = length - displayNumber;
+
+    switch (action.type) {
+      case 'offset': {
+        const { value } = action;
+
+        if (value < 0) {
+          return { ...state, offset: 0 };
+        }
+
+        if (value > maxOffset) {
+          return { ...state, offset: maxOffset };
+        }
+
+        return { ...state, offset: value };
+      }
+      case 'displayNumber': {
+        const { value } = action;
+
+        if (offset > length - value) {
+          return { ...state, offset: length - value, displayNumber: value };
+        }
+
+        return { ...state, displayNumber: value };
+      }
+      default:
+        throw new Error();
+    }
+  };
+
+  const [{ offset, displayNumber }, dispatch] = useReducer(reducer, {
     offset: 0,
-    length: movies.length, // 프로퍼티 movies의 변경에 반응해야하는데 어떻게 달성할 수 있을지 고민입니다.
     displayNumber:
       ScreenWidthQueryToDisplayNumber[
         mediaQueryLists.find(({ matches }) => matches).media
