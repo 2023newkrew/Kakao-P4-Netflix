@@ -1,8 +1,8 @@
-import './index.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card';
 import useScreenWidthSize from '../../hooks/useScreenWidthSize';
+import styled from 'styled-components';
 
 const ScreenWidthSizeToDisplayNumber = {
   xs: 2,
@@ -11,6 +11,44 @@ const ScreenWidthSizeToDisplayNumber = {
   l: 5,
   xl: 6,
 };
+
+const StyledList = styled.ul`
+  --display-gap: 0.4%;
+  --display-number: 2;
+  --lr-padding: 4%;
+
+  @media screen and (min-width: 480px) {
+    --display-number: 3;
+  }
+
+  @media screen and (min-width: 768px) {
+    --display-number: 4;
+  }
+
+  @media screen and (min-width: 1024px) {
+    --display-number: 5;
+  }
+
+  @media screen and (min-width: 1280px) {
+    --display-number: 6;
+  }
+
+  --item-and-gap-width: calc((100% - var(--lr-padding) * 2 + var(--display-gap)) / var(--display-number));
+
+  padding: 0 var(--lr-padding);
+  width: 100%;
+  display: flex;
+  gap: var(--display-gap);
+`;
+
+const StyledListItem = styled.li`
+  flex-shrink: 0;
+  border: 1px solid black;
+
+  display: flex;
+  width: calc((100% - var(--display-gap) * (var(--display-number) - 1)) / var(--display-number));
+  aspect-ratio: 16/9;
+`;
 
 function MovieList({ movies }) {
   const screenWidthSize = useScreenWidthSize();
@@ -80,15 +118,15 @@ function MovieList({ movies }) {
         {' '}
         (좌우 방향키로 변경)
       </div>
-      <ul className="movie-list" ref={movieListElementRef}>
+      <StyledList ref={movieListElementRef}>
         {
         movies.map((movie) => (
-          <li className="movie-list-item" key={movie.id}>
+          <StyledListItem key={movie.id}>
             <MovieCard movie={movie} />
-          </li>
+          </StyledListItem>
         ))
       }
-      </ul>
+      </StyledList>
     </>
   );
 }
