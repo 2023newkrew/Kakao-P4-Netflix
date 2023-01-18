@@ -14,14 +14,16 @@ const MovieCardInfo = ({ movie }) => {
     return movieCategory;
   }
 
+  const svgSize = 30;
+
   return (
     <div className="movieCardInfo_container">
       <div className="movieCardInfo_button">
-        <ImPlay2 size={40} />
-        <BsPlusCircle size={40} />
-        <GoThumbsup size={40} />
+        <ImPlay2 size={svgSize} />
+        <BsPlusCircle size={svgSize} />
+        <GoThumbsup size={svgSize} />
         <div style={{ width: "70%", display: "flex", justifyContent: "flex-end" }}>
-          <IoIosArrowDropdownCircle size={40} />
+          <IoIosArrowDropdownCircle size={svgSize} />
         </div>
       </div>
       <div className="movieCardInfo_title">{movie.title}</div>

@@ -1,3 +1,4 @@
+// import "../../scss/header/profile.scss";
 import "@scss/header/profile.scss";
 
 import profileIcon from "@assets/profile-icon.png";

@@ -1,18 +1,20 @@
-import Banner from "@components/banner/Banner";
-import CardSlide from "@components/cardSlide/CardSlide";
-import Footer from "@components/footer/Footer";
-import Header from "@components/header/Header";
+import Header from "./components/Header/Header";
+import Banner from "./components/Banner/Banner";
+import CardSlide from "./components/CardSlide/CardSlide";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
     <>
       <Header />
       <Banner />
-      <CardSlide title={"액션"} genreId={28} />
-      <CardSlide title={"가족"} genreId={10751} />
-      <CardSlide title={"애니메이션"} genreId={16} />
-      <CardSlide title={"공포"} genreId={27} />
-
+      <CardSlide title={"액션"} />
+      <CardSlide title={"모험"} />
+      <CardSlide title={"애니메이션"} />
+      <CardSlide title={"SF"} />
+      <CardSlide title={"공포"} />
+      <CardSlide title={"코미디"} />
+      <CardSlide title={"음악"} />
       <Footer />
     </>
   );

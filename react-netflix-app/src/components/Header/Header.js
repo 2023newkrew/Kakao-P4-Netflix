@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import Search from "./Search";
 import Profile from "./Profile";
 
-import "@scss/header/header.scss";
+import "@scss/header/Header.scss";
 
 const Header = () => {
   return (

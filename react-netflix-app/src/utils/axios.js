@@ -1,4 +1,5 @@
 import axios from "axios";
+const genre = require("../json/genre.json");
 
 class Axios {
   constructor() {
@@ -22,7 +23,8 @@ class Axios {
     return popularMovieList[random];
   }
 
-  async fetchGenreMovie(genreId) {
+  async fetchGenreMovie(category) {
+    const genreId = genre[category];
     const response = await axios.get(`${this.API_URL}/3/discover/movie?api_key=${this.API_KEY}&language=ko&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}&with_watch_monetization_types=flatrate`);
     const fetchGenreMovieList = response.data.results;
     return fetchGenreMovieList;

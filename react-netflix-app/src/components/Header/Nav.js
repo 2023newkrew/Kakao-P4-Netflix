@@ -1,3 +1,5 @@
+// import "../../scss/header/nav.scss";
+
 import "@scss/header/nav.scss";
 
 const Nav = () => {

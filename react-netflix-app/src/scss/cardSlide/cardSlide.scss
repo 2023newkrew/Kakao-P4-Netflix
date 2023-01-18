@@ -4,7 +4,9 @@
 .cardSlide_container {
   position: relative;
   width: 100%;
-  height: 40%;
+  height: 50%;
+
+  background-color: rgb(14, 14, 14);
 
   margin: 3vw 0;
 
@@ -12,32 +14,94 @@
   flex-direction: column;
 
   .cardSlide_title {
+    position: relative;
+
     color: white;
     font-family: 'Black Han Sans', sans-serif;
+    
 
     font-size: 40px;
-    padding: 10px 20px;
+    padding: 10px 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .cardSlide_wrapper {
     position: relative;
-    overflow: auto;
+    overflow: hidden;
     width: 100%;
     height: 100%;
 
     display: flex;
     align-items: center;
 
+    padding-left: 10px;
+
     .cardSlide_leftButton {
       position: absolute;
       left: 0;
-      z-index: 9999;
+      z-index: 2;
+
+      height: 55%;
+      // background-color: black;
+      width: 3%;
+      background-color: rgba(0, 0, 0, 0.1);
+
+      
+      transition: background-color 0.2s;
+      border: 0;
+      cursor: pointer;
+
+      div {
+        transition: transform 0.2s;
+        color: white;
+      
+        font-weight: lighter;
+        font-size: 35px;
+        
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+
+        div {
+          transform:scale(1.2);
+        }
+      }
     }
 
     .cardSlide_rightButton {
       position: absolute;
       right: 0;
-      z-index: 9999;
+      z-index: 1;
+
+      height: 55%;
+      width: 3%;
+      background-color: rgba(0, 0, 0, 0.1);
+
+      
+      transition: background-color 0.2s;
+      border: 0;
+      cursor: pointer;
+
+      div {
+        transition: transform 0.2s;
+        color: white;
+      
+        font-weight: lighter;
+        font-size: 35px;
+        
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+
+        div {
+          transform:scale(1.2);
+        }
+      }
     }
 
     .cardSlide_slide {
@@ -47,6 +111,10 @@
       height: 100%;
 
       padding-left: 20px;
+
+      transition: transform 0.5s;
+      
+      // overflow: auto;
     }
   }
 }

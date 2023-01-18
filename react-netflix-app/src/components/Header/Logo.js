@@ -1,5 +1,6 @@
-import "@scss/header/logo.scss";
 import netflixLogo from "@assets/Netflix_2015_logo.svg";
+
+import "@scss/header/logo.scss";
 
 const Logo = () => {
   return (
