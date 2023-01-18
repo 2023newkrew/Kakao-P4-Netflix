@@ -8,8 +8,8 @@ function App() {
 
   return (
     <>
-      <MovieList initialMovies={movies} />
-      <MovieList initialMovies={movies} />
+      <MovieList movies={movies} />
+      <MovieList movies={movies} />
     </>
   );
 }

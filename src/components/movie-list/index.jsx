@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import MovieCard from '../movie-card';
 import useChange from '../../hooks/useChange';
-import useConst from '../../hooks/useConst';
 import {
   StyledDiv,
   StyledLeftButton,
@@ -60,12 +59,10 @@ const reducer = (state, action) => {
   }
 };
 
-function MovieList({ initialMovies }) {
-  const movies = useConst(() => initialMovies);
-
+function MovieList({ movies }) {
   const [{ offset, length, displayNumber }, dispatch] = useReducer(reducer, {
     offset: 0,
-    length: movies.length,
+    length: movies.length, // 프로퍼티 movies의 변경에 반응해야하는데 어떻게 달성할 수 있을지 고민입니다.
     displayNumber:
       ScreenWidthQueryToDisplayNumber[
         mediaQueryLists.find(({ matches }) => matches).media
