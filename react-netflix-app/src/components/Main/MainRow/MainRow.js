@@ -12,7 +12,7 @@ export default function MainRow({ fetchMethod }) {
   const [separatedList, setSeparatedList] = useState([]);
   const [colIndex, setColIndex] = useState(0);
   const [imageContainerSize, setImageContainerSize] = useState(null);
-  const SEPARATE_COUNT = 4;
+  const SEPARATE_COUNT = 6;
 
   useEffect(() => {
     /* 데이터 fetch */
@@ -25,11 +25,7 @@ export default function MainRow({ fetchMethod }) {
 
   return (
     <MainRowContainer>
-      <MainRowSlider
-        translateValue={
-          imageContainerSize !== null ? colIndex * imageContainerSize * separatedList[colIndex].length : 0
-        }
-      >
+      <MainRowSlider translateValue={imageContainerSize !== null ? colIndex * imageContainerSize * SEPARATE_COUNT : 0}>
         {/* 생성 및 삭제와 같은 변화가 없을 것이라고 예상하기에 key에 인덱스 값으로 부여 */}
         {separatedList !== null
           ? separatedList.map((subList, idx) => (

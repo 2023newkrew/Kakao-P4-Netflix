@@ -5,7 +5,7 @@ import rightArrowIcon from "../../../assets/rightArrow.svg";
 const MainRowContainer = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100% - 60px);
+  height: calc(100% - 30px);
   overflow-x: hidden;
 `;
 const MainRowSlider = styled.div`
