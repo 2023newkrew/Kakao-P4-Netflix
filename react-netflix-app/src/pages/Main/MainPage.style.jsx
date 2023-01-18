@@ -22,7 +22,7 @@ export const MainView = styled.main`
   ${tw`relative block`}
 `;
 export const RowContainer = styled.div`
-  ${tw`px-2 my-[3vw] mx-0 box-border outline-none`}
+  ${tw`px-2 my-[3vw] mx-0 box-border outline-none relative`}
   transition: transform .54s cubic-bezier(.5,0,.1,1) 0s;
 `;
 export const RowTitle = tw.h2`text-2xl my-2 ml-[4%]`;
