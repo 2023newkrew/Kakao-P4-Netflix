@@ -8,11 +8,11 @@ const handleClickArrow = (setColIndex, dir) => {
   setColIndex((prev) => prev + value);
 };
 
-export default function MainRow({ fetchMethod }) {
+export default function MainRow({ fetchMethod, itemCount }) {
   const [separatedList, setSeparatedList] = useState([]);
   const [colIndex, setColIndex] = useState(0);
   const [imageContainerSize, setImageContainerSize] = useState(null);
-  const SEPARATE_COUNT = 6;
+  const SEPARATE_COUNT = itemCount;
 
   useEffect(() => {
     /* 데이터 fetch */

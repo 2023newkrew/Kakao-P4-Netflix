@@ -7,9 +7,9 @@ export default function Main() {
   return (
     <div className="main">
       <MainPost />
-      <MainRow fetchMethod={TheMovieDBAPI.getTopRatedMovieList} />
-      <MainRow fetchMethod={TheMovieDBAPI.getNowPlayingMovieList} />
-      <MainRow fetchMethod={TheMovieDBAPI.getPopularMovieList} />
+      <MainRow fetchMethod={TheMovieDBAPI.getTopRatedMovieList} itemCount={4} />
+      <MainRow fetchMethod={TheMovieDBAPI.getNowPlayingMovieList} itemCount={4} />
+      <MainRow fetchMethod={TheMovieDBAPI.getPopularMovieList} itemCount={4} />
     </div>
   );
 }
