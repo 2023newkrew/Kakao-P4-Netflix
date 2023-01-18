@@ -70,31 +70,18 @@ const StyledList = styled.ul`
   width: 100%;
   display: flex;
   gap: var(--display-gap);
-
-  .movie-list-item {
-    flex-shrink: 0;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-
-    display: flex;
-    width: calc(
-      (100% - var(--display-gap) * (var(--display-number) - 1)) /
-        var(--display-number)
-    );
-    aspect-ratio: 16/9;
-  }
 `;
 
 const StyledListItem = styled.li`
   flex-shrink: 0;
-  border: 1px solid black;
+  border-radius: var(--border-radius);
 
   display: flex;
   width: calc(
     (100% - var(--display-gap) * (var(--display-number) - 1)) /
       var(--display-number)
   );
-  aspect-ratio: 16/9;
+  aspect-ratio: 2/3;
 `;
 
 const StyledButton = styled.button`
@@ -104,7 +91,7 @@ const StyledButton = styled.button`
   width: calc(var(--lr-padding) - var(--display-gap));
 
   border: none;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   color: white;
   transition: 0.2s;
