@@ -21,7 +21,7 @@ const createMqls = () => Object.values(ScreenWidthQuery).map(window.matchMedia);
 const useScreenWidthSize = () => {
   const [mqls] = useState(createMqls);
   const [matchedScreenWidthQuery, setMatchedScreenWidthQuery] = useState(
-    () => mqls.find(({ matches }) => matches).media,
+    () => mqls.find(({ matches }) => matches).media
   );
 
   useEffect(() => {
@@ -30,8 +30,12 @@ const useScreenWidthSize = () => {
     };
 
     mqls.forEach((mql) => mql.addEventListener('change', handleChangeEvent));
-    return () => { mqls.forEach((mql) => mql.removeEventListener('change', handleChangeEvent)); };
-  }, []);
+    return () => {
+      mqls.forEach((mql) =>
+        mql.removeEventListener('change', handleChangeEvent)
+      );
+    };
+  }, [mqls]);
 
   return ScreenWidthQueryToSizeString[matchedScreenWidthQuery];
 };

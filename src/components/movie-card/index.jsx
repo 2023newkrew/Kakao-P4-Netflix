@@ -9,9 +9,7 @@ const StyledDiv = styled.div`
 `;
 
 function MovieCard() {
-  return (
-    <StyledDiv>MovieCard</StyledDiv>
-  );
+  return <StyledDiv>MovieCard</StyledDiv>;
 }
 
 export default MovieCard;

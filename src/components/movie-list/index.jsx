@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import MovieCard from '../movie-card';
 import useScreenWidthSize from '../../hooks/useScreenWidthSize';
-import styled from 'styled-components';
 
 const ScreenWidthSizeToDisplayNumber = {
   xs: 2,
@@ -33,7 +32,9 @@ const StyledList = styled.ul`
     --display-number: 6;
   }
 
-  --item-and-gap-width: calc((100% - var(--lr-padding) * 2 + var(--display-gap)) / var(--display-number));
+  --item-and-gap-width: calc(
+    (100% - var(--lr-padding) * 2 + var(--display-gap)) / var(--display-number)
+  );
 
   padding: 0 var(--lr-padding);
   width: 100%;
@@ -46,7 +47,10 @@ const StyledListItem = styled.li`
   border: 1px solid black;
 
   display: flex;
-  width: calc((100% - var(--display-gap) * (var(--display-number) - 1)) / var(--display-number));
+  width: calc(
+    (100% - var(--display-gap) * (var(--display-number) - 1)) /
+      var(--display-number)
+  );
   aspect-ratio: 16/9;
 `;
 
@@ -59,8 +63,12 @@ function MovieList({ movies }) {
   const movieListElementRef = useRef(null);
   const animateMoveListElement = (currentPage, nextPage) => {
     const keyframes = [
-      { transform: `translateX(calc(-1 * ${currentPage} * var(--item-and-gap-width)))` },
-      { transform: `translateX(calc(-1 * ${nextPage} * var(--item-and-gap-width)))` },
+      {
+        transform: `translateX(calc(-1 * ${currentPage} * var(--item-and-gap-width)))`,
+      },
+      {
+        transform: `translateX(calc(-1 * ${nextPage} * var(--item-and-gap-width)))`,
+      },
     ];
 
     const options = {
@@ -97,42 +105,25 @@ function MovieList({ movies }) {
 
   return (
     <>
-      <div>
-        반응형 스크린 너비 사이즈:
-        {' '}
-        {screenWidthSize}
-      </div>
-      <div>
-        한 화면에 보이는 항목 수:
-        {' '}
-        {displayNumber}
-      </div>
-      <div style={{ color: page < 0 || page > movies.length - displayNumber ? 'red' : 'unset' }}>
-        페이지:
-        {' '}
-        {page}
-        {' '}
-        /
-        {' '}
-        {movies.length - displayNumber}
-        {' '}
-        (좌우 방향키로 변경)
+      <div>반응형 스크린 너비 사이즈: {screenWidthSize}</div>
+      <div>한 화면에 보이는 항목 수: {displayNumber}</div>
+      <div
+        style={{
+          color:
+            page < 0 || page > movies.length - displayNumber ? 'red' : 'unset',
+        }}
+      >
+        페이지: {page} / {movies.length - displayNumber} (좌우 방향키로 변경)
       </div>
       <StyledList ref={movieListElementRef}>
-        {
-        movies.map((movie) => (
+        {movies.map((movie) => (
           <StyledListItem key={movie.id}>
             <MovieCard movie={movie} />
           </StyledListItem>
-        ))
-      }
+        ))}
       </StyledList>
     </>
   );
 }
-
-MovieList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired })).isRequired,
-};
 
 export default MovieList;
