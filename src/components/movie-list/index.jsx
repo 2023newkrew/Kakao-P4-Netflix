@@ -30,6 +30,15 @@ const mediaQueryLists = Object.values(ScreenWidthQuery).map(window.matchMedia);
 function MovieList({ movies }) {
   const { length } = movies;
 
+  // MovieList는 2개의 상태값을 가집니다.
+  // offset과 displayNumber 입니다.
+  // offset은 화면 상에서 첫번째로 보여지는 MovieListItem의 index를 의미합니다.
+  // displayNumber는 화면 상에서 보여지는 MovieListItem의 개수를 의미합니다.
+  // 이 두 상태값은 상호 영향을 주고받기 때문에 useReducer를 통해 관리됩니다.
+
+  // offset은 0보다 크거나 같고, movies.length - displayNumber보다 작거나 같아야합니다.
+  // 그런데 movies.length는 MovieList의 프로퍼티입니다.
+  // 프로퍼티 movies의 변경에 따라 상태 offset가 규칙에 맞는 값을 동기적으로 가지도록 할 수 있는 방법이 없을지 고민입니다.
   const reducer = (state, action) => {
     const { offset, displayNumber } = state;
     const maxOffset = length - displayNumber;
