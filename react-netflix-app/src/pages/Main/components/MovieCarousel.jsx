@@ -1,30 +1,56 @@
-import tw, { styled } from 'twin.macro';
+import { Pagination, Controller, Navigation } from 'swiper';
+import { SwiperSlide } from 'swiper/react';
 import PropTypes from 'prop-types';
-import MovieCard from '@pages/Main/components/MovieCard';
 
-const SliderControlButton = styled.button`
-  ${tw`absolute bg-[hsla(0,0%, 8%, .5)] rounded-b-md bottom-0 text-white flex justify-center items-center top-10 w-[4%] z-[20]`}
-  &:nth-of-type(1) {
-    left: 0;
-  }
-  &:nth-of-type(2) {
-    right: 0;
-  }
-`;
-const ListContainer = tw.div`flex leading-[1.4]`;
-const SliderContent = tw.div`overflow-x-auto whitespace-nowrap w-full px-[4%]`;
+import { CarouselContainer, MovieSwiper } from '@pages/Main/components/MovieCarousel.style';
+import MovieCard from '@pages/Main/components/MovieCard';
+import { breakpoints } from '@/styles/theme';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+const swiperOptions = {
+  pagination: {
+    clickable: true,
+  },
+  navigation: true,
+  slidesPerGroup: 2,
+  slidesPerView: 2,
+  breakpoints: {
+    [breakpoints.sm]: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+    },
+    [breakpoints.md]: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+    },
+    [breakpoints.lg]: {
+      slidesPerGroup: 5,
+      slidesPerView: 5,
+    },
+    [breakpoints.xl]: {
+      slidesPerGroup: 6,
+      slidesPerView: 6,
+    },
+  },
+  modules: [Pagination, Controller, Navigation],
+};
 
 const MovieCarousel = ({ movies }) => {
   return (
-    <ListContainer>
-      <SliderControlButton>이전</SliderControlButton>
-      <SliderContent>
+    <CarouselContainer>
+      {/* <SliderControlButton>이전</SliderControlButton> */}
+      <MovieSwiper {...swiperOptions}>
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <SwiperSlide key={movie.id} style={{ width: '25%' }}>
+            <MovieCard movie={movie} />
+          </SwiperSlide>
         ))}
-      </SliderContent>
-      <SliderControlButton>다음</SliderControlButton>
-    </ListContainer>
+      </MovieSwiper>
+      {/* <SliderControlButton>다음</SliderControlButton> */}
+    </CarouselContainer>
   );
 };
 MovieCarousel.propTypes = {

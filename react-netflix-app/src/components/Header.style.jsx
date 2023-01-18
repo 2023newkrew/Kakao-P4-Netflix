@@ -22,7 +22,7 @@ export const PrimaryMenus = styled.ul`
   & > li:not(:first-of-type) {
     display: none;
   }
-  @media screen and (min-width: ${breakpoints.sm}) {
+  @media screen and (min-width: ${breakpoints.sm}px) {
     & > li:not(:first-of-type) {
       display: block;
     }
@@ -34,7 +34,7 @@ export const SecondaryMenus = styled.ul`
   & > li:nth-of-type(4) {
     display: none;
   }
-  @media screen and (min-width: ${breakpoints.sm}) {
+  @media screen and (min-width: ${breakpoints.sm}px) {
     & > li:nth-of-type(1),
     & > li:nth-of-type(4) {
       display: block;
