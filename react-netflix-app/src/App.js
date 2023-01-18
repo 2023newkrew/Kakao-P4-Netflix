@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import Banner from "@components/banner/Banner";
+import CardSlide from "@components/cardSlide/CardSlide";
+import Footer from "@components/footer/Footer";
+import Header from "@components/header/Header";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Banner />
+      <CardSlide title={"액션"} genreId={28} />
+      <CardSlide title={"가족"} genreId={10751} />
+      <CardSlide title={"애니메이션"} genreId={16} />
+      <CardSlide title={"공포"} genreId={27} />
+
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;
