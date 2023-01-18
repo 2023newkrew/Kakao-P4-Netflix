@@ -131,7 +131,7 @@ const reducer = (state, action) => {
 };
 
 function MovieList({ initialMovies }) {
-  const movies = useConst(initialMovies);
+  const movies = useConst(() => initialMovies);
   const MediaQueryLists = useConst(createMediaQueryLists);
 
   const [{ offset, length, displayNumber }, dispatch] = useReducer(reducer, {

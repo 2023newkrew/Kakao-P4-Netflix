@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useMemo } from 'react';
 
-const useConst = (value) => useState(value)[0];
+// eslint-disable-next-line react-hooks/exhaustive-deps
+const useConst = (init) => useMemo(init, []);
 
 export default useConst;
