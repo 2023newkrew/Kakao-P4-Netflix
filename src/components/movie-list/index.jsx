@@ -1,20 +1,48 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import styled from 'styled-components';
 import MovieCard from '../movie-card';
-import useScreenWidthSize from '../../hooks/useScreenWidthSize';
+import useChange from '../../hooks/useChange';
+import useConst from '../../hooks/useConst';
 
-const ScreenWidthSizeToDisplayNumber = {
-  xs: 2,
-  s: 3,
-  m: 4,
-  l: 5,
-  xl: 6,
+const reducer = (state, action) => {
+  const { offset, length, displayNumber } = state;
+  const maxOffset = length - displayNumber;
+
+  switch (action.type) {
+    case 'offset': {
+      const { value } = action;
+
+      if (value < 0) {
+        return { ...state, offset: 0 };
+      }
+
+      if (value > maxOffset) {
+        return { ...state, offset: maxOffset };
+      }
+
+      return { ...state, offset: value };
+    }
+    case 'displayNumber': {
+      const { value } = action;
+
+      if (offset > length - value) {
+        return { ...state, offset: length - value, displayNumber: value };
+      }
+
+      return { ...state, displayNumber: value };
+    }
+    default:
+      throw new Error();
+  }
 };
 
-const StyledList = styled.ul`
+const StyledDiv = styled.div`
+  position: relative;
+
   --display-gap: 0.4%;
   --display-number: 2;
   --lr-padding: 4%;
+  --border-radius: 4px;
 
   @media screen and (min-width: 480px) {
     --display-number: 3;
@@ -31,7 +59,9 @@ const StyledList = styled.ul`
   @media screen and (min-width: 1280px) {
     --display-number: 6;
   }
+`;
 
+const StyledList = styled.ul`
   --item-and-gap-width: calc(
     (100% - var(--lr-padding) * 2 + var(--display-gap)) / var(--display-number)
   );
@@ -40,6 +70,19 @@ const StyledList = styled.ul`
   width: 100%;
   display: flex;
   gap: var(--display-gap);
+
+  .movie-list-item {
+    flex-shrink: 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+
+    display: flex;
+    width: calc(
+      (100% - var(--display-gap) * (var(--display-number) - 1)) /
+        var(--display-number)
+    );
+    aspect-ratio: 16/9;
+  }
 `;
 
 const StyledListItem = styled.li`
@@ -54,21 +97,99 @@ const StyledListItem = styled.li`
   aspect-ratio: 16/9;
 `;
 
-function MovieList({ movies }) {
-  const screenWidthSize = useScreenWidthSize();
-  const displayNumber = ScreenWidthSizeToDisplayNumber[screenWidthSize];
+const StyledButton = styled.button`
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: calc(var(--lr-padding) - var(--display-gap));
 
-  const [page, setPage] = useState(0);
+  border: none;
+  background-color: rgba($color: #000000, $alpha: 0.25);
+  cursor: pointer;
+  color: white;
+  transition: 0.2s;
+  border-radius: var(--border-radius);
+
+  &:disabled {
+    cursor: initial;
+    opacity: 0;
+  }
+`;
+
+const StyledLeftButton = styled(StyledButton)`
+  left: 0;
+`;
+
+const StyledRightButton = styled(StyledButton)`
+  right: 0;
+`;
+
+const ScreenWidthQuery = {
+  XS: '(max-width: 479px)',
+  S: '(min-width: 480px) and (max-width: 767px)',
+  M: '(min-width: 768px) and (max-width: 1023px)',
+  L: '(min-width: 1024px) and (max-width: 1279px)',
+  XL: '(min-width: 1280px)',
+};
+
+const ScreenWidthQueryToDisplayNumber = {
+  [ScreenWidthQuery.XS]: 2,
+  [ScreenWidthQuery.S]: 3,
+  [ScreenWidthQuery.M]: 4,
+  [ScreenWidthQuery.L]: 5,
+  [ScreenWidthQuery.XL]: 6,
+};
+
+const createMqls = () => Object.values(ScreenWidthQuery).map(window.matchMedia);
+
+function MovieList({ initialMovies }) {
+  const movies = useConst(initialMovies);
+  const mqls = useConst(createMqls);
+
+  const [{ offset, length, displayNumber }, dispatch] = useReducer(reducer, {
+    offset: 0,
+    length: movies.length,
+    displayNumber:
+      ScreenWidthQueryToDisplayNumber[
+        mqls.find(({ matches }) => matches).media
+      ],
+  });
+
+  useEffect(() => {
+    const handleChangeEvent = ({ matches, media }) => {
+      if (matches) {
+        dispatch({
+          type: 'displayNumber',
+          value: ScreenWidthQueryToDisplayNumber[media],
+        });
+      }
+    };
+
+    mqls.forEach((mql) => mql.addEventListener('change', handleChangeEvent));
+    return () => {
+      mqls.forEach((mql) =>
+        mql.removeEventListener('change', handleChangeEvent)
+      );
+    };
+  }, [mqls]);
+
+  const handleLeftScrollButtonClick = () => {
+    const nextOffset = offset - displayNumber;
+    dispatch({ type: 'offset', value: nextOffset });
+  };
+
+  const handleRightScrollButtonClick = () => {
+    const nextOffset = offset + displayNumber;
+    dispatch({ type: 'offset', value: nextOffset });
+  };
 
   const movieListElementRef = useRef(null);
-  const animateMoveListElement = (currentPage, nextPage) => {
+  const animateMoveListElement = (from, to) => {
     const keyframes = [
       {
-        transform: `translateX(calc(-1 * ${currentPage} * var(--item-and-gap-width)))`,
+        transform: `translateX(calc(-1 * ${from} * var(--item-and-gap-width)))`,
       },
-      {
-        transform: `translateX(calc(-1 * ${nextPage} * var(--item-and-gap-width)))`,
-      },
+      { transform: `translateX(calc(-1 * ${to} * var(--item-and-gap-width)))` },
     ];
 
     const options = {
@@ -80,48 +201,43 @@ function MovieList({ movies }) {
     movieListElementRef.current.animate(keyframes, options);
   };
 
-  useEffect(() => {
-    const handleKeydownEvent = (event) => {
-      if (event.code === 'ArrowRight') {
-        setPage((currentPage) => {
-          const nextPage = currentPage + 1;
-          animateMoveListElement(currentPage, nextPage);
-          return nextPage;
-        });
-      }
+  useChange((prevOffset) => {
+    animateMoveListElement(prevOffset, offset);
+  }, offset);
 
-      if (event.code === 'ArrowLeft') {
-        setPage((currentPage) => {
-          const nextPage = currentPage - 1;
-          animateMoveListElement(currentPage, nextPage);
-          return nextPage;
-        });
-      }
-    };
-
-    window.addEventListener('keydown', handleKeydownEvent);
-    return () => window.removeEventListener('keydown', handleKeydownEvent);
-  }, []);
+  const maxOffset = length - displayNumber;
 
   return (
     <>
-      <div>반응형 스크린 너비 사이즈: {screenWidthSize}</div>
       <div>한 화면에 보이는 항목 수: {displayNumber}</div>
       <div
-        style={{
-          color:
-            page < 0 || page > movies.length - displayNumber ? 'red' : 'unset',
-        }}
+        style={{ color: offset < 0 || offset > maxOffset ? 'red' : 'unset' }}
       >
-        페이지: {page} / {movies.length - displayNumber} (좌우 방향키로 변경)
+        페이지: {offset} / {maxOffset}
       </div>
-      <StyledList ref={movieListElementRef}>
-        {movies.map((movie) => (
-          <StyledListItem key={movie.id}>
-            <MovieCard movie={movie} />
-          </StyledListItem>
-        ))}
-      </StyledList>
+      <StyledDiv>
+        <StyledList ref={movieListElementRef}>
+          {movies.map((movie) => (
+            <StyledListItem className="movie-list-item" key={movie.id}>
+              <MovieCard movie={movie} />
+            </StyledListItem>
+          ))}
+        </StyledList>
+        <StyledLeftButton
+          type="button"
+          onClick={handleLeftScrollButtonClick}
+          disabled={offset === 0}
+        >
+          ◀
+        </StyledLeftButton>
+        <StyledRightButton
+          type="button"
+          onClick={handleRightScrollButtonClick}
+          disabled={offset === maxOffset}
+        >
+          ▶
+        </StyledRightButton>
+      </StyledDiv>
     </>
   );
 }
