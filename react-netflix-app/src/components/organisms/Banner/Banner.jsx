@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { IconButton, EllipsisText } from "components";
 import api from "utils/API";
 import {
   BannerContainer,
@@ -8,8 +9,10 @@ import {
   ContentTitle,
   ContentDesc,
   ContentButtonBox,
-  ContentButton,
 } from "./Banner.style";
+
+import playImage from "assets/play.svg";
+import infoImage from "assets/info.svg";
 
 const Banner = () => {
   const [content, setContent] = useState({
@@ -35,13 +38,15 @@ const Banner = () => {
         <BackgroundFooter></BackgroundFooter>
       </BannerBackground>
       <BannerContent>
-        <ContentTitle as="h1">{content.title}</ContentTitle>
-        <ContentDesc>{content.overview}</ContentDesc>
+        <ContentTitle as="h1">
+          <EllipsisText text={content.title} fontSize={"5.2vw"} fontWeight={"bold"}></EllipsisText>
+        </ContentTitle>
+        <ContentDesc>
+          <EllipsisText text={content.overview} fontSize={"1.2vw"} line={4}></EllipsisText>
+        </ContentDesc>
         <ContentButtonBox>
-          <ContentButton color="#000" backgroundColor="#fff">
-            재생
-          </ContentButton>
-          <ContentButton>상세 정보</ContentButton>
+          <IconButton iconImage={playImage} text={"재생"} theme="white" />
+          <IconButton iconImage={infoImage} text={"상세 정보"} />
         </ContentButtonBox>
       </BannerContent>
     </BannerContainer>

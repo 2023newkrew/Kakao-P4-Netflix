@@ -28,15 +28,6 @@ export const NavItem = styled.div`
   margin: 0 10px;
 `;
 
-export const NavTabs = styled.ul`
-  display: flex;
-  align-items: center;
-`;
-
-export const NavTab = styled.li`
-  margin: 0 10px;
-`;
-
 export const Logo = styled.a`
   display: flex;
   justify-content: center;
