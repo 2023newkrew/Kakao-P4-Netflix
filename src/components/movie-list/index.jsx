@@ -4,38 +4,6 @@ import MovieCard from '../movie-card';
 import useChange from '../../hooks/useChange';
 import useConst from '../../hooks/useConst';
 
-const reducer = (state, action) => {
-  const { offset, length, displayNumber } = state;
-  const maxOffset = length - displayNumber;
-
-  switch (action.type) {
-    case 'offset': {
-      const { value } = action;
-
-      if (value < 0) {
-        return { ...state, offset: 0 };
-      }
-
-      if (value > maxOffset) {
-        return { ...state, offset: maxOffset };
-      }
-
-      return { ...state, offset: value };
-    }
-    case 'displayNumber': {
-      const { value } = action;
-
-      if (offset > length - value) {
-        return { ...state, offset: length - value, displayNumber: value };
-      }
-
-      return { ...state, displayNumber: value };
-    }
-    default:
-      throw new Error();
-  }
-};
-
 const StyledDiv = styled.div`
   position: relative;
 
@@ -127,18 +95,51 @@ const ScreenWidthQueryToDisplayNumber = {
   [ScreenWidthQuery.XL]: 6,
 };
 
-const createMqls = () => Object.values(ScreenWidthQuery).map(window.matchMedia);
+const createMediaQueryLists = () =>
+  Object.values(ScreenWidthQuery).map(window.matchMedia);
+
+const reducer = (state, action) => {
+  const { offset, length, displayNumber } = state;
+  const maxOffset = length - displayNumber;
+
+  switch (action.type) {
+    case 'offset': {
+      const { value } = action;
+
+      if (value < 0) {
+        return { ...state, offset: 0 };
+      }
+
+      if (value > maxOffset) {
+        return { ...state, offset: maxOffset };
+      }
+
+      return { ...state, offset: value };
+    }
+    case 'displayNumber': {
+      const { value } = action;
+
+      if (offset > length - value) {
+        return { ...state, offset: length - value, displayNumber: value };
+      }
+
+      return { ...state, displayNumber: value };
+    }
+    default:
+      throw new Error();
+  }
+};
 
 function MovieList({ initialMovies }) {
   const movies = useConst(initialMovies);
-  const mqls = useConst(createMqls);
+  const MediaQueryLists = useConst(createMediaQueryLists);
 
   const [{ offset, length, displayNumber }, dispatch] = useReducer(reducer, {
     offset: 0,
     length: movies.length,
     displayNumber:
       ScreenWidthQueryToDisplayNumber[
-        mqls.find(({ matches }) => matches).media
+        MediaQueryLists.find(({ matches }) => matches).media
       ],
   });
 
@@ -152,13 +153,15 @@ function MovieList({ initialMovies }) {
       }
     };
 
-    mqls.forEach((mql) => mql.addEventListener('change', handleChangeEvent));
+    MediaQueryLists.forEach((MediaQueryList) =>
+      MediaQueryList.addEventListener('change', handleChangeEvent)
+    );
     return () => {
-      mqls.forEach((mql) =>
-        mql.removeEventListener('change', handleChangeEvent)
+      MediaQueryLists.forEach((MediaQueryList) =>
+        MediaQueryList.removeEventListener('change', handleChangeEvent)
       );
     };
-  }, [mqls]);
+  }, [MediaQueryLists]);
 
   const handleLeftScrollButtonClick = () => {
     const nextOffset = offset - displayNumber;
