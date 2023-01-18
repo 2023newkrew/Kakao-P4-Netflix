@@ -1,7 +1,7 @@
 .movieCard_container {
   width: 100%;
   height: 100%;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,15 +10,17 @@
 
   margin-right: 10px;
 
+  .movieCard_wrapper {
+    .movieCard_image {
+      position: relative;
+      width: 340px;
+      height: auto;
+      transition: transform 0.1s ease-out;
 
-  .movieCard_image {
-    width: 340px;
-    height: auto;
-    transition: transform 0.1s ease-out;
-
-    &.hover {
-      transform: scale(1.2) translateY(-50px);
-      z-index: 1;
+      &.hover {
+        transform: scale(1.2) translateY(-50px);
+        z-index: 1;
+      }
     }
   }
 

@@ -7,8 +7,8 @@ class Axios {
     this.API_KEY = process.env.REACT_APP_API_KEY;
   }
 
-  async fetchBannerMovieVideoURL(bannerMovie) {
-    const response = await axios.get(`${this.API_URL}/3/movie/${bannerMovie.id}/videos?api_key=${this.API_KEY}`);
+  async fetchMovieVideoURL(bannerMovieId) {
+    const response = await axios.get(`${this.API_URL}/3/movie/${bannerMovieId}/videos?api_key=${this.API_KEY}`);
     const bannerMovieTrailerURLs = response.data.results;
 
     const bannerMovieTrailerURL = bannerMovieTrailerURLs.find((element) => element.type === "Trailer");
@@ -28,6 +28,11 @@ class Axios {
     const response = await axios.get(`${this.API_URL}/3/discover/movie?api_key=${this.API_KEY}&language=ko&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}&with_watch_monetization_types=flatrate`);
     const fetchGenreMovieList = response.data.results;
     return fetchGenreMovieList;
+  }
+
+  async fetchDetailMovieInfo(movieId) {
+    const response = await axios.get(`${this.API_URL}/3/movie/${movieId}?api_key=${this.API_KEY}&language=ko`);
+    return response.data;
   }
 }
 

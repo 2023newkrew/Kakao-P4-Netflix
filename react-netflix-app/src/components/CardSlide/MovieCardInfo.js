@@ -6,8 +6,9 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import "@scss/cardSlide/movieCardInfo.scss";
 
 import genre from "../../json/genre.json";
+import useModal from "../../hooks/useModal";
 
-const MovieCardInfo = ({ movie }) => {
+const MovieCardInfo = ({ movie, open }) => {
   function movieCategory() {
     const movieCategoryIdList = movie.genre_ids;
     const movieCategory = movieCategoryIdList.map((value, index) => <li key={index}>{genre[value]}</li>);
@@ -23,7 +24,7 @@ const MovieCardInfo = ({ movie }) => {
         <BsPlusCircle size={svgSize} />
         <GoThumbsup size={svgSize} />
         <div style={{ width: "70%", display: "flex", justifyContent: "flex-end" }}>
-          <IoIosArrowDropdownCircle size={svgSize} />
+          <IoIosArrowDropdownCircle size={svgSize} onClick={open} />
         </div>
       </div>
       <div className="movieCardInfo_title">{movie.title}</div>

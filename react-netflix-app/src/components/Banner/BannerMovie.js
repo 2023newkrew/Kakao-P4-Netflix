@@ -11,7 +11,7 @@ const BannerMovie = ({ bannerMovie }) => {
     fetchAndSetBannerMovieVideoURL();
 
     async function fetchAndSetBannerMovieVideoURL() {
-      const fetchBannerMovieURL = await API.fetchBannerMovieVideoURL(bannerMovie);
+      const fetchBannerMovieURL = await API.fetchMovieVideoURL(bannerMovie.id);
       setBannerMovieURL(fetchBannerMovieURL);
     }
   }, []);
