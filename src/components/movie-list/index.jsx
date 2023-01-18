@@ -104,7 +104,7 @@ const StyledButton = styled.button`
   width: calc(var(--lr-padding) - var(--display-gap));
 
   border: none;
-  background-color: rgba($color: #000000, $alpha: 0.25);
+  background-color: rgba(0, 0, 0, 0.25);
   cursor: pointer;
   color: white;
   transition: 0.2s;
