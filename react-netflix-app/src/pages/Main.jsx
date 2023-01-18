@@ -1,10 +1,10 @@
-import React from "react";
-import { Banner, Header, Slider, Footer } from "components";
+import React, { useState } from "react";
+import { Banner, Header, ContentCardList, Footer } from "components";
 
 export default function Main() {
-  const sliders = () => {
+  const makeContentCardLists = () => {
     const keywords = ["지금 뜨는 콘텐츠!"];
-    return keywords.map((keyword) => <Slider key={keyword} keyword={keyword} />);
+    return keywords.map((keyword) => <ContentCardList key={keyword} keyword={keyword} />);
   };
 
   return (
@@ -12,7 +12,7 @@ export default function Main() {
       <Header />
       <main>
         <Banner />
-        {sliders()}
+        {makeContentCardLists()}
       </main>
       <Footer />
     </>

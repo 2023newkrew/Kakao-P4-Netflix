@@ -1,6 +1,6 @@
 import React from "react";
 
-const SliderCard = ({ index, content }) => {
+const ContentCard = ({ index, content }) => {
   return (
     <li key={index}>
       <article className="slider-card">
@@ -12,4 +12,4 @@ const SliderCard = ({ index, content }) => {
   );
 };
 
-export default React.memo(SliderCard);
+export default React.memo(ContentCard);
