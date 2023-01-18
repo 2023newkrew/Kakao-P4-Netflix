@@ -26,8 +26,7 @@ const ScreenWidthQueryToDisplayNumber = {
   [ScreenWidthQuery.XL]: 6,
 };
 
-const createMediaQueryLists = () =>
-  Object.values(ScreenWidthQuery).map(window.matchMedia);
+const mediaQueryLists = Object.values(ScreenWidthQuery).map(window.matchMedia);
 
 const reducer = (state, action) => {
   const { offset, length, displayNumber } = state;
@@ -63,14 +62,13 @@ const reducer = (state, action) => {
 
 function MovieList({ initialMovies }) {
   const movies = useConst(() => initialMovies);
-  const MediaQueryLists = useConst(createMediaQueryLists);
 
   const [{ offset, length, displayNumber }, dispatch] = useReducer(reducer, {
     offset: 0,
     length: movies.length,
     displayNumber:
       ScreenWidthQueryToDisplayNumber[
-        MediaQueryLists.find(({ matches }) => matches).media
+        mediaQueryLists.find(({ matches }) => matches).media
       ],
   });
 
@@ -84,15 +82,15 @@ function MovieList({ initialMovies }) {
       }
     };
 
-    MediaQueryLists.forEach((MediaQueryList) =>
+    mediaQueryLists.forEach((MediaQueryList) =>
       MediaQueryList.addEventListener('change', handleChangeEvent)
     );
     return () => {
-      MediaQueryLists.forEach((MediaQueryList) =>
+      mediaQueryLists.forEach((MediaQueryList) =>
         MediaQueryList.removeEventListener('change', handleChangeEvent)
       );
     };
-  }, [MediaQueryLists]);
+  }, []);
 
   const handleLeftScrollButtonClick = () => {
     const nextOffset = offset - displayNumber;
