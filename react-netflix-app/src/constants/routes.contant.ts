@@ -5,15 +5,15 @@ import Movie from '@pages/Movie/[id]';
 
 const routes: RoutesObject = {
   '/': {
-    name: '메인 페이지',
+    name: '메인페이지',
     element: Main,
   },
   '/movie/:id': {
-    name: 'Movie Detail Pages',
+    name: '영화 상세페이지',
     element: Movie,
   },
   '/notfound': {
-    name: 'Not found - 404',
+    name: '404 - 찾을 수 없는 페이지',
     element: Notfound,
   }
 }; 
