@@ -24,7 +24,7 @@ const MainPostLeftShadow = styled.div`
   right: 26.09%;
   top: 0px;
   transition: opacity 0.5s;
-  height: 56.25vh;
+  height: 56.25vw;
 `;
 
 const MainPostBottomShadow = styled.div`
