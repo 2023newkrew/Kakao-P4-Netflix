@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
-      const data = await getNowPlaying(1);
+      const data = await getNowPlaying();
       const { results } = data;
 
       setNowPlaying(results);
