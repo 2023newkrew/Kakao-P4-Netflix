@@ -34,4 +34,4 @@ export const MovieSwiper = styled(Swiper)`
   }
 `;
 
-export const CarouselContainer = tw.div`flex leading-[1.4]`;
+export const CarouselContainer = tw.div`flex leading-[1.4] min-h-[150px]`;
