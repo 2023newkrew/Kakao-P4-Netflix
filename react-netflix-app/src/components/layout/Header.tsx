@@ -29,6 +29,7 @@ const Container = styled.header`
   display: flex;
   margin: 0 auto;
   z-index: 99;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent);
 `;
 const Logo = styled(LogoSVG)`
   width: 134px;

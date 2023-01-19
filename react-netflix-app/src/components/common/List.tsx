@@ -1,18 +1,24 @@
 import { COLORS } from '@constants/colors.contant';
-import { PropsWithChildren } from 'react';
+import { HTMLAttributes, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-const List = ({ children }: PropsWithChildren) => {
+const List = ({ children, className, ...rest }: PropsWithChildren & HTMLAttributes<HTMLUListElement>) => {
   return (
-    <ListContainer>
+    <ListContainer
+      className={className}
+      {...rest}
+    >
       {children}
     </ListContainer>
   );
 };
 
-List.Card = function ListCard({children}: PropsWithChildren) {
+List.Card = function ListCard({ children, className, ...rest}: PropsWithChildren & HTMLAttributes<HTMLLIElement>) {
   return (
-    <CardContainer>
+    <CardContainer
+      className={className}
+      {...rest}
+    >
       {children}
     </CardContainer>
   );
