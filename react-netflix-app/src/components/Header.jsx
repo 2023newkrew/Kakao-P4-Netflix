@@ -29,6 +29,37 @@ const primaryMenus = [
   },
 ];
 
+const secondaryMenus = [
+  {
+    id: 1,
+    content: (
+      <button>
+        <img src={SearchIcon} alt="검색 아이콘" />
+      </button>
+    ),
+  },
+  {
+    id: 2,
+    content: (
+      <button>
+        <img src={AlarmIcon} alt="알람 아이콘" />
+      </button>
+    ),
+  },
+  {
+    id: 3,
+    content: <button>프로필</button>,
+  },
+  {
+    id: 4,
+    content: (
+      <Link to="/login" replace>
+        로그아웃
+      </Link>
+    ),
+  },
+];
+
 const useHeaderStyle = () => {
   const headerRef = useRef(null);
   useEffect(() => {
@@ -70,24 +101,9 @@ const Header = () => {
           ))}
         </PrimaryMenus>
         <SecondaryMenus>
-          <MenuItem>
-            <button>
-              <img src={SearchIcon} alt="검색 아이콘" />
-            </button>
-          </MenuItem>
-          <MenuItem>
-            <button>
-              <img src={AlarmIcon} alt="알람 아이콘" />
-            </button>
-          </MenuItem>
-          <MenuItem>
-            <button>프로필</button>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/login" replace>
-              로그아웃
-            </Link>
-          </MenuItem>
+          {secondaryMenus.map((menu) => (
+            <MenuItem key={menu.id}>{menu.content}</MenuItem>
+          ))}
         </SecondaryMenus>
       </HeaderContent>
     </HeaderContainer>

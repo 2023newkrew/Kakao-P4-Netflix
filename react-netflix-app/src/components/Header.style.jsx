@@ -5,7 +5,7 @@ import { breakpoints } from '@styles/theme';
 export const HeaderContainer = tw.header`fixed top-0 right-0 left-0 z-[1] h-[60px] text-xl`;
 
 export const HeaderContent = styled.nav`
-  ${tw`h-full flex items-center px-[4%] text-sm transition-all`}
+  ${tw`h-full flex items-center px-[4%] text-sm transition-all relative`}
   background-image: linear-gradient(180deg,rgba(0,0,0,.7) 10%,transparent);
   transition: background-color 0.4s;
 `;
