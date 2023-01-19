@@ -12,7 +12,7 @@ const useIntersectionObserver = (observeCallback, unObserveCallback) => {
           }
         });
       },
-      { threshold: 1 }
+      { threshold: 0.8 }
     )
   );
 

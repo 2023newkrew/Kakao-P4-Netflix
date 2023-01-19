@@ -2,10 +2,9 @@ import "@scss/banner/banner.scss";
 
 import React, { useState, useEffect } from "react";
 
-import axios from "axios";
 import BannerMovie from "./BannerMovie";
 import BannerInfo from "./BannerInfo";
-import { API } from "../../utils/axios";
+import { API } from "@utils/axios";
 
 const Banner = () => {
   const [bannerMovie, setBannerMovie] = useState();

@@ -1,12 +1,11 @@
 import { ImPlay2 } from "react-icons/im";
-import { BsChatRight, BsPlusCircle } from "react-icons/bs";
+import { BsPlusCircle } from "react-icons/bs";
 import { GoThumbsup } from "react-icons/go";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 import "@scss/cardSlide/movieCardInfo.scss";
 
 import genre from "../../json/genre.json";
-import useModal from "../../hooks/useModal";
 
 const MovieCardInfo = ({ movie, open }) => {
   function movieCategory() {

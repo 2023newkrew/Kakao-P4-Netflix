@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
 
+
+
 .cardSlide_container {
   position: relative;
   width: 100%;
@@ -39,81 +41,18 @@
 
     padding-left: 10px;
 
-    .cardSlide_leftButton {
-      position: absolute;
-      left: 0;
-      z-index: 2;
-
-      height: 55%;
-      // background-color: black;
-      width: 3%;
-      background-color: rgba(0, 0, 0, 0.1);
-
-      
-      transition: background-color 0.2s;
-      border: 0;
-      cursor: pointer;
-
-      div {
-        transition: transform 0.2s;
-        color: white;
-      
-        font-weight: lighter;
-        font-size: 35px;
-        
-      }
-
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.4);
-
-        div {
-          transform:scale(1.2);
-        }
-      }
-    }
-
-    .cardSlide_rightButton {
-      position: absolute;
-      right: 0;
-      z-index: 1;
-
-      height: 55%;
-      width: 3%;
-      background-color: rgba(0, 0, 0, 0.1);
-
-      
-      transition: background-color 0.2s;
-      border: 0;
-      cursor: pointer;
-
-      div {
-        transition: transform 0.2s;
-        color: white;
-      
-        font-weight: lighter;
-        font-size: 35px;
-        
-      }
-
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.4);
-
-        div {
-          transform:scale(1.2);
-        }
-      }
-    }
 
     .cardSlide_slide {
       display: flex;
+      align-items: center;
+      justify-content: center;
 
       width: 100%;
       height: 100%;
 
       padding-left: 20px;
 
-      transition: transform 0.5s;
-      
+      transition: transform 0.5s;      
       // overflow: auto;
     }
   }
