@@ -54,8 +54,8 @@ const MovieList = ({ title, movies }) => {
               </MovieCardInner>
             ))}
         </MovieItemContent>
-        <MoviePrevButton disabled={currentPage === 0} onClick={onClickPrev} />
-        <MovieNextButton disabled={currentPage === splitMovies.length - 1} onClick={onClickNext} />
+        <MoviePrevButton disabled={isFirstPage} onClick={onClickPrev} />
+        <MovieNextButton disabled={isLastPage} onClick={onClickNext} />
       </MovieItemContainer>
     </MovieListContainer>
   );
