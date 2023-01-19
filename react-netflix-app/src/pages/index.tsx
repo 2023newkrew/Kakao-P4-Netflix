@@ -1,14 +1,11 @@
 import { getPopularMovies } from '@apis/movies';
-import { Image } from '@components/common/Image';
 import { Text } from '@components/common/Text';
 import MovieList from '@components/movie/MovieList';
 import { MoviePoster } from '@components/movie/MoviePoster';
-import { COLORS } from '@constants/colors.contant';
 import useCarousel from '@hooks/useCarousel';
 import { MovieType } from '@models/movies.model';
-import { throttle } from '@utils/throttle';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+
 
 export default function Main() {
   const [loading, setLoading] = useState(false);
@@ -26,17 +23,6 @@ export default function Main() {
       setLoading(true);
     };
     fetchPopularMovies();
-  }, []);
-  useEffect(() => {
-    
-    const handleScroll = throttle(() => {
-      console.log('scrolled');
-    }, 500);
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
   }, []);
   
   if (!loading || !randomMovie) return <></>;
