@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -21,8 +20,6 @@ function App() {
       const res = await axios.get(
         `https://api.themoviedb.org/3/movie/top_rated?api_key=c14724951e1843e630f68881a3192a57&language=ko`
       );
-
-      console.log(res);
 
       setMovies(res.data.results);
     })();

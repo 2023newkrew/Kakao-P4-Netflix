@@ -1,13 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import MovieCard from '../movie-card';
-import useChange from '../../hooks/useChange';
-import {
-  StyledDiv,
-  StyledLeftButton,
-  StyledList,
-  StyledListItem,
-  StyledRightButton,
-} from './styled';
+import React, { useEffect, useState } from 'react';
+import MovieList from './movieList';
 
 const ScreenWidthQuery = {
   XS: '(max-width: 479px)',
@@ -27,6 +19,8 @@ const ScreenWidthQueryToDisplayNumber = {
 
 const mediaQueryLists = Object.values(ScreenWidthQuery).map(window.matchMedia);
 
+// getDerivedStateFromProps를 달성하기 위한 Wrapper 컴포넌트
+// (https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops)
 function MovieListWrapper({ movies }) {
   const { length } = movies;
 
@@ -70,68 +64,6 @@ function MovieListWrapper({ movies }) {
       offset={offset}
       setOffset={setOffset}
     />
-  );
-}
-
-function MovieList({ movies, displayNumber, offset, setOffset }) {
-  const { length } = movies;
-
-  const handleLeftScrollButtonClick = () => {
-    setOffset(offset - displayNumber);
-  };
-
-  const handleRightScrollButtonClick = () => {
-    setOffset(offset + displayNumber);
-  };
-
-  const movieListElementRef = useRef(null);
-  const animateMoveListElement = (from, to) => {
-    const keyframes = [
-      {
-        transform: `translateX(calc(-1 * ${from} * var(--item-and-gap-width)))`,
-      },
-      { transform: `translateX(calc(-1 * ${to} * var(--item-and-gap-width)))` },
-    ];
-
-    const options = {
-      duration: 500,
-      easing: 'ease',
-      fill: 'forwards',
-    };
-
-    movieListElementRef.current.animate(keyframes, options);
-  };
-
-  useChange((prevOffset) => {
-    animateMoveListElement(prevOffset, offset);
-  }, offset);
-
-  const maxOffset = length - displayNumber;
-
-  return (
-    <StyledDiv>
-      <StyledList ref={movieListElementRef}>
-        {movies.map((movie) => (
-          <StyledListItem className="movie-list-item" key={movie.id}>
-            <MovieCard movie={movie} />
-          </StyledListItem>
-        ))}
-      </StyledList>
-      <StyledLeftButton
-        type="button"
-        onClick={handleLeftScrollButtonClick}
-        disabled={offset === 0}
-      >
-        ◀
-      </StyledLeftButton>
-      <StyledRightButton
-        type="button"
-        onClick={handleRightScrollButtonClick}
-        disabled={offset === maxOffset}
-      >
-        ▶
-      </StyledRightButton>
-    </StyledDiv>
   );
 }
 
