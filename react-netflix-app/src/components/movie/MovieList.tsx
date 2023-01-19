@@ -1,38 +1,88 @@
 import { Image } from '@components/common/Image';
-import List from '@components/common/List';
+import { List, ListCard } from '@components/common/List';
 import { Text } from '@components/common/Text';
+import { FONT_SIZE } from '@constants/typography.constant';
+import { usePrevState } from '@hooks/usePrevState';
 import { MovieType } from '@models/movies.model';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { ReactComponent as ArrowSVG } from '@assets/icon-arrow.svg';
+import { COLORS } from '@constants/colors.contant';
 
+interface MovieListProps {
+  title: string,
+  page: number,
+  handlePrevPage: () => void,
+  handleNextPage: () => void,
+  movies: MovieType[],
+}
+const ELEMENT_WIDTH = 360;
+const ELEMENT_HEIGHT = 540;
+const TOTAL_SHOWN = 5;
+const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieListProps) => {
+  const prevPage = usePrevState(page);
+  const wrapperRef = useRef<HTMLUListElement>(null);
+  
+  useEffect(() => {
+    if (!wrapperRef || !wrapperRef.current) return;
+    wrapperRef.current.style.setProperty('transform', `translateX(-${ELEMENT_WIDTH * (page - 1)}px`);
+  }, [page]);
 
-const MovieList = ({title, movies}: {title: string, movies: MovieType[]}) => {
   return (
     <Container>
-      {movies.map((movie: MovieType) => {
-        const { id, title, poster_path } = movie;
-        return (
-          <List.Card key={id}>
-            <Poster src={poster_path} imageType={'themoviedb'}/>
-            <Text>{title}</Text>
-          </List.Card>
-        );
-      })}
+      <Title fontSize={FONT_SIZE.m}>{title}</Title>
+      <Wrapper ref={wrapperRef}>
+        {movies.map((movie: MovieType) => {
+          const { id, title, poster_path } = movie;
+          return (
+            <ListCard key={id}>
+              <Poster src={poster_path} imageType={'themoviedb'}/>
+              <Text>{title} {prevPage} {page}</Text>
+            </ListCard>
+          );
+        })}
+      </Wrapper>
+      {page !== 1 && <PrevArrow onClick={handlePrevPage}/>}
+      {page !== movies.length - TOTAL_SHOWN + 1&& <NextArrow onClick={handleNextPage}/>}
     </Container>
   );
 };
 
 export default MovieList;
 
-const Container = styled(List)`
-  overflow-y: scroll;
+const Container = styled.section`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-bottom: 6px solid ${COLORS.gray700};
+`;
+const Title = styled(Text)`
+  margin: 16px 56px;
+`;
+const Wrapper = styled(List)`
+  transition: 0.5s transform;
 `;
 const Poster = styled(Image)`
-  height: 360px;
-  object-fit: contain;
+  width: ${ELEMENT_WIDTH}px;
+  height: ${ELEMENT_HEIGHT}px;
+  object-fit: cover;
   &:hover {
     transition: 0.5s transform;
     transform: scale(1.2);
     z-index: 999;
   }
 `;
-
+const NextArrow = styled(ArrowSVG)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+`;
+const PrevArrow = styled(NextArrow)`
+  transform: rotate(180deg) translateY(-50%);
+  left: 40px;
+`;

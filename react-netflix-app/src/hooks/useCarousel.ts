@@ -1,5 +1,5 @@
 import { throttle } from '@utils/throttle';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const START_PAGE = 1;
 interface useCarouselProps {
@@ -14,37 +14,37 @@ function useCarousel({
   isInfinity = false,
   throttleDelay = 1000
 }: useCarouselProps) {
-  const [currentPage, setCurrentPage] = useState(START_PAGE);
-  const lastPage = totalElements - totalVisibleElements;
+  const [page, setPage] = useState(START_PAGE);
+  const lastPage = totalElements - totalVisibleElements + 1;
 
   const handlePrevPage = useCallback(
     throttle(() => {
-      if (currentPage > START_PAGE) {
-        setCurrentPage(currentPage - 1);
+      if (page > START_PAGE) {
+        setPage(page - 1);
         return;
       } 
       if (isInfinity) {
-        setCurrentPage(lastPage);
+        setPage(lastPage);
       }
     }, throttleDelay),
-    [currentPage, lastPage, isInfinity, throttleDelay]
+    [page, lastPage, isInfinity, throttleDelay]
   );
   
   const handleNextPage = useCallback(
     throttle(() => {
-      if (currentPage < lastPage) {
-        setCurrentPage(currentPage + 1);
+      if (page < lastPage) {
+        setPage(page + 1);
         return;
       } 
       if (isInfinity) {
-        setCurrentPage(0);
+        setPage(0);
       }
     }, throttleDelay),
-    [currentPage, lastPage, isInfinity, throttleDelay]
+    [page, lastPage, isInfinity, throttleDelay]
   );
 
   return ({
-    currentPage,
+    page,
     handlePrevPage,
     handleNextPage,
   });

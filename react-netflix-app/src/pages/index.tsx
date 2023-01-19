@@ -1,5 +1,4 @@
-import { getPopularMovies } from '@apis/movies';
-import { Text } from '@components/common/Text';
+import { getUpcomingMovies, getPopularMovies } from '@apis/movies';
 import MovieList from '@components/movie/MovieList';
 import { MoviePoster } from '@components/movie/MoviePoster';
 import useCarousel from '@hooks/useCarousel';
@@ -11,7 +10,9 @@ export default function Main() {
   const [loading, setLoading] = useState(false);
   const [randomMovie, setRandomMovie] = useState<MovieType | undefined>();
   const [popularMovies, setPopularMovies] = useState<MovieType[]>([]);
-  const { currentPage, handlePrevPage, handleNextPage } = useCarousel({ totalElements: 20, totalVisibleElements: 1});
+  const [upcomingMovies, setUpcomingMovies] = useState<MovieType[]>([]);
+  const popularCarousel = useCarousel({ totalElements: 20, totalVisibleElements: 5});
+  const upcomingCarousel = useCarousel({ totalElements: 20, totalVisibleElements: 5});
   useEffect(() => {
     const fetchPopularMovies = async() => {
       const { data: { results }} = await getPopularMovies();
@@ -19,20 +20,27 @@ export default function Main() {
       
       const randomNumber = Math.floor(Math.random() * results.length);
       setRandomMovie(results[randomNumber]);
-
-      setLoading(true);
     };
-    fetchPopularMovies();
+    const fetchUpcomingMovies = async() => {
+      const { data: { results }} = await getUpcomingMovies();
+      setUpcomingMovies(results);
+    };
+
+    Promise.all([
+      fetchPopularMovies(),
+      fetchUpcomingMovies()
+    ]).then(() => {
+      setLoading(true);
+    });
+    
   }, []);
   
   if (!loading || !randomMovie) return <></>;
   return (
     <>
       <MoviePoster movie={randomMovie}/>
-      <MovieList title={'TOP 20 인기 영화'} movies={popularMovies}/>
-      <button onClick={handlePrevPage}>-</button>
-      <Text>{currentPage}</Text>
-      <button onClick={handleNextPage}>+</button>
+      <MovieList {...popularCarousel} title={'TOP 20 인기 영화'} movies={popularMovies}/>
+      <MovieList {...upcomingCarousel} title={'개봉 예정 20선'} movies={upcomingMovies}/>
     </>
   );
 }

@@ -5,7 +5,7 @@ export const getPopularMovies = async () => {
   return await customAxios.get(`/movie/popular?language=ko-KR&api_key=${apiKey}`);
 };
 
-export const getLatestMovies = async () => {
-  return await customAxios.get(`/movie/latest?api_key=${apiKey}&language=ko-KR`);
+export const getUpcomingMovies = async () => {
+  return await customAxios.get(`/movie/upcoming?language=ko-KR&api_key=${apiKey}`);
 };
 
