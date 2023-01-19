@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BannerContainer = styled.section`
   position: relative;
-  height: 55vw;
+  height: 40vw;
 `;
 
 export const BannerBackground = styled.div`
@@ -42,7 +42,7 @@ export const BackgroundFooter = styled.div`
 export const BannerContent = styled.div`
   position: absolute;
   top: 0;
-  bottom: 35%;
+  bottom: 10%;
   left: 5%;
   display: flex;
   flex-direction: column;
