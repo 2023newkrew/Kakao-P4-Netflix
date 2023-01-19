@@ -23,6 +23,8 @@ const StyledDiv = styled.div`
   @media screen and (min-width: 1280px) {
     --display-number: 6;
   }
+
+  overflow: hidden;
 `;
 
 const StyledList = styled.ul`

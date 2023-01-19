@@ -1,4 +1,7 @@
 import React from 'react';
+import Navigator from '../navigator';
+import Banner from '../banner';
+import Footer from '../footer';
 import MovieList from '../movie-list';
 
 function App() {
@@ -8,8 +11,12 @@ function App() {
 
   return (
     <>
+      <Navigator />
+      <Banner movie={movies[0]} />
       <MovieList movies={movies} />
       <MovieList movies={movies} />
+      {/* <MovieList movies={movies} /> */}
+      <Footer />
     </>
   );
 }

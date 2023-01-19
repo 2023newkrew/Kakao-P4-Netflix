@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MovieCard from '../movie-card';
 import useChange from '../../hooks/useChange';
 import {
@@ -27,71 +27,29 @@ const ScreenWidthQueryToDisplayNumber = {
 
 const mediaQueryLists = Object.values(ScreenWidthQuery).map(window.matchMedia);
 
-function MovieList({ movies }) {
+function MovieListWrapper({ movies }) {
   const { length } = movies;
 
-  // MovieList는 2개의 상태값을 가집니다.
-  // offset과 displayNumber 입니다.
-  // offset은 화면 상에서 첫번째로 보여지는 MovieListItem의 index를 의미합니다.
-  // displayNumber는 화면 상에서 보여지는 MovieListItem의 개수를 의미합니다.
-  // 이 두 상태값은 상호 영향을 주고받기 때문에 useReducer를 통해 관리됩니다.
-
-  // offset은 0보다 크거나 같고, movies.length - displayNumber보다 작거나 같아야합니다.
-  // 그런데 movies.length는 MovieList의 프로퍼티입니다.
-  // 프로퍼티 movies의 변경에 따라 상태 offset가 규칙에 맞는 값을 동기적으로 가지도록 할 수 있는 방법이 없을지 고민입니다.
-
-  // 문제가 되는 하나의 사례입니다:
-  // movies.length가 20이고 offset은 10, displayNumber가 6인 상태에서
-  // movies.length가 8로 변경되는 경우
-  // offset이 movies.length - displayNumber보다 큰 값을 가진 상태로 렌더링되기 때문에 문제가 될 수 있습니다.
-
-  const reducer = (state, action) => {
-    const { offset, displayNumber } = state;
-    const maxOffset = length - displayNumber;
-
-    switch (action.type) {
-      case 'offset': {
-        const { value } = action;
-
-        if (value < 0) {
-          return { ...state, offset: 0 };
-        }
-
-        if (value > maxOffset) {
-          return { ...state, offset: maxOffset };
-        }
-
-        return { ...state, offset: value };
-      }
-      case 'displayNumber': {
-        const { value } = action;
-
-        if (offset > length - value) {
-          return { ...state, offset: length - value, displayNumber: value };
-        }
-
-        return { ...state, displayNumber: value };
-      }
-      default:
-        throw new Error();
-    }
-  };
-
-  const [{ offset, displayNumber }, dispatch] = useReducer(reducer, {
-    offset: 0,
-    displayNumber:
+  const [displayNumber, setDisplayNumber] = useState(
+    () =>
       ScreenWidthQueryToDisplayNumber[
         mediaQueryLists.find(({ matches }) => matches).media
-      ],
-  });
+      ]
+  );
+  const [offset, setOffset] = useState(0);
+
+  if (offset < 0) {
+    setOffset(0);
+  }
+
+  if (offset > length - displayNumber) {
+    setOffset(length - displayNumber);
+  }
 
   useEffect(() => {
     const handleChangeEvent = ({ matches, media }) => {
       if (matches) {
-        dispatch({
-          type: 'displayNumber',
-          value: ScreenWidthQueryToDisplayNumber[media],
-        });
+        setDisplayNumber(ScreenWidthQueryToDisplayNumber[media]);
       }
     };
 
@@ -105,14 +63,25 @@ function MovieList({ movies }) {
     };
   }, []);
 
+  return (
+    <MovieList
+      movies={movies}
+      displayNumber={displayNumber}
+      offset={offset}
+      setOffset={setOffset}
+    />
+  );
+}
+
+function MovieList({ movies, displayNumber, offset, setOffset }) {
+  const { length } = movies;
+
   const handleLeftScrollButtonClick = () => {
-    const nextOffset = offset - displayNumber;
-    dispatch({ type: 'offset', value: nextOffset });
+    setOffset(offset - displayNumber);
   };
 
   const handleRightScrollButtonClick = () => {
-    const nextOffset = offset + displayNumber;
-    dispatch({ type: 'offset', value: nextOffset });
+    setOffset(offset + displayNumber);
   };
 
   const movieListElementRef = useRef(null);
@@ -174,4 +143,4 @@ function MovieList({ movies }) {
   );
 }
 
-export default MovieList;
+export default MovieListWrapper;
