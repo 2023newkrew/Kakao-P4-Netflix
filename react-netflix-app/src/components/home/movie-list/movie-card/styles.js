@@ -10,6 +10,7 @@ export const MovieCardContainer = styled.div`
   ${({ backdropPath }) =>
     backdropPath &&
     css`
+      /* TODO: Fetch lower sized images */
       background-image: url(${`${process.env.REACT_APP_IMAGE_API_URL}${backdropPath}`});
       background-size: cover;
     `}

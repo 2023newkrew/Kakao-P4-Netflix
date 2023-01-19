@@ -5,6 +5,7 @@ import Hero from '@components/home/hero';
 import { useEffect, useState } from 'react';
 import { getNowPlaying } from '@apis/home';
 import { rand } from '@/utils/math';
+import { MOVIE_LIST, MOVIE_LIST_TITLE } from '@/constants/movie';
 
 const Home = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
@@ -25,7 +26,8 @@ const Home = () => {
     <>
       <Header />
       <Hero movie={heroMovie} />
-      <MovieList title="Now Playing Movies" movies={nowPlaying} />
+      <MovieList title={MOVIE_LIST_TITLE[MOVIE_LIST.NOW_PLAYING]} movies={nowPlaying} />
+      {/* TODO: Fetch more movies and display it using .map */}
       <Footer />
     </>
   );
