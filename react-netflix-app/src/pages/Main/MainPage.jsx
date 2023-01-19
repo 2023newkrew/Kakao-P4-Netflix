@@ -3,6 +3,7 @@ import MovieCarousel from '@/pages/Main/components/MovieCarousel';
 import { PageContainer, MainView, Row, PageTitle } from '@pages/Main/MainPage.style';
 import Header from '@components/Header';
 import MovieBanner from './components/MovieBanner';
+import Footer from '@/components/Footer';
 
 const Main = () => {
   const { isLoading, topRatedMovies, popularMovies } = useMovieList();
@@ -25,6 +26,7 @@ const Main = () => {
           </Row.Content>
         </Row.Container>
       </MainView>
+      <Footer />
     </PageContainer>
   );
 };

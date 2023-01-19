@@ -1,5 +1,6 @@
 import { Banner } from '@pages/Main/MainPage.style';
 import sampleVideo from '@assets/videos/sample.mp4';
+import playIcon from '@icons/play.svg';
 
 const MovieBanner = () => {
   return (
@@ -11,12 +12,28 @@ const MovieBanner = () => {
         />
       </Banner.BackgroundLayer>
       <Banner.BackgroundLayer>
-        <video width="100%" height="100%" preload="auto" autoPlay>
+        <video width="100%" height="100%" preload="auto" autoPlay loop>
           <source src={sampleVideo} type="video/mp4" />
           Your browser does not support HTML5 video.
         </video>
       </Banner.BackgroundLayer>
-      <Banner.Content></Banner.Content>
+      <Banner.Content>
+        <Banner.MovieInfo>
+          <h3>아바타</h3>
+          <p>세상에 없던 광경이 펼쳐진다!</p>
+          <div>
+            <Banner.Button className="primary">
+              <img src={playIcon} alt="재생 아이콘" />
+              재생
+            </Banner.Button>
+            <Banner.Button className="secondary">상세 정보</Banner.Button>
+          </div>
+        </Banner.MovieInfo>
+        <Banner.Utils>
+          <button>음소거 버튼</button>
+          <span>15세+</span>
+        </Banner.Utils>
+      </Banner.Content>
     </Banner.Container>
   );
 };
