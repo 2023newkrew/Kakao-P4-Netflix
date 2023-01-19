@@ -37,7 +37,7 @@ const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieL
           return (
             <ListCard key={id}>
               <Poster src={poster_path} imageType={'themoviedb'}/>
-              <Text>{title} {prevPage} {page}</Text>
+              <Text color={COLORS.gray300} textAlign='center'>{title}</Text>
             </ListCard>
           );
         })}

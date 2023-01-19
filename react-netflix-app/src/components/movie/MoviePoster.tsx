@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 export const MoviePoster = ({movie}: {movie: MovieType}) => {
   const { title, overview, backdrop_path, } = movie;
-  
+
   return (
     <Container>
       <MovieImage imageType={'themoviedb'} src={backdrop_path}/>
@@ -37,4 +37,5 @@ const MovieDescription = styled.article`
   left: 56px;
   translate: transformY(-50%);
   max-width: 30%;
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
 `;
