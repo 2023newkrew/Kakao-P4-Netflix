@@ -38,7 +38,7 @@ const Banner = () => {
         <BackgroundFooter></BackgroundFooter>
       </BannerBackground>
       <BannerContent>
-        <ContentTitle as="h1">
+        <ContentTitle>
           <EllipsisText text={content.title} fontSize={"5.2vw"} fontWeight={"bold"}></EllipsisText>
         </ContentTitle>
         <ContentDesc>

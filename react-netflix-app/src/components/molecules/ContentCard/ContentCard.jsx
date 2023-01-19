@@ -1,8 +1,8 @@
 import React from "react";
 
-const ContentCard = ({ index, content }) => {
+const ContentCard = ({ content }) => {
   return (
-    <li key={index}>
+    <li>
       <article className="slider-card">
         <div className="slider-card__image-wrapper">
           <img alt="컨텐츠 썸네일 이미지"></img>
@@ -12,4 +12,4 @@ const ContentCard = ({ index, content }) => {
   );
 };
 
-export default React.memo(ContentCard);
+export default ContentCard;

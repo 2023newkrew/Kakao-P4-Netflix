@@ -2,28 +2,30 @@ import React, { useEffect, useState } from "react";
 import { ContentCard } from "components";
 
 const ContentCardList = ({ keyword }) => {
-  const [contents, setContents] = useState([{ title: "더글로리" }]);
+  const [contents, setContents] = useState([
+    { id: 1, content: { title: "더글로리" } },
+    { id: 2, content: { title: "하이하이" } },
+    { id: 3, content: { title: "하이하이" } },
+    { id: 4, content: { title: "하이하이" } },
+    { id: 5, content: { title: "하이하이" } },
+  ]);
 
-  useEffect(() => {
-    // 키워드별 컨텐츠 리스트 get API 호출
+  const ContentCards = React.memo(() => {
+    return (
+      <li className="slider__cards">
+        {contents?.map(({ id, content }) => {
+          return <ContentCard key={id} content={content} />;
+        })}
+      </li>
+    );
   });
-
-  const makeContentCards = () => {
-    return contents?.map((content, index) => {
-      return <ContentCard key={index} content={content} index={index} />;
-    });
-  };
 
   return (
     <section className="slider">
       <h3>{keyword}</h3>
-      <ul className="slider__cards">{makeContentCards()}</ul>
-      <div className="slider__button-wrapper">
-        <button className="slider__button--left" type="button"></button>
-        <button className="slider__button--right" type="button"></button>
-      </div>
+      <ContentCards />
     </section>
   );
 };
 
-export default React.memo(ContentCardList);
+export default ContentCardList;
