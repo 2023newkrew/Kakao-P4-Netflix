@@ -29,7 +29,7 @@ const ContentCardList = ({ id, genrename }) => {
 
   const ContentCards = React.memo(() => {
     return (
-      <ContentListWrapper className="slider__cards">
+      <ContentListWrapper>
         {contents?.map((content) => {
           return <ContentCard key={content.id} content={content} />;
         })}
@@ -38,7 +38,7 @@ const ContentCardList = ({ id, genrename }) => {
   });
 
   return (
-    <ContentListContainer className="slider">
+    <ContentListContainer>
       <ContentListTitle>{genrename}</ContentListTitle>
       <ContentCards />
     </ContentListContainer>
