@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const MainColumnItemCotainer = styled.div`
-  width: 25%;
+  width: calc(100% / ${(props) => props.separateCount});
   padding-left: 0.2vw;
   padding-right: 0.2vw;
   object-fit: fill;

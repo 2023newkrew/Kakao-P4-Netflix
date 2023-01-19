@@ -6,4 +6,7 @@ export default class Util {
     }
     return newList;
   }
+  static clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
 }

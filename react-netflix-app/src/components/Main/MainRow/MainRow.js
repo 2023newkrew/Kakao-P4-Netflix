@@ -5,6 +5,7 @@ import { MainRowContainer, MainRowSlider, MainRowLeftArrow, MainRowRightArrow } 
 
 const handleClickArrow = (setColIndex, dir) => {
   const value = dir === "left" ? -1 : 1;
+
   setColIndex((prev) => prev + value);
 };
 
@@ -12,8 +13,19 @@ export default function MainRow({ fetchMethod, itemCount }) {
   const [separatedList, setSeparatedList] = useState([]);
   const [colIndex, setColIndex] = useState(0);
   const [imageContainerSize, setImageContainerSize] = useState(null);
-  const SEPARATE_COUNT = itemCount;
+  const [beforeWindowSize, setBeforeWindowSize] = useState(window.innerWidth);
+  const [resizeRatio, setResizeRatio] = useState(1);
 
+  const SEPARATE_COUNT = itemCount;
+  const translateValue =
+    imageContainerSize === null
+      ? 0
+      : Util.clamp(
+          colIndex * imageContainerSize * SEPARATE_COUNT,
+          0,
+          imageContainerSize * SEPARATE_COUNT * (separatedList.length - 2) +
+            separatedList[separatedList.length - 1].length * imageContainerSize
+        );
   useEffect(() => {
     /* 데이터 fetch */
     const fetchTopRatedMovie = async () => {
@@ -21,11 +33,20 @@ export default function MainRow({ fetchMethod, itemCount }) {
       setSeparatedList(Util.separateList(topRatedMovieList, SEPARATE_COUNT));
     };
     fetchTopRatedMovie();
+
+    /* 이벤트 등록 */
+    const handleResize = (event) => {
+      setResizeRatio(window.innerWidth / beforeWindowSize);
+      setBeforeWindowSize(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <MainRowContainer>
-      <MainRowSlider translateValue={imageContainerSize !== null ? colIndex * imageContainerSize * SEPARATE_COUNT : 0}>
+      <MainRowSlider translateValue={translateValue !== null ? translateValue : 0} resizeRatio={resizeRatio}>
         {/* 생성 및 삭제와 같은 변화가 없을 것이라고 예상하기에 key에 인덱스 값으로 부여 */}
         {separatedList !== null
           ? separatedList.map((subList, idx) => (
@@ -33,6 +54,7 @@ export default function MainRow({ fetchMethod, itemCount }) {
                 key={idx}
                 imgList={subList}
                 setImageContainerSize={idx === 0 ? setImageContainerSize : null}
+                separateCount={SEPARATE_COUNT}
               />
             ))
           : null}
