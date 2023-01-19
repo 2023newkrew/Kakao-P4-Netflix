@@ -11,10 +11,10 @@ const BannerLayout = styled.div`
   justify-content: flex-end;
   gap: 16px;
   background: url(${(props) =>
-      `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
-    no-repeat center/cover;
-  background-color: rgba(0, 0, 0, 0.5);
-  background-blend-mode: multiply;
+        `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
+      no-repeat center/cover,
+    linear-gradient(transparent, black 90%);
+  background-blend-mode: overlay;
 `;
 
 const Title = styled.div`
@@ -23,6 +23,7 @@ const Title = styled.div`
 
 const Overview = styled.div`
   font-size: 1.4vw;
+  line-height: normal;
 `;
 
 export default function Banner({ backgroundUrl, title, overview }) {

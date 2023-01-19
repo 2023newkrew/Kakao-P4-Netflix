@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import Banner from '@components/Banner';
 import Slider from '@components/Slider';
+
+const SliderContainer = styled.main`
+  margin-top -10%;
+`;
 
 export default function Main() {
   const [bannerMovie, setBannerMovie] = useState({});
@@ -27,7 +32,9 @@ export default function Main() {
         title={bannerMovie.title}
         overview={bannerMovie.overview}
       />
-      <Slider name="지금 뜨는 콘텐츠" items={popularMovies} />
+      <SliderContainer>
+        <Slider name="지금 뜨는 콘텐츠" items={popularMovies} />
+      </SliderContainer>
     </>
   );
 }
