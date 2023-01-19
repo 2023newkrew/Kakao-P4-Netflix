@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as LogoImage } from '../assets/logo.svg';
-import { ReactComponent as SearchIcon } from '../assets/search.svg';
-import { ReactComponent as NotificationsIcon } from '../assets/notifications.svg';
+import { ReactComponent as LogoImage } from '@assets/logo.svg';
+import { ReactComponent as SearchIcon } from '@assets/search.svg';
+import { ReactComponent as NotificationsIcon } from '@assets/notifications.svg';
 
 const HeaderLayout = styled.header`
   position: fixed;
