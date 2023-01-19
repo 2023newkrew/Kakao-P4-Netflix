@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const ContentCardContainer = styled.li`
-  width: 250px;
-  height: 150px;
+  width: 15vw;
+  height: 9vw;
 `;
 
 export const ContentCardImage = styled.img`
-  width: 250px;
-  height: 100%;
+  width: 15vw;
+  height: 9vw;
 `;
