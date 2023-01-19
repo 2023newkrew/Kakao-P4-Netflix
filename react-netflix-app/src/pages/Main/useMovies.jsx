@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getPopularMovies, getTopRatedMovies } from '@api/movies';
 
-const useTopRatedMovies = () => {
+export const useTopRatedMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState({});
 
   useEffect(() => {
     (async function () {
@@ -23,9 +23,9 @@ const useTopRatedMovies = () => {
     data: movies,
   };
 };
-const usePopularMovies = () => {
+export const usePopularMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState({});
 
   useEffect(() => {
     (async function () {
