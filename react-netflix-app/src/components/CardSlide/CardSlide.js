@@ -4,9 +4,13 @@ import MovieCard from "./MovieCard";
 import "@scss/cardSlide/cardSlide.scss";
 import { API } from "../../utils/axios";
 
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 const CardSlide = ({ title }) => {
   const [genreMovieList, setGenreMovieList] = useState([]);
@@ -36,7 +40,18 @@ const CardSlide = ({ title }) => {
     <div className="cardSlide_container">
       <div className="cardSlide_wrapper">
         <div className="cardSlide_slide" ref={slideElement}>
-          <Swiper slidesPerView={5} navigation style={{ height: "100%" }}>
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            loop={true}
+            speed={1000}
+            slidesPerView={4}
+            slidesPerGroup={4}
+            touchRatio={0}
+            pagination={{ clickable: true }}
+            spaceBetween={60}
+            navigation
+            style={{ height: "100%", padding: "0 60px", color: "white" }}
+          >
             {movieCardList}
           </Swiper>
         </div>

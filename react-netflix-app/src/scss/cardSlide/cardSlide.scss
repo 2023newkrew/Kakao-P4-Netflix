@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
-
-
-
 .cardSlide_container {
   position: relative;
   width: 100%;
@@ -20,7 +17,7 @@
 
     color: white;
     font-family: 'Black Han Sans', sans-serif;
-    
+
 
     font-size: 40px;
     padding: 10px 40px;
@@ -50,10 +47,13 @@
       width: 100%;
       height: 100%;
 
-      padding-left: 20px;
-
-      transition: transform 0.5s;      
-      // overflow: auto;
+      .swiper {
+        width: 100%;
+        height: 100%;
+      .swiper-pagination-bullet {
+        background-color: white;
+      }
+    }
     }
   }
 }

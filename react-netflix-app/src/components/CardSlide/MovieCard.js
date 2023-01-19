@@ -33,7 +33,7 @@ const MovieCard = ({ movie, observe }) => {
   return (
     <div className="movieCard_container">
       <div className="movieCard_wrapper" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-        <img ref={image} onClick={onModalOpen} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} />
+        <img ref={image} onClick={onModalOpen} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} loading="lazy" />
         {hover && <MovieCardInfo movie={movie} open={onModalOpen} />}
       </div>
       <MovieModal Modal={Modal} movieYoutubeURL={movieYoutubeURL} movieInfo={movieInfo} />
