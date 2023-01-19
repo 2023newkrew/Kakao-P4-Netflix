@@ -32,6 +32,7 @@ export default function MainRow({ fetchMethod, itemCount }) {
     };
     fetchTopRatedMovie();
 
+    /* 이벤트 등록 */
     const handleResize = (event) => {
       mainRowSlider.current.style.transition = "transform 1s";
     };

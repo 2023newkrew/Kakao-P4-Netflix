@@ -10,8 +10,6 @@ export default function MainColumnItem({ imgSrc, setImageContainerSize, separate
 
       /* 이벤트 등록 */
       const handleResize = (event) => {
-        console.log("here");
-        console.log(imageContainer.current.clientWidth);
         setImageContainerSize(imageContainer.current.clientWidth);
       };
       window.addEventListener("resize", handleResize);
