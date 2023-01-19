@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-  z-index: -1;
+  z-index: 0;
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;

@@ -109,37 +109,29 @@ function MovieList({ movies, displayNumber, offset, setOffset }) {
   const maxOffset = length - displayNumber;
 
   return (
-    <>
-      <div>한 화면에 보이는 항목 수: {displayNumber}</div>
-      <div
-        style={{ color: offset < 0 || offset > maxOffset ? 'red' : 'unset' }}
+    <StyledDiv>
+      <StyledList ref={movieListElementRef}>
+        {movies.map((movie) => (
+          <StyledListItem className="movie-list-item" key={movie.id}>
+            <MovieCard movie={movie} />
+          </StyledListItem>
+        ))}
+      </StyledList>
+      <StyledLeftButton
+        type="button"
+        onClick={handleLeftScrollButtonClick}
+        disabled={offset === 0}
       >
-        페이지: {offset} / {maxOffset}
-      </div>
-      <StyledDiv>
-        <StyledList ref={movieListElementRef}>
-          {movies.map((movie) => (
-            <StyledListItem className="movie-list-item" key={movie.id}>
-              <MovieCard movie={movie} />
-            </StyledListItem>
-          ))}
-        </StyledList>
-        <StyledLeftButton
-          type="button"
-          onClick={handleLeftScrollButtonClick}
-          disabled={offset === 0}
-        >
-          ◀
-        </StyledLeftButton>
-        <StyledRightButton
-          type="button"
-          onClick={handleRightScrollButtonClick}
-          disabled={offset === maxOffset}
-        >
-          ▶
-        </StyledRightButton>
-      </StyledDiv>
-    </>
+        ◀
+      </StyledLeftButton>
+      <StyledRightButton
+        type="button"
+        onClick={handleRightScrollButtonClick}
+        disabled={offset === maxOffset}
+      >
+        ▶
+      </StyledRightButton>
+    </StyledDiv>
   );
 }
 
