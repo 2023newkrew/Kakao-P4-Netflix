@@ -1,14 +1,21 @@
 import React from "react";
+import { ContentCardContainer, ContentCardImage } from "./ContentCard.style";
+
+import api from "utils/API";
 
 const ContentCard = ({ content }) => {
   return (
-    <li>
-      <article className="slider-card">
-        <div className="slider-card__image-wrapper">
-          <img alt="컨텐츠 썸네일 이미지"></img>
+    <ContentCardContainer>
+      <article>
+        <div>
+          <ContentCardImage
+            alt="컨텐츠 썸네일 이미지"
+            src={api.getimageSeverURL() + content.backdrop_path}
+            loading="lazy"
+          />
         </div>
       </article>
-    </li>
+    </ContentCardContainer>
   );
 };
 
