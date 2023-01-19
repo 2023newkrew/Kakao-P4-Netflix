@@ -9,8 +9,7 @@ import {
   DetailContainer,
   Genres,
 } from '@pages/Main/components/MovieCard.style';
-
-const THUMBNAIL_BASE_URL = `https://www.themoviedb.org/t/p/w500`;
+import { THUMBNAIL_BASE_URL } from '@/constants/tmdb';
 
 const useMovieDetail = (movieId, { fetch }) => {
   const [isLoading, setIsLoading] = useState(true);

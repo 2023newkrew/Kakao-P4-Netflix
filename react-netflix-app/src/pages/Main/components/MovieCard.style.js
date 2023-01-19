@@ -15,7 +15,7 @@ export const ThumbnailImage = tw.img`
 absolute top-0 left-0 w-full h-full object-cover
 `;
 export const DetailContainer = tw.div`
-  transition-transform absolute top-0 right-0 left-0 invisible hover:visible hover:scale-125 hover:-translate-y-12 hover:origin-bottom hover:z-[2]
+  transition-transform [transition-duration: 300ms] [transition-delay: 100ms] absolute top-0 right-0 left-0 invisible hover:visible hover:scale-125 hover:-translate-y-12 hover:origin-bottom hover:z-[2]
 `;
 export const DetailInfos = tw.div`
   bg-black w-full h-[70px] p-2 flex flex-col justify-between
