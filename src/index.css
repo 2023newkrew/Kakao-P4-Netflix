@@ -11,11 +11,13 @@
 }
 
 body {
-  background-color: gray;
+  background-color: black;
   color: white;
 }
 
 :root {
+  font-size: 1.5vw;
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
   --lr-padding: 4%;
   --border-radius: 4px;
 }

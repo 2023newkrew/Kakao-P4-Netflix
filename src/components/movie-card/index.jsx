@@ -9,7 +9,14 @@ const StyledDiv = styled.div`
 `;
 
 function MovieCard({ movie }) {
-  return <StyledDiv>{movie.id}</StyledDiv>;
+  return (
+    <StyledDiv>
+      <img
+        alt="movie poster"
+        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+      />
+    </StyledDiv>
+  );
 }
 
 export default MovieCard;

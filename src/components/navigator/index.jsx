@@ -9,7 +9,7 @@ const StyledDiv = styled.div`
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 1.5rem;
-  transition: 0.2s;
+  transition: background-color 0.2s;
   z-index: 1;
   ${({ isTop }) => (isTop ? '' : 'background-color: black;')}
 `;
