@@ -18,7 +18,7 @@ const MainRowSlider = styled.div`
   padding-right: 30px;
 
   margin-bottom: 30px;
-  transform: translateX(${(props) => props.translateValue * -1 * props.resizeRatio}px);
+  transform: translateX(${(props) => props.translateValue * -1}px);
   transition: transform 1s;
 `;
 

@@ -7,6 +7,16 @@ export default function MainColumnItem({ imgSrc, setImageContainerSize, separate
   useEffect(() => {
     if (setImageContainerSize) {
       setImageContainerSize(imageContainer.current.clientWidth);
+
+      /* 이벤트 등록 */
+      const handleResize = (event) => {
+        console.log("here");
+        console.log(imageContainer.current.clientWidth);
+        setImageContainerSize(imageContainer.current.clientWidth);
+      };
+      window.addEventListener("resize", handleResize);
+
+      return () => window.removeEventListener("resize", handleResize);
     }
   }, []);
   return (

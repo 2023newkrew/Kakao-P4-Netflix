@@ -13,9 +13,7 @@ export default function MainRow({ fetchMethod, itemCount }) {
   const [separatedList, setSeparatedList] = useState([]);
   const [colIndex, setColIndex] = useState(0);
   const [imageContainerSize, setImageContainerSize] = useState(null);
-  const [beforeWindowSize, setBeforeWindowSize] = useState(window.innerWidth);
-  const [resizeRatio, setResizeRatio] = useState(1);
-
+  const mainRowSlider = useRef(null);
   const SEPARATE_COUNT = itemCount;
   const translateValue =
     imageContainerSize === null
@@ -34,19 +32,19 @@ export default function MainRow({ fetchMethod, itemCount }) {
     };
     fetchTopRatedMovie();
 
-    /* 이벤트 등록 */
     const handleResize = (event) => {
-      setResizeRatio(window.innerWidth / beforeWindowSize);
-      setBeforeWindowSize(window.innerWidth);
+      mainRowSlider.current.style.transition = "transform 1s";
     };
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
+    const handleResizeStart = () => {
+      mainRowSlider.current.style.transition = "none";
+    };
+    const debouncedHandler = Util.makeDebounceHandler(handleResize, 600, handleResizeStart, null);
+    window.addEventListener("resize", debouncedHandler);
   }, []);
 
   return (
     <MainRowContainer>
-      <MainRowSlider translateValue={translateValue !== null ? translateValue : 0} resizeRatio={resizeRatio}>
+      <MainRowSlider translateValue={translateValue !== null ? translateValue : 0} ref={mainRowSlider}>
         {/* 생성 및 삭제와 같은 변화가 없을 것이라고 예상하기에 key에 인덱스 값으로 부여 */}
         {separatedList !== null
           ? separatedList.map((subList, idx) => (

@@ -9,4 +9,20 @@ export default class Util {
   static clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
+
+  static makeDebounceHandler(handler, delay, loadStartHandler = null, loadEndHandler = null) {
+    let timeOut = undefined;
+
+    const debounceHandler = (event) => {
+      if (loadStartHandler) loadStartHandler();
+      clearTimeout(timeOut);
+
+      timeOut = setTimeout(() => {
+        handler(event);
+        if (loadEndHandler) loadEndHandler();
+      }, delay);
+    };
+
+    return debounceHandler;
+  }
 }
