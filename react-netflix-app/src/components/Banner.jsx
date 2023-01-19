@@ -10,7 +10,9 @@ const BannerLayout = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   gap: 16px;
-  background: url(${(props) => props.backgroundUrl}) no-repeat center/cover;
+  background: url(${(props) =>
+      `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
+    no-repeat center/cover;
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: multiply;
 `;
