@@ -6,7 +6,7 @@ import { CloseButton, Container, Content } from '@components/Modal/Modal.style';
 import { ModalContext, useModalContext } from '@components/Modal/ModalContext';
 
 import useBodyScrollLock from '@/utils/hooks/useBodyScrollLock';
-import useOnEscape from '@/utils/hooks/useOnEscape';
+import useEscapeKey from '@/utils/hooks/useEscapeKey';
 
 export const ModalProvider = ({ children, id }) => {
   const containerRef = useRef(null);
@@ -34,7 +34,7 @@ export const ModalProvider = ({ children, id }) => {
   }, []);
 
   useBodyScrollLock(isOpen);
-  useOnEscape(node, close);
+  useEscapeKey(close);
 
   const context = useMemo(() => {
     return {
