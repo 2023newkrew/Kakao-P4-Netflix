@@ -5,12 +5,15 @@ import router from '@/router';
 import reportWebVitals from '@/reportWebVitals';
 import GlobalStyles from '@/GlobalStyles';
 import '@/index.css';
+import { ModalProvider } from './components/Modal';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GlobalStyles />
-    <RouterProvider router={router} />
+    <ModalProvider id="movie-detail">
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </ModalProvider>
   </React.StrictMode>,
 );
 
