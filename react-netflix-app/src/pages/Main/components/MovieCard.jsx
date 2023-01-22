@@ -10,6 +10,8 @@ import {
   Genres,
 } from '@pages/Main/components/MovieCard.style';
 import { THUMBNAIL_BASE_URL } from '@/constants/tmdb';
+import { useModal } from '@/components/Modal';
+import MovieDetail from '../[id]';
 
 const useMovieDetail = (movieId, { fetch }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,6 +37,11 @@ const useMovieDetail = (movieId, { fetch }) => {
 const MovieCard = ({ movie }) => {
   const [detailFetch, setDetailFetch] = useState(false);
   const { data: detail, isLoading } = useMovieDetail(movie.id, { fetch: detailFetch });
+  const openModal = useModal();
+
+  const showMovieDetailModal = () => {
+    openModal({ node: <MovieDetail movie={detail} /> });
+  };
 
   return (
     <>
@@ -47,7 +54,12 @@ const MovieCard = ({ movie }) => {
           <ThumbnailImage src={THUMBNAIL_BASE_URL + movie.backdrop_path} alt="썸네일" />
         </ThumbnailContainer>
       </Container>
-      <DetailContainer className="movie-detail">
+      <DetailContainer
+        className="movie-detail"
+        onClick={() => {
+          showMovieDetailModal();
+        }}
+      >
         {detailFetch && (
           <>
             <ThumbnailContainer>
