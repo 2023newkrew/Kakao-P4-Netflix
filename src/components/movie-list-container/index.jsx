@@ -18,7 +18,7 @@ function MovieListContainer({ title, movies }) {
   return (
     <StyledDiv>
       <StyledTitle>{title}</StyledTitle>
-      <MovieList movies={movies} />
+      <MovieList initialMovies={movies} />
     </StyledDiv>
   );
 }
