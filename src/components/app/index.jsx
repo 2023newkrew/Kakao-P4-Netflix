@@ -5,6 +5,9 @@ import Navigator from '../navigator';
 import Banner from '../banner';
 import Footer from '../footer';
 import MovieListContainer from '../movie-list-container';
+import MovieList from '../movie-list';
+import MovieListItem from '../movie-list-item';
+import MovieCard from '../movie-card';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -32,9 +35,33 @@ function App() {
       <Navigator />
       <Banner movie={movies[0]} />
       <StyledDiv>
-        <MovieListContainer title="넷플릭스 인기 콘텐츠" movies={movies} />
-        <MovieListContainer title="지금 뜨는 콘텐츠" movies={movies} />
-        <MovieListContainer title="새로 올라온 콘텐츠" movies={movies} />
+        <MovieListContainer title="넷플릭스 인기 콘텐츠">
+          <MovieList>
+            {movies.map((movie) => (
+              <MovieListItem key={movie.id}>
+                <MovieCard movie={movie} />
+              </MovieListItem>
+            ))}
+          </MovieList>
+        </MovieListContainer>
+        <MovieListContainer title="지금 뜨는 콘텐츠">
+          <MovieList>
+            {movies.map((movie) => (
+              <MovieListItem key={movie.id}>
+                <MovieCard movie={movie} />
+              </MovieListItem>
+            ))}
+          </MovieList>
+        </MovieListContainer>
+        <MovieListContainer title="새로 올라온 콘텐츠">
+          <MovieList>
+            {movies.map((movie) => (
+              <MovieListItem key={movie.id}>
+                <MovieCard movie={movie} />
+              </MovieListItem>
+            ))}
+          </MovieList>
+        </MovieListContainer>
       </StyledDiv>
       <Footer />
     </>

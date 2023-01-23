@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import MovieList from '../movie-list';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -14,11 +13,11 @@ const StyledTitle = styled.h3`
   font-weight: 400;
 `;
 
-function MovieListContainer({ title, movies }) {
+function MovieListContainer({ title, children }) {
   return (
     <StyledDiv>
       <StyledTitle>{title}</StyledTitle>
-      <MovieList initialMovies={movies} />
+      {children}
     </StyledDiv>
   );
 }

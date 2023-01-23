@@ -1,8 +1,6 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import styled from 'styled-components';
-import MovieCard from '../movie-card';
 import useChange from '../../hooks/useChange';
-import useConst from '../../hooks/useConst';
 
 const StyledDiv = styled.div`
   position: relative;
@@ -40,18 +38,6 @@ const StyledList = styled.ul`
   width: 100%;
   display: flex;
   gap: var(--display-gap);
-`;
-
-const StyledListItem = styled.li`
-  flex-shrink: 0;
-  border-radius: var(--border-radius);
-
-  display: flex;
-  width: calc(
-    (100% - var(--display-gap) * (var(--display-number) - 1)) /
-      var(--display-number)
-  );
-  aspect-ratio: 2/3;
 `;
 
 const StyledButton = styled.button`
@@ -99,9 +85,8 @@ const ScreenWidthQueryToDisplayNumber = {
 
 const mediaQueryLists = Object.values(ScreenWidthQuery).map(window.matchMedia);
 
-function MovieList({ initialMovies }) {
-  const movies = useConst(initialMovies);
-  const { length } = movies;
+function MovieList({ children }) {
+  const { length } = children;
 
   const [{ offset, displayNumber }, dispatch] = useReducer(
     (state, action) => {
@@ -174,13 +159,7 @@ function MovieList({ initialMovies }) {
 
   return (
     <StyledDiv>
-      <StyledList ref={movieListElementRef}>
-        {movies.map((movie) => (
-          <StyledListItem className="movie-list-item" key={movie.id}>
-            <MovieCard movie={movie} />
-          </StyledListItem>
-        ))}
-      </StyledList>
+      <StyledList ref={movieListElementRef}>{children}</StyledList>
       <StyledLeftButton
         type="button"
         onClick={handleLeftScrollButtonClick}
