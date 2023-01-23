@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledFooter = styled.footer`
   height: 8rem;
 `;
 
 function Footer() {
-  return <StyledDiv />;
+  return <StyledFooter />;
 }
 
 export default Footer;
