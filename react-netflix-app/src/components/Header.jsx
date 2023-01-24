@@ -49,8 +49,8 @@ export default function Header({ menus }) {
           <LogoImage />
         </Logo>
         <MenuList>
-          {menus.map(({ id, name }) => (
-            <MenuItem key={id}>{name}</MenuItem>
+          {menus.map(({ path, name }) => (
+            <MenuItem key={path}>{name}</MenuItem>
           ))}
         </MenuList>
         <Button>
@@ -67,7 +67,7 @@ export default function Header({ menus }) {
 Header.propTypes = {
   menus: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      path: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
     })
   ).isRequired,
