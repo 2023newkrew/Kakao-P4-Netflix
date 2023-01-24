@@ -4,7 +4,9 @@ import axios from 'axios';
 import Banner from '@components/Banner';
 import Slider from '@components/Slider';
 
-const SliderContainer = styled.main`
+const MainLayout = styled.main``;
+
+const SliderContainer = styled.section`
   margin-top -10%;
 `;
 
@@ -26,7 +28,7 @@ export default function Main() {
   }, []);
 
   return (
-    <>
+    <MainLayout>
       <Banner
         backgroundUrl={bannerMovie.backdrop_path}
         title={bannerMovie.title}
@@ -35,6 +37,6 @@ export default function Main() {
       <SliderContainer>
         <Slider name="지금 뜨는 콘텐츠" items={popularMovies} />
       </SliderContainer>
-    </>
+    </MainLayout>
   );
 }

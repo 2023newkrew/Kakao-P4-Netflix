@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const BannerLayout = styled.div`
+const BannerLayout = styled.section`
   height: 56.25vw;
   padding: 0 60% 20% 4%;
   box-sizing: border-box;
