@@ -1,17 +1,17 @@
-import "@scss/header/search.scss";
+import { SearchContainer, InputContainer, InputImage } from "./Search.style";
 
 import magnifyGlass from "@assets/magnifying-glass.svg";
 
 const Search = () => {
   return (
-    <div className="search_container">
-      <div className="input_container">
-        <div className="input_image">
+    <SearchContainer>
+      <InputContainer>
+        <InputImage>
           <img src={magnifyGlass} alt="입력 돋보기 이미지" />
-        </div>
+        </InputImage>
         <input placeholder="제목, 사람, 장르" />
-      </div>
-    </div>
+      </InputContainer>
+    </SearchContainer>
   );
 };
 

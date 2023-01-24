@@ -1,8 +1,8 @@
-import "@scss/header/nav.scss";
+import { NavContainer } from "./Nav.style";
 
 const Nav = () => {
   return (
-    <div className="nav_container">
+    <NavContainer>
       <ul>
         <li>홈</li>
         <li>시리즈</li>
@@ -11,7 +11,7 @@ const Nav = () => {
         <li>내가 찜한 콘텐츠</li>
         <li>언어별로 찾아보기</li>
       </ul>
-    </div>
+    </NavContainer>
   );
 };
 

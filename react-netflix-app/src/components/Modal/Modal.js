@@ -1,14 +1,17 @@
-import "@scss/modal/modal.scss";
-import Portal from "./Portal";
+import { ModalContainer, ModalWrapper } from "./Modal.style";
+import reactDom from "react-dom";
+
+const Portal = ({ children }) => {
+  const modalElement = document.getElementById("modal");
+  return reactDom.createPortal(children, modalElement);
+};
 
 const Modal = ({ onClose, children }) => {
   return (
     <Portal>
-      <div className="modal_container" onClick={onClose}>
-        <div className="modal_wrapper" onClick={(e) => e.stopPropagation()}>
-          {children}
-        </div>
-      </div>
+      <ModalContainer onClick={onClose}>
+        <ModalWrapper onClick={(e) => e.stopPropagation()}>{children}</ModalWrapper>
+      </ModalContainer>
     </Portal>
   );
 };

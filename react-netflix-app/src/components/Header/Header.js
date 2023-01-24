@@ -3,16 +3,16 @@ import Nav from "./Nav";
 import Search from "./Search";
 import Profile from "./Profile";
 
-import "@scss/header/header.scss";
+import { HeaderContainer } from "./Header.style";
 
 const Header = () => {
   return (
-    <div className="header_container">
+    <HeaderContainer>
       <Logo />
       <Nav />
       <Search />
       <Profile />
-    </div>
+    </HeaderContainer>
   );
 };
 

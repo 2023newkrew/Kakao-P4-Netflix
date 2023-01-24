@@ -1,12 +1,12 @@
 import netflixLogo from "@assets/Netflix_2015_logo.svg";
 
-import "@scss/header/logo.scss";
+import { LogoContainer } from "./Logo.style";
 
 const Logo = () => {
   return (
-    <div className="logo_container">
+    <LogoContainer>
       <img src={netflixLogo} alt="넷플릭스 로고 이미지" />
-    </div>
+    </LogoContainer>
   );
 };
 

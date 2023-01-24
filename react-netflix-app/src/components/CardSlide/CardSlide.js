@@ -1,64 +1,45 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 
-import "@scss/cardSlide/cardSlide.scss";
 import { API } from "../../utils/axios";
 
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import { CardSlideContainer, CardSlideCategory, CardSlideWrapper, CardSlidePage } from "./CardSlide.style";
 
-const CardSlide = ({ title }) => {
-  const [genreMovieList, setGenreMovieList] = useState([]);
-
-  const slideElement = useRef(null);
+const CardSlide = ({ category }) => {
+  const [genreMovieList, setGenreMovieList] = useState();
 
   useEffect(() => {
     fetchAndSetGenreMovieList();
 
     async function fetchAndSetGenreMovieList() {
-      const fetchGenreMovieList = await API.fetchGenreMovie(title);
-
+      const fetchGenreMovieList = await API.fetchGenreMovie(category);
       setGenreMovieList(fetchGenreMovieList);
     }
   }, []);
 
-  // ! Hooks 는 조건이 있는 함수 내에 들어가면 안됨 MovieCard 내에서 if 로 index를 조회해서 선언하려 했으나 안되었고 props로 넘기는게 더 깔끔할 것 같음
+  if (genreMovieList === undefined) return <div />;
 
-  const movieCardList = genreMovieList.map((movie, index) => (
-    <SwiperSlide key={index}>
+  const movieCardList = genreMovieList.map((movie) => (
+    <SwiperSlide key={movie.id}>
       <MovieCard movie={movie} />
     </SwiperSlide>
   ));
 
-  if (movieCardList === undefined) <div>로딩 중 입니다 !</div>;
   return (
-    <div className="cardSlide_container">
-      <div className="cardSlide_wrapper">
-        <div className="cardSlide_slide" ref={slideElement}>
-          <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
-            loop={true}
-            speed={1000}
-            slidesPerView={4}
-            slidesPerGroup={4}
-            touchRatio={0}
-            pagination={{ clickable: true }}
-            spaceBetween={60}
-            navigation
-            style={{ height: "100%", padding: "0 60px", color: "white" }}
-          >
+    <CardSlideContainer>
+      <CardSlideWrapper>
+        <CardSlidePage>
+          <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} loop={true} speed={2000} slidesPerView={5} slidesPerGroup={5} touchRatio={0} pagination={{ clickable: true }} spaceBetween={10} navigation>
             {movieCardList}
           </Swiper>
-        </div>
-      </div>
+        </CardSlidePage>
+      </CardSlideWrapper>
 
-      <div className="cardSlide_title">{title}</div>
-    </div>
+      <CardSlideCategory>{category}</CardSlideCategory>
+    </CardSlideContainer>
   );
 };
 

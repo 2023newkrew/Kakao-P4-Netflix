@@ -1,4 +1,6 @@
-.logo_container {
+import styled from "styled-components";
+
+export const LogoContainer = styled.div`
   height: 100%;
   flex: 0.06;
 
@@ -8,4 +10,4 @@
     width: 100px;
     height: 100%;
   }
-}
+`;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { API } from "../../utils/axios";
 
-import "@scss/banner/bannerMovie.scss";
+import { BannerMovieContainer } from "./BannerMovie.style";
 
 const BannerMovie = ({ bannerMovie }) => {
   const [bannerMovieURL, setBannerMovieURL] = useState("");
@@ -16,21 +16,15 @@ const BannerMovie = ({ bannerMovie }) => {
     }
   }, []);
 
-  if (bannerMovieURL === undefined) return <div>값을 렌더링하는 중입니다.</div>;
-  else {
-    const bannerMovieImageURL = process.env.REACT_APP_IMAGE_API_URL + `/${bannerMovie.backdrop_path || bannerMovie.poster_path}`;
-    const bannerMovieYoutubeURL = `https://www.youtube.com/embed/${bannerMovieURL}?autoplay=1&mute=1`;
+  if (bannerMovieURL === undefined) return <div />;
 
-    return (
-      <div className="bannerMovie_container">
-        {bannerMovieURL !== undefined ? (
-          <iframe src={bannerMovieYoutubeURL} title="YouTube video player" frameBorder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" allowFullScreen></iframe>
-        ) : (
-          <img className="bannerMovie_image" src={bannerMovieImageURL} alt="배너 영화 이미지" />
-        )}
-      </div>
-    );
-  }
+  const bannerMovieYoutubeURL = `https://www.youtube.com/embed/${bannerMovieURL}?autoplay=1&mute=1`;
+
+  return (
+    <BannerMovieContainer>
+      <iframe src={bannerMovieYoutubeURL} title="YouTube video player" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" allowFullScreen />
+    </BannerMovieContainer>
+  );
 };
 
 export default BannerMovie;

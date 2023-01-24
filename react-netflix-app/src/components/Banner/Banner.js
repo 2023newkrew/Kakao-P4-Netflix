@@ -1,10 +1,10 @@
-import "@scss/banner/banner.scss";
-
 import React, { useState, useEffect } from "react";
 
 import BannerMovie from "./BannerMovie";
 import BannerInfo from "./BannerInfo";
 import { API } from "@utils/axios";
+
+import { BannerContainer } from "./Banner.style";
 
 const Banner = () => {
   const [bannerMovie, setBannerMovie] = useState();
@@ -19,12 +19,13 @@ const Banner = () => {
     }
   }, []);
 
-  if (bannerMovie === undefined) return <div>값을 렌더링하는 중입니다.</div>;
+  if (bannerMovie === undefined) return <div />;
+
   return (
-    <div className="banner_container">
+    <BannerContainer>
       <BannerMovie bannerMovie={bannerMovie} />
       <BannerInfo bannerMovie={bannerMovie} />
-    </div>
+    </BannerContainer>
   );
 };
 

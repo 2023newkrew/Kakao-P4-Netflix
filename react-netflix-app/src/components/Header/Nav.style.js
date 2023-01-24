@@ -1,4 +1,6 @@
-.nav_container {
+import styled from "styled-components";
+
+export const NavContainer = styled.div`
   flex: 0.8;
 
   ul {
@@ -23,4 +25,4 @@
       font-size: 14px;
     }
   }
-}
+`;

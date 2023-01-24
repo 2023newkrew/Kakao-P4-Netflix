@@ -5,12 +5,12 @@ const useModal = ({ useBlur = true } = {}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = useCallback(() => {
-    document.getElementsByTagName("body")[0].style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     setIsOpen(() => true);
   }, []);
 
   const close = useCallback(() => {
-    document.getElementsByTagName("body")[0].style.overflow = "auto";
+    document.body.style.overflow = "auto";
     setIsOpen(() => false);
   }, []);
 
