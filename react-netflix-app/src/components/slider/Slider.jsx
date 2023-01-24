@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 import { Navigation } from 'swiper';
 
 import 'swiper/css';
@@ -51,12 +51,7 @@ const List = styled(Swiper)`
   }
 `;
 
-const Item = styled(SwiperSlide)`
-  box-sizing: border-box;
-  padding: 0 0.4vw;
-`;
-
-export default function Slider({ name, items }) {
+export default function Slider({ name, children }) {
   return (
     <SliderLayout>
       <Name>{name}</Name>
@@ -80,14 +75,7 @@ export default function Slider({ name, items }) {
           },
         }}
       >
-        {items.map(({ id, poster_path, title }) => (
-          <Item key={id}>
-            <img
-              src={`${process.env.REACT_APP_IMAGE_BASE_URL}${poster_path}`}
-              alt={title}
-            />
-          </Item>
-        ))}
+        {children}
       </List>
     </SliderLayout>
   );
@@ -95,11 +83,5 @@ export default function Slider({ name, items }) {
 
 Slider.propTypes = {
   name: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      poster_path: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  children: PropTypes.node.isRequired,
 };

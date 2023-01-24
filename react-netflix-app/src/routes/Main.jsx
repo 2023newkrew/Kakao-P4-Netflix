@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Banner from '@components/Banner';
-import Slider from '@components/Slider';
+import MovieSlider from '@components/slider/MovieSlider';
 
 const MainLayout = styled.main``;
 
@@ -39,7 +39,7 @@ export default function Main() {
         overview={bannerMovie.overview}
       />
       <SliderContainer>
-        <Slider name="지금 뜨는 콘텐츠" items={popularMovies} />
+        <MovieSlider name="지금 뜨는 콘텐츠" items={popularMovies} />
       </SliderContainer>
     </MainLayout>
   );
