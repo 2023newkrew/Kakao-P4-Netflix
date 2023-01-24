@@ -67,4 +67,5 @@ export const ModalMovieCard = styled.div`
   top: 590px;
 
   display: flex;
+  gap: 40px;
 `;

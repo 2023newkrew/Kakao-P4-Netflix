@@ -1,4 +1,4 @@
-import { NavContainer } from "./Nav.style";
+import { NavContainer } from "@styles/header/Nav.style";
 
 const Nav = () => {
   return (

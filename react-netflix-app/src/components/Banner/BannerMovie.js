@@ -1,11 +1,11 @@
+import { BannerMovieContainer } from "@styles/banner/BannerMovie.style";
+
 import React, { useState, useEffect } from "react";
 
-import { API } from "../../utils/axios";
-
-import { BannerMovieContainer } from "./BannerMovie.style";
+import { API } from "@utils/axios";
 
 const BannerMovie = ({ bannerMovie }) => {
-  const [bannerMovieURL, setBannerMovieURL] = useState("");
+  const [bannerMovieURL, setBannerMovieURL] = useState();
 
   useEffect(() => {
     fetchAndSetBannerMovieVideoURL();

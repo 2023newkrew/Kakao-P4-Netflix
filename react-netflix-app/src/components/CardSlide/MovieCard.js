@@ -1,12 +1,12 @@
+import { MovieCardContainer, MovieCardWrapper, MovieCardImage } from "@styles/cardSlide/MovieCard.style";
+
 import { useState } from "react";
 
 import classNames from "classnames";
 import useModal from "@hooks/useModal";
 
 import MovieCardInfo from "./MovieCardInfo";
-import MovieModal from "./MovieModal";
-
-import { MovieCardContainer, MovieCardWrapper, MovieCardImage } from "./MovieCard.style";
+import MovieModal from "@components/modal/MovieModal";
 
 const MovieCard = ({ movie }) => {
   const [hover, setHover] = useState(false);
@@ -20,6 +20,7 @@ const MovieCard = ({ movie }) => {
         <MovieCardImage onClick={open} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} loading="lazy" />
         {hover && <MovieCardInfo movie={movie} open={open} />}
       </MovieCardWrapper>
+
       <Modal>
         <MovieModal movie={movie} />
       </Modal>

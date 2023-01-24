@@ -1,12 +1,12 @@
+import { CardSlideContainer, CardSlideCategory, CardSlideWrapper, CardSlidePage } from "@styles/cardSlide/CardSlide.style";
+
 import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 
-import { API } from "../../utils/axios";
+import { API } from "@/utils/axios";
 
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import { CardSlideContainer, CardSlideCategory, CardSlideWrapper, CardSlidePage } from "./CardSlide.style";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
 const CardSlide = ({ category }) => {
   const [genreMovieList, setGenreMovieList] = useState();

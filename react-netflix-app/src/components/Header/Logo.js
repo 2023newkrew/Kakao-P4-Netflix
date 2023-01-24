@@ -1,6 +1,6 @@
-import netflixLogo from "@assets/Netflix_2015_logo.svg";
+import { LogoContainer } from "@styles/header/Logo.style";
 
-import { LogoContainer } from "./Logo.style";
+import netflixLogo from "@assets/Netflix_2015_logo.svg";
 
 const Logo = () => {
   return (

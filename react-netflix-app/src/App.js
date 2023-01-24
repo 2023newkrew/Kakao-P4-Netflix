@@ -1,22 +1,14 @@
-import Header from "@components/header/Header";
-import Banner from "@components/banner/Banner";
-import CardSlide from "@components/cardSlide/CardSlide";
-import Footer from "@components/footer/Footer";
+import { Routes, Route } from "react-router-dom";
+
+import MainPage from "@pages/MainPage";
+import LoginPage from "@pages/LoginPage";
 
 const App = () => {
   return (
-    <>
-      <Header />
-      <Banner />
-      <CardSlide category={"액션"} />
-      <CardSlide category={"모험"} />
-      <CardSlide category={"애니메이션"} />
-      <CardSlide category={"SF"} />
-      <CardSlide category={"공포"} />
-      <CardSlide category={"코미디"} />
-      <CardSlide category={"음악"} />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<MainPage />} />
+    </Routes>
   );
 };
 

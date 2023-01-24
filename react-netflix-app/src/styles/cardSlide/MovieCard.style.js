@@ -23,6 +23,9 @@ export const MovieCardImage = styled.img`
   transition: transform 0.1s ease-out;
   cursor: pointer;
 
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
   &.hover {
     transform: scale(1.2) translateY(-50px);
     z-index: 1;

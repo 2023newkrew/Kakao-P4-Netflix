@@ -1,6 +1,6 @@
-import profileIcon from "@assets/profile-icon.png";
+import { ProfileContainer } from "@styles/header/Profile.style";
 
-import { ProfileContainer } from "./Profile.style";
+import profileIcon from "@assets/profile-icon.png";
 
 const Profile = () => {
   return (

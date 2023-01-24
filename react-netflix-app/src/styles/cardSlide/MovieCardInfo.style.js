@@ -14,6 +14,9 @@ export const MovieCardInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 `;
 
 export const MovieCardInfoButton = styled.div`

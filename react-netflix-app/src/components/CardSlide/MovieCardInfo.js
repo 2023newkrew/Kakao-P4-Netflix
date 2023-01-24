@@ -1,11 +1,11 @@
+import { MovieCardInfoContainer, MovieCardInfoButton, MovieCardInfoDetailButton, MovieCardInfoTitle, MovieCardInfoVoteAverage, MovieCardInfoCategory } from "@styles/cardSlide/MovieCardInfo.style";
+
 import { ImPlay2 } from "react-icons/im";
 import { BsPlusCircle } from "react-icons/bs";
 import { GoThumbsup } from "react-icons/go";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 import genre from "../../json/genre.json";
-
-import { MovieCardInfoContainer, MovieCardInfoButton, MovieCardInfoDetailButton, MovieCardInfoTitle, MovieCardInfoVoteAverage, MovieCardInfoCategory } from "./MovieCardInfo.style";
 
 const MovieCardInfo = ({ movie, open }) => {
   const movieCategoryIdList = movie.genre_ids;

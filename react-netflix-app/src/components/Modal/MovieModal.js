@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { API } from "@utils/axios";
 
-import { MovieCardSubInfoContainer, MovieCardInfoContainer, MovieCardTitle, MovieCardSubTitle, MovieCardOverviewWrapper, MovieCardOverview, MovieModalContainer, ModalMovieCard } from "./MovieModal.style";
+import { MovieCardSubInfoContainer, MovieCardInfoContainer, MovieCardTitle, MovieCardSubTitle, MovieCardOverviewWrapper, MovieCardOverview, MovieModalContainer, ModalMovieCard } from "@styles/modal/MovieModal.style";
 
 const MovieCardSubInfo = ({ movieInfo }) => {
   return (

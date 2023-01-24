@@ -1,10 +1,11 @@
+import { BannerContainer } from "@styles/banner/Banner.style";
+
 import React, { useState, useEffect } from "react";
 
 import BannerMovie from "./BannerMovie";
 import BannerInfo from "./BannerInfo";
-import { API } from "@utils/axios";
 
-import { BannerContainer } from "./Banner.style";
+import { API } from "@utils/axios";
 
 const Banner = () => {
   const [bannerMovie, setBannerMovie] = useState();

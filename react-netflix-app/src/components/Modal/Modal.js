@@ -1,4 +1,4 @@
-import { ModalContainer, ModalWrapper } from "./Modal.style";
+import { ModalContainer, ModalWrapper } from "@styles/modal/Modal.style";
 import reactDom from "react-dom";
 
 const Portal = ({ children }) => {

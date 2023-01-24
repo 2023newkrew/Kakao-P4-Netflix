@@ -1,4 +1,4 @@
-import { SearchContainer, InputContainer, InputImage } from "./Search.style";
+import { SearchContainer, InputContainer, InputImage } from "@styles/header/Search.style";
 
 import magnifyGlass from "@assets/magnifying-glass.svg";
 
