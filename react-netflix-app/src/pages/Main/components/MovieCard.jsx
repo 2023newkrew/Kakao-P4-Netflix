@@ -13,30 +13,40 @@ import { THUMBNAIL_BASE_URL } from '@/constants/tmdb';
 import { useModal } from '@/components/Modal';
 import MovieDetail from '../[id]';
 
-const useMovieDetail = (movieId, { fetch }) => {
+const useMovieDetail = (movieId) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState(null);
   const [detail, setDetail] = useState(null);
+
   useEffect(() => {
-    if (!fetch || detail) {
+    if (detail || !movieId) {
       return;
     }
-    getMovieDetail(movieId)
-      .then((response) => {
-        setDetail(response.data);
-      })
-      .then(() => {
+
+    (async function () {
+      try {
+        const { data } = await getMovieDetail(movieId);
+        setDetail(data);
+      } catch (error) {
+        setIsError(true);
+        setError(error);
+      } finally {
         setIsLoading(false);
-      });
-  }, [fetch]);
+      }
+    })();
+  }, []);
+
   return {
     isLoading,
+    isError,
+    error,
     data: detail,
   };
 };
 
-const MovieCard = ({ movie }) => {
-  const [detailFetch, setDetailFetch] = useState(false);
-  const { data: detail, isLoading } = useMovieDetail(movie.id, { fetch: detailFetch });
+const DetailMovieCard = ({ movie }) => {
+  const { data: detail, isLoading } = useMovieDetail(movie.id);
   const openModal = useModal();
 
   const showMovieDetailModal = () => {
@@ -44,34 +54,41 @@ const MovieCard = ({ movie }) => {
   };
 
   return (
+    <DetailContainer
+      className="movie-detail"
+      onClick={() => {
+        showMovieDetailModal();
+      }}
+    >
+      <ThumbnailContainer>
+        <ThumbnailImage src={THUMBNAIL_BASE_URL + movie.backdrop_path} alt="썸네일" />
+      </ThumbnailContainer>
+      <DetailInfos>
+        <h4>{movie.title}</h4>
+        <Genres>{!isLoading && detail?.genres.map((genre) => genre.name).join(' / ')}</Genres>
+      </DetailInfos>
+    </DetailContainer>
+  );
+};
+DetailMovieCard.propTypes = {
+  movie: PropTypes.object,
+};
+
+const MovieCard = ({ movie }) => {
+  const [isHover, setIsHover] = useState(false);
+
+  return (
     <>
       <Container
         onMouseEnter={() => {
-          setDetailFetch(true);
+          setIsHover(true);
         }}
       >
         <ThumbnailContainer>
           <ThumbnailImage src={THUMBNAIL_BASE_URL + movie.backdrop_path} alt="썸네일" />
         </ThumbnailContainer>
       </Container>
-      <DetailContainer
-        className="movie-detail"
-        onClick={() => {
-          showMovieDetailModal();
-        }}
-      >
-        {detailFetch && (
-          <>
-            <ThumbnailContainer>
-              <ThumbnailImage src={THUMBNAIL_BASE_URL + movie.backdrop_path} alt="썸네일" />
-            </ThumbnailContainer>
-            <DetailInfos>
-              <h4>{movie.title}</h4>
-              <Genres>{!isLoading && detail?.genres.map((genre) => genre.name).join(' / ')}</Genres>
-            </DetailInfos>
-          </>
-        )}
-      </DetailContainer>
+      {isHover && <DetailMovieCard movie={movie} />}
     </>
   );
 };
