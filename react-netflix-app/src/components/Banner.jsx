@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Skeleton from '@components/Skeleton';
 
 const BannerLayout = styled.section`
   height: 56.25vw;
@@ -27,11 +28,13 @@ const Overview = styled.div`
 `;
 
 export default function Banner({ backgroundUrl, title, overview }) {
-  return (
+  return backgroundUrl ? (
     <BannerLayout backgroundUrl={backgroundUrl}>
       <Title>{title}</Title>
       <Overview>{overview}</Overview>
     </BannerLayout>
+  ) : (
+    <Skeleton height="56.25vw" />
   );
 }
 

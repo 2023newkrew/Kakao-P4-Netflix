@@ -11,7 +11,11 @@ const SliderContainer = styled.section`
 `;
 
 export default function Main() {
-  const [bannerMovie, setBannerMovie] = useState({});
+  const [bannerMovie, setBannerMovie] = useState({
+    backdrop_path: '',
+    title: '',
+    overview: '',
+  });
   const [popularMovies, setPopularMovies] = useState([]);
 
   const fetchPopularMovies = async () => {
