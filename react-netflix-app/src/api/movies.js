@@ -10,3 +10,4 @@ export const getUpcomingMovies = (page = 1) => fetcher('/upcoming', { page });
 
 export const getMovieDetail = (movieId) => fetcher(`/${movieId}`);
 export const getSimilarMovie = (movieId) => fetcher(`/${movieId}/similar`);
+export const getMovieVideos = (movieId) => fetcher(`/${movieId}/videos`);
