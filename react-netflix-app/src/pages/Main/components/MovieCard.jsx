@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getMovieDetail } from '@/api/movies';
+import { getMovieDetail } from '@api/movies';
 import {
   Container,
   ThumbnailContainer,
@@ -9,9 +9,9 @@ import {
   DetailContainer,
   Genres,
 } from '@pages/Main/components/MovieCard.style';
-import { THUMBNAIL_BASE_URL } from '@/constants/tmdb';
-import { useModal } from '@/components/Modal';
-import MovieDetail from '../[id]';
+import { THUMBNAIL_BASE_URL } from '@constants/tmdb';
+import { useModal } from '@components/Modal';
+import MovieDetail from '@pages/Main/[id]';
 
 const useMovieDetail = (movieId) => {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Banner } from '@pages/Main/MainPage.style';
 import playIcon from '@icons/play.svg';
-import { THUMBNAIL_BASE_URL } from '@/constants/tmdb';
+import { THUMBNAIL_BASE_URL } from '@constants/tmdb';
 import { useEffect, useState } from 'react';
 
 const MovieBanner = ({ movie }) => {

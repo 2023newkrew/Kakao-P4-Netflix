@@ -1,9 +1,9 @@
 import { useMovieList } from '@pages/Main/useMovies';
-import MovieCarousel from '@/pages/Main/components/MovieCarousel';
+import MovieCarousel from '@pages/Main/components/MovieCarousel';
 import { PageContainer, MainView, Row, PageTitle } from '@pages/Main/MainPage.style';
+import MovieBanner from '@pages/Main/components/MovieBanner';
 import Header from '@components/Header';
-import MovieBanner from './components/MovieBanner';
-import Footer from '@/components/Footer';
+import Footer from '@components/Footer';
 
 const Main = () => {
   const { isLoading, topRatedMovies, popularMovies } = useMovieList();

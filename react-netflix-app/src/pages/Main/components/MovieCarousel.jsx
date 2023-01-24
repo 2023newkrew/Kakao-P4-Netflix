@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { CarouselContainer, MovieSwiper } from '@pages/Main/components/MovieCarousel.style';
 import MovieCard from '@pages/Main/components/MovieCard';
-import { breakpoints } from '@/styles/theme';
+import { breakpoints } from '@styles/theme';
 
 import 'swiper/css';
 import 'swiper/css/navigation';

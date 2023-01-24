@@ -4,7 +4,7 @@ import { HeaderContainer, HeaderContent, LogoLink, PrimaryMenus, SecondaryMenus,
 import SearchIcon from '@icons/search.svg';
 import AlarmIcon from '@icons/alarm.svg';
 import Logo from '@icons/logo.png';
-import throttle from '@/utils/throttle';
+import throttle from '@utils/throttle';
 
 const primaryMenus = [
   {
