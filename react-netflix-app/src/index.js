@@ -5,7 +5,7 @@ import router from '@/router';
 import reportWebVitals from '@/reportWebVitals';
 import GlobalStyles from '@/GlobalStyles';
 import '@/index.css';
-import { ModalProvider } from './components/Modal/index';
+import { ModalProvider } from '@components/Modal';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

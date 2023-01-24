@@ -6,7 +6,7 @@ import Header from '@components/Header';
 import Footer from '@components/Footer';
 
 const Main = () => {
-  const { isLoading, topRatedMovies, popularMovies } = useMovieList();
+  const { isLoading, isError, topRatedMovies, popularMovies } = useMovieList();
   const randomIndex = isLoading.popular ? 0 : Math.floor(Math.random() * popularMovies.results.length);
 
   return (
@@ -17,11 +17,17 @@ const Main = () => {
         {!isLoading.popular && <MovieBanner movie={popularMovies.results[randomIndex]} />}
         <Row.Container>
           <Row.Title>인기 영화</Row.Title>
-          <Row.Content>{!isLoading.popular && <MovieCarousel movies={popularMovies.results} />}</Row.Content>
+          <Row.Content>
+            {!isLoading.popular && !isError.popular && <MovieCarousel movies={popularMovies.results} />}
+            {isError.popular && <p>영화 목록을 불러오지 못했습니다.</p>}
+          </Row.Content>
         </Row.Container>
         <Row.Container>
           <Row.Title>평점 높은 영화</Row.Title>
-          <Row.Content>{!isLoading.topRated && <MovieCarousel movies={topRatedMovies.results} />}</Row.Content>
+          <Row.Content>
+            {!isLoading.topRated && !isError.topRated && <MovieCarousel movies={topRatedMovies.results} />}
+            {isError && <p>영화 목록을 불러오지 못했습니다.</p>}
+          </Row.Content>
         </Row.Container>
       </MainView>
       <Footer />
