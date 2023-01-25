@@ -5,12 +5,10 @@ import styled from '@emotion/styled';
 export const MovieCardContainer = styled.div`
   flex: 1;
   aspect-ratio: 16 / 9;
-  background-color: lightgray;
   position: relative;
 
   &:hover {
     transition: 0.5s transform;
-    /* transition-delay: 0.2s; */
     transform: scale(1.2);
     z-index: 10;
     cursor: pointer;

@@ -1,7 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable arrow-body-style */
-/* eslint-disable no-unused-vars */
-
+import PropTypes from 'prop-types';
 import DownIconImg from '@assets/down-icon.svg';
 import StartIconImg from '@assets/start-icon.svg';
 import {
@@ -36,6 +33,11 @@ const MovieCardModal = ({ isAppear, movie }) => {
       </MovieCardModalContent>
     </MovieCardModalContainer>
   );
+};
+
+MovieCardModal.propTypes = {
+  isAppear: PropTypes.bool.isRequired,
+  movie: PropTypes.object.isRequired,
 };
 
 export default MovieCardModal;
