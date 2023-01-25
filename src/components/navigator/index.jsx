@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-  position: fixed;
+  position: sticky;
+  top: 0px;
   width: 100%;
   padding: 1rem var(--lr-padding);
   color: red;
@@ -14,17 +15,19 @@ const StyledDiv = styled.div`
   ${({ isTop }) => (isTop ? '' : 'background-color: black;')}
 `;
 
+const rootElement = document.body.querySelector('#root');
+
 function Navigator() {
   const [isTop, setIsTop] = useState(!window.scrollY);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsTop(!window.scrollY);
+      setIsTop(!rootElement.scrollTop);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    rootElement.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      rootElement.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

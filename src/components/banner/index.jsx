@@ -6,6 +6,7 @@ const StyledDiv = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
+  margin-top: -1.5rem;
   margin-bottom: -6.25%;
   background: no-repeat url(${({ url }) => url});
   background-size: cover;
@@ -55,7 +56,7 @@ const StyledInfoButton = styled(StyledButton)`
   color: white;
 `;
 
-function Banner({ movie }) {
+function Banner({ movie, onDetailClick }) {
   const description = movie.overview.slice(0, 100);
   const isOverflow = description.length !== movie.overview.length;
 
@@ -71,7 +72,9 @@ function Banner({ movie }) {
         </StyledDescription>
         <StyledButtonContainer>
           <StyledButton type="button">재생</StyledButton>
-          <StyledInfoButton type="button">상세 정보</StyledInfoButton>
+          <StyledInfoButton type="button" onClick={onDetailClick}>
+            상세 정보
+          </StyledInfoButton>
         </StyledButtonContainer>
       </StyledSection>
     </StyledDiv>

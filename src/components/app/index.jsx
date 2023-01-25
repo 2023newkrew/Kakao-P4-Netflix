@@ -8,6 +8,8 @@ import MovieListContainer from '../movie-list-container';
 import MovieList from '../movie-list';
 import MovieListItem from '../movie-list-item';
 import MovieCard from '../movie-card';
+import Modal from '../modal';
+import MovieDetail from '../movie-detail';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -17,6 +19,15 @@ const StyledDiv = styled.div`
 
 function App() {
   const [movies, setMovies] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const openMovieDetailModal = (movie) => {
+    if (isModalOpen) return;
+
+    setIsModalOpen(true);
+    setSelectedMovie(movie);
+  };
 
   useEffect(() => {
     (async () => {
@@ -30,15 +41,23 @@ function App() {
 
   if (!movies) return null;
 
+  const bannerMovie = movies[0];
+
   return (
     <>
       <Navigator />
-      <Banner movie={movies[0]} />
+      <Banner
+        movie={bannerMovie}
+        onDetailClick={() => openMovieDetailModal(bannerMovie)}
+      />
       <StyledDiv>
         <MovieListContainer title="넷플릭스 인기 콘텐츠">
           <MovieList>
             {movies.map((movie) => (
-              <MovieListItem key={movie.id}>
+              <MovieListItem
+                key={movie.id}
+                onClick={() => openMovieDetailModal(movie)}
+              >
                 <MovieCard movie={movie} />
               </MovieListItem>
             ))}
@@ -47,7 +66,10 @@ function App() {
         <MovieListContainer title="지금 뜨는 콘텐츠">
           <MovieList>
             {movies.map((movie) => (
-              <MovieListItem key={movie.id}>
+              <MovieListItem
+                key={movie.id}
+                onClick={() => openMovieDetailModal(movie)}
+              >
                 <MovieCard movie={movie} />
               </MovieListItem>
             ))}
@@ -56,7 +78,10 @@ function App() {
         <MovieListContainer title="새로 올라온 콘텐츠">
           <MovieList>
             {movies.map((movie) => (
-              <MovieListItem key={movie.id}>
+              <MovieListItem
+                key={movie.id}
+                onClick={() => openMovieDetailModal(movie)}
+              >
                 <MovieCard movie={movie} />
               </MovieListItem>
             ))}
@@ -64,6 +89,13 @@ function App() {
         </MovieListContainer>
       </StyledDiv>
       <Footer />
+      <Modal>
+        {isModalOpen && !!selectedMovie ? (
+          <MovieDetail movie={selectedMovie} />
+        ) : (
+          ''
+        )}
+      </Modal>
     </>
   );
 }

@@ -13,6 +13,7 @@
 body {
   background-color: black;
   color: white;
+  overflow: hidden;
 }
 
 :root {
@@ -20,4 +21,11 @@ body {
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
   --lr-padding: 4%;
   --border-radius: 4px;
+}
+
+#root {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
 }
