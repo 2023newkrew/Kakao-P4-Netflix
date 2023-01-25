@@ -5,6 +5,7 @@ import SmallModal from "../../../../SmallModal/SmallModal";
 import { MainColumnItemCotainer, MainColumnItemImg } from "./styles";
 import ReactDom from "react-dom";
 import ModalPortal from "../../../../../util/ModalPortal";
+import BigModal from "../../../../BigModal/BigModal";
 
 export default function MainColumnItem({
   imgSrc,
@@ -17,7 +18,8 @@ export default function MainColumnItem({
   const imageContainer = useRef(null);
   const timer = useRef(null);
   const [modalRectInfo, setModalRectInfo] = useState(null);
-  const [isModalOpen, toggle] = useModal();
+  const [isSmallModalOpen, smallModalToggle] = useModal();
+  const [isBigModalOpen, bigModalToggle] = useModal();
 
   useEffect(() => {
     let handleResize;
@@ -25,7 +27,6 @@ export default function MainColumnItem({
     if (setImageContainerSize) {
       setImageContainerSize(imageContainer.current.clientWidth);
 
-      /* 이벤트 등록 */
       handleResize = (event) => {
         setImageContainerSize(imageContainer.current.clientWidth);
       };
@@ -33,32 +34,38 @@ export default function MainColumnItem({
     }
 
     const handleMouseEnter = (event) => {
-      timer.current = setTimeout(toggle, 1000);
+      timer.current = setTimeout(smallModalToggle, 1000);
     };
     const handleMouseLeave = (event) => {
       clearTimeout(timer.current);
     };
+    const handleClick = (event) => {
+      event.stopPropagation();
+      bigModalToggle();
+    };
 
     imageContainer.current.addEventListener("mouseenter", handleMouseEnter);
     imageContainer.current.addEventListener("mouseleave", handleMouseLeave);
+    imageContainer.current.addEventListener("click", handleClick);
 
     return () => {
       window.removeEventListener("resize", handleResize);
       imageContainer.current.removeEventListener("mouseenter", handleMouseEnter);
       imageContainer.current.removeEventListener("mouseleave", handleMouseLeave);
+      imageContainer.current.removeEventListener("click", handleClick);
     };
   }, []);
 
   useEffect(() => {
-    if (isModalOpen === false) return;
+    if (isSmallModalOpen === false) return;
     setModalRectInfo(imageContainer.current.getBoundingClientRect());
-  }, [isModalOpen]);
+  }, [isSmallModalOpen]);
   return (
     <>
       <MainColumnItemCotainer ref={imageContainer} separateCount={separateCount}>
         <MainColumnItemImg src={TheMovieDBAPI.imgBaseURL + imgSrc} />
       </MainColumnItemCotainer>
-      {isModalOpen && modalRectInfo ? (
+      {isSmallModalOpen && modalRectInfo ? (
         <ModalPortal>
           <SmallModal
             imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc}
@@ -66,11 +73,16 @@ export default function MainColumnItem({
             offsetTop={modalRectInfo.top}
             imageContainerWidth={modalRectInfo.width}
             imageContainerHeight={modalRectInfo.height}
-            toggle={toggle}
+            toggle={smallModalToggle}
             info={`vote_average : ${vote_average}
             vote_count : ${vote_count}
             release_date : ${release_date}`}
           />
+        </ModalPortal>
+      ) : null}
+      {isBigModalOpen ? (
+        <ModalPortal>
+          <BigModal imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc} toggle={bigModalToggle} />
         </ModalPortal>
       ) : null}
     </>
