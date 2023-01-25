@@ -11,6 +11,8 @@ export const MovieCardSubInfoContainer = styled.div`
 export const MovieCardInfoContainer = styled.div`
   width: 90%;
   padding-left: 5px;
+  overflow: auto;
+  z-index: 0;
 `;
 
 export const MovieCardTitle = styled.div`
@@ -51,6 +53,7 @@ export const MovieModalContainer = styled.div`
     width: 100%;
     height: 600px;
     position: relative;
+    z-index: 1;
   }
 `;
 

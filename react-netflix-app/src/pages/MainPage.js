@@ -3,10 +3,9 @@ import Banner from "@components/banner/Banner";
 import CardSlide from "@components/cardSlide/CardSlide";
 import Footer from "@components/footer/Footer";
 
-const MainPage = () => {
+const MainPage = ({ setSearchInput }) => {
   return (
     <>
-      <Header />
       <Banner />
       <CardSlide category={"액션"} />
       <CardSlide category={"모험"} />

@@ -1,14 +1,20 @@
 import { Routes, Route } from "react-router-dom";
+import qs from "qs";
 
+import React, { useState } from "react";
 import MainPage from "@pages/MainPage";
-import LoginPage from "@pages/LoginPage";
+import SearchPage from "@pages/SearchPage";
+import Header from "./components/header/Header";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/" element={<MainPage />} />
-    </Routes>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/search" element={<SearchPage />} />
+      </Routes>
+    </>
   );
 };
 

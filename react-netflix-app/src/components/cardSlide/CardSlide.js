@@ -3,7 +3,7 @@ import { CardSlideContainer, CardSlideCategory, CardSlideWrapper, CardSlidePage 
 import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 
-import { API } from "@/utils/axios";
+import { API } from "@utils/axios";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
@@ -18,7 +18,7 @@ const CardSlide = ({ category }) => {
       const fetchGenreMovieList = await API.fetchGenreMovie(category);
       setGenreMovieList(fetchGenreMovieList);
     }
-  }, []);
+  }, [category]);
 
   if (genreMovieList === undefined) return <div />;
 
@@ -32,7 +32,7 @@ const CardSlide = ({ category }) => {
     <CardSlideContainer>
       <CardSlideWrapper>
         <CardSlidePage>
-          <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} loop={true} speed={2000} slidesPerView={5} slidesPerGroup={5} touchRatio={0} pagination={{ clickable: true }} spaceBetween={10} navigation>
+          <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} loopFillGroupWithBlank={false} loop={true} speed={2000} slidesPerView={5} slidesPerGroup={5} touchRatio={0} pagination={{ clickable: true }} spaceBetween={10} navigation>
             {movieCardList}
           </Swiper>
         </CardSlidePage>

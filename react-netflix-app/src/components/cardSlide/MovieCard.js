@@ -9,6 +9,7 @@ import MovieCardInfo from "./MovieCardInfo";
 import MovieModal from "@components/modal/MovieModal";
 
 const MovieCard = ({ movie }) => {
+  // ! Hover 로 인해 리렌더링이 발생함 이로 인해 모달이 두 번 호출되는 문제 발생
   const [hover, setHover] = useState(false);
   const { Modal, open } = useModal();
 

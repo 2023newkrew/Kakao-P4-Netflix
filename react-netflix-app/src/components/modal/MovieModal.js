@@ -40,7 +40,7 @@ const MovieModal = ({ movie }) => {
       setMovieURL(fetchMovieURL);
       setMovieInfo(fetchMovieInfo);
     }
-  });
+  }, [movie]);
 
   if (!movieURL || !movieInfo) return <div>로딩 중입니다 ...</div>;
 

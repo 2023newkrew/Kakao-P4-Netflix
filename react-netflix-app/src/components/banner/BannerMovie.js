@@ -14,7 +14,7 @@ const BannerMovie = ({ bannerMovie }) => {
       const fetchBannerMovieURL = await API.fetchMovieVideoURL(bannerMovie.id);
       setBannerMovieURL(fetchBannerMovieURL);
     }
-  }, []);
+  }, [bannerMovie]);
 
   if (bannerMovieURL === undefined) return <div />;
 
