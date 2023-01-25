@@ -47,7 +47,8 @@ export const MovieListContainer = styled.article``;
 
 export const MovieItemContainer = styled.div`
   position: relative;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
 `;
 
 export const MovieItemContent = styled.div`
@@ -62,6 +63,14 @@ export const MovieCardInner = styled.div`
   gap: 16px;
   flex-wrap: nowrap;
   width: 100%;
+`;
+
+export const MovieCardInnerContent = styled.div`
+  padding: 24px;
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  flex-wrap: nowrap;
 `;
 
 export const MovieListTitle = styled.h2`

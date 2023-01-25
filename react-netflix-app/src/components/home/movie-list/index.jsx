@@ -5,6 +5,7 @@ import { MAX_MOVIES_PER_PAGE } from '@constants/home';
 import MovieCard from './movie-card';
 import {
   MovieCardInner,
+  MovieCardInnerContent,
   MovieItemContainer,
   MovieItemContent,
   MovieListContainer,
@@ -48,9 +49,11 @@ const MovieList = ({ title, movies }) => {
           {splitMovies &&
             splitMovies.map((moviesArr) => (
               <MovieCardInner key={`${moviesArr[0].title}-list`}>
-                {moviesArr.map((movie) => (
-                  <MovieCard key={movie.title} movie={movie} />
-                ))}
+                <MovieCardInnerContent>
+                  {moviesArr.map((movie) => (
+                    <MovieCard key={movie.title} movie={movie} />
+                  ))}
+                </MovieCardInnerContent>
               </MovieCardInner>
             ))}
         </MovieItemContent>
