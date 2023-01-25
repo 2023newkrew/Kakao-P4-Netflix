@@ -12,9 +12,18 @@ const StyledDiv = styled.div`
   height: 100%;
   ${({ idDisplayed }) => (idDisplayed ? '' : 'display: none;')}
   background-color: rgba(0, 0, 0, 0.875);
+
+  will-change: opacity;
+  animation: fade-in 0.2s ease;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
 `;
 
 const PaperWrapper = styled.div`
+  overflow: hidden;
   padding: 1rem;
 `;
 
@@ -26,6 +35,15 @@ const Paper = styled.div`
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+
+  will-change: transform, filter;
+  animation: slide-up 0.25s ease-out;
+  @keyframes slide-up {
+    from {
+      filter: blur(8px);
+      transform: translateY(2rem);
+    }
+  }
 `;
 
 const CloseButton = styled.button`

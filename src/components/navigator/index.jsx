@@ -13,6 +13,30 @@ const StyledDiv = styled.div`
   transition: background-color 0.2s;
   z-index: 2;
   ${({ isTop }) => (isTop ? '' : 'background-color: black;')}
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SearchBox = styled.div`
+  display: flex;
+`;
+
+const SearchInput = styled.input`
+  font-size: 0.75rem;
+  line-height: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  width: 10rem;
+  outline: none;
+  transition: 0.2s transform;
+  border: 1px solid #181818;
+  border-radius: 4px;
+
+  &:focus {
+    transform: scale(1.2);
+    border: 1px solid red;
+  }
 `;
 
 const rootElement = document.body.querySelector('#root');
@@ -31,7 +55,14 @@ function Navigator() {
     };
   }, []);
 
-  return <StyledDiv isTop={isTop}>넷플릭스™️</StyledDiv>;
+  return (
+    <StyledDiv isTop={isTop}>
+      넷플릭스™️
+      <SearchBox>
+        <SearchInput type="text" placeholder="검색" />
+      </SearchBox>
+    </StyledDiv>
+  );
 }
 
 export default Navigator;
