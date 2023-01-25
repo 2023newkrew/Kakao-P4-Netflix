@@ -3,20 +3,14 @@ import { BannerMovieContainer } from "@styles/banner/BannerMovie.style";
 import React, { useState, useEffect } from "react";
 
 import { API } from "@utils/axios";
+import Loading from "@components/loading/Loading";
+import useFetch from "@hooks/useFetch";
 
 const BannerMovie = ({ bannerMovie }) => {
-  const [bannerMovieURL, setBannerMovieURL] = useState();
+  const { data, loading } = useFetch(API.fetchMovieVideoURL(bannerMovie.id));
+  const bannerMovieURL = data;
 
-  useEffect(() => {
-    fetchAndSetBannerMovieVideoURL();
-
-    async function fetchAndSetBannerMovieVideoURL() {
-      const fetchBannerMovieURL = await API.fetchMovieVideoURL(bannerMovie.id);
-      setBannerMovieURL(fetchBannerMovieURL);
-    }
-  }, [bannerMovie]);
-
-  if (bannerMovieURL === undefined) return <div />;
+  if (loading) return <Loading />;
 
   const bannerMovieYoutubeURL = `https://www.youtube.com/embed/${bannerMovieURL}?autoplay=1&mute=1`;
 

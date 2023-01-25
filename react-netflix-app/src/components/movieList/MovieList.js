@@ -1,26 +1,21 @@
-import styled from "styled-components";
-
 import MovieCard from "./MovieCard";
 
-const MovieListContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  color: white;
+import { MovieListContainer } from "@styles/movieList/movieList.style";
 
-  padding: 100px 30px 0 30px;
+import Loading from "@components/loading/Loading";
+import useFetch from "@hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
-  margin-bottom: 50px;
+import { API } from "@utils/axios";
 
-  overflow: auto;
-  display: grid;
+const MovieList = ({ search }) => {
+  const { data, loading } = useFetch(API.fetchSearchMovieList(search), search);
 
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-`;
+  if (loading) return <Loading />;
 
-const MovieList = ({ searchMovieList }) => {
+  const searchMovieList = data;
+
   const movieList = searchMovieList.map((movie) => <MovieCard key={movie.id} movie={movie} />);
-
   return <MovieListContainer>{movieList}</MovieListContainer>;
 };
 

@@ -8,19 +8,15 @@ import { API } from "@utils/axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
+import Loading from "@components/loading/Loading";
+import useFetch from "../../hooks/useFetch";
+
 const CardSlide = ({ category }) => {
-  const [genreMovieList, setGenreMovieList] = useState();
+  const { data, loading } = useFetch(API.fetchGenreMovie(category));
 
-  useEffect(() => {
-    fetchAndSetGenreMovieList();
+  if (loading) return <Loading />;
 
-    async function fetchAndSetGenreMovieList() {
-      const fetchGenreMovieList = await API.fetchGenreMovie(category);
-      setGenreMovieList(fetchGenreMovieList);
-    }
-  }, [category]);
-
-  if (genreMovieList === undefined) return <div />;
+  const genreMovieList = data;
 
   const movieCardList = genreMovieList.map((movie) => (
     <SwiperSlide key={movie.id}>

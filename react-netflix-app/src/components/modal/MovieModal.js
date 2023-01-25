@@ -42,13 +42,14 @@ const MovieModal = ({ movie }) => {
     }
   }, [movie]);
 
-  if (!movieURL || !movieInfo) return <div>로딩 중입니다 ...</div>;
+  if (movieInfo === undefined) return <div></div>;
 
   const movieYoutubeURL = `https://www.youtube.com/embed/${movieURL}?autoplay=1&mute=1`;
+  const movieImageURL = process.env.REACT_APP_IMAGE_API_URL + `/${movie.poster_path || movie.backdrop_path}`;
 
   return (
     <MovieModalContainer>
-      <iframe src={movieYoutubeURL} title="YouTube video player" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" allowFullScreen />
+      {movieURL !== null ? <iframe src={movieYoutubeURL} title="YouTube video player" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" allowFullScreen /> : <img src={movieImageURL} alt={movie.title} />}
       <ModalMovieCard>
         <MovieCardInfo movieInfo={movieInfo} />
         <MovieCardSubInfo movieInfo={movieInfo} />

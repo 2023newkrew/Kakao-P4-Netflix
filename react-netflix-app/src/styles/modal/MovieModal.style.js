@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MovieCardSubInfoContainer = styled.div`
   margin-top: 40px;
-  width: 40%;
+  width: 50%;
   height: 100%;
   line-height: 250%;
   font-weight: 200;
@@ -54,6 +54,11 @@ export const MovieModalContainer = styled.div`
     height: 600px;
     position: relative;
     z-index: 1;
+  }
+
+  img {
+    width: 100%;
+    height: 600px;
   }
 `;
 

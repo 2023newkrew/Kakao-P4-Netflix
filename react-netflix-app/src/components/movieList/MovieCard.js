@@ -1,22 +1,7 @@
-import styled from "styled-components";
-
 import useModal from "@hooks/useModal";
 import MovieModal from "@components/modal/MovieModal";
 
-const MovieCardContainer = styled.div`
-  width: 260px;
-  height: 380px;
-  overflow: hidden;
-  cursor: pointer;
-
-  background-color: rgb(24, 24, 24);
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-  }
-`;
+import { MovieCardContainer } from "@styles/movieList/movieCard.style";
 
 const MovieCard = ({ movie }) => {
   const { Modal, open } = useModal();

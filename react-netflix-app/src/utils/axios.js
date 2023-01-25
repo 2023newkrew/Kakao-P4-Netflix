@@ -58,11 +58,10 @@ class Axios {
       const response = await axios.get(`${this.API_URL}/3/search/movie?api_key=${this.API_KEY}&language=ko&query=${search}&page=1&include_adult=false`);
       const searchMovieList = response.data.results;
 
+      // * 인기순 정렬
       const sortedSearchMovieList = searchMovieList.sort((a, b) => {
         return b.popularity - a.popularity;
       });
-
-      console.log(sortedSearchMovieList);
 
       return sortedSearchMovieList;
     } catch (error) {
