@@ -1,8 +1,7 @@
 import { Pagination, Controller, Navigation } from 'swiper';
-import { SwiperSlide } from 'swiper/react';
 import PropTypes from 'prop-types';
 
-import { CarouselContainer, MovieSwiper } from '@pages/Main/components/MovieCarousel.style';
+import { CarouselContainer, MovieSwiper, MovieSwiperSlide } from '@pages/Main/components/MovieCarousel.style';
 import MovieCard from '@pages/Main/components/MovieCard';
 import { breakpoints } from '@styles/theme';
 
@@ -43,9 +42,9 @@ const MovieCarousel = ({ movies }) => {
     <CarouselContainer>
       <MovieSwiper {...swiperOptions}>
         {movies.map((movie) => (
-          <SwiperSlide key={movie.id}>
+          <MovieSwiperSlide key={movie.id}>
             <MovieCard movie={movie} />
-          </SwiperSlide>
+          </MovieSwiperSlide>
         ))}
       </MovieSwiper>
     </CarouselContainer>

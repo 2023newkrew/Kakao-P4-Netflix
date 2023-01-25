@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { getMovieDetail } from '@api/movies';
 import {
   Container,
   ThumbnailContainer,
@@ -15,45 +14,18 @@ import {
   PlayButton,
   MoreButton,
 } from '@pages/Main/components/MovieCard.style';
-import { THUMBNAIL_BASE_URL } from '@constants/tmdb';
-import { useModal } from '@components/Modal';
+import useMovieDetail from '@pages/Main/hooks/useMovieDetail';
 import MovieDetail from '@pages/Main/[id]';
-import playIcon from '@assets/icons/play.svg';
-import plusIcon from '@assets/icons/plus.svg';
-import thumbsUpIcon from '@assets/icons/thumbsUp.svg';
-import arrowDownIcon from '@assets/icons/arrowDown.svg';
 
-const useMovieDetail = (movieId) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [error, setError] = useState(null);
-  const [detail, setDetail] = useState(null);
+import { useModal } from '@components/Modal';
 
-  useEffect(() => {
-    if (detail || !movieId) {
-      return;
-    }
+import { BACKDROP_W300_URL, BACKDROP_W780_URL } from '@constants/tmdb';
+import usePreviewImage from '@utils/hooks/usePreviewImage';
 
-    (async function () {
-      try {
-        const { data } = await getMovieDetail(movieId);
-        setDetail(data);
-      } catch (error) {
-        setIsError(true);
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
-
-  return {
-    isLoading,
-    isError,
-    error,
-    data: detail,
-  };
-};
+import { ReactComponent as PlayIcon } from '@assets/icons/play.svg';
+import { ReactComponent as PlusIcon } from '@assets/icons/plus.svg';
+import { ReactComponent as ThumbsUpIcon } from '@assets/icons/thumbsUp.svg';
+import { ReactComponent as ArrowDownIcon } from '@assets/icons/arrowDown.svg';
 
 const DetailMovieCard = ({ movie }) => {
   const { data: detail, isLoading } = useMovieDetail(movie.id);
@@ -65,9 +37,6 @@ const DetailMovieCard = ({ movie }) => {
 
   return (
     <DetailContainer className="movie-detail" onClick={showMovieDetailModal}>
-      <ThumbnailContainer>
-        <ThumbnailImage src={THUMBNAIL_BASE_URL + movie.backdrop_path} alt="썸네일" />
-      </ThumbnailContainer>
       <DetailInfos>
         <h4>{movie.title}</h4>
         <UtilsWrapper
@@ -76,16 +45,16 @@ const DetailMovieCard = ({ movie }) => {
           }}
         >
           <PlayButton>
-            <img src={playIcon} alt="재생 아이콘" height="18" width="18" />
+            <PlayIcon width={18} height={18} />
           </PlayButton>
           <UtilButton>
-            <img src={plusIcon} alt="추가 아이콘" height="18" width="18" />
+            <PlusIcon width={18} height={18} />
           </UtilButton>
           <UtilButton>
-            <img src={thumbsUpIcon} alt="좋아요 아이콘" height="18" width="18" />
+            <ThumbsUpIcon width={18} height={18} />
           </UtilButton>
           <MoreButton onClick={showMovieDetailModal}>
-            <img src={arrowDownIcon} alt="더보기 아이콘" height="18" width="18" />
+            <ArrowDownIcon width={18} height={18} />
           </MoreButton>
         </UtilsWrapper>
         <InfoRow>
@@ -102,20 +71,23 @@ DetailMovieCard.propTypes = {
 
 const MovieCard = ({ movie }) => {
   const [isHover, setIsHover] = useState(false);
+  const thumbnailUrl = usePreviewImage({
+    previewUrl: BACKDROP_W300_URL + movie.backdrop_path,
+    originalUrl: BACKDROP_W780_URL + movie.backdrop_path,
+    load: isHover,
+  });
 
   return (
-    <>
-      <Container
-        onMouseEnter={() => {
-          setIsHover(true);
-        }}
-      >
-        <ThumbnailContainer>
-          <ThumbnailImage src={THUMBNAIL_BASE_URL + movie.backdrop_path} alt="썸네일" />
-        </ThumbnailContainer>
-      </Container>
+    <Container
+      onMouseEnter={() => {
+        setIsHover(true);
+      }}
+    >
+      <ThumbnailContainer>
+        <ThumbnailImage src={thumbnailUrl} alt="썸네일" />
+      </ThumbnailContainer>
       {isHover && <DetailMovieCard movie={movie} />}
-    </>
+    </Container>
   );
 };
 MovieCard.propTypes = {

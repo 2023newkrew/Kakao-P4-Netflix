@@ -1,5 +1,5 @@
 import tw, { styled } from 'twin.macro';
-import { Swiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const MovieSwiper = styled(Swiper)`
   ${tw`py-[20px] px-[4%] overflow-visible w-full flex overflow-x-clip`}
@@ -33,5 +33,5 @@ export const MovieSwiper = styled(Swiper)`
     ${tw`invisible`}
   }
 `;
-
+export const MovieSwiperSlide = tw(SwiperSlide)`hover:z-10`;
 export const CarouselContainer = tw.div`flex leading-[1.4] min-h-[150px]`;

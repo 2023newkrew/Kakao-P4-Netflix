@@ -58,19 +58,15 @@ export const usePopularMovies = () => {
   };
 };
 export const useMovieList = () => {
-  const {
-    isLoading: topRatedMoviesLoading,
-    data: topRatedMovies,
-    isError: isTopRatedMoviesError,
-  } = useTopRatedMovies();
-  const { isLoading: popularMoviesLoading, data: popularMovies, isError: isPopularMoviesError } = usePopularMovies();
+  const { isLoading: isTopRatedLoading, data: topRatedMovies, isError: isTopRatedError } = useTopRatedMovies();
+  const { isLoading: isPopularLoading, data: popularMovies, isError: isPopularError } = usePopularMovies();
   const isLoading = {
-    topRated: topRatedMoviesLoading,
-    popular: popularMoviesLoading,
+    topRated: isTopRatedLoading,
+    popular: isPopularLoading,
   };
   const isError = {
-    topRated: isTopRatedMoviesError,
-    popular: isPopularMoviesError,
+    topRated: isTopRatedError,
+    popular: isPopularError,
   };
   return {
     isLoading,
