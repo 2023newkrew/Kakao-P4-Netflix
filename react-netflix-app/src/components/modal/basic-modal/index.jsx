@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CloseIcon from '@assets/close-icon.svg';
 import { Background, CloseButton, ModalContainer } from './styles';
+import useOutsideClick from '@/hooks/use-outside-click';
 
-const BasicModal = ({ children, onClose }) => (
-  <Background>
-    <ModalContainer>
-      <CloseButton onClick={onClose} src={CloseIcon} alt="Close Modal" />
-      {children}
-    </ModalContainer>
-  </Background>
-);
+const BasicModal = ({ children, onClose }) => {
+  const modalRef = useRef(null);
+
+  useOutsideClick(modalRef, onClose);
+
+  useEffect(() => {
+    const body = document.querySelector('body');
+    const defaultOverflow = body.style.overflow;
+
+    body.style.overflow = 'hidden';
+
+    return () => {
+      body.style.overflow = defaultOverflow;
+    };
+  }, []);
+
+  return (
+    <Background>
+      <ModalContainer ref={modalRef}>
+        <CloseButton onClick={onClose} src={CloseIcon} alt="Close Modal" />
+        {children}
+      </ModalContainer>
+    </Background>
+  );
+};
 
 BasicModal.propTypes = {
   children: PropTypes.node,
