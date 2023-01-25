@@ -53,10 +53,10 @@ function Modal({ children, onClose }) {
             event.stopPropagation();
           }}
         >
+          {children}
           <CloseButton type="button" onClick={onClose}>
             X
           </CloseButton>
-          {children}
         </Paper>
       </PaperWrapper>
     </StyledDiv>,

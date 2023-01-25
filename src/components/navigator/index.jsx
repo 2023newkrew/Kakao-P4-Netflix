@@ -31,7 +31,7 @@ function Navigator() {
     };
   }, []);
 
-  return <StyledDiv isTop={isTop}>Netflix</StyledDiv>;
+  return <StyledDiv isTop={isTop}>넷플릭스™️</StyledDiv>;
 }
 
 export default Navigator;

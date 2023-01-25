@@ -29,10 +29,6 @@ function App() {
     setSelectedMovie(movie);
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-
   useEffect(() => {
     (async () => {
       const res = await axios.get(
@@ -93,13 +89,17 @@ function App() {
         </MovieListContainer>
       </StyledDiv>
       <Footer />
-      <Modal onClose={handleModalClose}>
-        {isModalOpen && !!selectedMovie ? (
+      {isModalOpen ? (
+        <Modal
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+        >
           <MovieDetail movie={selectedMovie} />
-        ) : (
-          ''
-        )}
-      </Modal>
+        </Modal>
+      ) : (
+        ''
+      )}
     </>
   );
 }

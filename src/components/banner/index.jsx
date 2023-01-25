@@ -45,9 +45,9 @@ const StyledButtonContainer = styled.div`
 const StyledButton = styled.button`
   cursor: pointer;
   font-size: 70%;
-  font-weight: 500;
+  font-weight: 700;
   border: none;
-  border-radius: 4%;
+  border-radius: 4px;
   padding: 2% 4%;
 `;
 
@@ -71,7 +71,7 @@ function Banner({ movie, onDetailClick }) {
           {isOverflow ? '...' : ''}
         </StyledDescription>
         <StyledButtonContainer>
-          <StyledButton type="button">재생</StyledButton>
+          <StyledButton type="button">► 재생</StyledButton>
           <StyledInfoButton type="button" onClick={onDetailClick}>
             상세 정보
           </StyledInfoButton>
