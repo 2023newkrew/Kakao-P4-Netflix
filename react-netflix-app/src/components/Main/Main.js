@@ -1,5 +1,6 @@
 import React from "react";
 import TheMovieDBAPI from "../../util/TheMovieDBAPI.js";
+import SmallModal from "../SmallModal/SmallModal.js";
 import MainPost from "./MainPost/MainPost.js";
 import MainRow from "./MainRow/MainRow.js";
 

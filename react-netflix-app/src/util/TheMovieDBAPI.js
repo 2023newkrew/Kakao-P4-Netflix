@@ -6,15 +6,15 @@ export default class TheMovieDBAPI {
   static apiBaseURL = "https://api.themoviedb.org/3/movie";
   static imgBaseURL = "https://image.tmdb.org/t/p/original";
   static async getPopularMovieList() {
-    const json = await axios.get(`${TheMovieDBAPI.apiBaseURL}/popular?api_key=${API_KEY}&language=en-US&page=1`);
+    const json = await axios.get(`${TheMovieDBAPI.apiBaseURL}/popular?api_key=${API_KEY}&language=ko&page=1`);
     return json.data.results;
   }
   static async getTopRatedMovieList() {
-    const json = await axios.get(`${TheMovieDBAPI.apiBaseURL}/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
+    const json = await axios.get(`${TheMovieDBAPI.apiBaseURL}/top_rated?api_key=${API_KEY}&language=ko&page=1`);
     return json.data.results;
   }
   static async getNowPlayingMovieList() {
-    const json = await axios.get(`${TheMovieDBAPI.apiBaseURL}/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
+    const json = await axios.get(`${TheMovieDBAPI.apiBaseURL}/now_playing?api_key=${API_KEY}&language=ko&page=1`);
     return json.data.results;
   }
 }

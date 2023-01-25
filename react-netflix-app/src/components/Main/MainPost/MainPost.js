@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from "react";
 import TheMovieDBAPI from "../../../util/TheMovieDBAPI";
-import { MainPostBottomShadow, MainPostContainer, MainPostImg, MainPostLeftShadow } from "./styles";
+import {
+  MainPostBottomShadow,
+  MainPostContainer,
+  MainPostImg,
+  MainPostInfo,
+  MainPostLeftShadow,
+  MainPostMetaContainer,
+  MainPostTitle,
+} from "./styles";
 
 export default function MainPost() {
-  const [imgSrc, setImgSrc] = useState("");
+  const [postInfo, setPostInfo] = useState("");
 
   useEffect(() => {
     const fetchMainPost = async () => {
       const popularMovieList = await TheMovieDBAPI.getPopularMovieList();
       const randomIndex = Math.floor(Math.random() * popularMovieList.length);
-      setImgSrc(popularMovieList[randomIndex].backdrop_path);
+      setPostInfo(popularMovieList[randomIndex]);
     };
     fetchMainPost();
   }, []);
 
-  return imgSrc !== "" ? (
+  return postInfo !== "" ? (
     <>
       <MainPostContainer>
-        <MainPostImg src={TheMovieDBAPI.imgBaseURL + imgSrc} />
+        <MainPostImg src={TheMovieDBAPI.imgBaseURL + postInfo.backdrop_path} />
+        <MainPostMetaContainer>
+          <MainPostTitle>{postInfo.title}</MainPostTitle>
+          <MainPostInfo>{postInfo.overview}</MainPostInfo>
+        </MainPostMetaContainer>
         <MainPostLeftShadow />
         <MainPostBottomShadow />
       </MainPostContainer>

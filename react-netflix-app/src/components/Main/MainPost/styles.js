@@ -49,4 +49,33 @@ const MainPostBottomShadow = styled.div`
   position: absolute;
 `;
 
-export { MainPostContainer, MainPostImg, MainPostLeftShadow, MainPostBottomShadow };
+const MainPostMetaContainer = styled.div`
+  bottom: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  left: 4%;
+  position: absolute;
+  top: 0;
+  width: 36%;
+  z-index: 30;
+`;
+
+const MainPostTitle = styled.div`
+  color: white;
+  font-size: 60px;
+  margin-bottom: 30px;
+`;
+const MainPostInfo = styled.div`
+  color: white;
+  font-size: 11px;
+`;
+export {
+  MainPostContainer,
+  MainPostImg,
+  MainPostLeftShadow,
+  MainPostBottomShadow,
+  MainPostMetaContainer,
+  MainPostTitle,
+  MainPostInfo,
+};

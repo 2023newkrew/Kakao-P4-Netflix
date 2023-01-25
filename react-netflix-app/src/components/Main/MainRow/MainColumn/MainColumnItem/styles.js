@@ -11,6 +11,7 @@ const MainColumnItemCotainer = styled.div`
 const MainColumnItemImg = styled.img`
   width: 100%;
   height: 100%;
+  cursor: pointer;
 `;
 
 export { MainColumnItemCotainer, MainColumnItemImg };
