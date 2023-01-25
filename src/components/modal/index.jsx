@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
   background-color: rgba(0, 0, 0, 0.875);
 
   will-change: opacity;
-  animation: fade-in 0.2s ease;
+  animation: fade-in 0.15s ease;
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -63,8 +63,29 @@ const CloseButton = styled.button`
 `;
 
 function Modal({ children, onClose }) {
+  const elementRef = useRef(null);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleCloseClick = () => {
+    if (isClosing) return;
+    setIsClosing(true);
+
+    const keyframes = [{ opacity: 0 }];
+    const options = {
+      duration: 150,
+      easing: 'ease',
+      fill: 'forwards',
+    };
+    const animation = elementRef.current.animate(keyframes, options);
+    animation.addEventListener('finish', onClose);
+  };
+
   return createPortal(
-    <StyledDiv idDisplayed={!!children} onClick={onClose}>
+    <StyledDiv
+      ref={elementRef}
+      idDisplayed={!!children}
+      onClick={handleCloseClick}
+    >
       <PaperWrapper>
         <Paper
           onClick={(event) => {
@@ -72,7 +93,7 @@ function Modal({ children, onClose }) {
           }}
         >
           {children}
-          <CloseButton type="button" onClick={onClose}>
+          <CloseButton type="button" onClick={handleCloseClick}>
             X
           </CloseButton>
         </Paper>
