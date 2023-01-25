@@ -16,18 +16,19 @@ const MovieOverview = tw.p`mb-5`;
 
 const AboutWrapper = tw.div`pb-10`;
 const AboutHeader = tw.header`[& > h3]:text-2xl [& > h3]:mb-5 [& > h3]:font-medium`;
-const Tags = tw.div`text-sm leading-5 m-2 ml-0 break-words flex gap-1`;
+const TagsWrapper = tw.div`text-sm leading-5 m-2 ml-0 break-words flex gap-1`;
+const Tags = tw.div`flex items-center flex-wrap`;
 const Title = tw.label`text-[#777] mr-1`;
-const Tag = tw.span`text-[#ddd] cursor-pointer m-0 outline-[#fff]`;
+const Tag = tw.span`text-[#ddd] cursor-pointer m-0 mr-1 outline-[#fff]`;
 
 const YOUTUBE_EMBED_BASE_URL = 'https://www.youtube.com/embed/';
 
 const AboutRow = ({ title, tags }) => {
   return (
-    <Tags>
+    <TagsWrapper>
       <Title>{title}:</Title>
-      {tags}
-    </Tags>
+      <Tags>{tags}</Tags>
+    </TagsWrapper>
   );
 };
 AboutRow.propTypes = {
