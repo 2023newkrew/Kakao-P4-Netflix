@@ -11,7 +11,7 @@ const StyledDiv = styled.div`
   width: 100%;
   height: 100%;
   ${({ idDisplayed }) => (idDisplayed ? '' : 'display: none;')}
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.875);
 `;
 
 const PaperWrapper = styled.div`
@@ -44,12 +44,18 @@ const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-function Modal({ children }) {
+function Modal({ children, onClose }) {
   return createPortal(
-    <StyledDiv idDisplayed={!!children}>
+    <StyledDiv idDisplayed={!!children} onClick={onClose}>
       <PaperWrapper>
-        <Paper>
-          <CloseButton type="button">X</CloseButton>
+        <Paper
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
+          <CloseButton type="button" onClick={onClose}>
+            X
+          </CloseButton>
           {children}
         </Paper>
       </PaperWrapper>
