@@ -32,6 +32,7 @@ const SmallModalImg = styled.img`
 const SmallModalInfo = styled.div`
   height: 70px;
   color: white;
+  white-space: pre-line;
 `;
 
 export { SmallModalWrapper, SmallModalContainer, SmallModalImg, SmallModalInfo };

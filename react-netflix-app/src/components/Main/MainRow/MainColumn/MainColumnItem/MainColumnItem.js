@@ -15,8 +15,6 @@ export default function MainColumnItem({
   release_date,
 }) {
   const imageContainer = useRef(null);
-  const [imageContainerRectInfo, setImageContainerRectInfo] = useState(null);
-  // const modalRef = useRef(null);
   const timer = useRef(null);
   const [modalRectInfo, setModalRectInfo] = useState(null);
   const [isModalOpen, toggle] = useModal();
@@ -69,9 +67,9 @@ export default function MainColumnItem({
             imageContainerWidth={modalRectInfo.width}
             imageContainerHeight={modalRectInfo.height}
             toggle={toggle}
-            vote_average={vote_average}
-            vote_count={vote_count}
-            release_date={release_date}
+            info={`vote_average : ${vote_average}
+            vote_count : ${vote_count}
+            release_date : ${release_date}`}
           />
         </ModalPortal>
       ) : null}

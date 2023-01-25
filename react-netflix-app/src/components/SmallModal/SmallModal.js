@@ -8,9 +8,7 @@ export default function SmallModal({
   imageContainerWidth,
   imageContainerHeight,
   toggle,
-  vote_average,
-  vote_count,
-  release_date,
+  info,
 }) {
   const modalContainerRef = useRef(null);
   useEffect(() => {
@@ -28,12 +26,7 @@ export default function SmallModal({
         ref={modalContainerRef}
       >
         <SmallModalImg src={imgSrc} />
-        <SmallModalInfo>
-          vote_average : {vote_average} <br />
-          vote_count : {vote_count}
-          <br />
-          release_date : {release_date}
-        </SmallModalInfo>
+        <SmallModalInfo>{info}</SmallModalInfo>
       </SmallModalContainer>
     </SmallModalWrapper>
   );
