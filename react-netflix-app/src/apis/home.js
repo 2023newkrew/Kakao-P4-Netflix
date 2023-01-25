@@ -9,3 +9,8 @@ export const getNowPlaying = async (page = 1) => {
   });
   return response.data;
 };
+
+export const getDetail = async (id) => {
+  const response = await Client.get(`/movie/${id}`);
+  return response.data;
+};
