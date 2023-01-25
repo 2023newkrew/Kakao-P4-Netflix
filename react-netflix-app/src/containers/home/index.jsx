@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getNowPlaying, getPopular, getToprated, getUpcoming } from '@apis/home';
 import { rand } from '@/utils/math';
 import { MOVIE_LIST, MOVIE_LIST_TITLE } from '@/constants/movie';
+import { MovieListSection } from './styles';
 
 const Home = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
@@ -46,9 +47,11 @@ const Home = () => {
     <>
       <Header />
       <Hero movie={heroMovie} />
-      {movieLists.map(([title, movies]) => (
-        <MovieList key={title} title={MOVIE_LIST_TITLE[title]} movies={movies} />
-      ))}
+      <MovieListSection>
+        {movieLists.map(([title, movies]) => (
+          <MovieList key={title} title={MOVIE_LIST_TITLE[title]} movies={movies} />
+        ))}
+      </MovieListSection>
       <Footer />
     </>
   );

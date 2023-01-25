@@ -26,6 +26,8 @@ export const MovieCardModalContainer = styled.div`
   background-color: var(--background-card-color);
   box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.2);
   font-size: 0.8rem;
+  overflow: hidden;
+  white-space: nowrap;
 
   ${({ isAppear }) =>
     isAppear &&
