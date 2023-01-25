@@ -13,11 +13,12 @@ const StyledDiv = styled.div`
   ${({ idDisplayed }) => (idDisplayed ? '' : 'display: none;')}
   background-color: rgba(0, 0, 0, 0.875);
 
-  will-change: opacity;
-  animation: fade-in 0.15s ease;
+  will-change: opacity, filter;
+  animation: fade-in 0.2s ease;
   @keyframes fade-in {
     from {
       opacity: 0;
+      filter: blur(8px);
     }
   }
 `;
@@ -36,11 +37,10 @@ const Paper = styled.div`
   overflow: hidden;
   position: relative;
 
-  will-change: transform, filter;
+  will-change: transform;
   animation: slide-up 0.25s ease-out;
   @keyframes slide-up {
     from {
-      filter: blur(8px);
       transform: translateY(2rem);
     }
   }
@@ -70,9 +70,9 @@ function Modal({ children, onClose }) {
     if (isClosing) return;
     setIsClosing(true);
 
-    const keyframes = [{ opacity: 0 }];
+    const keyframes = [{ opacity: 0, filter: 'blur(8px)' }];
     const options = {
-      duration: 150,
+      duration: 200,
       easing: 'ease',
       fill: 'forwards',
     };
