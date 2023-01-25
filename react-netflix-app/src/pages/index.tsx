@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 
 export default function Main() {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [randomMovie, setRandomMovie] = useState<MovieType | undefined>();
   const [popularMovies, setPopularMovies] = useState<MovieType[]>([]);
   const [upcomingMovies, setUpcomingMovies] = useState<MovieType[]>([]);
@@ -30,12 +30,12 @@ export default function Main() {
       fetchPopularMovies(),
       fetchUpcomingMovies()
     ]).then(() => {
-      setLoading(true);
+      setIsLoading(false);
     });
     
   }, []);
   
-  if (!loading || !randomMovie) return <></>;
+  if (isLoading || !randomMovie) return <></>;
   return (
     <>
       <MoviePoster movie={randomMovie}/>
