@@ -18,7 +18,7 @@ const MovieCardModal = ({ isAppear, movie }) => {
   const { title, genres } = movie || {};
 
   return (
-    <MovieCardModalContainer isAppear={isAppear}>
+    <MovieCardModalContainer>
       <MovieCardModalContent>
         <ModalButtonContainer>
           <ModalIconButton src={StartIconImg} />
@@ -37,7 +37,11 @@ const MovieCardModal = ({ isAppear, movie }) => {
 
 MovieCardModal.propTypes = {
   isAppear: PropTypes.bool.isRequired,
-  movie: PropTypes.object.isRequired,
+  movie: PropTypes.object,
+};
+
+MovieCardModal.defaultProps = {
+  movie: {},
 };
 
 export default MovieCardModal;

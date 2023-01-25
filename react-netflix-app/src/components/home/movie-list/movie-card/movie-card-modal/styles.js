@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const ModalButtonContainer = styled.div`
@@ -22,18 +21,11 @@ export const MovieCardModalContainer = styled.div`
   bottom: -100px;
   width: 100%;
   height: 100px;
-  display: none;
   background-color: var(--background-card-color);
   box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.2);
   font-size: 0.8rem;
   overflow: hidden;
   white-space: nowrap;
-
-  ${({ isAppear }) =>
-    isAppear &&
-    css`
-      display: unset;
-    `}
 `;
 
 export const GenresContainer = styled.div`
