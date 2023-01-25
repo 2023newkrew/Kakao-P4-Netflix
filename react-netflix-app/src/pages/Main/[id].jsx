@@ -35,7 +35,7 @@ AboutRow.propTypes = {
   tags: PropTypes.node,
 };
 
-const VIDEO_TYPE = ' Trailer';
+const VIDEO_TYPE = 'Trailer';
 const useTrailer = (movieId) => {
   const { data: movieVideos, isLoading, isError } = useMovieVideos(movieId);
   const trailer = Array.isArray(movieVideos) ? movieVideos.find((video) => video.type === VIDEO_TYPE) : null;
@@ -44,7 +44,7 @@ const useTrailer = (movieId) => {
 };
 
 const MovieDetail = ({ movie }) => {
-  const { data, isLoading, isError } = useTrailer(movie?.id);
+  const { data, isLoading, isError } = useTrailer(movie.id);
   const youtubeKey = data?.key;
 
   if (isLoading) {
@@ -52,7 +52,7 @@ const MovieDetail = ({ movie }) => {
   }
   return (
     <Container>
-      {!isError && (
+      {!isError && youtubeKey && (
         <YoutubeEmbedFrame
           src={YOUTUBE_EMBED_BASE_URL + youtubeKey}
           title="YouTube video player"
