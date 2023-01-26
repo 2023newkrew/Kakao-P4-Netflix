@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { divideArray } from '@utils/array';
 import { MAX_MOVIES_PER_PAGE } from '@constants/home';
@@ -17,10 +17,13 @@ const MovieList = ({ title, movies }) => {
   const movieItemContentRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const splitMovies = divideArray(movies, MAX_MOVIES_PER_PAGE);
+  const splitMovies = useMemo(() => divideArray(movies, MAX_MOVIES_PER_PAGE), [movies]);
 
-  const isFirstPage = currentPage === 0;
-  const isLastPage = currentPage === splitMovies.length - 1;
+  const isFirstPage = useMemo(() => currentPage === 0, [currentPage]);
+  const isLastPage = useMemo(
+    () => currentPage === splitMovies.length - 1,
+    [currentPage, splitMovies.length],
+  );
 
   const onClickPrev = () => {
     if (isFirstPage) return;
