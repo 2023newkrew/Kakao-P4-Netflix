@@ -4,6 +4,7 @@ export const ContentCardContainer = styled.li`
   width: 15vw;
   height: 9vw;
   z-index: 10;
+  cursor: pointer;
 `;
 
 export const ContentCardImage = styled.img`
