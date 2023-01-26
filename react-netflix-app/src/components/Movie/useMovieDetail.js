@@ -3,7 +3,6 @@ import { getMovieDetail } from '@api/movies';
 
 const useMovieDetail = (movieId) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
   const [error, setError] = useState(null);
   const [detail, setDetail] = useState(null);
 
@@ -17,7 +16,6 @@ const useMovieDetail = (movieId) => {
         const { data } = await getMovieDetail(movieId);
         setDetail(data);
       } catch (error) {
-        setIsError(true);
         setError(error);
       } finally {
         setIsLoading(false);
@@ -27,7 +25,6 @@ const useMovieDetail = (movieId) => {
 
   return {
     isLoading,
-    isError,
     error,
     data: detail,
   };

@@ -4,7 +4,6 @@ import { getMovieVideos } from '@api/movies';
 const useMovieVideos = (movieId) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isError, setIsError] = useState(false);
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -16,7 +15,6 @@ const useMovieVideos = (movieId) => {
         const { data } = await getMovieVideos(movieId);
         setData(data.results);
       } catch (error) {
-        setIsError(true);
         setError(error);
       } finally {
         setIsLoading(false);
@@ -26,7 +24,6 @@ const useMovieVideos = (movieId) => {
 
   return {
     isLoading,
-    isError,
     error,
     data,
   };

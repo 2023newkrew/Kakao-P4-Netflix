@@ -34,6 +34,7 @@ const swiperOptions = {
       slidesPerView: 6,
     },
   },
+  threshold: 10,
   modules: [Pagination, Controller, Navigation],
 };
 
