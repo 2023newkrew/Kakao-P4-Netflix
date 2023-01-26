@@ -3,9 +3,9 @@ import TheMovieDBAPI from "../../../../../util/TheMovieDBAPI";
 import useModal from "../../../../../util/useModal";
 import SmallModal from "../../../../SmallModal/SmallModal";
 import { MainColumnItemContainer, MainColumnItemImg } from "./styles";
-import ReactDom from "react-dom";
 import ModalPortal from "../../../../../util/ModalPortal";
 import BigModal from "../../../../BigModal/BigModal";
+import useTimeOutEvent from "../../../../../util/useTimeOutEvent";
 
 const POPUP_MULTIPLE_VALUE = 1.3;
 const POPUP_INFO_HEIGHT = 70;
@@ -13,16 +13,20 @@ const POPUP_INFO_HEIGHT = 70;
 const getPopUpTopOffset = (containerTop, containerHeight, scrollY) => {
   return containerTop + scrollY - (containerHeight * (POPUP_MULTIPLE_VALUE - 1)) / 2 - POPUP_INFO_HEIGHT / 2;
 };
+
 const getPopUpLeftOffset = (containerLeft, containerWidth, index, separateCount) => {
-  // left end
   if (index % separateCount === 0) {
+    // left end
     return containerLeft;
   } else if (index % separateCount === separateCount - 1) {
+    // right end
     return containerLeft - containerWidth * (POPUP_MULTIPLE_VALUE - 1);
   } else {
+    // mid
     return containerLeft - (containerWidth * (POPUP_MULTIPLE_VALUE - 1)) / 2;
   }
 };
+
 export default function MainColumnItem({
   imgSrc,
   setImageContainerSize,
@@ -32,57 +36,47 @@ export default function MainColumnItem({
   release_date,
   index,
 }) {
-  const imageContainer = useRef(null);
-  const timer = useRef(null);
+  const imageContainerRef = useRef(null);
   const [imageContainerRectInfo, setImageContainerRectInfo] = useState(null);
   const [isSmallModalOpen, smallModalToggle] = useModal();
   const [isBigModalOpen, bigModalToggle] = useModal();
+  useTimeOutEvent(imageContainerRef, "mouseenter", smallModalToggle, "mouseleave", 1000);
 
   useEffect(() => {
-    let handleResize;
+    /* 각 MainColumn의 첫 번째 아이템이면 setImageContainerSize(MainRow에서 소유)를 가지고 있음 */
+    /* 단순히 보기 편하기 위해 useEffect를 나누었음*/
+    if (!setImageContainerSize) return;
 
-    if (setImageContainerSize) {
-      setImageContainerSize(imageContainer.current.clientWidth);
-
-      handleResize = (event) => {
-        setImageContainerSize(imageContainer.current.clientWidth);
-      };
-      window.addEventListener("resize", handleResize);
-    }
-
-    const handleMouseEnter = (event) => {
-      timer.current = setTimeout(smallModalToggle, 1000);
+    const handleResize = (event) => {
+      setImageContainerSize(imageContainerRef.current.clientWidth);
     };
-    const handleMouseLeave = (event) => {
-      clearTimeout(timer.current);
-    };
+    setImageContainerSize(imageContainerRef.current.clientWidth);
+    window.addEventListener("resize", handleResize);
+    return window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     const handleClick = (event) => {
+      /* 클릭 이벤트가 모달 외부로 전파되어 다시 toggle 되는 현상을 막기 위함 */
       event.stopPropagation();
       bigModalToggle();
     };
 
-    imageContainer.current.addEventListener("mouseenter", handleMouseEnter);
-    imageContainer.current.addEventListener("mouseleave", handleMouseLeave);
-    imageContainer.current.addEventListener("click", handleClick);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      imageContainer.current.removeEventListener("mouseenter", handleMouseEnter);
-      imageContainer.current.removeEventListener("mouseleave", handleMouseLeave);
-      imageContainer.current.removeEventListener("click", handleClick);
-    };
+    imageContainerRef.current.addEventListener("click", handleClick);
+    return () => imageContainerRef.current.removeEventListener("click", handleClick);
   }, []);
 
   useEffect(() => {
     if (isSmallModalOpen === false) return;
-    setImageContainerRectInfo(imageContainer.current.getBoundingClientRect());
+    setImageContainerRectInfo(imageContainerRef.current.getBoundingClientRect());
   }, [isSmallModalOpen]);
 
   return (
     <>
-      <MainColumnItemContainer ref={imageContainer} separateCount={separateCount}>
+      <MainColumnItemContainer ref={imageContainerRef} separateCount={separateCount}>
         <MainColumnItemImg src={TheMovieDBAPI.imgBaseURL + imgSrc} />
       </MainColumnItemContainer>
+
       {isSmallModalOpen && imageContainerRectInfo ? (
         <ModalPortal>
           <SmallModal
