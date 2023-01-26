@@ -1,6 +1,11 @@
-export { default as Banner } from "components/Banner/Banner";
-export { default as Footer } from "components/Footer/Footer";
-export { default as Header } from "components/Header/Header";
-export { default as Modal } from "components/Modal/Modal";
-export { default as Slider } from "components/Slider/Slider";
-export { default as SliderCard } from "components/SliderCard/SliderCard";
+export { default as Banner } from "components/organisms/Banner/Banner";
+export { default as Footer } from "components/organisms/Footer/Footer";
+export { default as Header } from "components/organisms/Header/Header";
+export { default as Modal } from "components/molecules/Modal/Modal";
+export { default as Slider } from "components/molecules/Slider/Slider";
+export { default as ContentCard } from "components/molecules/ContentCard/ContentCard";
+export { default as ContentCardList } from "components/organisms/ContentCardList/ContentCardList";
+export { default as NavTab } from "components/atoms/NavTab/NavTab";
+export { default as NavTabList } from "components/molecules/NavTabList/NavTabList";
+export { default as IconButton } from "components/atoms/IconButton/IconButton";
+export { default as EllipsisText } from "components/atoms/EllipsisText/EllipsisText";
