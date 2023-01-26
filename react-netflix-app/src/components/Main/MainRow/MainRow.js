@@ -10,9 +10,9 @@ const handleClickArrow = (setColIndex, dir) => {
 };
 
 export default function MainRow({ fetchMethod, itemCount }) {
+  const [imageContainerSize, setImageContainerSize] = useState(null);
   const [separatedList, setSeparatedList] = useState([]);
   const [colIndex, setColIndex] = useState(0);
-  const [imageContainerSize, setImageContainerSize] = useState(null);
   const mainRowSlider = useRef(null);
   const SEPARATE_COUNT = itemCount;
   const translateValue =
@@ -24,6 +24,7 @@ export default function MainRow({ fetchMethod, itemCount }) {
           imageContainerSize * SEPARATE_COUNT * (separatedList.length - 2) +
             separatedList[separatedList.length - 1].length * imageContainerSize
         );
+
   useEffect(() => {
     /* 데이터 fetch */
     const fetchTopRatedMovie = async () => {
@@ -39,8 +40,8 @@ export default function MainRow({ fetchMethod, itemCount }) {
     const handleResizeStart = () => {
       mainRowSlider.current.style.transition = "none";
     };
-    const debouncedHandler = Util.makeDebounceHandler(handleResize, 600, handleResizeStart, null);
-    window.addEventListener("resize", debouncedHandler);
+    const debouncedResizeHandler = Util.makeDebounceHandler(handleResize, 600, handleResizeStart, null);
+    window.addEventListener("resize", debouncedResizeHandler);
   }, []);
 
   return (
