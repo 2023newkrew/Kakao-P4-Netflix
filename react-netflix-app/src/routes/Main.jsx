@@ -7,7 +7,7 @@ import MovieSlider from '@components/slider/MovieSlider';
 const MainLayout = styled.main``;
 
 const SliderContainer = styled.section`
-  margin-top -10%;
+  margin-top: -10%;
 `;
 
 export default function Main() {
