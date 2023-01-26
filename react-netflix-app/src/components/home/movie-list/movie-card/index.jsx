@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { getDetail } from '@/apis/home';
-import MovieCardModal from './movie-card-modal';
+import MovieCardDetail from './movie-card-detail';
 import { MovieCardContainer } from './styles';
 
 const MovieCard = ({ movie }) => {
   const movieCardRef = useRef(null);
 
-  const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowDetail, setIsShowDetail] = useState(false);
   const [detailedMovie, setDetailedMovie] = useState(null);
 
   const { backdrop_path: backdropPath, id } = movie;
@@ -18,22 +18,20 @@ const MovieCard = ({ movie }) => {
   };
 
   useEffect(() => {
-    if (movieCardRef.current === null) return;
-
     movieCardRef.current.addEventListener('mouseenter', async () => {
-      setIsShowModal(true);
+      setIsShowDetail(true);
 
       if (detailedMovie === null) {
         setDetailedMovie(await getMovieDetail(id));
       }
     });
 
-    movieCardRef.current.addEventListener('mouseleave', () => setIsShowModal(false));
+    movieCardRef.current.addEventListener('mouseleave', () => setIsShowDetail(false));
   });
 
   return (
     <MovieCardContainer ref={movieCardRef} backdropPath={backdropPath}>
-      <MovieCardModal isAppear={isShowModal} movie={detailedMovie} />
+      <MovieCardDetail isAppear={isShowDetail} movie={detailedMovie} />
     </MovieCardContainer>
   );
 };

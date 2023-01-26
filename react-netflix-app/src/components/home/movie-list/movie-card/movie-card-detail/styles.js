@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
-export const ModalButtonContainer = styled.div`
+export const DetailButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
 `;
 
-export const ModalIconButton = styled.img`
+export const DetailIconButton = styled.img`
   width: 16px;
   height: 15px;
   padding: 8px;
@@ -16,7 +16,7 @@ export const ModalIconButton = styled.img`
   cursor: pointer;
 `;
 
-export const MovieCardModalContainer = styled.div`
+export const MovieCardDetailContainer = styled.div`
   position: absolute;
   bottom: -100px;
   width: 100%;
@@ -36,7 +36,7 @@ export const GenresContainer = styled.div`
   }
 `;
 
-export const ModalInfoContainer = styled.div``;
+export const DetailInfoContainer = styled.div``;
 
 export const TitleContainer = styled.div`
   font-weight: bold;
@@ -44,7 +44,7 @@ export const TitleContainer = styled.div`
 
 export const GenreText = styled.span``;
 
-export const MovieCardModalContent = styled.div`
+export const MovieCardDetailContent = styled.div`
   margin: 8px;
   display: flex;
   flex-direction: column;
