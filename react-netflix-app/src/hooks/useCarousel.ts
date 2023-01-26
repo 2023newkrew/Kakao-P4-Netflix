@@ -1,7 +1,7 @@
+import { START_PAGE } from '@constants/movies.constant';
 import { throttle } from '@utils/throttle';
 import { useCallback, useState } from 'react';
 
-const START_PAGE = 1;
 interface useCarouselProps {
   totalElements: number;
   totalVisibleElements: number
@@ -15,7 +15,7 @@ function useCarousel({
   throttleDelay = 1000
 }: useCarouselProps) {
   const [page, setPage] = useState(START_PAGE);
-  const lastPage = totalElements - totalVisibleElements + 1;
+  const lastPage = totalElements - totalVisibleElements + START_PAGE;
 
   const handlePrevPage = useCallback(
     throttle(() => {

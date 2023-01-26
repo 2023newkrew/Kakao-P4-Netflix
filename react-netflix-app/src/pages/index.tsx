@@ -1,6 +1,7 @@
 import { getUpcomingMovies, getPopularMovies } from '@apis/movies';
 import MovieList from '@components/movie/MovieList';
 import { MoviePoster } from '@components/movie/MoviePoster';
+import { TOTAL_SHOWN } from '@constants/movies.constant';
 import useCarousel from '@hooks/useCarousel';
 import { MovieType } from '@models/movies.model';
 import { useEffect, useState } from 'react';
@@ -11,25 +12,33 @@ export default function Main() {
   const [randomMovie, setRandomMovie] = useState<MovieType | undefined>();
   const [popularMovies, setPopularMovies] = useState<MovieType[]>([]);
   const [upcomingMovies, setUpcomingMovies] = useState<MovieType[]>([]);
-  const popularCarousel = useCarousel({ totalElements: 20, totalVisibleElements: 5});
-  const upcomingCarousel = useCarousel({ totalElements: 20, totalVisibleElements: 5});
+  const popularCarousel = useCarousel({ totalElements: popularMovies.length, totalVisibleElements: TOTAL_SHOWN});
+  const upcomingCarousel = useCarousel({ totalElements: upcomingMovies.length, totalVisibleElements: TOTAL_SHOWN });
   useEffect(() => {
-    const fetchPopularMovies = async() => {
+    const fetchPopularMovies = async () => {
       const { data: { results }} = await getPopularMovies();
       setPopularMovies(results);
       
-      const randomNumber = Math.floor(Math.random() * results.length);
-      setRandomMovie(results[randomNumber]);
+      return results;
     };
-    const fetchUpcomingMovies = async() => {
+    const fetchUpcomingMovies = async () => {
       const { data: { results }} = await getUpcomingMovies();
       setUpcomingMovies(results);
+
+      return results;
+    };
+    const getRandomMovie = (movies: MovieType[]) => {
+      const randomNumber = Math.floor(Math.random() * movies.length);
+      setRandomMovie(movies[randomNumber]);
     };
 
     Promise.all([
       fetchPopularMovies(),
       fetchUpcomingMovies()
-    ]).then(() => {
+    ]).then((movies: MovieType[][]) => {
+      const [popularMovies, upcomingMovies] = movies;
+      const allMovies = [...popularMovies, ...upcomingMovies];
+      getRandomMovie(allMovies);
       setIsLoading(false);
     });
     

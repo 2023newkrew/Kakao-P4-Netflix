@@ -2,12 +2,13 @@ import { Image } from '@components/common/Image';
 import { List, ListCard } from '@components/common/List';
 import { Text } from '@components/common/Text';
 import { FONT_SIZE } from '@constants/typography.constant';
-import { usePrevState } from '@hooks/usePrevState';
+// import { usePrevState } from '@hooks/usePrevState';
 import { MovieType } from '@models/movies.model';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ArrowSVG } from '@assets/icon-arrow.svg';
 import { COLORS } from '@constants/colors.contant';
+import { TOTAL_SHOWN } from '@constants/movies.constant';
 
 interface MovieListProps {
   title: string,
@@ -18,9 +19,8 @@ interface MovieListProps {
 }
 const ELEMENT_WIDTH = 360;
 const ELEMENT_HEIGHT = 540;
-const TOTAL_SHOWN = 5;
 const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieListProps) => {
-  const prevPage = usePrevState(page);
+  // const prevPage = usePrevState<number>(page);
   const wrapperRef = useRef<HTMLUListElement>(null);
   
   useEffect(() => {
@@ -43,7 +43,7 @@ const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieL
         })}
       </Wrapper>
       {page !== 1 && <PrevArrow onClick={handlePrevPage}/>}
-      {page !== movies.length - TOTAL_SHOWN + 1&& <NextArrow onClick={handleNextPage}/>}
+      {page !== movies.length - TOTAL_SHOWN + 1 && <NextArrow onClick={handleNextPage}/>}
     </Container>
   );
 };
@@ -69,7 +69,7 @@ const Poster = styled(Image)`
   object-fit: cover;
   &:hover {
     transition: 0.5s transform;
-    transform: scale(1.2);
+    transform: scale(1.1);
     z-index: 999;
   }
 `;
@@ -83,6 +83,6 @@ const NextArrow = styled(ArrowSVG)`
   cursor: pointer;
 `;
 const PrevArrow = styled(NextArrow)`
-  transform: rotate(180deg) translateY(-50%);
+  transform: translateY(-50%) rotate(180deg);
   left: 40px;
 `;
