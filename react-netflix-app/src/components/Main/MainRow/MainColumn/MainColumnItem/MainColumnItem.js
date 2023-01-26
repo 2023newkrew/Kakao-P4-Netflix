@@ -76,14 +76,13 @@ export default function MainColumnItem({
   useEffect(() => {
     if (isSmallModalOpen === false) return;
     setImageContainerRectInfo(imageContainer.current.getBoundingClientRect());
-  }, []);
+  }, [isSmallModalOpen]);
 
   return (
     <>
       <MainColumnItemContainer ref={imageContainer} separateCount={separateCount}>
         <MainColumnItemImg src={TheMovieDBAPI.imgBaseURL + imgSrc} />
       </MainColumnItemContainer>
-
       {isSmallModalOpen && imageContainerRectInfo ? (
         <ModalPortal>
           <SmallModal
@@ -112,7 +111,6 @@ export default function MainColumnItem({
           />
         </ModalPortal>
       ) : null}
-
       {isBigModalOpen ? (
         <ModalPortal>
           <BigModal imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc} toggle={bigModalToggle} />
