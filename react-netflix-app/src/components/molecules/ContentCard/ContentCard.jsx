@@ -21,7 +21,7 @@ const ContentCard = ({ content }) => {
         <div>
           <ContentCardImage
             alt="컨텐츠 썸네일 이미지"
-            src={api.getimageSeverURL() + content.backdrop_path}
+            src={api.getImageSeverURL() + content.backdrop_path}
             loading="lazy"
           />
         </div>

@@ -8,12 +8,10 @@ const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = useCallback(() => {
-    console.log("modal opened");
     setIsOpen(() => true);
   }, []);
 
   const close = useCallback(() => {
-    console.log("modal closed");
     setIsOpen(() => false);
   }, []);
 

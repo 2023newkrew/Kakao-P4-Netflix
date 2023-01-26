@@ -8,14 +8,14 @@ const ContentCardLists = ({ genres }) => {
   return (
     <ContentListsWrapper>
       {genres.map((genre) => (
-        <ContentCardList key={genre.id} id={genre.id} genrename={genre.name} />
+        <ContentCardList key={genre.id} id={genre.id} genreName={genre.name} />
       ))}
     </ContentListsWrapper>
   );
 };
 
 export default function Main() {
-  const [genres, setGenres] = useState([{ id: "", name: "" }]);
+  const [genres, setGenres] = useState([]);
   useEffect(() => {
     getContentGenres();
   }, []);

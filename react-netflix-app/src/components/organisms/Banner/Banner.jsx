@@ -34,7 +34,7 @@ const Banner = () => {
   return (
     <BannerContainer>
       <BannerBackground>
-        <img src={api.getimageSeverURL() + content.backdrop_path} alt="컨텐츠 대표 이미지"></img>
+        <img src={api.getImageSeverURL() + content.backdrop_path} alt="컨텐츠 대표 이미지"></img>
         <BackgroundFooter></BackgroundFooter>
       </BannerBackground>
       <BannerContent>

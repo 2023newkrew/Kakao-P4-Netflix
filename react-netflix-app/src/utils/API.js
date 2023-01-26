@@ -9,7 +9,7 @@ const setCommonParams = (param) => {
 };
 
 const api = {
-  getimageSeverURL() {
+  getImageSeverURL() {
     return imageServer;
   },
   async get(endpoint, param) {

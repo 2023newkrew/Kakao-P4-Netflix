@@ -14,7 +14,7 @@ const ContentDetail = ({ title, desc, imageURL }) => {
   return (
     <ContentDetailContainer>
       <ContentDetailBackground>
-        <img src={api.getimageSeverURL() + imageURL} alt="컨텐츠 대표 이미지"></img>
+        <img src={api.getImageSeverURL() + imageURL} alt="컨텐츠 대표 이미지"></img>
         <BackgroundFooter></BackgroundFooter>
       </ContentDetailBackground>
       <ContentDetailContent>

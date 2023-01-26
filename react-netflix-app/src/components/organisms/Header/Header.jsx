@@ -3,7 +3,7 @@ import { NavTab, NavTabList } from "components";
 
 import {
   HeaderContainer,
-  HaderContent,
+  HeaderContent,
   Nav,
   NavItem,
   NavTabs,
@@ -27,7 +27,7 @@ const tabList = [
 const Header = ({}) => {
   return (
     <HeaderContainer>
-      <HaderContent>
+      <HeaderContent>
         <Nav>
           <NavItem>
             <Logo href="/#">
@@ -52,7 +52,7 @@ const Header = ({}) => {
             </button>
           </NavItem>
         </Nav>
-      </HaderContent>
+      </HeaderContent>
     </HeaderContainer>
   );
 };

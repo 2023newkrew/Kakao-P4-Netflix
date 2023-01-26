@@ -40,14 +40,14 @@ const ContentCards = ({ contents }) => {
   );
 };
 
-const ContentCardList = ({ id, genrename }) => {
+const ContentCardList = ({ id, genreName }) => {
   const [contents, setContents] = useState([
-    {
-      id: "",
-      backdrop_path: "",
-      title: "",
-      overview: "",
-    },
+    // {
+    //   id: "",
+    //   backdrop_path: "",
+    //   title: "",
+    //   overview: "",
+    // },
   ]);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const ContentCardList = ({ id, genrename }) => {
 
   return (
     <ContentListContainer>
-      <ContentListTitle>{genrename}</ContentListTitle>
+      <ContentListTitle>{genreName}</ContentListTitle>
       <ContentCards contents={contents} />
     </ContentListContainer>
   );
