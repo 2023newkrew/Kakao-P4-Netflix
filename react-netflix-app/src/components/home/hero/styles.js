@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { IMAGE_URL_MAP } from '@/configs/image';
 
 export const HeroContainer = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ export const HeroContainer = styled.div`
     backdropPath &&
     css`
       background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
-        url(${`${process.env.REACT_APP_IMAGE_API_URL}${backdropPath}`});
+        url(${`${IMAGE_URL_MAP.ORIGINAL}${backdropPath}`});
       background-size: cover;
     `};
 `;

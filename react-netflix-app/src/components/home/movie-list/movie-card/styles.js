@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { IMAGE_URL_MAP } from '@/configs/image';
 
 export const MovieCardContainer = styled.div`
   flex: 1;
@@ -17,8 +18,7 @@ export const MovieCardContainer = styled.div`
   ${({ backdropPath }) =>
     backdropPath &&
     css`
-      /* TODO: Fetch lower sized images */
-      background-image: url(${`${process.env.REACT_APP_IMAGE_API_URL}${backdropPath}`});
+      background-image: url(${`${IMAGE_URL_MAP.W_300}${backdropPath}`});
       background-size: cover;
     `}
 `;
