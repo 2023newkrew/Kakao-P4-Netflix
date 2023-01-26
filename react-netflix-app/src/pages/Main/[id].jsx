@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 import PropTypes from 'prop-types';
 
-import useMovieVideos from '@/pages/Main/hooks/useMovieVideos';
+import useMovieVideos from '@pages/Main/hooks/useMovieVideos';
 import { POSTER_BASE_URL } from '@constants/tmdb';
 import { getTrailingComma } from '@utils/getTrailingComma';
 

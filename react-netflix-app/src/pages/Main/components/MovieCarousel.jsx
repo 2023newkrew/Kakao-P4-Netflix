@@ -2,7 +2,7 @@ import { Pagination, Controller, Navigation } from 'swiper';
 import PropTypes from 'prop-types';
 
 import { CarouselContainer, MovieSwiper, MovieSwiperSlide } from '@pages/Main/components/MovieCarousel.style';
-import MovieCard from '@pages/Main/components/MovieCard';
+import MovieCard from '@components/Movie/MovieCard';
 import { breakpoints } from '@styles/theme';
 
 import 'swiper/css';

@@ -13,8 +13,8 @@ import {
   UtilButton,
   PlayButton,
   MoreButton,
-} from '@pages/Main/components/MovieCard.style';
-import useMovieDetail from '@pages/Main/hooks/useMovieDetail';
+} from '@components/Movie/MovieCard.style';
+import useMovieDetail from '@components/Movie/useMovieDetail';
 import MovieDetail from '@pages/Main/[id]';
 
 import { useModal } from '@components/Modal';
