@@ -39,11 +39,7 @@ const DetailMovieCard = ({ movie }) => {
     <DetailContainer className="movie-detail" onClick={showMovieDetailModal}>
       <DetailInfos>
         <h4>{movie.title}</h4>
-        <UtilsWrapper
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
+        <UtilsWrapper>
           <PlayButton>
             <PlayIcon width={18} height={18} />
           </PlayButton>

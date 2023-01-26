@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Portal from '@components/Portal';
@@ -12,21 +12,39 @@ export const ModalProvider = ({ children, id }) => {
   const containerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [node, setNode] = useState(null);
+  const [mousePosition, setMousePosition] = useState({ x: null, y: null });
+
+  useEffect(() => {
+    const getMousePosition = (event) => {
+      if (!mousePosition.x && !mousePosition.y) {
+        setMousePosition({ x: event.clientX, y: event.clientY });
+      }
+    };
+
+    window.addEventListener('click', getMousePosition);
+    return () => {
+      window.removeEventListener('click', getMousePosition);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current || !isOpen) {
+      return;
+    }
+
+    containerRef.current.style.setProperty('transform-origin', `${mousePosition.x}px ${mousePosition.y}px`);
+    setTimeout(() => {
+      containerRef.current.style.setProperty('--scale', 'scale(1)');
+    }, 0);
+  }, [isOpen, mousePosition]);
 
   const open = useCallback(({ node }) => {
     setNode(node);
     setIsOpen(true);
-    setTimeout(() => {
-      if (containerRef.current) {
-        containerRef.current.style.setProperty('opacity', 1);
-      }
-    }, 0);
   }, []);
 
   const close = useCallback(() => {
-    if (containerRef.current) {
-      containerRef.current.style.setProperty('opacity', 0);
-    }
+    containerRef.current.style.setProperty('--scale', 'scale(0)');
     setTimeout(() => {
       setNode(null);
       setIsOpen(false);
@@ -52,7 +70,8 @@ export const ModalProvider = ({ children, id }) => {
           <Container ref={containerRef}>
             <Content>
               <CloseButton
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   close();
                 }}
               >
