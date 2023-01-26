@@ -6,13 +6,15 @@ import { useEffect, useState } from 'react';
 import { getNowPlaying, getPopular, getToprated, getUpcoming } from '@apis/home';
 import { rand } from '@/utils/math';
 import { MOVIE_LIST, MOVIE_LIST_TITLE } from '@/constants/movie';
-import { MovieListSection } from './styles';
+import { MovieListSection, SpinnerContainer } from './styles';
+import Spinner from '@/components/common/spinner';
 
 const Home = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [popular, setPopular] = useState([]);
   const [toprated, setToprated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [heroMovie, setHeroMovie] = useState({});
 
@@ -25,6 +27,8 @@ const Home = () => {
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
+      setIsLoading(true);
+
       const [nowPlayingData, popularData, topratedData, upcomingData] = await Promise.all([
         getNowPlaying(),
         getPopular(),
@@ -37,9 +41,19 @@ const Home = () => {
       setToprated(topratedData);
       setUpcoming(upcomingData);
       setHeroMovie(nowPlayingData[rand({ max: nowPlayingData.length - 1 }) || 0]);
+
+      setIsLoading(false);
     };
     fetchNowPlaying();
   }, []);
+
+  if (isLoading) {
+    return (
+      <SpinnerContainer>
+        <Spinner />
+      </SpinnerContainer>
+    );
+  }
 
   return (
     <>
