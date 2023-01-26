@@ -16,7 +16,7 @@ export const getPopular = async (page = 1) => {
       page,
     },
   });
-  return response.data;
+  return response.data.results;
 };
 
 export const getToprated = async (page = 1) => {
@@ -25,7 +25,7 @@ export const getToprated = async (page = 1) => {
       page,
     },
   });
-  return response.data;
+  return response.data.results;
 };
 
 export const getUpcoming = async (page = 1) => {
@@ -34,7 +34,7 @@ export const getUpcoming = async (page = 1) => {
       page,
     },
   });
-  return response.data;
+  return response.data.results;
 };
 
 export const getDetail = async (id) => {

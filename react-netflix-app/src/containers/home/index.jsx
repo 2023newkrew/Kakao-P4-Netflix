@@ -35,9 +35,9 @@ const Home = () => {
       const { results } = nowPlayingData;
 
       setNowPlaying(results);
-      setPopular(popularData.results);
-      setToprated(topratedData.results);
-      setUpcoming(upcomingData.results);
+      setPopular(popularData);
+      setToprated(topratedData);
+      setUpcoming(upcomingData);
       setHeroMovie(results[rand({ max: results.length }) - 1 || 0]);
     };
     fetchNowPlaying();
