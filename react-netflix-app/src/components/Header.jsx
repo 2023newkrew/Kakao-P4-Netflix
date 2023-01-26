@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as LogoImage } from '../assets/logo.svg';
-import { ReactComponent as SearchIcon } from '../assets/search.svg';
-import { ReactComponent as NotificationsIcon } from '../assets/notifications.svg';
+import PropTypes from 'prop-types';
+import { ReactComponent as LogoImage } from '@assets/logo.svg';
+import { ReactComponent as SearchIcon } from '@assets/search.svg';
+import { ReactComponent as NotificationsIcon } from '@assets/notifications.svg';
 
 const HeaderLayout = styled.header`
   position: fixed;
@@ -40,7 +41,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default function Header() {
+export default function Header({ menus }) {
   return (
     <HeaderLayout>
       <Navigation>
@@ -48,12 +49,9 @@ export default function Header() {
           <LogoImage />
         </Logo>
         <MenuList>
-          <MenuItem>홈</MenuItem>
-          <MenuItem>시리즈</MenuItem>
-          <MenuItem>영화</MenuItem>
-          <MenuItem>NEW! 요즘 대세 콘텐츠</MenuItem>
-          <MenuItem>내가 찜한 콘텐츠</MenuItem>
-          <MenuItem>언어별로 찾아보기</MenuItem>
+          {menus.map(({ path, name }) => (
+            <MenuItem key={path}>{name}</MenuItem>
+          ))}
         </MenuList>
         <Button>
           <SearchIcon />
@@ -65,3 +63,12 @@ export default function Header() {
     </HeaderLayout>
   );
 }
+
+Header.propTypes = {
+  menus: PropTypes.arrayOf(
+    PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};

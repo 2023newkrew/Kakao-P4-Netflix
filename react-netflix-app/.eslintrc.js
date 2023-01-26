@@ -9,4 +9,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  rules: {
+    'import/no-unresolved': 'off',
+    'import/extensions': ['error', { ignorePackages: true }],
+    camelcase: 'off',
+  },
 };
