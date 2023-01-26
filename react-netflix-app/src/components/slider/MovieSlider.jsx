@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Slider from '@components/slider/Slider';
 import MovieItem from '@components/slider/MovieItem';
+import Slider from '@/components/slider/base/Slider';
 
 export default function MovieSlider({ name, movies }) {
   return (

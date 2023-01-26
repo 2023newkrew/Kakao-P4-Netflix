@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import TMDBImage from '@components/TMDBImage';
 import CircleButton from '@components/button/CircleButton';
 import { ReactComponent as CloseIcon } from '@assets/x.svg';
 
@@ -17,16 +18,12 @@ const CloseButton = styled(CircleButton)`
   position: absolute;
   top: 8px;
   right: 8px;
+  z-index: 1;
 `;
 
-const Backdrop = styled.div`
+const Backdrop = styled(TMDBImage)`
   height: 45vw;
-  background: url(${(props) =>
-        `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
-      no-repeat center/cover,
-    linear-gradient(transparent, black 90%);
-  background-blend-mode: overlay;
-  border-radius: 6px;
+  mask-image: linear-gradient(black, transparent);
 `;
 
 const InfoContainer = styled.div`
@@ -56,7 +53,7 @@ export default function InfoModal({ close, movie }) {
         backgroundColor="rgba(0, 0, 0, 0.5)"
         onClick={close}
       />
-      <Backdrop backgroundUrl={backdrop_path} />
+      <Backdrop type="backdrop" path={backdrop_path} alt={title} />
       <InfoContainer>
         <Title>{title}</Title>
         <Overview>{overview}</Overview>

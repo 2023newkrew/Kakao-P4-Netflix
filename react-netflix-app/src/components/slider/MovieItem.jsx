@@ -4,27 +4,32 @@ import PropTypes from 'prop-types';
 import { SwiperSlide } from 'swiper/react';
 import InfoModal from '@components/modal/InfoModal';
 import useModal from '@hooks/useModal';
+import TMDBImage from '../TMDBImage';
 
 const MovieItemLayout = styled(SwiperSlide)`
   box-sizing: border-box;
   padding: 0 0.4vw;
 `;
 
-const Poster = styled.div`
+const ContentContainer = styled.div`
+  position: relative;
   padding: 32px 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   aspect-ratio: 2 / 3;
-  background: url(${(props) =>
-      `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
-    no-repeat center/cover;
   cursor: pointer;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.5);
-    background-blend-mode: overlay;
   }
+`;
+
+const Poster = styled(TMDBImage)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 `;
 
 const Title = styled.div`
@@ -42,14 +47,14 @@ export default function MovieItem({ movie }) {
 
   return (
     <MovieItemLayout>
-      <Poster
-        backgroundUrl={poster_path}
+      <ContentContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={open}
       >
+        <Poster type="poster" path={poster_path} alt={title} />
         {isHovered && <Title>{title}</Title>}
-      </Poster>
+      </ContentContainer>
       <ModalContainer>
         <InfoModal close={close} movie={movie} />
       </ModalContainer>

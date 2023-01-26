@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Skeleton from '@components/Skeleton';
+import TMDBImage from '@components/TMDBImage';
 import SquareButton from '@components/button/SquareButton';
 import InfoModal from '@components/modal/InfoModal';
 import useModal from '@hooks/useModal';
@@ -9,18 +10,22 @@ import { ReactComponent as PlayIcon } from '@assets/play.svg';
 import { ReactComponent as InfoIcon } from '@assets/info.svg';
 
 const BannerLayout = styled.section`
+  position: relative;
+  box-sizing: border-box;
   height: 56.25vw;
   padding: 0 60% 20% 4%;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   gap: 16px;
-  background: url(${(props) =>
-        `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
-      no-repeat center/cover,
-    linear-gradient(transparent, black 90%);
-  background-blend-mode: overlay;
+`;
+
+const Backdrop = styled(TMDBImage)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  mask-image: linear-gradient(black, transparent);
+  z-index: -1;
 `;
 
 const Title = styled.div`
@@ -44,7 +49,8 @@ export default function Banner({ isLoading, movie }) {
   if (isLoading) return <Skeleton height="56.25vw" />;
 
   return (
-    <BannerLayout backgroundUrl={backdrop_path}>
+    <BannerLayout>
+      <Backdrop type="backdrop" path={backdrop_path} alt={title} />
       <Title>{title}</Title>
       <Overview>{overview}</Overview>
       <ButtonContainer>

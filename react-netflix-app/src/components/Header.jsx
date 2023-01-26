@@ -9,7 +9,6 @@ const HeaderLayout = styled.header`
   width: 100%;
   height: 72px;
   background: linear-gradient(black, transparent);
-  z-index: 1;
 `;
 
 const Navigation = styled.nav`
