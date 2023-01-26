@@ -2,8 +2,6 @@ import { useMovieList } from '@/pages/Main/hooks/useMovies';
 import MovieCarousel from '@pages/Main/components/MovieCarousel';
 import { PageContainer, MainView, Row, PageTitle } from '@pages/Main/MainPage.style';
 import MovieBanner from '@pages/Main/components/MovieBanner';
-import Header from '@components/Header';
-import Footer from '@components/Footer';
 
 const Main = () => {
   const { isLoading, isError, topRatedMovies, popularMovies } = useMovieList();
@@ -12,7 +10,6 @@ const Main = () => {
 
   return (
     <PageContainer>
-      <Header />
       <MainView>
         <PageTitle>Netflix 홈</PageTitle>
         {!isError.popular && !isLoading.popular && <MovieBanner movie={popularMovies.results[randomIndex]} />}
@@ -32,7 +29,6 @@ const Main = () => {
           </Row.Content>
         </Row.Container>
       </MainView>
-      <Footer />
     </PageContainer>
   );
 };
