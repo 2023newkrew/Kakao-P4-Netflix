@@ -35,8 +35,6 @@ const MovieList = ({ title, movies }) => {
   };
 
   useEffect(() => {
-    if (movieItemContentRef.current === null) return;
-
     movieItemContentRef.current.style.transform = `translateX(-${currentPage * 100}%)`;
   }, [currentPage]);
 
@@ -45,14 +43,13 @@ const MovieList = ({ title, movies }) => {
       <MovieListTitle>{title}</MovieListTitle>
       <MovieItemContainer>
         <MovieItemContent ref={movieItemContentRef}>
-          {splitMovies &&
-            splitMovies.map((moviesArr) => (
-              <MovieCardInner key={`${moviesArr[0].title}-list`}>
-                {moviesArr.map((movie) => (
-                  <MovieCard key={movie.title} movie={movie} />
-                ))}
-              </MovieCardInner>
-            ))}
+          {splitMovies.map((moviesArr) => (
+            <MovieCardInner key={`${moviesArr[0].id}-list`}>
+              {moviesArr.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+            </MovieCardInner>
+          ))}
         </MovieItemContent>
         <MoviePrevButton disabled={isFirstPage} onClick={onClickPrev} />
         <MovieNextButton disabled={isLastPage} onClick={onClickNext} />

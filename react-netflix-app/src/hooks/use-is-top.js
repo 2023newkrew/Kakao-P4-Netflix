@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useIsTop = (debounce = 50) => {
+const useIsTop = (delayTime = 50) => {
   const [isTop, setIsTop] = useState(true);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const useIsTop = (debounce = 50) => {
 
       timerId = setTimeout(() => {
         setIsTop(window.pageYOffset === 0);
-      }, debounce);
+      }, delayTime);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -20,7 +20,7 @@ const useIsTop = (debounce = 50) => {
       clearTimeout(timerId);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [debounce]);
+  }, [delayTime]);
 
   return isTop;
 };

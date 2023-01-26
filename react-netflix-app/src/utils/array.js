@@ -8,11 +8,11 @@
  * @returns {any[any[]]} Divided array
  */
 export const divideArray = (array, size) => {
-  if (array === null || array === undefined || array.length === 0) return array;
+  if (!Array.isArray(array)) return [];
 
   const subArray = array
     .map((_, index) => (index % size === 0 ? array.slice(index, index + size) : null))
-    .filter((item) => item);
+    .filter(Boolean);
 
   return subArray;
 };

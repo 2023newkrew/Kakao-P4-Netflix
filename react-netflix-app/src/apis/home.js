@@ -7,5 +7,5 @@ export const getNowPlaying = async (page = 1) => {
       page,
     },
   });
-  return response.data;
+  return response.data.results;
 };

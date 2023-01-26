@@ -13,11 +13,10 @@ const Home = () => {
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
-      const data = await getNowPlaying();
-      const { results } = data;
+      const results = await getNowPlaying();
 
       setNowPlaying(results);
-      setHeroMovie(results[rand({ max: results.length }) - 1 || 0]);
+      setHeroMovie(results[rand({ max: results.length - 1 }) || 0]);
     };
     fetchNowPlaying();
   }, []);

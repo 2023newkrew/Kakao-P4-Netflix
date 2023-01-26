@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import { HeroContainer, HeroContent, HeroOverview, HeroTitle } from './styles';
 
 const Hero = ({ movie }) => {
-  if (!movie) return null;
-
   const { backdrop_path: background, title, overview } = movie;
 
   return (
@@ -17,11 +15,7 @@ const Hero = ({ movie }) => {
 };
 
 Hero.propTypes = {
-  movie: PropTypes.object,
-};
-
-Hero.defaultProps = {
-  movie: null,
+  movie: PropTypes.object.isRequired,
 };
 
 export default Hero;
