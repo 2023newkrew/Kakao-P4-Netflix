@@ -22,7 +22,7 @@ const footerMenus = [
 ];
 
 const MenuList = () => {
-  return footerMenus.map((menu) => <li>{menu}</li>);
+  return footerMenus.map((menu) => <li key={menu}>{menu}</li>);
 };
 
 const Footer = () => {
