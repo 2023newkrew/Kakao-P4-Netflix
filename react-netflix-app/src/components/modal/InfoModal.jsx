@@ -22,12 +22,15 @@ const CloseButton = styled(CircleButton)`
 const Backdrop = styled.div`
   height: 45vw;
   background: url(${(props) =>
-      `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
-    no-repeat center/cover;
+        `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
+      no-repeat center/cover,
+    linear-gradient(transparent, black 90%);
+  background-blend-mode: overlay;
   border-radius: 6px;
 `;
 
 const InfoContainer = styled.div`
+  margin-top: -10%;
   padding: 32px;
   display: flex;
   flex-direction: column;
