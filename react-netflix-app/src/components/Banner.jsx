@@ -37,11 +37,13 @@ const ButtonContainer = styled.div`
   gap: 8px;
 `;
 
-export default function Banner({ movie }) {
+export default function Banner({ isLoading, movie }) {
   const { backdrop_path, title, overview } = movie;
   const [ModalContainer, open, close] = useModal();
 
-  return backdrop_path ? (
+  if (isLoading) return <Skeleton height="56.25vw" />;
+
+  return (
     <BannerLayout backgroundUrl={backdrop_path}>
       <Title>{title}</Title>
       <Overview>{overview}</Overview>
@@ -59,12 +61,11 @@ export default function Banner({ movie }) {
         <InfoModal close={close} movie={movie} />
       </ModalContainer>
     </BannerLayout>
-  ) : (
-    <Skeleton height="56.25vw" />
   );
 }
 
 Banner.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
     backdrop_path: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
