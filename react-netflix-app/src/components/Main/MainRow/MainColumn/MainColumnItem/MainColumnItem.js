@@ -83,8 +83,9 @@ export default function MainColumnItem({
       <MainColumnItemContainer ref={imageContainer} separateCount={separateCount}>
         <MainColumnItemImg src={TheMovieDBAPI.imgBaseURL + imgSrc} />
       </MainColumnItemContainer>
-      <ModalPortal>
-        {isSmallModalOpen && imageContainerRectInfo ? (
+
+      {isSmallModalOpen && imageContainerRectInfo ? (
+        <ModalPortal>
           <SmallModal
             imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc}
             toggle={smallModalToggle}
@@ -109,8 +110,9 @@ export default function MainColumnItem({
             )}
             popupInfoHeight={POPUP_INFO_HEIGHT}
           />
-        ) : null}
-      </ModalPortal>
+        </ModalPortal>
+      ) : null}
+
       {isBigModalOpen ? (
         <ModalPortal>
           <BigModal imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc} toggle={bigModalToggle} />
