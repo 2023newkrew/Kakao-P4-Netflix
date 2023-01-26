@@ -1,4 +1,5 @@
 import { ModalContainer, ModalWrapper } from "@styles/modal/Modal.style";
+// TODO : reactDom의 크기 133.5k 생각보다 크다 로직 변경 요망
 import reactDom from "react-dom";
 
 const Portal = ({ children }) => {

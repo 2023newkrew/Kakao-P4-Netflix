@@ -5,12 +5,11 @@ import BannerInfo from "./BannerInfo";
 
 import { API } from "@utils/axios";
 import useFetch from "@hooks/useFetch";
-import Loading from "@components/loading/Loading";
 
 const Banner = () => {
-  const { data, loading } = useFetch(API.fetchBannerMovie());
+  const { data, loading, LoadingComponent } = useFetch(API.fetchBannerMovie());
 
-  if (loading === true) return <Loading />;
+  if (loading === true) return <LoadingComponent />;
 
   const bannerMovie = data;
 

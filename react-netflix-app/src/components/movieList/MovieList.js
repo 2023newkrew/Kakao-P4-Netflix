@@ -2,16 +2,14 @@ import MovieCard from "./MovieCard";
 
 import { MovieListContainer } from "@styles/movieList/movieList.style";
 
-import Loading from "@components/loading/Loading";
 import useFetch from "@hooks/useFetch";
-import { useNavigate } from "react-router-dom";
 
 import { API } from "@utils/axios";
 
 const MovieList = ({ search }) => {
-  const { data, loading } = useFetch(API.fetchSearchMovieList(search), search);
+  const { data, loading, LoadingComponent } = useFetch(API.fetchSearchMovieList(search), search);
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingComponent />;
 
   const searchMovieList = data;
 

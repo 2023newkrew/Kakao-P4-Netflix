@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Search = () => {
   const navigate = useNavigate();
 
+  // TODO : debounce 적용하기
   const onChange = (e) => {
     navigate(`/search?q=${e.target.value}`);
   };

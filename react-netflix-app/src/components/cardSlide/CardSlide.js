@@ -1,20 +1,17 @@
 import { CardSlideContainer, CardSlideCategory, CardSlideWrapper, CardSlidePage } from "@styles/cardSlide/CardSlide.style";
 
-import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 
 import { API } from "@utils/axios";
+import useFetch from "@hooks/useFetch";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
-import Loading from "@components/loading/Loading";
-import useFetch from "../../hooks/useFetch";
-
 const CardSlide = ({ category }) => {
-  const { data, loading } = useFetch(API.fetchGenreMovie(category));
+  const { data, loading, LoadingComponent } = useFetch(API.fetchGenreMovie(category));
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingComponent />;
 
   const genreMovieList = data;
 

@@ -5,7 +5,7 @@ import { BsPlusCircle } from "react-icons/bs";
 import { GoThumbsup } from "react-icons/go";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
-import genre from "../../json/genre.json";
+import genre from "@json/genre.json";
 
 const MovieCardInfo = ({ movie, open }) => {
   const movieCategoryIdList = movie.genre_ids;

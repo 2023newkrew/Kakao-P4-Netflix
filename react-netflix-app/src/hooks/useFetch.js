@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import LoadingComponent from "@components/loading/Loading";
+
 const useFetch = (fetch, value) => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
@@ -17,7 +19,7 @@ const useFetch = (fetch, value) => {
     }
   }, [value]);
 
-  return { data, loading };
+  return { data, loading, LoadingComponent };
 };
 
 export default useFetch;

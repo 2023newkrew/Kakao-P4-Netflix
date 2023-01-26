@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API } from "@utils/axios";
+import useFetch from "@hooks/useFetch";
 
 import { MovieCardSubInfoContainer, MovieCardInfoContainer, MovieCardTitle, MovieCardSubTitle, MovieCardOverviewWrapper, MovieCardOverview, MovieModalContainer, ModalMovieCard } from "@styles/modal/MovieModal.style";
 
@@ -30,6 +31,7 @@ const MovieModal = ({ movie }) => {
   const [movieURL, setMovieURL] = useState();
   const [movieInfo, setMovieInfo] = useState();
 
+  // TODO : 2개의 API가 호출되는 부분 useFetch로 변경하기
   useEffect(() => {
     fetchMovieInfo(movie);
 
@@ -49,6 +51,7 @@ const MovieModal = ({ movie }) => {
 
   return (
     <MovieModalContainer>
+      {/* 영상의 주소가 없다면 이미지 띄어주기 */}
       {movieURL !== null ? <iframe src={movieYoutubeURL} title="YouTube video player" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" allowFullScreen /> : <img src={movieImageURL} alt={movie.title} />}
       <ModalMovieCard>
         <MovieCardInfo movieInfo={movieInfo} />

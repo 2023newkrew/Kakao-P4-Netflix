@@ -4,9 +4,14 @@ export const BannerMovieContainer = styled.div`
   width: 100%;
   height: 100%;
 
-  iframe {
+  .youtube {
     width: 100%;
     height: 100%;
-    // pointer-events: none;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      // pointer-events: none;
+    }
   }
 `;
