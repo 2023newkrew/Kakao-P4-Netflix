@@ -6,17 +6,20 @@ import { BrowserRouter } from 'react-router-dom';
 import { Reset } from 'styled-reset';
 import Routes from './Routes';
 import GlobalStyle from './GlobalStyle';
+import { GlobalPortal } from './GlobalPortal';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Reset />
     <GlobalStyle/>
-    <Layout>
-      <BrowserRouter>
-        <Header />
-        <Routes />
-      </BrowserRouter>
-    </Layout>
+    <GlobalPortal.Provider>
+      <Layout>
+        <BrowserRouter>
+          <Header />
+          <Routes />
+        </BrowserRouter>
+      </Layout>
+    </GlobalPortal.Provider>
   </React.StrictMode>
 );

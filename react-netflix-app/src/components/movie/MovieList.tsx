@@ -15,11 +15,12 @@ interface MovieListProps {
   page: number,
   handlePrevPage: () => void,
   handleNextPage: () => void,
+  handleSelectMovie: (movie: MovieType) => void,
   movies: MovieType[],
 }
 const ELEMENT_WIDTH = 360;
 const ELEMENT_HEIGHT = 540;
-const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieListProps) => {
+const MovieList = ({title, movies, page, handlePrevPage, handleNextPage, handleSelectMovie}: MovieListProps) => {
   // const prevPage = usePrevState<number>(page);
   const wrapperRef = useRef<HTMLUListElement>(null);
   
@@ -35,7 +36,7 @@ const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieL
         {movies.map((movie: MovieType) => {
           const { id, title, poster_path } = movie;
           return (
-            <ListCard key={id}>
+            <ListCard key={id} onClick={() => handleSelectMovie(movie)}>
               <Poster src={poster_path} imageType={'themoviedb'}/>
               <Text color={COLORS.gray300} textAlign='center'>{title}</Text>
             </ListCard>

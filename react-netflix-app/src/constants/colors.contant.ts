@@ -1,5 +1,6 @@
 const COLORS = {
-  black: '#000000' ,
+  black: '#000000',
+  blackTrans: '#000000CC',
   gray300: '#d1d1d1',
   gray500: '#737373',
   gray700: '#4e4e4e',
