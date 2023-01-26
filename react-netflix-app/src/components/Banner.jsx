@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Button from '@components/Button';
 import Skeleton from '@components/Skeleton';
+import SquareButton from '@components/button/SquareButton';
+import InfoModal from '@components/modal/InfoModal';
+import useModal from '@hooks/useModal';
 import { ReactComponent as PlayIcon } from '@assets/play.svg';
 import { ReactComponent as InfoIcon } from '@assets/info.svg';
 
@@ -35,20 +37,27 @@ const ButtonContainer = styled.div`
   gap: 8px;
 `;
 
-export default function Banner({ backgroundUrl, title, overview }) {
-  return backgroundUrl ? (
-    <BannerLayout backgroundUrl={backgroundUrl}>
+export default function Banner({ movie }) {
+  const { backdrop_path, title, overview } = movie;
+  const [Modal, open, close] = useModal();
+
+  return backdrop_path ? (
+    <BannerLayout backgroundUrl={backdrop_path}>
       <Title>{title}</Title>
       <Overview>{overview}</Overview>
       <ButtonContainer>
-        <Button Icon={PlayIcon} name="재생" />
-        <Button
+        <SquareButton Icon={PlayIcon} name="재생" />
+        <SquareButton
           Icon={InfoIcon}
           name="상세 정보"
           color="white"
           backgroundColor="rgba(128, 128, 128, 0.5)"
+          onClick={open}
         />
       </ButtonContainer>
+      <Modal>
+        <InfoModal close={close} movie={movie} />
+      </Modal>
     </BannerLayout>
   ) : (
     <Skeleton height="56.25vw" />
@@ -56,7 +65,9 @@ export default function Banner({ backgroundUrl, title, overview }) {
 }
 
 Banner.propTypes = {
-  backgroundUrl: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  overview: PropTypes.string.isRequired,
+  movie: PropTypes.shape({
+    backdrop_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
+  }).isRequired,
 };

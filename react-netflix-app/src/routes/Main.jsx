@@ -33,11 +33,7 @@ export default function Main() {
 
   return (
     <MainLayout>
-      <Banner
-        backgroundUrl={bannerMovie.backdrop_path}
-        title={bannerMovie.title}
-        overview={bannerMovie.overview}
-      />
+      <Banner movie={bannerMovie} />
       <SliderContainer>
         <MovieSlider name="지금 뜨는 콘텐츠" items={popularMovies} />
       </SliderContainer>
