@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Button from '@components/Button';
 import Skeleton from '@components/Skeleton';
+import { ReactComponent as PlayIcon } from '@assets/play.svg';
+import { ReactComponent as InfoIcon } from '@assets/info.svg';
 
 const BannerLayout = styled.section`
   height: 56.25vw;
@@ -27,11 +30,25 @@ const Overview = styled.div`
   line-height: normal;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
 export default function Banner({ backgroundUrl, title, overview }) {
   return backgroundUrl ? (
     <BannerLayout backgroundUrl={backgroundUrl}>
       <Title>{title}</Title>
       <Overview>{overview}</Overview>
+      <ButtonContainer>
+        <Button Icon={PlayIcon} name="재생" />
+        <Button
+          Icon={InfoIcon}
+          name="상세 정보"
+          color="white"
+          backgroundColor="rgba(128, 128, 128, 0.5)"
+        />
+      </ButtonContainer>
     </BannerLayout>
   ) : (
     <Skeleton height="56.25vw" />
