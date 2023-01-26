@@ -7,8 +7,10 @@ import { ReactComponent as CloseIcon } from '@assets/x.svg';
 const ModalLayout = styled.div`
   position: relative;
   width: 80vw;
+  max-height: 90vh;
   border-radius: 6px;
   background-color: black;
+  overflow: auto;
 `;
 
 const CloseButton = styled(CircleButton)`
@@ -22,6 +24,7 @@ const Backdrop = styled.div`
   background: url(${(props) =>
       `${process.env.REACT_APP_IMAGE_BASE_URL}${props.backgroundUrl}`})
     no-repeat center/cover;
+  border-radius: 6px;
 `;
 
 const InfoContainer = styled.div`
@@ -43,7 +46,7 @@ export default function InfoModal({ close, movie }) {
   const { backdrop_path, title, overview } = movie;
 
   return (
-    <ModalLayout>
+    <ModalLayout onClick={(e) => e.stopPropagation()}>
       <CloseButton
         Icon={CloseIcon}
         color="white"

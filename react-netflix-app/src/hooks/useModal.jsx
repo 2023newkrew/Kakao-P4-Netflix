@@ -7,10 +7,12 @@ const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  box-sizing: border-box;
   width: 100vw;
   height: 100vh;
+  padding: 0 10vw;
   display: flex;
-  justify-content: center;
+  justify-contents: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
@@ -21,10 +23,12 @@ export default function useModal() {
 
   const open = () => {
     setIsOpened(true);
+    document.body.style.overflowY = 'hidden';
   };
 
   const close = () => {
     setIsOpened(false);
+    document.body.style.removeProperty('overflow-y');
   };
 
   function Modal({ children }) {
