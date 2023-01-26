@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SwiperSlide } from 'swiper/react';
+import InfoModal from '@components/modal/InfoModal';
+import useModal from '@hooks/useModal';
 
 const MovieItemLayout = styled(SwiperSlide)`
   box-sizing: border-box;
@@ -33,6 +35,7 @@ const Title = styled.div`
 export default function MovieItem({ movie }) {
   const { poster_path, title } = movie;
   const [isHovered, setIsHovered] = useState(false);
+  const [ModalContainer, open, close] = useModal();
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -43,9 +46,13 @@ export default function MovieItem({ movie }) {
         backgroundUrl={poster_path}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={open}
       >
         {isHovered && <Title>{title}</Title>}
       </Poster>
+      <ModalContainer>
+        <InfoModal close={close} movie={movie} />
+      </ModalContainer>
     </MovieItemLayout>
   );
 }
