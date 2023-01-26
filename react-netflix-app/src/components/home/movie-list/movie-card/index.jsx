@@ -40,7 +40,7 @@ const MovieCard = ({ movie }) => {
       >
         <MovieCardDetail isAppear={isShowDetail} movie={detailedMovie} />
       </MovieCardContainer>
-      {isShowModal && <MovieModal onClose={handleOnClose} movie={null} />}
+      {isShowModal && <MovieModal onClose={handleOnClose} movie={detailedMovie} />}
     </>
   );
 };

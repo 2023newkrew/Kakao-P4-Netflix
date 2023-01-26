@@ -11,6 +11,14 @@ export const ModalContent = styled.div`
   align-items: flex-start;
 `;
 
+export const ModalSpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
 export const ModalTitle = styled.h1``;
 
 export const ModalOverview = styled.p``;
