@@ -3,7 +3,7 @@ import tw, { styled } from 'twin.macro';
 export const Container = styled.div`
   ${tw`box-border inline-block w-full whitespace-normal bg-transparent py-0 px-[0.2vw] z-0 transition-transform`}
   &:hover {
-    transform: scale(1.25) translate3d(0, -50%, 0);
+    transform: scale(1.25) translate3d(0, -75%, 0);
     z-index: 10;
   }
   &:hover .movie-detail {
@@ -16,6 +16,9 @@ export const ThumbnailContainer = styled.div`
 `;
 export const ThumbnailImage = tw.img`
 absolute top-0 left-0 w-full h-full object-cover
+`;
+export const NoImage = tw.div`
+absolute top-0 left-0 w-full h-full bg-slate-600 text-white flex items-center justify-center p-2
 `;
 export const DetailContainer = tw.div`
   cursor-pointer invisible hover:visible px-[0.2vw] h-[100px] transition-transform [transition-duration: 300ms] [transition-delay: 100ms] absolute bottom-0 right-0 left-0 translate-y-[100px] hover:origin-bottom hover:z-[2]

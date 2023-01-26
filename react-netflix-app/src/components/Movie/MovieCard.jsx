@@ -13,6 +13,7 @@ import {
   UtilButton,
   PlayButton,
   MoreButton,
+  NoImage,
 } from '@components/Movie/MovieCard.style';
 import useMovieDetail from '@components/Movie/useMovieDetail';
 import MovieDetail from '@pages/Main/[id]';
@@ -54,9 +55,9 @@ const DetailMovieCard = ({ movie }) => {
           </MoreButton>
         </UtilsWrapper>
         <InfoRow>
-          {!isLoading && detail?.vote_average && <UserVote>{Math.round(detail.vote_average * 10)}점</UserVote>}
+          {!isLoading && detail.vote_average > 0 && <UserVote>{Math.round(detail.vote_average * 10)}점</UserVote>}
         </InfoRow>
-        <Genres>{!isLoading && detail?.genres.map((genre) => genre.name).join(' / ')}</Genres>
+        <Genres>{!isLoading && detail.genres.map((genre) => genre.name).join(' / ')}</Genres>
       </DetailInfos>
     </DetailContainer>
   );
@@ -70,7 +71,7 @@ const MovieCard = ({ movie }) => {
   const thumbnailUrl = usePreviewImage({
     previewUrl: BACKDROP_W300_URL + movie.backdrop_path,
     originalUrl: BACKDROP_W780_URL + movie.backdrop_path,
-    load: isHover,
+    load: isHover && movie.backdrop_path,
   });
 
   return (
@@ -80,7 +81,8 @@ const MovieCard = ({ movie }) => {
       }}
     >
       <ThumbnailContainer>
-        <ThumbnailImage src={thumbnailUrl} alt="썸네일" />
+        {movie.backdrop_path && <ThumbnailImage src={thumbnailUrl} alt="썸네일" />}
+        {!movie.backdrop_path && <NoImage>{movie.title}</NoImage>}
       </ThumbnailContainer>
       {isHover && <DetailMovieCard movie={movie} />}
     </Container>
