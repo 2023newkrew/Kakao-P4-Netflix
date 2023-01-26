@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { IconButton, EllipsisText } from "components";
 import api from "utils/API";
+import { getRandomNumber } from "utils/common";
+
 import {
   BannerContainer,
   BannerBackground,
@@ -10,7 +12,6 @@ import {
   ContentDesc,
   ContentButtonBox,
 } from "./Banner.style";
-
 import playImage from "assets/play.svg";
 import infoImage from "assets/info.svg";
 
@@ -27,8 +28,8 @@ const Banner = () => {
 
   const getPopularContent = async () => {
     const res = await api.get(`/movie/popular`, { language: "ko-KR" });
-    // 랜덤 선택으로 변경하기 0~19
-    setContent(res.results[0]);
+    const randomNumber = getRandomNumber(0, res.results.length);
+    setContent(res.results[randomNumber]);
   };
 
   return (
