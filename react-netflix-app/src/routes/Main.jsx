@@ -35,7 +35,7 @@ export default function Main() {
     <MainLayout>
       <Banner movie={bannerMovie} />
       <SliderContainer>
-        <MovieSlider name="지금 뜨는 콘텐츠" items={popularMovies} />
+        <MovieSlider name="지금 뜨는 콘텐츠" movies={popularMovies} />
       </SliderContainer>
     </MainLayout>
   );
