@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { USE_IS_TOP_DELAY_TIME } from '@/constants/hook';
 
-const useIsTop = (delayTime = 100) => {
+const useIsTop = (delayTime = USE_IS_TOP_DELAY_TIME) => {
   const [isTop, setIsTop] = useState(true);
 
   useEffect(() => {
