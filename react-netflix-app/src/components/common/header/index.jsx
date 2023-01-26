@@ -1,13 +1,13 @@
 import NetflixLogoImg from '@assets/netflix-logo.svg';
 import ProfileIconImg from '@assets/profile-icon.png';
-import usePageScroll from '@hooks/use-page-scroll';
+import useIsTop from '@/hooks/use-is-top';
 import { HeaderContainer, HeaderContent, HeaderLogo, HeaderProfile } from './styles';
 
 const Header = () => {
-  const pageYOffset = usePageScroll();
+  const isTop = useIsTop();
 
   return (
-    <HeaderContainer isTop={pageYOffset === 0}>
+    <HeaderContainer isTop={isTop}>
       <HeaderContent>
         <HeaderLogo src={NetflixLogoImg} />
         <HeaderProfile src={ProfileIconImg} />

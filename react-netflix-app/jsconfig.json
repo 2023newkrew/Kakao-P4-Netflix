@@ -6,6 +6,8 @@
       "@assets/*": ["./src/assets/*"],
       "@apis/*": ["./src/apis/*"],
       "@components/*": ["./src/components/*"],
+      "@configs/*": ["./src/configs/*"],
+      "@containers/*": ["./src/containers/*"],
       "@constants/*": ["./src/constants/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@utils/*": ["./src/utils/*"]

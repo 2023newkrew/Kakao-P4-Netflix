@@ -1,26 +1,21 @@
-import { getHero } from '@apis/home';
-import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { HeroContainer, HeroContent, HeroOverview, HeroTitle } from './styles';
 
-const Hero = () => {
-  const [lastestMovie, setLatestMovie] = useState(null);
-
-  useEffect(() => {
-    const fetchLatestMovie = async () => {
-      const data = await getHero();
-      setLatestMovie(data);
-    };
-    fetchLatestMovie();
-  }, []);
+const Hero = ({ movie }) => {
+  const { backdrop_path: background, title, overview } = movie;
 
   return (
-    <HeroContainer backdropPath={lastestMovie?.backdrop_path}>
+    <HeroContainer backdropPath={background}>
       <HeroContent>
-        {lastestMovie && <HeroTitle>{lastestMovie.title}</HeroTitle>}
-        {lastestMovie && <HeroOverview>{lastestMovie.overview}</HeroOverview>}
+        <HeroTitle>{title}</HeroTitle>
+        <HeroOverview>{overview}</HeroOverview>
       </HeroContent>
     </HeroContainer>
   );
+};
+
+Hero.propTypes = {
+  movie: PropTypes.object.isRequired,
 };
 
 export default Hero;

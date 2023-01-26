@@ -1,21 +1,11 @@
 import axios from 'axios';
+import { CLIENT_HEADERS, CLIENT_INTERCEPTORS_REQUEST } from '@configs/client';
 
 const Client = axios.create({
   baseURL: process.env.REACT_APP_MOVIE_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
+  headers: CLIENT_HEADERS,
 });
 
-Client.interceptors.request.use((config) => {
-  const newConfig = { ...config };
-  newConfig.params = {
-    ...config.params,
-    api_key: process.env.REACT_APP_MOVIE_API_KEY,
-    language: 'ko',
-  };
-  return newConfig;
-});
+Client.interceptors.request.use(CLIENT_INTERCEPTORS_REQUEST);
 
 export default Client;
