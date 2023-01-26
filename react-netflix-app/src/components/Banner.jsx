@@ -39,7 +39,7 @@ const ButtonContainer = styled.div`
 
 export default function Banner({ movie }) {
   const { backdrop_path, title, overview } = movie;
-  const [Modal, open, close] = useModal();
+  const [ModalContainer, open, close] = useModal();
 
   return backdrop_path ? (
     <BannerLayout backgroundUrl={backdrop_path}>
@@ -55,9 +55,9 @@ export default function Banner({ movie }) {
           onClick={open}
         />
       </ButtonContainer>
-      <Modal>
+      <ModalContainer>
         <InfoModal close={close} movie={movie} />
-      </Modal>
+      </ModalContainer>
     </BannerLayout>
   ) : (
     <Skeleton height="56.25vw" />
