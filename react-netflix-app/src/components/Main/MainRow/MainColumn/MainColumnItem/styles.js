@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MainColumnItemCotainer = styled.div`
+const MainColumnItemContainer = styled.div`
   width: calc(100% / ${(props) => props.separateCount});
   padding-left: 0.2vw;
   padding-right: 0.2vw;
@@ -14,4 +14,4 @@ const MainColumnItemImg = styled.img`
   cursor: pointer;
 `;
 
-export { MainColumnItemCotainer, MainColumnItemImg };
+export { MainColumnItemContainer, MainColumnItemImg };

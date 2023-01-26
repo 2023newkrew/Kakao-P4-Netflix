@@ -2,11 +2,27 @@ import React, { useEffect, useRef, useState } from "react";
 import TheMovieDBAPI from "../../../../../util/TheMovieDBAPI";
 import useModal from "../../../../../util/useModal";
 import SmallModal from "../../../../SmallModal/SmallModal";
-import { MainColumnItemCotainer, MainColumnItemImg } from "./styles";
+import { MainColumnItemContainer, MainColumnItemImg } from "./styles";
 import ReactDom from "react-dom";
 import ModalPortal from "../../../../../util/ModalPortal";
 import BigModal from "../../../../BigModal/BigModal";
 
+const POPUP_MULTIPLE_VALUE = 1.3;
+const POPUP_INFO_HEIGHT = 70;
+
+const getPopUpTopOffset = (containerTop, containerHeight, scrollY) => {
+  return containerTop + scrollY - (containerHeight * (POPUP_MULTIPLE_VALUE - 1)) / 2 - POPUP_INFO_HEIGHT / 2;
+};
+const getPopUpLeftOffset = (containerLeft, containerWidth, index, separateCount) => {
+  // left end
+  if (index % separateCount === 0) {
+    return containerLeft;
+  } else if (index % separateCount === separateCount - 1) {
+    return containerLeft - containerWidth * (POPUP_MULTIPLE_VALUE - 1);
+  } else {
+    return containerLeft - (containerWidth * (POPUP_MULTIPLE_VALUE - 1)) / 2;
+  }
+};
 export default function MainColumnItem({
   imgSrc,
   setImageContainerSize,
@@ -14,10 +30,11 @@ export default function MainColumnItem({
   vote_average,
   vote_count,
   release_date,
+  index,
 }) {
   const imageContainer = useRef(null);
   const timer = useRef(null);
-  const [modalRectInfo, setModalRectInfo] = useState(null);
+  const [imageContainerRectInfo, setImageContainerRectInfo] = useState(null);
   const [isSmallModalOpen, smallModalToggle] = useModal();
   const [isBigModalOpen, bigModalToggle] = useModal();
 
@@ -58,28 +75,42 @@ export default function MainColumnItem({
 
   useEffect(() => {
     if (isSmallModalOpen === false) return;
-    setModalRectInfo(imageContainer.current.getBoundingClientRect());
-  }, [isSmallModalOpen]);
+    setImageContainerRectInfo(imageContainer.current.getBoundingClientRect());
+  }, []);
+
   return (
     <>
-      <MainColumnItemCotainer ref={imageContainer} separateCount={separateCount}>
+      <MainColumnItemContainer ref={imageContainer} separateCount={separateCount}>
         <MainColumnItemImg src={TheMovieDBAPI.imgBaseURL + imgSrc} />
-      </MainColumnItemCotainer>
-      {isSmallModalOpen && modalRectInfo ? (
-        <ModalPortal>
+      </MainColumnItemContainer>
+      <ModalPortal>
+        {isSmallModalOpen && imageContainerRectInfo ? (
           <SmallModal
             imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc}
-            offsetLeft={modalRectInfo.left}
-            offsetTop={modalRectInfo.top}
-            imageContainerWidth={modalRectInfo.width}
-            imageContainerHeight={modalRectInfo.height}
             toggle={smallModalToggle}
             info={`vote_average : ${vote_average}
             vote_count : ${vote_count}
             release_date : ${release_date}`}
+            offsetLeft={imageContainerRectInfo.left}
+            offsetTop={imageContainerRectInfo.top + window.scrollY}
+            width={imageContainerRectInfo.width}
+            height={imageContainerRectInfo.height}
+            popupWidth={imageContainerRectInfo.width * POPUP_MULTIPLE_VALUE}
+            popupTopOffset={getPopUpTopOffset(
+              imageContainerRectInfo.top,
+              imageContainerRectInfo.height,
+              window.scrollY
+            )}
+            popupLeftOffset={getPopUpLeftOffset(
+              imageContainerRectInfo.left,
+              imageContainerRectInfo.width,
+              index,
+              separateCount
+            )}
+            popupInfoHeight={POPUP_INFO_HEIGHT}
           />
-        </ModalPortal>
-      ) : null}
+        ) : null}
+      </ModalPortal>
       {isBigModalOpen ? (
         <ModalPortal>
           <BigModal imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc} toggle={bigModalToggle} />

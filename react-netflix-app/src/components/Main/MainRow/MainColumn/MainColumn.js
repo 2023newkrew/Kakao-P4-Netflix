@@ -14,6 +14,7 @@ export default function MainColumn({ imgList, setImageContainerSize, separateCou
           vote_average={item.vote_average}
           vote_count={item.vote_count}
           release_date={item.release_date}
+          index={idx}
         />
       ))}
     </MainColumnContainer>

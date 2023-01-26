@@ -3,9 +3,9 @@ import styled from "styled-components";
 const SmallModalWrapper = styled.div``;
 
 const SmallModalContainer = styled.div`
-  width: ${(props) => props.imageContainerWidth}px;
+  width: ${(props) => props.width}px;
 
-  top: ${(props) => props.offsetTop + props.scrollY}px;
+  top: ${(props) => props.offsetTop}px;
   left: ${(props) => props.offsetLeft}px;
   transform-origin: center center;
   transform: none;
@@ -19,9 +19,9 @@ const SmallModalContainer = styled.div`
 
   @keyframes popup {
     100% {
-      width: ${(props) => props.imageContainerWidth * 1.3}px;
-      top: ${(props) => props.offsetTop + props.scrollY - (props.imageContainerHeight * 0.3) / 2 - 30}px;
-      left: ${(props) => props.offsetLeft - (props.imageContainerWidth * 0.3) / 2}px;
+      width: ${(props) => props.popupWidth}px;
+      top: ${(props) => props.popupTopOffset}px;
+      left: ${(props) => props.popupLeftOffset}px;
     }
   }
 `;
@@ -30,7 +30,7 @@ const SmallModalImg = styled.img`
   width: 100%;
 `;
 const SmallModalInfo = styled.div`
-  height: 70px;
+  height: ${(props) => props.popupInfoHeight}px;
   color: white;
   white-space: pre-line;
 `;

@@ -3,12 +3,16 @@ import { SmallModalContainer, SmallModalImg, SmallModalInfo, SmallModalWrapper }
 
 export default function SmallModal({
   imgSrc,
-  offsetLeft,
-  offsetTop,
-  imageContainerWidth,
-  imageContainerHeight,
   toggle,
   info,
+  width,
+  height,
+  offsetLeft,
+  offsetTop,
+  popupWidth,
+  popupTopOffset,
+  popupLeftOffset,
+  popupInfoHeight,
 }) {
   const modalContainerRef = useRef(null);
   useEffect(() => {
@@ -18,11 +22,7 @@ export default function SmallModal({
   return (
     <SmallModalWrapper>
       <SmallModalContainer
-        offsetLeft={offsetLeft}
-        offsetTop={offsetTop}
-        imageContainerWidth={imageContainerWidth}
-        imageContainerHeight={imageContainerHeight}
-        scrollY={window.scrollY}
+        {...{ offsetLeft, offsetTop, width, height, popupWidth, popupTopOffset, popupLeftOffset, popupInfoHeight }}
         ref={modalContainerRef}
       >
         <SmallModalImg src={imgSrc} />
