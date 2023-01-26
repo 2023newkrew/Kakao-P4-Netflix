@@ -17,17 +17,16 @@ import api from "utils/API";
 
 const ContentCards = ({ contents }) => {
   return (
-    <ContentListSlider
-      slidesPerView={6}
-      spaceBetween={3}
-      slidesPerGroup={6}
-      loop={true}
-      touchRatio={0}
-      loopFillGroupWithBlank={false}
-      navigation={true}
-      modules={[Pagination, Navigation]}
-    >
-      <ContentListWrapper>
+    <ContentListWrapper>
+      <ContentListSlider
+        slidesPerView={6}
+        spaceBetween={3}
+        slidesPerGroup={6}
+        touchRatio={0}
+        loopFillGroupWithBlank={false}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+      >
         {contents?.map((content) => {
           return (
             <SwiperSlide key={content.id}>
@@ -35,8 +34,8 @@ const ContentCards = ({ contents }) => {
             </SwiperSlide>
           );
         })}
-      </ContentListWrapper>
-    </ContentListSlider>
+      </ContentListSlider>
+    </ContentListWrapper>
   );
 };
 
