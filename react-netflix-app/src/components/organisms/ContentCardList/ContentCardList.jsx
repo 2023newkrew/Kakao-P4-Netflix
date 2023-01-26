@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ContentCard } from "components";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,6 +14,31 @@ import {
 } from "./ContentCardList.style";
 
 import api from "utils/API";
+
+const ContentCards = ({ contents }) => {
+  return (
+    <ContentListSlider
+      slidesPerView={6}
+      spaceBetween={3}
+      slidesPerGroup={6}
+      loop={true}
+      touchRatio={0}
+      loopFillGroupWithBlank={false}
+      navigation={true}
+      modules={[Pagination, Navigation]}
+    >
+      <ContentListWrapper>
+        {contents?.map((content) => {
+          return (
+            <SwiperSlide key={content.id}>
+              <ContentCard key={content.id} content={content} />
+            </SwiperSlide>
+          );
+        })}
+      </ContentListWrapper>
+    </ContentListSlider>
+  );
+};
 
 const ContentCardList = ({ id, genrename }) => {
   const [contents, setContents] = useState([
@@ -34,37 +59,12 @@ const ContentCardList = ({ id, genrename }) => {
     setContents(res.results);
   };
 
-  const ContentCards = React.memo(() => {
-    return (
-      <ContentListSlider
-        slidesPerView={6}
-        spaceBetween={3}
-        slidesPerGroup={6}
-        loop={true}
-        touchRatio={0}
-        loopFillGroupWithBlank={false}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-      >
-        <ContentListWrapper>
-          {contents?.map((content) => {
-            return (
-              <SwiperSlide>
-                <ContentCard key={content.id} content={content} />
-              </SwiperSlide>
-            );
-          })}
-        </ContentListWrapper>
-      </ContentListSlider>
-    );
-  });
-
   return (
     <ContentListContainer>
       <ContentListTitle>{genrename}</ContentListTitle>
-      <ContentCards />
+      <ContentCards contents={contents} />
     </ContentListContainer>
   );
 };
 
-export default ContentCardList;
+export default React.memo(ContentCardList);
