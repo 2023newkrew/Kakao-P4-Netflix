@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 import PropTypes from 'prop-types';
 import { ReactComponent as SearchIcon } from '@icons/search.svg';
@@ -13,11 +14,12 @@ export const Input = tw.input`
 
 const SEARCH_DELAY_MS = 300;
 const useSearch = () => {
+  const navigate = useNavigate();
   const timer = useRef(null);
   const { inputValue, handleChange } = useInput();
 
   const search = (value) => {
-    // TODO: 검색 API
+    navigate(`/search?q=${value}`);
   };
 
   useEffect(() => {
