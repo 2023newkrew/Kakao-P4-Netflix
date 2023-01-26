@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { ReactComponent as LogoImage } from '@assets/logo.svg';
 import { ReactComponent as SearchIcon } from '@assets/search.svg';
 import { ReactComponent as NotificationsIcon } from '@assets/notifications.svg';
@@ -41,7 +40,16 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default function Header({ menus }) {
+const menus = [
+  { path: '/hot', name: '홈' },
+  { path: '/series', name: '시리즈' },
+  { path: '/movie', name: '영화' },
+  { path: '/latest', name: 'NEW! 요즘 대세 콘텐츠' },
+  { path: '/my-list', name: '내가 찜한 콘텐츠' },
+  { path: '/by-language', name: '언어별로 찾아보기' },
+];
+
+export default function Header() {
   return (
     <HeaderLayout>
       <Navigation>
@@ -63,12 +71,3 @@ export default function Header({ menus }) {
     </HeaderLayout>
   );
 }
-
-Header.propTypes = {
-  menus: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
