@@ -43,6 +43,13 @@ const SearchInput = ({ setCanSearch }) => {
   const searchInputRef = useRef(null);
   const { inputValue, handleChange } = useSearch();
 
+  useEffect(() => {
+    if (!searchInputRef.current) {
+      return;
+    }
+    searchInputRef.current.focus();
+  }, []);
+
   return (
     <Container>
       <SearchIcon />
