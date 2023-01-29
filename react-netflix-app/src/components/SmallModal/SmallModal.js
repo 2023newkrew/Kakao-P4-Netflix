@@ -16,7 +16,7 @@ export default function SmallModal({
 }) {
   const modalContainerRef = useRef(null);
   useEffect(() => {
-    modalContainerRef.current.addEventListener("click", toggle);
+    modalContainerRef.current.addEventListener("mouseleave", toggle);
   });
 
   return (

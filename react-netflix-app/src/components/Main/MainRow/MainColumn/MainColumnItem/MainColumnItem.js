@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import TheMovieDBAPI from "../../../../../util/TheMovieDBAPI";
-import useModal from "../../../../../util/useModal";
+import TheMovieDBAPI from "../../../../../util/class/TheMovieDBAPI";
+import useModal from "../../../../../util/hooks/useModal";
 import SmallModal from "../../../../SmallModal/SmallModal";
 import { MainColumnItemContainer, MainColumnItemImg } from "./styles";
-import ModalPortal from "../../../../../util/ModalPortal";
+import ModalPortal from "../../../../../util/components/ModalPortal";
 import BigModal from "../../../../BigModal/BigModal";
-import useTimeOutEvent from "../../../../../util/useTimeOutEvent";
+import useTimeOutEvent from "../../../../../util/hooks/useTimeOutEvent";
 
 const POPUP_MULTIPLE_VALUE = 1.3;
 const POPUP_INFO_HEIGHT = 70;
@@ -36,22 +36,24 @@ export default function MainColumnItem({
   release_date,
   index,
 }) {
+  const DELAY = 1000;
   const imageContainerRef = useRef(null);
   const [imageContainerRectInfo, setImageContainerRectInfo] = useState(null);
   const [isSmallModalOpen, smallModalToggle] = useModal();
   const [isBigModalOpen, bigModalToggle] = useModal();
-  useTimeOutEvent(imageContainerRef, "mouseenter", smallModalToggle, "mouseleave", 1000);
+  useTimeOutEvent(imageContainerRef, "mouseenter", smallModalToggle, "mouseleave", DELAY);
 
   useEffect(() => {
     /* 각 MainColumn의 첫 번째 아이템이면 setImageContainerSize(MainRow에서 소유)를 가지고 있음 */
     /* 단순히 보기 편하기 위해 useEffect를 나누었음*/
     if (!setImageContainerSize) return;
+    setImageContainerSize(imageContainerRef.current.clientWidth);
 
     const handleResize = (event) => {
       setImageContainerSize(imageContainerRef.current.clientWidth);
     };
-    setImageContainerSize(imageContainerRef.current.clientWidth);
     window.addEventListener("resize", handleResize);
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -61,8 +63,8 @@ export default function MainColumnItem({
       event.stopPropagation();
       bigModalToggle();
     };
-
     imageContainerRef.current.addEventListener("click", handleClick);
+
     return () => imageContainerRef.current.removeEventListener("click", handleClick);
   }, []);
 
