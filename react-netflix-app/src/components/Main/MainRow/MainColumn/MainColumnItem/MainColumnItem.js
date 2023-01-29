@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import TheMovieDBAPI from "../../../../../util/class/TheMovieDBAPI";
 import useModal from "../../../../../util/hooks/useModal";
-import SmallModal from "../../../../SmallModal/SmallModal";
+import SmallModal from "../../../../Modal/SmallModal/SmallModal";
 import { MainColumnItemContainer, MainColumnItemImg } from "./styles";
 import ModalPortal from "../../../../../util/components/ModalPortal";
-import BigModal from "../../../../BigModal/BigModal";
+import BigModal from "../../../../Modal/BigModal/BigModal";
 import useTimeOutEvent from "../../../../../util/hooks/useTimeOutEvent";
 
 const POPUP_MULTIPLE_VALUE = 1.3;

@@ -25,6 +25,7 @@ const SmallModalContainer = styled.div`
   position: absolute;
   animation: ${(props) => popup(props)} 0.2s;
   animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
   background-color: rgb(27, 27, 27);
 `;
 
