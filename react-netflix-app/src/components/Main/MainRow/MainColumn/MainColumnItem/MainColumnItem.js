@@ -104,6 +104,7 @@ export default function MainColumnItem({
               separateCount
             )}
             popupInfoHeight={POPUP_INFO_HEIGHT}
+            onClickPost={bigModalToggle}
           />
         </ModalPortal>
       ) : null}
