@@ -68,7 +68,7 @@ function Banner({ movie, onDetailClick }) {
         <StyledTitle>{movie.title}</StyledTitle>
         <StyledDescription>
           {description}
-          {isOverflow ? '...' : ''}
+          {isOverflow ? '...' : null}
         </StyledDescription>
         <StyledButtonContainer>
           <StyledButton type="button">► 재생</StyledButton>

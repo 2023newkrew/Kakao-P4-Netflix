@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import useSearchParam from '../../hooks/useSearchParam';
 
 const StyledDiv = styled.div`
   position: sticky;
@@ -17,6 +19,11 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: unset;
 `;
 
 const SearchBox = styled.div`
@@ -42,7 +49,19 @@ const SearchInput = styled.input`
 const rootElement = document.body.querySelector('#root');
 
 function Navigator() {
+  const navigate = useNavigate();
   const [isTop, setIsTop] = useState(!window.scrollY);
+  const query = useSearchParam('query') ?? '';
+
+  const handleChangeSearchInput = (event) => {
+    const { value } = event.target;
+
+    if (value) {
+      navigate(`/search?query=${encodeURIComponent(value)}`);
+    } else {
+      navigate('/');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,9 +76,14 @@ function Navigator() {
 
   return (
     <StyledDiv isTop={isTop}>
-      넷플릭스™️
+      <StyledLink to="/">넷플릭스™️</StyledLink>
       <SearchBox>
-        <SearchInput type="text" placeholder="검색" />
+        <SearchInput
+          type="text"
+          placeholder="검색"
+          value={query}
+          onChange={handleChangeSearchInput}
+        />
       </SearchBox>
     </StyledDiv>
   );
