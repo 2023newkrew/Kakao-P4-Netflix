@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SwiperSlide } from 'swiper/react';
@@ -13,16 +13,8 @@ const MovieItemLayout = styled(SwiperSlide)`
 
 const ContentContainer = styled.div`
   position: relative;
-  padding: 32px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   aspect-ratio: 2 / 3;
   cursor: pointer;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
 `;
 
 const Poster = styled(TMDBImage)`
@@ -33,27 +25,34 @@ const Poster = styled(TMDBImage)`
 `;
 
 const Title = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   font-size: 1.4vw;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export default function MovieItem({ movie }) {
   const { poster_path, title } = movie;
-  const [isHovered, setIsHovered] = useState(false);
   const [ModalContainer, open, close] = useModal();
-
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
 
   return (
     <MovieItemLayout>
-      <ContentContainer
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={open}
-      >
+      <ContentContainer onClick={open}>
         <Poster type="poster" path={poster_path} alt={title} />
-        {isHovered && <Title>{title}</Title>}
+        <Title>{title}</Title>
       </ContentContainer>
       <ModalContainer>
         <InfoModal close={close} movie={movie} />
