@@ -1,7 +1,7 @@
 import { COLORS } from '@/constants/colors.contant';
 import { GlobalPortal } from '@/GlobalPortal';
 import { isModalOpenState } from '@/recoil/modal.recoil';
-import { ReactNode, useEffect } from 'react';
+import { MouseEvent, ReactNode, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -11,8 +11,11 @@ interface ModalProps {
 
 export function Modal({ children } : ModalProps) {
   const setIsOpen = useSetRecoilState(isModalOpenState);
-  const handleClose = () => {
-    setIsOpen(false);
+  
+  const handleClose = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      setIsOpen(false);
+    }
   };
 
   useEffect(() => {
