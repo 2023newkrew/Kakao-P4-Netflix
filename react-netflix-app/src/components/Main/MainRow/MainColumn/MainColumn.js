@@ -8,6 +8,8 @@ export default function MainColumn({ imgList, setImageContainerSize, separateCou
       {imgList.map((item, idx) => (
         <MainColumnItem
           key={item.id}
+          title={item.title}
+          movieId={item.id}
           imgSrc={item.backdrop_path}
           setImageContainerSize={setImageContainerSize && idx === 0 ? setImageContainerSize : null}
           separateCount={separateCount}
@@ -15,6 +17,7 @@ export default function MainColumn({ imgList, setImageContainerSize, separateCou
           voteCount={item.vote_count}
           releaseDate={item.release_date}
           index={idx}
+          overViewInfo={item.overview}
         />
       ))}
     </MainColumnContainer>

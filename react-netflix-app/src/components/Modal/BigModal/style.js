@@ -23,7 +23,7 @@ const BigModalContainer = styled.div`
   flex-direction: column;
 `;
 
-const BigModalImage = styled.img`
+const BigModalVideo = styled.iframe`
   height: 50%;
   width: 100%;
 `;
@@ -32,6 +32,10 @@ const BigModalInfo = styled.div`
   width: 100%;
   background-color: rgb(27, 27, 27);
   color: white;
+  padding-top: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 13px;
 `;
 
-export { BigModalBackground, BigModalContainer, BigModalImage, BigModalInfo };
+export { BigModalBackground, BigModalContainer, BigModalVideo, BigModalInfo };

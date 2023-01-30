@@ -25,7 +25,7 @@ export default function MainPost() {
   return postInfo !== "" ? (
     <>
       <MainPostContainer>
-        <MainPostImg src={TheMovieDBAPI.imgBaseURL + postInfo.backdrop_path} />
+        <MainPostImg src={TheMovieDBAPI.IMG_BASE_URL + postInfo.backdrop_path} />
         <MainPostMetaContainer>
           <MainPostTitle>{postInfo.title}</MainPostTitle>
           <MainPostInfo>{postInfo.overview}</MainPostInfo>

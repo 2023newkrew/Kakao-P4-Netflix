@@ -28,6 +28,8 @@ const getPopUpLeftOffset = (containerLeft, containerWidth, index, separateCount)
 };
 
 export default function MainColumnItem({
+  movieId,
+  title,
   imgSrc,
   setImageContainerSize,
   separateCount,
@@ -35,6 +37,7 @@ export default function MainColumnItem({
   voteCount,
   releaseDate,
   index,
+  overViewInfo,
 }) {
   const DELAY = 1000;
   const imageContainerRef = useRef(null);
@@ -76,13 +79,13 @@ export default function MainColumnItem({
   return (
     <>
       <MainColumnItemContainer ref={imageContainerRef} separateCount={separateCount}>
-        <MainColumnItemImg src={TheMovieDBAPI.imgBaseURL + imgSrc} />
+        <MainColumnItemImg src={TheMovieDBAPI.IMG_BASE_URL + imgSrc} />
       </MainColumnItemContainer>
 
       {isSmallModalOpen && imageContainerRectInfo ? (
         <ModalPortal>
           <SmallModal
-            imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc}
+            imgSrc={TheMovieDBAPI.IMG_BASE_URL + imgSrc}
             toggle={smallModalToggle}
             info={`vote_average : ${voteAverage}
             vote_count : ${voteCount}
@@ -110,7 +113,13 @@ export default function MainColumnItem({
       ) : null}
       {isBigModalOpen ? (
         <ModalPortal>
-          <BigModal imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc} toggle={bigModalToggle} />
+          <BigModal
+            movieId={movieId}
+            toggle={bigModalToggle}
+            title={title}
+            voteAverage={voteAverage}
+            overViewInfo={overViewInfo}
+          />
         </ModalPortal>
       ) : null}
     </>
