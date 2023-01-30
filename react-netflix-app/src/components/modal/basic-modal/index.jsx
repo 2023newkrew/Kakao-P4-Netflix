@@ -1,24 +1,15 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import CloseIcon from '@assets/close-icon.svg';
 import { Background, CloseButton, ModalContainer } from './styles';
 import useOutsideClick from '@/hooks/use-outside-click';
+import useDeactivateScroll from '@/hooks/use-deactivate-scroll';
 
 const BasicModal = ({ children, onClose }) => {
   const modalRef = useRef(null);
 
   useOutsideClick(modalRef, onClose);
-
-  useEffect(() => {
-    const body = document.querySelector('body');
-    const defaultOverflow = body.style.overflow;
-
-    body.style.overflow = 'hidden';
-
-    return () => {
-      body.style.overflow = defaultOverflow;
-    };
-  }, []);
+  useDeactivateScroll();
 
   return (
     <Background>
