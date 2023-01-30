@@ -1,5 +1,5 @@
 import React from "react";
-import { NavTab, NavTabList } from "components";
+import { NavTab, NavTabList, SearchBar } from "components";
 
 import {
   HeaderContainer,
@@ -39,7 +39,7 @@ const Header = ({}) => {
           </NavItem>
         </Nav>
         <Nav>
-          <NavItem>Search</NavItem>
+          <SearchBar />
           <NavTab path="/#" tabText="키즈" />
           <NavItem>
             <button type="button">
