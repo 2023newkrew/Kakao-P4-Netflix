@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Portal from '@components/Portal';
@@ -9,47 +9,42 @@ import useBodyScrollLock from '@hooks/useBodyScrollLock';
 import useEscapeKey from '@hooks/useEscapeKey';
 
 export const ModalProvider = ({ children, id }) => {
-  const containerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [node, setNode] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: null, y: null });
+  const [containerEl, setContainerEl] = useState(null);
+  const [transformOrigin, setTransformOrigin] = useState({ x: null, y: null });
 
-  useEffect(() => {
-    const getMousePosition = (event) => {
-      if (!mousePosition.x && !mousePosition.y) {
-        setMousePosition({ x: event.clientX, y: event.clientY });
+  const callbackContainerRef = useCallback(
+    (ref) => {
+      setContainerEl(ref);
+      if (ref) {
+        ref.style.setProperty('transform-origin', `${transformOrigin.x}px ${transformOrigin.y}px`);
+        setTimeout(() => {
+          ref.style.setProperty('--scale', '1');
+        }, 0);
       }
-    };
+    },
+    [transformOrigin],
+  );
 
-    window.addEventListener('click', getMousePosition);
-    return () => {
-      window.removeEventListener('click', getMousePosition);
-    };
-  }, []);
+  const open = useCallback(({ node, position }) => {
+    const x = position?.x ?? window.innerWidth / 2;
+    const y = position?.y ?? window.innerHeight / 2;
+    const width = position?.width ?? 0;
+    const height = position?.height ?? 0;
 
-  useEffect(() => {
-    if (!containerRef.current || !isOpen) {
-      return;
-    }
-
-    containerRef.current.style.setProperty('transform-origin', `${mousePosition.x}px ${mousePosition.y}px`);
-    setTimeout(() => {
-      containerRef.current.style.setProperty('--scale', 'scale(1)');
-    }, 0);
-  }, [isOpen, mousePosition]);
-
-  const open = useCallback(({ node }) => {
+    setTransformOrigin({ x: x + width / 2, y: y + height / 2 });
     setNode(node);
     setIsOpen(true);
   }, []);
 
   const close = useCallback(() => {
-    containerRef.current.style.setProperty('--scale', 'scale(0)');
+    containerEl.style.setProperty('--scale', '0');
     setTimeout(() => {
       setNode(null);
       setIsOpen(false);
     }, 250);
-  }, []);
+  }, [containerEl]);
 
   useBodyScrollLock(isOpen);
   useEscapeKey(close);
@@ -60,14 +55,14 @@ export const ModalProvider = ({ children, id }) => {
       open,
       close,
     };
-  }, [isOpen]);
+  }, [isOpen, close]);
 
   return (
     <ModalContext.Provider value={context}>
       {children}
       {isOpen ? (
         <Portal portalId={id}>
-          <Container ref={containerRef}>
+          <Container ref={callbackContainerRef}>
             <Content>
               <CloseButton
                 onClick={(e) => {
@@ -94,10 +89,8 @@ export const useModal = () => {
   const { open, close } = useModalContext();
 
   const openModal = useCallback(
-    ({ node }) => {
-      open({
-        node,
-      });
+    (payload) => {
+      open(payload);
     },
     [open, close],
   );

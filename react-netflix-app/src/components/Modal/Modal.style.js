@@ -2,9 +2,9 @@ import tw, { styled } from 'twin.macro';
 
 export const Container = styled.dialog`
   ${tw`bg-[rgba(0, 0, 0, 0.7)] fixed inset-0 z-[1000] flex h-full w-full flex-col items-center justify-center overflow-y-auto`}
-  --scale: scale(0);
-  transform: var(--scale);
-  transition: transform 200ms linear, opacity 300ms ease-in-out;
+  --scale: 0;
+  transform: scale(var(--scale));
+  transition: transform 200ms ease-in-out, opacity 300ms ease-in-out;
   will-change: opacity, transform;
 `;
 export const Content = tw.div`

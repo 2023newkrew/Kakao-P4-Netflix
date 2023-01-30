@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Container,
@@ -30,14 +30,16 @@ import { ReactComponent as ArrowDownIcon } from '@assets/icons/arrowDown.svg';
 
 const DetailMovieCard = ({ movie }) => {
   const { data: detail, isLoading } = useMovieDetail(movie.id);
+  const cardRef = useRef(null);
   const openModal = useModal();
 
   const showMovieDetailModal = () => {
-    openModal({ node: <MovieDetail movie={detail} /> });
+    const position = cardRef.current.getBoundingClientRect();
+    openModal({ node: <MovieDetail movie={detail} />, position });
   };
 
   return (
-    <DetailContainer className="movie-detail" onClick={showMovieDetailModal}>
+    <DetailContainer ref={cardRef} className="movie-detail" onClick={showMovieDetailModal}>
       <DetailInfos>
         <h4>{movie.title}</h4>
         <UtilsWrapper>
