@@ -31,27 +31,27 @@ export default function MainColumnItem({
   imgSrc,
   setImageContainerSize,
   separateCount,
-  vote_average,
-  vote_count,
-  release_date,
+  voteAverage,
+  voteCount,
+  releaseDate,
   index,
 }) {
   const DELAY = 1000;
   const imageContainerRef = useRef(null);
   const [imageContainerRectInfo, setImageContainerRectInfo] = useState(null);
-  const [isSmallModalOpen, smallModalToggle] = useModal();
-  const [isBigModalOpen, bigModalToggle] = useModal();
+  const { isModalOpen: isSmallModalOpen, toggle: smallModalToggle } = useModal();
+  const { isModalOpen: isBigModalOpen, toggle: bigModalToggle } = useModal();
   useTimeOutEvent(imageContainerRef, "mouseenter", smallModalToggle, "mouseleave", DELAY);
 
   useEffect(() => {
     /* 각 MainColumn의 첫 번째 아이템이면 setImageContainerSize(MainRow에서 소유)를 가지고 있음 */
     /* 단순히 보기 편하기 위해 useEffect를 나누었음*/
     if (!setImageContainerSize) return;
-    setImageContainerSize(imageContainerRef.current.clientWidth);
 
-    const handleResize = (event) => {
+    const handleResize = () => {
       setImageContainerSize(imageContainerRef.current.clientWidth);
     };
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
@@ -84,9 +84,9 @@ export default function MainColumnItem({
           <SmallModal
             imgSrc={TheMovieDBAPI.imgBaseURL + imgSrc}
             toggle={smallModalToggle}
-            info={`vote_average : ${vote_average}
-            vote_count : ${vote_count}
-            release_date : ${release_date}`}
+            info={`vote_average : ${voteAverage}
+            vote_count : ${voteCount}
+            release_date : ${releaseDate}`}
             offsetLeft={imageContainerRectInfo.left}
             offsetTop={imageContainerRectInfo.top + window.scrollY}
             width={imageContainerRectInfo.width}

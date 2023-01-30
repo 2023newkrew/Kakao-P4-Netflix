@@ -9,6 +9,8 @@ export default function BigModal({ imgSrc, toggle }) {
       toggle();
     };
     document.addEventListener("click", handleClick);
+
+    return document.removeEventListener("click", handleClick);
   }, []);
   return (
     <BigModalBackground>

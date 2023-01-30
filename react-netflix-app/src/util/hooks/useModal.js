@@ -7,5 +7,5 @@ export default function useModal() {
     setIsModalOpen(!isModalOpen);
   };
 
-  return [isModalOpen, toggle];
+  return { isModalOpen, toggle };
 }

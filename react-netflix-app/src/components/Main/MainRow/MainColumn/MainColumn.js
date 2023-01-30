@@ -11,9 +11,9 @@ export default function MainColumn({ imgList, setImageContainerSize, separateCou
           imgSrc={item.backdrop_path}
           setImageContainerSize={setImageContainerSize && idx === 0 ? setImageContainerSize : null}
           separateCount={separateCount}
-          vote_average={item.vote_average}
-          vote_count={item.vote_count}
-          release_date={item.release_date}
+          voteAverage={item.vote_average}
+          voteCount={item.vote_count}
+          releaseDate={item.release_date}
           index={idx}
         />
       ))}

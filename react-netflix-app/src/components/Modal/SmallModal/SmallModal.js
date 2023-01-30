@@ -18,7 +18,7 @@ export default function SmallModal({
   const modalContainerRef = useRef(null);
   useEffect(() => {
     modalContainerRef.current.addEventListener("mouseleave", toggle);
-  });
+  }, []);
   const handleClick = (event) => {
     /* 클릭 이벤트가 모달 외부로 전파되어 다시 toggle 되는 현상을 막기 위함 */
     event.stopPropagation();
