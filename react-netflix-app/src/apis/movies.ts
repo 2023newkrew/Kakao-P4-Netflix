@@ -10,4 +10,7 @@ const API_PREFIX = obj2queryString({
 export const getMovies = async (sortType: MovieSortType) => {
   return await customAxios.get(`/movie/${sortType}?${API_PREFIX}`);
 };
+export const getMovieVideo = async (movieID: number) => {
+  return await customAxios.get(`/movie/${movieID}/videos?${API_PREFIX}`);
+};
 

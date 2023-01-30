@@ -2,7 +2,7 @@ import { Image } from '@components/common/Image';
 import { List, ListCard } from '@components/common/List';
 import { Text } from '@components/common/Text';
 import { FONT_SIZE } from '@constants/typography.constant';
-import { MovieType } from '@models/movies.model';
+import { MovieDetailType, MovieType } from '@models/movies.model';
 import { memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ArrowSVG } from '@assets/icon-arrow.svg';
@@ -11,6 +11,8 @@ import { TOTAL_SHOWN } from '@constants/movies.constant';
 import { isModalOpenState } from '@/recoil/modal.recoil';
 import { useRecoilState } from 'recoil';
 import { MovieModal } from './MoiveModal';
+import { getMovieVideo } from '@/apis/movies';
+import { useFetchMovieDetail } from '@/hooks/useFetchMovieDetail';
 
 interface MovieListProps {
   title: string,
@@ -22,24 +24,20 @@ interface MovieListProps {
 const ELEMENT_WIDTH = 360;
 const ELEMENT_HEIGHT = 540;
 const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieListProps) => {
+  
+  // Carousel
   const wrapperRef = useRef<HTMLUListElement>(null);
-
-  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
-  const [selectedMovie, setSelectedMovie] = useState<MovieType | undefined>(undefined);
-  const handleSelectMovie = (movie: MovieType) => {
-    setSelectedMovie(movie);
-    setIsModalOpen(true);
-  };
-
   useEffect(() => {
     if (!wrapperRef || !wrapperRef.current) return;
     wrapperRef.current.style.setProperty('transform', `translateX(-${ELEMENT_WIDTH * (page - 1)}px`);
   }, [page]);
-  useEffect(() => {
-    if (isModalOpen === false) {
-      setSelectedMovie(undefined);
-    }
-  }, [isModalOpen]);
+
+  // Fetch Movie Detail
+  const [handleSelectMovie, selectedMovie, isError] = useFetchMovieDetail();
+
+  if (isError) {
+    return <>error</>;
+  }
 
   return (
     <Container>
@@ -54,7 +52,7 @@ const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieL
             </ListCard>
           );
         })}
-        {isModalOpen && selectedMovie &&
+        {selectedMovie &&
           <MovieModal movie={selectedMovie}/>
         }
       </Wrapper>

@@ -15,3 +15,7 @@ export type MovieType = {
   vote_count: number
 }
 export type MovieSortType = 'popular' | 'upcoming';
+export type MovieDetailType = {
+  isYoutube: boolean,
+  path: string,
+}

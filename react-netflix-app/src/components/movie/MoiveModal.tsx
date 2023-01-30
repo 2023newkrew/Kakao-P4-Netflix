@@ -1,31 +1,36 @@
 import { COLORS } from '@/constants/colors.contant';
-import { MovieType } from '@/models/movies.model';
+import { MovieDetailType, MovieType } from '@/models/movies.model';
 import styled from 'styled-components';
+import { Image } from '../common/Image';
 import { Modal } from '../common/Modal';
-import { Text } from '../common/Text';
+import Youtube from 'react-youtube';
 
 interface MovieModalProps {
-  movie: MovieType
+  movie: MovieDetailType
 }
 export function MovieModal ({ movie }: MovieModalProps) {
-  const { id, title } = movie;
+  const { isYoutube, path } = movie;
+  console.log(path);
   return (
     <Modal>
       <Container>
-        <Text color={COLORS.black}>
-          {id}  
-        </Text>
-        <Text color={COLORS.black}>
-          {title}
-        </Text>
+        {isYoutube ?
+          <Youtube
+            videoId={path}
+          />
+          :
+          <Poster src={path} imageType='themoviedb'/>
+        }
       </Container>
     </Modal>
   );
 }
 
 const Container = styled.div`
-  background: ${COLORS.white};
+  background: ${COLORS.blackTrans};
+  max-width: 80vw;
+  overflow: auto;
+`;
+const Poster = styled(Image)`
   max-height: 80vh;
-  border-radius: 8px;
-  padding: 24px;
 `;
