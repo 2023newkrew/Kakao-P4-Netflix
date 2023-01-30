@@ -20,7 +20,7 @@ const BannerLayout = styled.section`
   gap: 16px;
 `;
 
-const Backdrop = styled(TMDBImage)`
+const Backdrop = styled(TMDBImage).attrs({ type: 'backdrop' })`
   position: absolute;
   top: 0;
   left: 0;
@@ -50,7 +50,7 @@ export default function Banner({ isLoading, movie }) {
 
   return (
     <BannerLayout>
-      <Backdrop type="backdrop" path={backdrop_path} alt={title} />
+      <Backdrop path={backdrop_path} alt={title} />
       <Title>{title}</Title>
       <Overview>{overview}</Overview>
       <ButtonContainer>

@@ -21,7 +21,7 @@ const CloseButton = styled(CircleButton)`
   z-index: 1;
 `;
 
-const Backdrop = styled(TMDBImage)`
+const Backdrop = styled(TMDBImage).attrs({ type: 'backdrop' })`
   height: 45vw;
   mask-image: linear-gradient(black, transparent);
 `;
@@ -54,7 +54,7 @@ export default function InfoModal({ close, movie }) {
       >
         <CloseIcon />
       </CloseButton>
-      <Backdrop type="backdrop" path={backdrop_path} alt={title} />
+      <Backdrop path={backdrop_path} alt={title} />
       <InfoContainer>
         <Title>{title}</Title>
         <Overview>{overview}</Overview>

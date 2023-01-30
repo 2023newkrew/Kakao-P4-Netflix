@@ -17,7 +17,7 @@ const ContentContainer = styled.div`
   cursor: pointer;
 `;
 
-const Poster = styled(TMDBImage)`
+const Poster = styled(TMDBImage).attrs({ type: 'poster' })`
   position: absolute;
   top: 0;
   left: 0;
@@ -51,7 +51,7 @@ export default function MovieItem({ movie }) {
   return (
     <MovieItemLayout>
       <ContentContainer onClick={openModal}>
-        <Poster type="poster" path={poster_path} alt={title} />
+        <Poster path={poster_path} alt={title} />
         <Title>{title}</Title>
       </ContentContainer>
       <ModalContainer>
