@@ -54,14 +54,18 @@ export default function Banner({ isLoading, movie }) {
       <Title>{title}</Title>
       <Overview>{overview}</Overview>
       <ButtonContainer>
-        <SquareButton Icon={PlayIcon} name="재생" />
+        <SquareButton>
+          <PlayIcon />
+          재생
+        </SquareButton>
         <SquareButton
-          Icon={InfoIcon}
-          name="상세 정보"
           color="white"
           backgroundColor="rgba(128, 128, 128, 0.5)"
           onClick={open}
-        />
+        >
+          <InfoIcon />
+          상세 정보
+        </SquareButton>
       </ButtonContainer>
       <ModalContainer>
         <InfoModal close={close} movie={movie} />

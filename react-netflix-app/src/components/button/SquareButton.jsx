@@ -25,36 +25,26 @@ const ButtonLayout = styled.button`
   }
 `;
 
-export default function Button({
-  Icon,
-  name,
-  color,
-  backgroundColor,
-  onClick,
-}) {
+export default function Button({ color, backgroundColor, onClick, children }) {
   return (
     <ButtonLayout
       color={color}
       backgroundColor={backgroundColor}
       onClick={onClick}
     >
-      <Icon color={color} />
-      {name}
+      {children}
     </ButtonLayout>
   );
 }
 
 Button.propTypes = {
-  Icon: PropTypes.object,
-  name: PropTypes.string,
   color: PropTypes.string,
   backgroundColor: PropTypes.string,
   onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
 };
 
 Button.defaultProps = {
-  Icon: null,
-  name: null,
   color: 'black',
   backgroundColor: 'white',
   onClick: null,

@@ -48,11 +48,12 @@ export default function InfoModal({ close, movie }) {
   return (
     <ModalLayout onClick={(e) => e.stopPropagation()}>
       <CloseButton
-        Icon={CloseIcon}
         color="white"
         backgroundColor="rgba(0, 0, 0, 0.5)"
         onClick={close}
-      />
+      >
+        <CloseIcon />
+      </CloseButton>
       <Backdrop type="backdrop" path={backdrop_path} alt={title} />
       <InfoContainer>
         <Title>{title}</Title>

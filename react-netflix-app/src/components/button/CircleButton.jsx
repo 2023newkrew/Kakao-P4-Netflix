@@ -25,10 +25,10 @@ const ButtonLayout = styled.button`
 
 export default function Button({
   className,
-  Icon,
   color,
   backgroundColor,
   onClick,
+  children,
 }) {
   return (
     <ButtonLayout
@@ -37,17 +37,17 @@ export default function Button({
       backgroundColor={backgroundColor}
       onClick={onClick}
     >
-      <Icon color={color} />
+      {children}
     </ButtonLayout>
   );
 }
 
 Button.propTypes = {
   className: PropTypes.string.isRequired,
-  Icon: PropTypes.object.isRequired,
   color: PropTypes.string,
   backgroundColor: PropTypes.string,
   onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
 };
 
 Button.defaultProps = {
