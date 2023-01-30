@@ -2,32 +2,44 @@ import { Image } from '@components/common/Image';
 import { List, ListCard } from '@components/common/List';
 import { Text } from '@components/common/Text';
 import { FONT_SIZE } from '@constants/typography.constant';
-// import { usePrevState } from '@hooks/usePrevState';
 import { MovieType } from '@models/movies.model';
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ArrowSVG } from '@assets/icon-arrow.svg';
 import { COLORS } from '@constants/colors.contant';
 import { TOTAL_SHOWN } from '@constants/movies.constant';
+import { isModalOpenState } from '@/recoil/modal.recoil';
+import { useRecoilState } from 'recoil';
+import { MovieModal } from './MoiveModal';
 
 interface MovieListProps {
   title: string,
   page: number,
   handlePrevPage: () => void,
   handleNextPage: () => void,
-  handleSelectMovie: (movie: MovieType) => void,
   movies: MovieType[],
 }
 const ELEMENT_WIDTH = 360;
 const ELEMENT_HEIGHT = 540;
-const MovieList = ({title, movies, page, handlePrevPage, handleNextPage, handleSelectMovie}: MovieListProps) => {
-  // const prevPage = usePrevState<number>(page);
+const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieListProps) => {
   const wrapperRef = useRef<HTMLUListElement>(null);
-  
+
+  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
+  const [selectedMovie, setSelectedMovie] = useState<MovieType | undefined>(undefined);
+  const handleSelectMovie = (movie: MovieType) => {
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
+  };
+
   useEffect(() => {
     if (!wrapperRef || !wrapperRef.current) return;
     wrapperRef.current.style.setProperty('transform', `translateX(-${ELEMENT_WIDTH * (page - 1)}px`);
   }, [page]);
+  useEffect(() => {
+    if (isModalOpen === false) {
+      setSelectedMovie(undefined);
+    }
+  }, [isModalOpen]);
 
   return (
     <Container>
@@ -42,6 +54,9 @@ const MovieList = ({title, movies, page, handlePrevPage, handleNextPage, handleS
             </ListCard>
           );
         })}
+        {isModalOpen && selectedMovie &&
+          <MovieModal movie={selectedMovie}/>
+        }
       </Wrapper>
       {page !== 1 && <PrevArrow onClick={handlePrevPage}/>}
       {page !== movies.length - TOTAL_SHOWN + 1 && <NextArrow onClick={handleNextPage}/>}
@@ -49,7 +64,7 @@ const MovieList = ({title, movies, page, handlePrevPage, handleNextPage, handleS
   );
 };
 
-export default MovieList;
+export default memo(MovieList);
 
 const Container = styled.section`
   position: relative;
@@ -71,7 +86,6 @@ const Poster = styled(Image)`
   &:hover {
     transition: 0.5s transform;
     transform: scale(1.1);
-    z-index: 999;
   }
 `;
 const NextArrow = styled(ArrowSVG)`

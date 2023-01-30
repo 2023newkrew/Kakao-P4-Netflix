@@ -2,15 +2,14 @@ import styled from 'styled-components';
 import { ReactComponent as LogoSVG } from '@assets/icon-netflix.svg';
 import { Button } from '@components/common/Button';
 import { useNavigate } from 'react-router-dom';
-
 import { useEffect, useState } from 'react';
 import { COLORS } from '@constants/colors.contant';
 import { debounce } from '@utils/debounce';
 
-
 export function Header() {
   const navigate = useNavigate();
   const [isTop, setIsTop] = useState(true);  
+  
   const handleLogoClick = () => {
     navigate('/');
   };
@@ -20,6 +19,9 @@ export function Header() {
   useEffect(() => {
 
     const handleScroll = debounce(() => {
+      const isModalOpen = document.body.style.getPropertyValue('position') === 'fixed';
+      if (isModalOpen) return;
+      
       if (window.scrollY < 80) {
         setIsTop(true);
       } else {
@@ -52,7 +54,7 @@ const Container = styled.header<{isTop: boolean}>`
   align-items: center;
   
   margin: 0 auto;
-  z-index: 99;
+  
   background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent);
   background: ${props => props.isTop ? 'none' : COLORS.black};
 `;

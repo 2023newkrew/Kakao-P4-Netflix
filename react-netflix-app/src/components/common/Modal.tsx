@@ -1,6 +1,8 @@
 import { COLORS } from '@/constants/colors.contant';
 import { GlobalPortal } from '@/GlobalPortal';
-import { ReactNode } from 'react';
+import { isModalOpenState } from '@/recoil/modal.recoil';
+import { ReactNode, useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 interface ModalProps {
@@ -8,9 +10,28 @@ interface ModalProps {
 }
 
 export function Modal({ children } : ModalProps) {
+  const setIsOpen = useSetRecoilState(isModalOpenState);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const y = window.scrollY;
+    document.body.style.setProperty('overflow-y', 'scroll');
+    document.body.style.setProperty('position', 'fixed');
+    document.body.style.setProperty('inset', `-${y}px 0px 0px`);
+
+    return (() => {
+      document.body.style.removeProperty('overflow-y');
+      document.body.style.removeProperty('position');
+      document.body.style.removeProperty('inset');
+      window.scrollTo(0, y);
+    });
+  }, []);
+  
   return (
     <GlobalPortal.Consumer>
-      <ModalContainer>
+      <ModalContainer onClick={handleClose}>
         {children}
       </ModalContainer>
     </GlobalPortal.Consumer>
@@ -18,7 +39,7 @@ export function Modal({ children } : ModalProps) {
 }
 
 const ModalContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;

@@ -7,19 +7,22 @@ import { Reset } from 'styled-reset';
 import Routes from './Routes';
 import GlobalStyle from './GlobalStyle';
 import { GlobalPortal } from './GlobalPortal';
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Reset />
     <GlobalStyle/>
-    <GlobalPortal.Provider>
-      <Layout>
-        <BrowserRouter>
-          <Header />
-          <Routes />
-        </BrowserRouter>
-      </Layout>
-    </GlobalPortal.Provider>
+    <RecoilRoot>
+      <GlobalPortal.Provider>
+        <Layout>
+          <BrowserRouter>
+            <Routes />
+            <Header />
+          </BrowserRouter>
+        </Layout>
+      </GlobalPortal.Provider>
+    </RecoilRoot>
   </React.StrictMode>
 );
