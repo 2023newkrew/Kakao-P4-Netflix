@@ -20,7 +20,6 @@ const MovieCard = ({ movie }) => {
         <MovieCardImage onClick={open} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} loading="lazy" />
         {hover && <MovieCardInfo movie={movie} open={open} />}
       </MovieCardWrapper>
-
       <Modal>
         <MovieModal movie={movie} />
       </Modal>

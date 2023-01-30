@@ -9,11 +9,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
 const CardSlide = ({ category }) => {
-  const { data, loading, LoadingComponent } = useFetch(API.fetchGenreMovie(category));
+  const { data: genreMovieList, loading, LoadingComponent } = useFetch(API.fetchGenreMovie(category));
 
   if (loading) return <LoadingComponent />;
-
-  const genreMovieList = data;
 
   const movieCardList = genreMovieList.map((movie) => (
     <SwiperSlide key={movie.id}>

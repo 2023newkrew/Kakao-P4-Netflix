@@ -6,8 +6,7 @@ import { API } from "@utils/axios";
 import useFetch from "@hooks/useFetch";
 
 const BannerMovie = ({ bannerMovie }) => {
-  const { data, loading, LoadingComponent } = useFetch(API.fetchMovieVideoURL(bannerMovie.id));
-  const bannerMovieURL = data;
+  const { data: bannerMovieURL, loading, LoadingComponent } = useFetch(API.fetchMovieVideoURL(bannerMovie.id));
 
   if (loading) return <LoadingComponent />;
 

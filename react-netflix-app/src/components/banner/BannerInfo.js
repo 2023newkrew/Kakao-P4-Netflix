@@ -12,13 +12,11 @@ const BannerInfo = ({ bannerMovie }) => {
   return (
     <BannerInfoContainer>
       <BannerInfoTitle>{bannerMovie.title}</BannerInfoTitle>
-
       <BannerInfoButton>
         <BannerInfoPlayButton>
           <AiFillCaretRight />
           재생
         </BannerInfoPlayButton>
-
         <BannerInfoDetailButton onClick={open}>
           <IoIosInformationCircleOutline />
           상세 정보

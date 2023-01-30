@@ -7,11 +7,9 @@ import useFetch from "@hooks/useFetch";
 import { API } from "@utils/axios";
 
 const MovieList = ({ search }) => {
-  const { data, loading, LoadingComponent } = useFetch(API.fetchSearchMovieList(search), search);
+  const { data: searchMovieList, loading, LoadingComponent } = useFetch(API.fetchSearchMovieList(search), search);
 
   if (loading) return <LoadingComponent />;
-
-  const searchMovieList = data;
 
   const movieList = searchMovieList.map((movie) => <MovieCard key={movie.id} movie={movie} />);
   return <MovieListContainer>{movieList}</MovieListContainer>;
