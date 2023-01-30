@@ -46,16 +46,16 @@ const Title = styled.div`
 
 export default function MovieItem({ movie }) {
   const { poster_path, title } = movie;
-  const [ModalContainer, open, close] = useModal();
+  const [ModalContainer, openModal, closeModal] = useModal();
 
   return (
     <MovieItemLayout>
-      <ContentContainer onClick={open}>
+      <ContentContainer onClick={openModal}>
         <Poster type="poster" path={poster_path} alt={title} />
         <Title>{title}</Title>
       </ContentContainer>
       <ModalContainer>
-        <InfoModal close={close} movie={movie} />
+        <InfoModal close={closeModal} movie={movie} />
       </ModalContainer>
     </MovieItemLayout>
   );

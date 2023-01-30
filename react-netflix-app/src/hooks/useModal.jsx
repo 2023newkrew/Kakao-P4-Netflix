@@ -41,13 +41,13 @@ export default function useModal() {
   const [isOpened, setIsOpened] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
-  const open = () => {
+  const openModal = () => {
     setIsClosing(false);
     setIsOpened(true);
     document.body.style.overflowY = 'hidden';
   };
 
-  const close = () => {
+  const closeModal = () => {
     setIsClosing(true);
   };
 
@@ -64,7 +64,7 @@ export default function useModal() {
     return ReactDOM.createPortal(
       <ModalWrapper
         isClosing={isClosing}
-        onClick={close}
+        onClick={closeModal}
         onAnimationEnd={handleAnimationEnd}
       >
         {children}
@@ -77,5 +77,5 @@ export default function useModal() {
     children: PropTypes.node.isRequired,
   };
 
-  return [ModalContainer, open, close];
+  return [ModalContainer, openModal, closeModal];
 }

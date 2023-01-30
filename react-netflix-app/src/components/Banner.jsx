@@ -44,7 +44,7 @@ const ButtonContainer = styled.div`
 
 export default function Banner({ isLoading, movie }) {
   const { backdrop_path, title, overview } = movie;
-  const [ModalContainer, open, close] = useModal();
+  const [ModalContainer, openModal, closeModal] = useModal();
 
   if (isLoading) return <Skeleton height="56.25vw" />;
 
@@ -61,14 +61,14 @@ export default function Banner({ isLoading, movie }) {
         <SquareButton
           color="white"
           backgroundColor="rgba(128, 128, 128, 0.5)"
-          onClick={open}
+          onClick={openModal}
         >
           <InfoIcon />
           상세 정보
         </SquareButton>
       </ButtonContainer>
       <ModalContainer>
-        <InfoModal close={close} movie={movie} />
+        <InfoModal close={closeModal} movie={movie} />
       </ModalContainer>
     </BannerLayout>
   );
