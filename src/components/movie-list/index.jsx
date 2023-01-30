@@ -90,13 +90,32 @@ function MovieList({ children }) {
 
   const [{ offset, displayNumber }, dispatch] = useReducer(
     (state, action) => {
-      const nextState = { ...state, ...action };
-
-      const minOffset = 0;
-      const maxOffset = length - nextState.displayNumber;
-      if (nextState.offset < minOffset) nextState.offset = minOffset;
-      if (nextState.offset > maxOffset) nextState.offset = maxOffset;
-      return nextState;
+      switch (action.type) {
+        case 'prevPage': {
+          let nextOffset = offset - displayNumber;
+          if (nextOffset < 0) nextOffset = 0;
+          return { ...state, offset: nextOffset };
+        }
+        case 'nextPage': {
+          const maxOffset = length - displayNumber;
+          let nextOffset = offset + displayNumber;
+          if (nextOffset > maxOffset) nextOffset = maxOffset;
+          return { ...state, offset: nextOffset };
+        }
+        case 'updateDisplayNumber': {
+          const nextDisplayNumber =
+            ScreenWidthQueryToDisplayNumber[action.media];
+          const maxOffset = length - nextDisplayNumber;
+          const nextOffset = offset > maxOffset ? maxOffset : offset;
+          return {
+            ...state,
+            offset: nextOffset,
+            displayNumber: nextDisplayNumber,
+          };
+        }
+        default:
+          throw new Error('유효하지 않은 action');
+      }
     },
     null,
     () => ({
@@ -111,7 +130,10 @@ function MovieList({ children }) {
   useEffect(() => {
     const handleChangeEvent = ({ matches, media }) => {
       if (matches) {
-        dispatch({ displayNumber: ScreenWidthQueryToDisplayNumber[media] });
+        dispatch({
+          type: 'updateDisplayNumber',
+          media,
+        });
       }
     };
 
@@ -126,11 +148,11 @@ function MovieList({ children }) {
   }, []);
 
   const handleLeftScrollButtonClick = () => {
-    dispatch({ offset: offset - displayNumber });
+    dispatch({ type: 'prevPage' });
   };
 
   const handleRightScrollButtonClick = () => {
-    dispatch({ offset: offset + displayNumber });
+    dispatch({ type: 'nextPage' });
   };
 
   const movieListElementRef = useRef(null);
