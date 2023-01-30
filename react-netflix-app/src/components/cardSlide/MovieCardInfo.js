@@ -14,9 +14,7 @@ const MovieCardInfo = ({ movie, open }) => {
   return (
     <MovieCardInfoContainer>
       <MovieCardInfoTitle>{movie.title}</MovieCardInfoTitle>
-
       <MovieCardInfoVoteAverage>{movie.vote_average}</MovieCardInfoVoteAverage>
-
       <MovieCardInfoCategory>{movieCategory}</MovieCardInfoCategory>
     </MovieCardInfoContainer>
   );

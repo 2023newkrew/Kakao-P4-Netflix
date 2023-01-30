@@ -8,6 +8,7 @@ import useModal from "@hooks/useModal";
 import MovieModal from "@components/modal/MovieModal";
 
 import MovieCardInfo from "./MovieCardInfo";
+import LazyLoad from "react-lazyload";
 
 const MovieCard = ({ movie }) => {
   const [hover, setHover] = useState(false);
@@ -19,7 +20,9 @@ const MovieCard = ({ movie }) => {
     <MovieCardContainer>
       <MovieCardWrapper onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
         <ImageWrapper>
-          <MovieCardImage onClick={open} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} loading="lazy" />
+          <LazyLoad>
+            <MovieCardImage onClick={open} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} loading="lazy" />
+          </LazyLoad>
           {hover && <MovieCardInfo movie={movie} open={open} />}
         </ImageWrapper>
       </MovieCardWrapper>

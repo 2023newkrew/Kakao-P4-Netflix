@@ -7,6 +7,7 @@ import useFetch from "@hooks/useFetch";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import LazyLoad from "react-lazyload";
 
 const CardSlide = ({ category }) => {
   const { data: genreMovieList, loading, LoadingComponent } = useFetch(API.fetchGenreMovie(category));
@@ -28,7 +29,6 @@ const CardSlide = ({ category }) => {
           </Swiper>
         </CardSlidePage>
       </CardSlideWrapper>
-
       <CardSlideCategory>{category}</CardSlideCategory>
     </CardSlideContainer>
   );
