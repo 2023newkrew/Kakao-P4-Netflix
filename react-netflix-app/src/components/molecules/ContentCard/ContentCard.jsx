@@ -22,7 +22,7 @@ const ContentCard = ({ content }) => {
       >
         <div>
           <ContentCardImage
-            alt="컨텐츠 썸네일 이미지"
+            alt={`${content.title}의 컨텐츠 썸네일 이미지`}
             src={api.getImageSeverURL() + content.backdrop_path}
             loading="lazy"
           />

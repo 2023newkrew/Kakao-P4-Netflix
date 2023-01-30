@@ -4,11 +4,9 @@ import Main from "pages/Main/Main";
 
 function App() {
   return (
-    <>
-      <ModalProvider>
-        <Main />
-      </ModalProvider>
-    </>
+    <ModalProvider>
+      <Main />
+    </ModalProvider>
   );
 }
 
