@@ -1,7 +1,7 @@
 import { BannerInfoContainer, BannerInfoButton, BannerInfoTitle, BannerInfoPlayButton, BannerInfoDetailButton } from "@styles/banner/BannerInfo.style";
 
-import { AiFillCaretRight } from "react-icons/ai";
-import { IoIosInformationCircleOutline } from "react-icons/io";
+// import { AiFillCaretRight } from "react-icons/ai";
+// import { IoIosInformationCircleOutline } from "react-icons/io";
 
 import useModal from "@hooks/useModal";
 import MovieModal from "@components/modal/MovieModal";
@@ -14,11 +14,11 @@ const BannerInfo = ({ bannerMovie }) => {
       <BannerInfoTitle>{bannerMovie.title}</BannerInfoTitle>
       <BannerInfoButton>
         <BannerInfoPlayButton>
-          <AiFillCaretRight />
+          {/* <AiFillCaretRight /> */}
           재생
         </BannerInfoPlayButton>
         <BannerInfoDetailButton onClick={open}>
-          <IoIosInformationCircleOutline />
+          {/* <IoIosInformationCircleOutline /> */}
           상세 정보
         </BannerInfoDetailButton>
         <Modal>
