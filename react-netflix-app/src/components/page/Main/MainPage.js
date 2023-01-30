@@ -1,10 +1,10 @@
 import React from "react";
-import TheMovieDBAPI from "../../util/class/TheMovieDBAPI.js";
+import TheMovieDBAPI from "../../../util/class/TheMovieDBAPI.js";
 import MainPost from "./MainPost/MainPost.js";
 import MainRow from "./MainRow/MainRow.js";
 import { Category } from "./styles.js";
 
-export default function Main() {
+export default function MainPage() {
   return (
     <div className="main">
       <MainPost />

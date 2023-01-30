@@ -1,13 +1,19 @@
+import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
+import MainPage from "./components/page/Main/MainPage";
+import SearchResultPage from "./components/page/SearchResultPage/SearchResultPage";
+import MainLayout from "./layout/MainLayout";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="" element={<MainPage />} />
+          <Route path="test" element={<SearchResultPage />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

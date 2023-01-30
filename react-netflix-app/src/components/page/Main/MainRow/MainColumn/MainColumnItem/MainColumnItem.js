@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import TheMovieDBAPI from "../../../../../util/class/TheMovieDBAPI";
-import useModal from "../../../../../util/hooks/useModal";
-import SmallModal from "../../../../Modal/SmallModal/SmallModal";
+import TheMovieDBAPI from "../../../../../../util/class/TheMovieDBAPI";
+import useModal from "../../../../../../util/hooks/useModal";
+import SmallModal from "../../../../../Modal/SmallModal/SmallModal";
 import { MainColumnItemContainer, MainColumnItemImg } from "./styles";
-import ModalPortal from "../../../../../util/components/ModalPortal";
-import BigModal from "../../../../Modal/BigModal/BigModal";
-import useTimeOutEvent from "../../../../../util/hooks/useTimeOutEvent";
-import useAddEventListener from "../../../../../util/hooks/useAddEventListener";
+import ModalPortal from "../../../../../../util/components/ModalPortal";
+import BigModal from "../../../../../Modal/BigModal/BigModal";
+import useTimeOutEvent from "../../../../../../util/hooks/useTimeOutEvent";
+import useAddEventListener from "../../../../../../util/hooks/useAddEventListener";
 
 const POPUP_MULTIPLE_VALUE = 1.3;
 const POPUP_INFO_HEIGHT = 70;
@@ -69,13 +69,13 @@ export default function MainColumnItem({
   return (
     <>
       <MainColumnItemContainer ref={imageContainerRef} separateCount={separateCount}>
-        <MainColumnItemImg src={TheMovieDBAPI.IMG_BASE_URL + imgSrc} />
+        <MainColumnItemImg src={imgSrc ? TheMovieDBAPI.IMG_BASE_URL + imgSrc : "https://via.placeholder.com/200x100"} />
       </MainColumnItemContainer>
 
       {isSmallModalOpen && imageContainerRectInfo ? (
         <ModalPortal>
           <SmallModal
-            imgSrc={TheMovieDBAPI.IMG_BASE_URL + imgSrc}
+            imgSrc={imgSrc ? TheMovieDBAPI.IMG_BASE_URL + imgSrc : "https://via.placeholder.com/200x100"}
             toggle={smallModalToggle}
             info={`vote_average : ${voteAverage}
             vote_count : ${voteCount}

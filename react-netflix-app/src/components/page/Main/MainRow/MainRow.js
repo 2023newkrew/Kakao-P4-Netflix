@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import Util from "../../../util/class/Util";
-import useAddEventListener from "../../../util/hooks/useAddEventListener";
+import Util from "../../../../util/class/Util";
+import useAddEventListener from "../../../../util/hooks/useAddEventListener";
 import MainColumn from "./MainColumn/MainColumn";
 import { MainRowContainer, MainRowSlider, MainRowLeftArrow, MainRowRightArrow } from "./styles";
 

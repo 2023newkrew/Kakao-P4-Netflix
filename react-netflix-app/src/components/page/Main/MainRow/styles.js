@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import leftArrowIcon from "../../../assets/leftArrow.svg";
-import rightArrowIcon from "../../../assets/rightArrow.svg";
+import leftArrowIcon from "../../../../assets/leftArrow.svg";
+import rightArrowIcon from "../../../../assets/rightArrow.svg";
 
 const MainRowContainer = styled.div`
   position: relative;
