@@ -24,9 +24,6 @@ const useSearch = () => {
 
   useEffect(() => {
     clearTimeout(timer.current);
-    if (!inputValue) {
-      return;
-    }
 
     timer.current = setTimeout(() => {
       search(inputValue);

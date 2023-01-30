@@ -8,7 +8,7 @@ import {
 } from '@pages/Search/SearchPage.style';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import RelatedKeywords from '@pages/Search/RelatedKeywords';
 import MovieCard from '@components/Movie/MovieCard';
 
@@ -70,11 +70,17 @@ const useSearchKeywords = (keyword) => {
 };
 
 const SearchPage = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const searchKeyword = searchParams.get('q');
   const { data: movies, isLoading } = useSearchMovies(searchKeyword);
   const { data: keywords, isLoading: keywordsLoading } = useSearchKeywords(searchKeyword);
 
+  useEffect(() => {
+    if (!searchKeyword) {
+      navigate('/');
+    }
+  }, [searchKeyword]);
   return (
     <PageContainer>
       <SearchLayout>
