@@ -3,7 +3,12 @@ import Footer from '@components/common/footer';
 import Header from '@components/common/header';
 import Hero from '@components/home/hero';
 import { useEffect, useState } from 'react';
-import { getNowPlaying, getPopular, getToprated, getUpcoming } from '@apis/home';
+import {
+  getNowPlayingMovieList,
+  getPopularMovieList,
+  getTopratedMovieList,
+  getUpcomingMovieList,
+} from '@/apis/movie';
 import { rand } from '@/utils/math';
 import { MOVIE_LIST, MOVIE_LIST_TITLE } from '@/constants/movie';
 import { MovieListSection } from './styles';
@@ -26,10 +31,10 @@ const Home = () => {
   useEffect(() => {
     const fetchNowPlaying = async () => {
       const [nowPlayingData, popularData, topratedData, upcomingData] = await Promise.all([
-        getNowPlaying(),
-        getPopular(),
-        getToprated(),
-        getUpcoming(),
+        getNowPlayingMovieList(),
+        getPopularMovieList(),
+        getTopratedMovieList(),
+        getUpcomingMovieList(),
       ]);
 
       setNowPlaying(nowPlayingData);

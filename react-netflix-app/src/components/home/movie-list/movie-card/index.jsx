@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { getDetail } from '@/apis/home';
+import { getMovieDetail } from '@/apis/movie';
 import MovieCardDetail from './movie-card-detail';
 import { MovieCardContainer } from './styles';
 
@@ -10,8 +10,8 @@ const MovieCard = ({ movie }) => {
 
   const { backdrop_path: backdropPath, id } = movie;
 
-  const getMovieDetail = async (movidId) => {
-    const data = await getDetail(movidId);
+  const getMovieDetailData = async (movidId) => {
+    const data = await getMovieDetail(movidId);
     return data;
   };
 
@@ -19,7 +19,7 @@ const MovieCard = ({ movie }) => {
     setIsShowDetail(true);
 
     if (detailedMovie === null) {
-      setDetailedMovie(await getMovieDetail(id));
+      setDetailedMovie(await getMovieDetailData(id));
     }
   };
 
