@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { API } from "@utils/axios";
-import useFetch from "@hooks/useFetch";
 
 import { MovieCardSubInfoContainer, MovieCardInfoContainer, MovieCardTitle, MovieCardSubTitle, MovieCardOverviewWrapper, MovieCardOverview, MovieModalContainer, ModalMovieCard } from "@styles/modal/MovieModal.style";
 

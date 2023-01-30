@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const BannerMovieContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: 100%;
 
   .youtube {
     width: 100%;
@@ -12,7 +11,6 @@ export const BannerMovieContainer = styled.div`
     iframe {
       width: 100%;
       height: 100%;
-      // pointer-events: none;
     }
   }
 `;

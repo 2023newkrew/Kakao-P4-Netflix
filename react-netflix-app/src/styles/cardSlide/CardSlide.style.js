@@ -54,7 +54,6 @@ export const CardSlideCategory = styled.div`
   position: relative;
 
   color: white;
-  font-family: "Black Han Sans", sans-serif;
 
   font-size: 40px;
   padding: 10px 40px;

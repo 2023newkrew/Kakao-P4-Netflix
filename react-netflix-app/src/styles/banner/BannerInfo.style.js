@@ -17,7 +17,6 @@ export const BannerInfoButton = styled.div`
 export const BannerInfoTitle = styled.div`
   font-size: 80px;
 
-  font-family: "Black Han Sans", sans-serif;
   font-weight: bold;
   -webkit-text-stroke: 2px black;
 `;
