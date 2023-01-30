@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Portal from '@components/Portal';
@@ -13,6 +13,7 @@ export const ModalProvider = ({ children, id }) => {
   const [node, setNode] = useState(null);
   const [containerEl, setContainerEl] = useState(null);
   const [transformOrigin, setTransformOrigin] = useState({ x: null, y: null });
+  const handleClose = useRef(null);
 
   const callbackContainerRef = useCallback(
     (ref) => {
@@ -21,30 +22,42 @@ export const ModalProvider = ({ children, id }) => {
         ref.style.setProperty('transform-origin', `${transformOrigin.x}px ${transformOrigin.y}px`);
         setTimeout(() => {
           ref.style.setProperty('--scale', '1');
-        }, 0);
+        }, 50);
       }
     },
     [transformOrigin],
   );
 
-  const open = useCallback(({ node, position }) => {
+  const open = useCallback(({ node, onClose }) => {
+    if (onClose && typeof onClose === 'function') {
+      handleClose.current = onClose;
+    }
+    setNode(node);
+    setIsOpen(true);
+  }, []);
+
+  const close = useCallback(() => {
+    if (containerEl) {
+      containerEl.style.setProperty('--scale', '0');
+    }
+    setTimeout(() => {
+      setNode(null);
+      setIsOpen(false);
+      if (handleClose.current && typeof handleClose.current === 'function') {
+        handleClose.current();
+      }
+      handleClose.current = null;
+    }, 250);
+  }, [containerEl]);
+
+  const setPosition = useCallback((position) => {
     const x = position?.x ?? window.innerWidth / 2;
     const y = position?.y ?? window.innerHeight / 2;
     const width = position?.width ?? 0;
     const height = position?.height ?? 0;
 
     setTransformOrigin({ x: x + width / 2, y: y + height / 2 });
-    setNode(node);
-    setIsOpen(true);
   }, []);
-
-  const close = useCallback(() => {
-    containerEl.style.setProperty('--scale', '0');
-    setTimeout(() => {
-      setNode(null);
-      setIsOpen(false);
-    }, 250);
-  }, [containerEl]);
 
   useBodyScrollLock(isOpen);
   useEscapeKey(close);
@@ -54,6 +67,7 @@ export const ModalProvider = ({ children, id }) => {
       isOpen,
       open,
       close,
+      setPosition,
     };
   }, [isOpen, close]);
 

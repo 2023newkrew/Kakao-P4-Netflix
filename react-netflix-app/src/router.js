@@ -11,7 +11,7 @@ const routes = [
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { path: '', element: <MainPage /> },
+      { path: '/browse', element: <MainPage /> },
       { path: '/search', element: <SearchPage /> },
     ],
   },

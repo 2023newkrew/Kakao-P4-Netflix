@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSearchParams } from 'react-router-dom';
 import {
   Container,
   ThumbnailContainer,
@@ -16,9 +17,6 @@ import {
   NoImage,
 } from '@components/Movie/MovieCard.style';
 import useMovieDetail from '@components/Movie/useMovieDetail';
-import MovieDetail from '@pages/Main/[id]';
-
-import { useModal } from '@components/Modal';
 
 import { BACKDROP_W300_URL, BACKDROP_W780_URL } from '@constants/tmdb';
 import usePreviewImage from '@hooks/usePreviewImage';
@@ -27,15 +25,22 @@ import { ReactComponent as PlayIcon } from '@assets/icons/play.svg';
 import { ReactComponent as PlusIcon } from '@assets/icons/plus.svg';
 import { ReactComponent as ThumbsUpIcon } from '@assets/icons/thumbsUp.svg';
 import { ReactComponent as ArrowDownIcon } from '@assets/icons/arrowDown.svg';
+import { useModalContext } from '../Modal/ModalContext';
 
 const DetailMovieCard = ({ movie }) => {
+  const { setPosition } = useModalContext();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { data: detail, isLoading } = useMovieDetail(movie.id);
   const cardRef = useRef(null);
-  const openModal = useModal();
 
-  const showMovieDetailModal = () => {
+  const showMovieDetailModal = (event) => {
+    event.stopPropagation();
+
     const position = cardRef.current.getBoundingClientRect();
-    openModal({ node: <MovieDetail movie={detail} />, position });
+    setPosition(position);
+
+    searchParams.append('movie', movie.id);
+    setSearchParams(searchParams);
   };
 
   return (

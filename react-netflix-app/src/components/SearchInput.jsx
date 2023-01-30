@@ -20,7 +20,7 @@ const useSearch = () => {
   const search = (value) => {
     const searchKeyword = value.trim();
     if (!searchKeyword) {
-      navigate('/', { replace: true });
+      navigate('/browse', { replace: true });
       return;
     }
     navigate(`/search?q=${searchKeyword}`, { replace: true });

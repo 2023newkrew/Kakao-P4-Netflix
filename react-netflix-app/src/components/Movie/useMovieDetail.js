@@ -7,7 +7,7 @@ const useMovieDetail = (movieId) => {
   const [detail, setDetail] = useState(null);
 
   useEffect(() => {
-    if (detail || !movieId) {
+    if (!movieId) {
       return;
     }
 
@@ -21,7 +21,7 @@ const useMovieDetail = (movieId) => {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [movieId]);
 
   return {
     isLoading,

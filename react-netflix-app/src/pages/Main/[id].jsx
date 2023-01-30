@@ -1,9 +1,12 @@
+import { useEffect } from 'react';
 import tw from 'twin.macro';
 import PropTypes from 'prop-types';
-
+import { useLocation, useSearchParams } from 'react-router-dom';
 import useMovieVideos from '@pages/Main/hooks/useMovieVideos';
 import { POSTER_BASE_URL } from '@constants/tmdb';
 import { getTrailingComma } from '@utils/getTrailingComma';
+import useMovieDetail from '@components/Movie/useMovieDetail';
+import { useModal } from '@components/Modal';
 
 const Container = tw.div`w-full h-full bg-[#222222] z-0 box-border`;
 const ContentSection = tw.section`p-10 w-full bg-transparent rounded-sm text-white text-sm overflow-hidden z-[2] will-change-transform mb-4`;
@@ -44,7 +47,7 @@ const useTrailer = (movieId) => {
   return { data: trailer, error, isLoading };
 };
 
-const MovieDetail = ({ movie }) => {
+export const MovieDetail = ({ movie }) => {
   const { data, isLoading, error } = useTrailer(movie.id);
   const youtubeKey = data?.key;
 
@@ -106,4 +109,33 @@ const MovieDetail = ({ movie }) => {
 MovieDetail.propTypes = {
   movie: PropTypes.object,
 };
-export default MovieDetail;
+
+const useMovieDetailModal = (movieId) => {
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const position = location.state?.position;
+  const openModal = useModal();
+  const { data, error, isLoading } = useMovieDetail(movieId);
+
+  useEffect(() => {
+    if (!movieId) {
+      return;
+    }
+
+    if (error || isLoading || !data) {
+      return;
+    }
+
+    setTimeout(() => {
+      openModal({
+        node: <MovieDetail movie={data} />,
+        position,
+        onClose() {
+          searchParams.delete('movie');
+          setSearchParams(searchParams);
+        },
+      });
+    }, 100);
+  }, [movieId, data, isLoading, error]);
+};
+export default useMovieDetailModal;
