@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
-import useDebounce from "hooks/useDebounce";
-import api from "utils/API";
+import { useNavigate } from "react-router-dom";
 
 import { SearchBarContainer, SearchBarIcon, SearchBarInput } from "./SearchBar.style";
 import searchImg from "assets/search.svg";
 
 const SearchBar = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const debouncedSearchValue = useDebounce(searchValue, 1000);
+  const navigate = useNavigate();
 
-  const searchContents = async () => {
-    const res = await api.get(`/search/movie`, { query: debouncedSearchValue, language: "ko-KR" });
-    console.log(res);
-  };
-
-  useEffect(() => {
-    if (debouncedSearchValue) {
-      searchContents();
+  const handleOnChange = (searchValue) => {
+    if (searchValue) {
+      navigate({ pathname: "/search", search: `?q=${searchValue}` }, { replace: true });
+    } else {
+      navigate("/");
     }
-  }, [debouncedSearchValue]);
+  };
 
   return (
     <SearchBarContainer>
@@ -26,7 +21,7 @@ const SearchBar = () => {
       <SearchBarInput
         placeholder="제목"
         onChange={({ target }) => {
-          setSearchValue(target.value);
+          handleOnChange(target.value);
         }}
       ></SearchBarInput>
     </SearchBarContainer>
