@@ -12,8 +12,8 @@ import {
   TitleContainer,
 } from './styles';
 
-const MovieCardDetail = ({ isAppear, movie }) => {
-  if (!isAppear) return null;
+const MovieCardDetail = ({ isShow, movie }) => {
+  if (!isShow) return null;
 
   const { title, genres } = movie || {};
 
@@ -36,7 +36,7 @@ const MovieCardDetail = ({ isAppear, movie }) => {
 };
 
 MovieCardDetail.propTypes = {
-  isAppear: PropTypes.bool.isRequired,
+  isShow: PropTypes.bool.isRequired,
   movie: PropTypes.object,
 };
 
