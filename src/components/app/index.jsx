@@ -10,6 +10,7 @@ import MovieListItem from '../movie-list-item';
 import MovieCard from '../movie-card';
 import Modal from '../modal';
 import MovieDetail from '../movie-detail';
+import ErrorView from '../error-view';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ function App() {
   const [movies, setMovies] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [error, setError] = useState(null);
 
   const openMovieDetailModal = (movie) => {
     if (isModalOpen) return;
@@ -31,14 +33,18 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=c14724951e1843e630f68881a3192a57&language=ko`
-      );
-
-      setMovies(res.data.results);
+      try {
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/top_rated?api_key=c14724951e1843e630f68881a3192a57&language=ko`
+        );
+        setMovies(res.data.results);
+      } catch (err) {
+        setError(err);
+      }
     })();
   }, []);
 
+  if (error) return <ErrorView error={error} />;
   if (!movies) return null;
 
   const bannerMovie = movies[0];
