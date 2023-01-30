@@ -3354,7 +3354,7 @@ cosmiconfig@^7.0.0:
 
 cra-bundle-analyzer@^0.1.1:
   version "0.1.1"
-  resolved "https://registry.npmjs.org/cra-bundle-analyzer/-/cra-bundle-analyzer-0.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/cra-bundle-analyzer/-/cra-bundle-analyzer-0.1.1.tgz#0cdcccb78e3b74eab8662915b15b1dd4a094dd4b"
   integrity sha512-f20x1ugcfnpx7uPu+tl+YY/GEkXehTtTmxl/Atgw3+jdrVjaH15pjKtQy5NGNaLnaZ04suJGFuch1FLHoo7B1A==
   dependencies:
     minimist "^1.2.5"

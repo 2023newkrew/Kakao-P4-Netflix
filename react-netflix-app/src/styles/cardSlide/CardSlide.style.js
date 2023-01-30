@@ -3,16 +3,20 @@ import styled from "styled-components";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+// import "swiper/css/scrollbar";
 
 export const CardSlideContainer = styled.div`
+  .lazyload-wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 4vw 0;
+  }
+
   position: relative;
   width: 100%;
   height: 50%;
 
   background-color: rgb(14, 14, 14);
-
-  margin: 3vw 0;
 
   display: flex;
   flex-direction: column;

@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import qs from "qs";
 
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense } from "react";
 
 import Header from "@components/header/Header";
 

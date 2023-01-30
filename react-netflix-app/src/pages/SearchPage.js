@@ -4,7 +4,7 @@ import qs from "qs";
 import MovieList from "@components/movieList/MovieList";
 import Footer from "@components/footer/Footer";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const SearchPage = () => {
   const navigate = useNavigate();
