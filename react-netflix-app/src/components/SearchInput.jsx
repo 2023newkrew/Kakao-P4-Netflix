@@ -18,7 +18,12 @@ const useSearch = () => {
   const navigate = useNavigate();
   const { inputValue, handleChange } = useInput();
   const search = (value) => {
-    navigate(`/search?q=${value}`);
+    const searchKeyword = value.trim();
+    if (!searchKeyword) {
+      navigate('/', { replace: true });
+      return;
+    }
+    navigate(`/search?q=${searchKeyword}`, { replace: true });
   };
 
   useDebounce(
