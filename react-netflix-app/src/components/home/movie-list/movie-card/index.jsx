@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { getMovieDetail } from '@/apis/movie';
 import MovieCardDetail from './movie-card-detail';
 import { MovieCardContainer } from './styles';
@@ -10,20 +10,20 @@ const MovieCard = ({ movie }) => {
 
   const { backdrop_path: backdropPath, id } = movie;
 
-  const getMovieDetailData = async (movidId) => {
+  const fetchMovieDetail = useCallback(async (movidId) => {
     const data = await getMovieDetail(movidId);
     return data;
-  };
+  }, []);
 
-  const handleMouseEnter = async () => {
+  const handleMouseEnter = useCallback(async () => {
     setIsShowDetail(true);
 
     if (detailedMovie === null) {
-      setDetailedMovie(await getMovieDetailData(id));
+      setDetailedMovie(await fetchMovieDetail(id));
     }
-  };
+  }, [detailedMovie, fetchMovieDetail, id]);
 
-  const handleMouseLeave = () => setIsShowDetail(false);
+  const handleMouseLeave = useCallback(() => setIsShowDetail(false), []);
 
   return (
     <MovieCardContainer
@@ -31,7 +31,7 @@ const MovieCard = ({ movie }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <MovieCardDetail isAppear={isShowDetail} movie={detailedMovie} />
+      <MovieCardDetail isShow={isShowDetail} movie={detailedMovie} />
     </MovieCardContainer>
   );
 };
