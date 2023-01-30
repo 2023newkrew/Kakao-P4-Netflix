@@ -85,47 +85,74 @@ const ScreenWidthQueryToDisplayNumber = {
 
 const mediaQueryLists = Object.values(ScreenWidthQuery).map(window.matchMedia);
 
-function MovieList({ children }) {
-  const { length } = children;
+const useMovieListReducer = ({ length }) => {
+  const buildState = ({ offset, displayNumber }) => {
+    const maxOffset = length - displayNumber;
 
-  const [{ offset, displayNumber }, dispatch] = useReducer(
+    const resultState = {
+      offset,
+      displayNumber,
+      isLeftButtonDisabled: false,
+      isRightButtonDisabled: false,
+    };
+
+    if (resultState.offset < 0) {
+      resultState.offset = 0;
+    }
+
+    if (resultState.offset > maxOffset) {
+      resultState.offset = maxOffset;
+    }
+
+    if (resultState.offset === 0) {
+      resultState.isLeftButtonDisabled = true;
+    }
+
+    if (resultState.offset === maxOffset) {
+      resultState.isRightButtonDisabled = true;
+    }
+
+    return resultState;
+  };
+
+  return useReducer(
     (state, action) => {
+      const { offset, displayNumber } = state;
+
       switch (action.type) {
         case 'prevPage': {
-          let nextOffset = offset - displayNumber;
-          if (nextOffset < 0) nextOffset = 0;
-          return { ...state, offset: nextOffset };
+          return buildState({ offset: offset - displayNumber, displayNumber });
         }
         case 'nextPage': {
-          const maxOffset = length - displayNumber;
-          let nextOffset = offset + displayNumber;
-          if (nextOffset > maxOffset) nextOffset = maxOffset;
-          return { ...state, offset: nextOffset };
+          return buildState({ offset: offset + displayNumber, displayNumber });
         }
         case 'updateDisplayNumber': {
-          const nextDisplayNumber =
-            ScreenWidthQueryToDisplayNumber[action.media];
-          const maxOffset = length - nextDisplayNumber;
-          const nextOffset = offset > maxOffset ? maxOffset : offset;
-          return {
-            ...state,
-            offset: nextOffset,
-            displayNumber: nextDisplayNumber,
-          };
+          return buildState({
+            offset,
+            displayNumber: ScreenWidthQueryToDisplayNumber[action.media],
+          });
         }
         default:
-          throw new Error('유효하지 않은 action');
+          throw new Error('유효하지 않은 action type');
       }
     },
     null,
-    () => ({
-      offset: 0,
-      displayNumber:
-        ScreenWidthQueryToDisplayNumber[
-          mediaQueryLists.find(({ matches }) => matches).media
-        ],
-    })
+    () =>
+      buildState({
+        offset: 0,
+        displayNumber:
+          ScreenWidthQueryToDisplayNumber[
+            mediaQueryLists.find(({ matches }) => matches).media
+          ],
+      })
   );
+};
+
+function MovieList({ children }) {
+  const { length } = children;
+
+  const [{ offset, isLeftButtonDisabled, isRightButtonDisabled }, dispatch] =
+    useMovieListReducer({ length });
 
   useEffect(() => {
     const handleChangeEvent = ({ matches, media }) => {
@@ -145,7 +172,7 @@ function MovieList({ children }) {
         MediaQueryList.removeEventListener('change', handleChangeEvent)
       );
     };
-  }, []);
+  }, [dispatch]);
 
   const handleLeftScrollButtonClick = () => {
     dispatch({ type: 'prevPage' });
@@ -177,22 +204,20 @@ function MovieList({ children }) {
     animateMoveListElement(prevOffset, offset);
   }, offset);
 
-  const maxOffset = length - displayNumber;
-
   return (
     <StyledDiv>
       <StyledList ref={movieListElementRef}>{children}</StyledList>
       <StyledLeftButton
         type="button"
         onClick={handleLeftScrollButtonClick}
-        disabled={offset === 0}
+        disabled={isLeftButtonDisabled}
       >
         ◀
       </StyledLeftButton>
       <StyledRightButton
         type="button"
         onClick={handleRightScrollButtonClick}
-        disabled={offset === maxOffset}
+        disabled={isRightButtonDisabled}
       >
         ▶
       </StyledRightButton>
