@@ -4,6 +4,7 @@ import tw from 'twin.macro';
 import PropTypes from 'prop-types';
 import { ReactComponent as SearchIcon } from '@icons/search.svg';
 import useInput from '@utils/hooks/useInput';
+import useDebounce from '@utils/hooks/useDebounce';
 
 export const Container = tw.div`
   flex items-center h-10  bg-[rgb(0,0,0,40)] border border-white px-2
@@ -15,20 +16,18 @@ export const Input = tw.input`
 const SEARCH_DELAY_MS = 300;
 const useSearch = () => {
   const navigate = useNavigate();
-  const timer = useRef(null);
   const { inputValue, handleChange } = useInput();
-
   const search = (value) => {
     navigate(`/search?q=${value}`);
   };
 
-  useEffect(() => {
-    clearTimeout(timer.current);
-
-    timer.current = setTimeout(() => {
+  useDebounce(
+    inputValue,
+    () => {
       search(inputValue);
-    }, SEARCH_DELAY_MS);
-  }, [inputValue]);
+    },
+    SEARCH_DELAY_MS,
+  );
 
   return {
     inputValue,
