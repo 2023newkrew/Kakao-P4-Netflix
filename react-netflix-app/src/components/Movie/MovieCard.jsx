@@ -21,7 +21,7 @@ import MovieDetail from '@pages/Main/[id]';
 import { useModal } from '@components/Modal';
 
 import { BACKDROP_W300_URL, BACKDROP_W780_URL } from '@constants/tmdb';
-import usePreviewImage from '@utils/hooks/usePreviewImage';
+import usePreviewImage from '@hooks/usePreviewImage';
 
 import { ReactComponent as PlayIcon } from '@assets/icons/play.svg';
 import { ReactComponent as PlusIcon } from '@assets/icons/plus.svg';

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 import PropTypes from 'prop-types';
 import { ReactComponent as SearchIcon } from '@icons/search.svg';
-import useInput from '@utils/hooks/useInput';
-import useDebounce from '@utils/hooks/useDebounce';
+import useInput from '@hooks/useInput';
+import useDebounce from '@hooks/useDebounce';
 
 export const Container = tw.div`
   flex items-center h-10  bg-[rgb(0,0,0,40)] border border-white px-2

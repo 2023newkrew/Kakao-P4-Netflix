@@ -5,8 +5,8 @@ import Portal from '@components/Portal';
 import { CloseButton, Container, Content } from '@components/Modal/Modal.style';
 import { ModalContext, useModalContext } from '@components/Modal/ModalContext';
 
-import useBodyScrollLock from '@utils/hooks/useBodyScrollLock';
-import useEscapeKey from '@utils/hooks/useEscapeKey';
+import useBodyScrollLock from '@hooks/useBodyScrollLock';
+import useEscapeKey from '@hooks/useEscapeKey';
 
 export const ModalProvider = ({ children, id }) => {
   const containerRef = useRef(null);
