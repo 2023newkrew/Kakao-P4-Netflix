@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import Banner from '../banner';
 import Footer from '../footer';
 import MovieListContainer from '../movie-list-container';
@@ -22,6 +23,7 @@ function MainPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const openMovieDetailModal = (movie) => {
     if (isModalOpen) return;
@@ -52,6 +54,7 @@ function MainPage() {
     <>
       <Banner
         movie={bannerMovie}
+        onPlayClick={() => navigate(`/videos/${bannerMovie.id}`)}
         onDetailClick={() => openMovieDetailModal(bannerMovie)}
       />
       <StyledDiv>

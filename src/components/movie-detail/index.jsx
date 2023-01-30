@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ImageDiv = styled.div`
@@ -37,12 +38,16 @@ const PlayButton = styled.button`
 `;
 
 function MovieDetail({ movie }) {
+  const navigate = useNavigate();
+
   return (
     <div>
       <ImageDiv
         url={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
       >
-        <PlayButton>► 재생</PlayButton>
+        <PlayButton onClick={() => navigate(`/videos/${movie.id}`)}>
+          ► 재생
+        </PlayButton>
       </ImageDiv>
       <ContentWrapper>
         <Title>{movie.title}</Title>

@@ -56,7 +56,7 @@ const StyledInfoButton = styled(StyledButton)`
   color: white;
 `;
 
-function Banner({ movie, onDetailClick }) {
+function Banner({ movie, onPlayClick, onDetailClick }) {
   const description = movie.overview.slice(0, 100);
   const isOverflow = description.length !== movie.overview.length;
 
@@ -71,7 +71,9 @@ function Banner({ movie, onDetailClick }) {
           {isOverflow ? '...' : null}
         </StyledDescription>
         <StyledButtonContainer>
-          <StyledButton type="button">► 재생</StyledButton>
+          <StyledButton type="button" onClick={onPlayClick}>
+            ► 재생
+          </StyledButton>
           <StyledInfoButton type="button" onClick={onDetailClick}>
             상세 정보
           </StyledInfoButton>
