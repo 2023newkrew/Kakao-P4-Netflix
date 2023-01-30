@@ -30,6 +30,7 @@ const SmallModalContainer = styled.div`
 `;
 
 const SmallModalImg = styled.img`
+  cursor: pointer;
   width: 100%;
 `;
 const SmallModalInfo = styled.div`

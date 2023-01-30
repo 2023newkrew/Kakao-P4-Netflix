@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import TheMovieDBAPI from "../../../util/class/TheMovieDBAPI";
+import useClickOuter from "../../../util/hooks/useClickOuter";
 import { BigModalBackground, BigModalContainer, BigModalVideo, BigModalInfo } from "./style";
 
 export default function BigModal({ movieId, toggle, title, voteAverage, overViewInfo }) {
   const [videoKey, setVideoKey] = useState("");
+  useClickOuter("#bigModalContainer", toggle);
   useEffect(() => {
     const fetchMovieInfo = async (movieId) => {
       const movieVideoInfo = await TheMovieDBAPI.getMovieVideoInfo(movieId);
@@ -12,14 +14,6 @@ export default function BigModal({ movieId, toggle, title, voteAverage, overView
       setVideoKey(videoKey);
     };
     fetchMovieInfo(movieId);
-
-    const handleClick = (event) => {
-      if (event.target.closest("#bigModalContainer")) return;
-      toggle();
-    };
-    document.addEventListener("click", handleClick);
-
-    return () => document.removeEventListener("click", handleClick);
   }, []);
   return (
     <BigModalBackground>
