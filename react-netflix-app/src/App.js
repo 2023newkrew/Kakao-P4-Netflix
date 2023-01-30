@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import qs from "qs";
 
 import React, { useState } from "react";
-import MainPage from "@pages/MainPage";
-import SearchPage from "@pages/SearchPage";
+import MainPage from "../src/pages/MainPage";
+import SearchPage from "../src/pages/SearchPage";
 import Header from "./components/header/Header";
 
 const App = () => {

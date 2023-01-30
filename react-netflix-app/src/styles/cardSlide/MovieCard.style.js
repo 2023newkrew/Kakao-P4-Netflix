@@ -16,6 +16,12 @@ export const MovieCardContainer = styled.div`
 
 export const MovieCardWrapper = styled.div``;
 
+export const ImageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16/ 9;
+`;
+
 export const MovieCardImage = styled.img`
   position: relative;
   width: 100%;

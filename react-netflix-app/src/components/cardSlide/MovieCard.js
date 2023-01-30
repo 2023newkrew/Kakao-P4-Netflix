@@ -1,4 +1,4 @@
-import { MovieCardContainer, MovieCardWrapper, MovieCardImage } from "@styles/cardSlide/MovieCard.style";
+import { MovieCardContainer, MovieCardWrapper, MovieCardImage, ImageWrapper } from "@styles/cardSlide/MovieCard.style";
 
 import { useState } from "react";
 
@@ -17,7 +17,9 @@ const MovieCard = ({ movie }) => {
   return (
     <MovieCardContainer>
       <MovieCardWrapper onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-        <MovieCardImage onClick={open} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} loading="lazy" />
+        <ImageWrapper>
+          <MovieCardImage onClick={open} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} loading="lazy" />
+        </ImageWrapper>
         {hover && <MovieCardInfo movie={movie} open={open} />}
       </MovieCardWrapper>
       <Modal>

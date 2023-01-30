@@ -1,5 +1,5 @@
 const Loading = () => {
-  return <div>Loading ...</div>;
+  return <div style={{ "padding-top": "100%" }}>Loading ...</div>;
 };
 
 export default Loading;
