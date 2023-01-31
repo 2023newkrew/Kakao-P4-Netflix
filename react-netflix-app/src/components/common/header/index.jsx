@@ -1,7 +1,14 @@
 import NetflixLogoImg from '@assets/netflix-logo.svg';
 import ProfileIconImg from '@assets/profile-icon.png';
 import useIsTop from '@/hooks/use-is-top';
-import { HeaderContainer, HeaderContent, HeaderLogo, HeaderProfile } from './styles';
+import {
+  HeaderContainer,
+  HeaderContent,
+  HeaderLogo,
+  HeaderProfile,
+  HeaderRightContent,
+} from './styles';
+import HeaderSearchInput from './header-search-input';
 
 const Header = () => {
   const isTop = useIsTop();
@@ -10,7 +17,10 @@ const Header = () => {
     <HeaderContainer isTop={isTop}>
       <HeaderContent>
         <HeaderLogo src={NetflixLogoImg} />
-        <HeaderProfile src={ProfileIconImg} />
+        <HeaderRightContent>
+          <HeaderSearchInput />
+          <HeaderProfile src={ProfileIconImg} />
+        </HeaderRightContent>
       </HeaderContent>
     </HeaderContainer>
   );
