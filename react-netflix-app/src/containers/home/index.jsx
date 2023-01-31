@@ -1,6 +1,4 @@
 import MovieList from '@components/home/movie-list';
-import Footer from '@components/common/footer';
-import Header from '@components/common/header';
 import Hero from '@components/home/hero';
 import { useEffect, useState } from 'react';
 import {
@@ -48,14 +46,12 @@ const Home = () => {
 
   return (
     <>
-      <Header />
       <Hero movie={heroMovie} />
       <MovieListSection>
         {movieLists.map(([title, movies]) => (
           <MovieList key={title} title={MOVIE_LIST_TITLE[title]} movies={movies} />
         ))}
       </MovieListSection>
-      <Footer />
     </>
   );
 };

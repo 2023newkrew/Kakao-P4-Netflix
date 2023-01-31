@@ -1,11 +1,3 @@
-import Footer from '@/components/common/footer';
-import Header from '@/components/common/header';
-
-const Search = () => (
-  <>
-    <Header />
-    <Footer />
-  </>
-);
+const Search = () => <div>Hello</div>;
 
 export default Search;
