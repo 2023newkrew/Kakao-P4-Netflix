@@ -13,6 +13,7 @@ const useMovieDetail = (movieId) => {
 
     (async function () {
       try {
+        setIsLoading(true);
         const { data } = await getMovieDetail(movieId);
         setDetail(data);
       } catch (error) {

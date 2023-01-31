@@ -118,24 +118,18 @@ const useMovieDetailModal = (movieId) => {
   const { data, error, isLoading } = useMovieDetail(movieId);
 
   useEffect(() => {
-    if (!movieId) {
+    if (!movieId || isLoading || error || !data) {
       return;
     }
 
-    if (error || isLoading || !data) {
-      return;
-    }
-
-    setTimeout(() => {
-      openModal({
-        node: <MovieDetail movie={data} />,
-        position,
-        onClose() {
-          searchParams.delete('movie');
-          setSearchParams(searchParams);
-        },
-      });
-    }, 100);
-  }, [movieId, data, isLoading, error]);
+    openModal({
+      node: <MovieDetail movie={data} />,
+      position,
+      onClose() {
+        searchParams.delete('movie');
+        setSearchParams(searchParams);
+      },
+    });
+  }, [data, error, isLoading]);
 };
 export default useMovieDetailModal;
