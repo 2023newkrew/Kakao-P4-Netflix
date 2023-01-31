@@ -75,9 +75,14 @@ const menus = [
 
 export default function Header() {
   const [isSearchBoxOpened, setIsSearchBoxOpened] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const openSearchBox = () => setIsSearchBoxOpened(true);
   const closeSearchBox = () => setIsSearchBoxOpened(false);
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <HeaderLayout>
@@ -95,6 +100,8 @@ export default function Header() {
             <SearchIcon />
             <SearchInput
               placeholder="제목, 사람, 장르"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
               onBlur={closeSearchBox}
             />
           </SearchBox>
