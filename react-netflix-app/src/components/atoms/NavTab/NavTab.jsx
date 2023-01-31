@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const NavTabContainer = styled.li`
@@ -8,7 +9,7 @@ export const NavTabContainer = styled.li`
 const NavTab = ({ path, tabText }) => {
   return (
     <NavTabContainer>
-      <a href={path}>{tabText}</a>
+      <Link to={path}>{tabText}</Link>
     </NavTabContainer>
   );
 };

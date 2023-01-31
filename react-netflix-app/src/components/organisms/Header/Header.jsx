@@ -16,12 +16,12 @@ import notiImage from "assets/noti.svg";
 import userImage from "assets/user.png";
 
 const tabList = [
-  { text: "홈", path: "/#" },
-  { text: "시리즈", path: "/#" },
-  { text: "영화", path: "/#" },
-  { text: "NEW! 요즘 대세 콘텐츠", path: "/#" },
-  { text: "내가 찜한 콘텐츠", path: "/#" },
-  { text: "언어별로 찾아보기", path: "/#" },
+  { text: "홈", path: "/" },
+  { text: "시리즈", path: "/" },
+  { text: "영화", path: "/" },
+  { text: "NEW! 요즘 대세 콘텐츠", path: "/" },
+  { text: "내가 찜한 콘텐츠", path: "/" },
+  { text: "언어별로 찾아보기", path: "/" },
 ];
 
 const Header = ({}) => {
@@ -30,7 +30,7 @@ const Header = ({}) => {
       <HeaderContent>
         <Nav>
           <NavItem>
-            <Logo href="/#">
+            <Logo to="/">
               <img src={logoImage} alt="logo" />
             </Logo>
           </NavItem>
@@ -40,7 +40,7 @@ const Header = ({}) => {
         </Nav>
         <Nav>
           <SearchBar />
-          <NavTab path="/#" tabText="키즈" />
+          <NavTab path="/" tabText="키즈" />
           <NavItem>
             <button type="button">
               <img src={notiImage} alt="noti" />
