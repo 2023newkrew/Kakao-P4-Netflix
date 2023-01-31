@@ -3,20 +3,45 @@ import Footer from '@components/common/footer';
 import Header from '@components/common/header';
 import Hero from '@components/home/hero';
 import { useEffect, useState } from 'react';
-import { getNowPlaying } from '@apis/home';
+import {
+  getNowPlayingMovieList,
+  getPopularMovieList,
+  getTopratedMovieList,
+  getUpcomingMovieList,
+} from '@/apis/movie';
 import { rand } from '@/utils/math';
 import { MOVIE_LIST, MOVIE_LIST_TITLE } from '@/constants/movie';
+import { MovieListSection } from './styles';
 
 const Home = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
+  const [popular, setPopular] = useState([]);
+  const [toprated, setToprated] = useState([]);
+  const [upcoming, setUpcoming] = useState([]);
+
   const [heroMovie, setHeroMovie] = useState({});
+
+  const movieLists = Object.entries({
+    [MOVIE_LIST.NOW_PLAYING]: nowPlaying,
+    [MOVIE_LIST.POPULAR]: popular,
+    [MOVIE_LIST.TOP_RATED]: toprated,
+    [MOVIE_LIST.UPCOMING]: upcoming,
+  });
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
-      const results = await getNowPlaying();
+      const [nowPlayingData, popularData, topratedData, upcomingData] = await Promise.all([
+        getNowPlayingMovieList(),
+        getPopularMovieList(),
+        getTopratedMovieList(),
+        getUpcomingMovieList(),
+      ]);
 
-      setNowPlaying(results);
-      setHeroMovie(results[rand({ max: results.length - 1 }) || 0]);
+      setNowPlaying(nowPlayingData);
+      setPopular(popularData);
+      setToprated(topratedData);
+      setUpcoming(upcomingData);
+      setHeroMovie(nowPlayingData[rand({ max: nowPlayingData.length - 1 }) || 0]);
     };
     fetchNowPlaying();
   }, []);
@@ -25,8 +50,11 @@ const Home = () => {
     <>
       <Header />
       <Hero movie={heroMovie} />
-      <MovieList title={MOVIE_LIST_TITLE[MOVIE_LIST.NOW_PLAYING]} movies={nowPlaying} />
-      {/* TODO: Fetch more movies and display it using .map */}
+      <MovieListSection>
+        {movieLists.map(([title, movies]) => (
+          <MovieList key={title} title={MOVIE_LIST_TITLE[title]} movies={movies} />
+        ))}
+      </MovieListSection>
       <Footer />
     </>
   );

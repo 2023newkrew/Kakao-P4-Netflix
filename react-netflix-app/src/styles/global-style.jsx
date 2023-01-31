@@ -3,6 +3,7 @@ const { Global, css } = require('@emotion/react');
 const style = css`
   :root {
     --background-color: #0e0e0e;
+    --background-card-color: #181818;
     --primary-text-color: white;
     --secondary-text-color: #808080;
   }
