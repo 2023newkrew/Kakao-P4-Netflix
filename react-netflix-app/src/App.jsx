@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSearchParams, Outlet } from 'react-router-dom';
+import { useSearchParams, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
 import { useModalContext } from '@components/Modal/ModalContext';
@@ -22,8 +22,16 @@ const useMovieDetailRoutes = () => {
 };
 
 const App = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const movieId = useMovieDetailRoutes();
   useMovieDetailModal(movieId);
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navigate('/browse', { replace: true });
+    }
+  }, [location.pathname]);
 
   return (
     <>
