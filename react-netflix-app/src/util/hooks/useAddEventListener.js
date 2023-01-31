@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function useAddEventListener(
   ref,
@@ -7,13 +7,15 @@ export default function useAddEventListener(
   condition = true,
   beforeAttachEventCallback = null
 ) {
+  const handlerRef = useRef(handler);
   useEffect(() => {
     if (!condition) return;
 
     const target = ref.current;
+    const handlerRefTarget = handler.current;
     if (beforeAttachEventCallback) beforeAttachEventCallback();
-    target.addEventListener(eventType, handler);
+    target.addEventListener(eventType, handlerRef.current);
 
-    return () => target.removeEventListener(eventType, handler);
-  }, []);
+    return () => target.removeEventListener(eventType, handlerRefTarget);
+  }, [beforeAttachEventCallback, condition, eventType, handler, ref]);
 }
