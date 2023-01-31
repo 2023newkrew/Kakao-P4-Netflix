@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useDebounce from "hooks/useDebounce";
 import { ContentCard } from "components";
 import api from "utils/API";
@@ -19,6 +19,7 @@ const ContentCards = ({ contents }) => {
 
 const Search = () => {
   const searchValue = new URLSearchParams(useLocation().search).get("q");
+  const navigate = useNavigate();
   const [contents, setContents] = useState([]);
   const debouncedSearchValue = useDebounce(searchValue, 1000);
 
@@ -32,6 +33,8 @@ const Search = () => {
 
   useEffect(() => {
     if (debouncedSearchValue) {
+      navigate("/", { replace: true });
+      navigate({ pathname: "/search", search: `?q=${searchValue}` });
       searchContents();
     }
   }, [debouncedSearchValue]);

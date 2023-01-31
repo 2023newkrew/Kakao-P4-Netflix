@@ -11,7 +11,7 @@ const SearchBar = () => {
     if (searchValue) {
       navigate({ pathname: "/search", search: `?q=${searchValue}` }, { replace: true });
     } else {
-      navigate("/");
+      navigate("/", { replace: true });
     }
   };
 
