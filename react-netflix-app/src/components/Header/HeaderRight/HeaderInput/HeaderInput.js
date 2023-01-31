@@ -1,8 +1,28 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { HeaderInputBox } from "./styles";
-
+import useAddEventListener from "../../../../util/hooks/useAddEventListener";
+import { useNavigate } from "react-router-dom";
+import Util from "../../../../util/class/Util";
+const DEBOUNCE_DELAY = 1000;
 export default function HeaderInput() {
   const [text, setText] = useState("");
+  const inputRef = useRef(null);
+  const navigate = useNavigate();
 
-  return <HeaderInputBox onChange={(event) => setText(event.target.value)} value={text} />;
+  const debouncedHandler = useCallback(
+    Util.makeDebounceHandler((event) => {
+      navigate(`/search/${event.target.value}`);
+    }, DEBOUNCE_DELAY),
+    []
+  );
+  return (
+    <HeaderInputBox
+      ref={inputRef}
+      onChange={(event) => {
+        setText(event.target.value);
+        debouncedHandler(event);
+      }}
+      value={text}
+    />
+  );
 }

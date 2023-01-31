@@ -13,12 +13,13 @@ export default function useTimeOutEvent(ref, invokeEventType, handler, cancelEve
   };
 
   useEffect(() => {
-    ref.current.addEventListener(invokeEventType, invokeEvent);
-    ref.current.addEventListener(cancelEventType, cancelEvent);
+    const target = ref.current;
+    target.addEventListener(invokeEventType, invokeEvent);
+    target.addEventListener(cancelEventType, cancelEvent);
 
     return () => {
-      ref.current.removeEventListener(invokeEventType, invokeEvent);
-      ref.current.removeEventListener(cancelEventType, cancelEvent);
+      target.removeEventListener(invokeEventType, invokeEvent);
+      target.removeEventListener(cancelEventType, cancelEvent);
     };
   });
 }

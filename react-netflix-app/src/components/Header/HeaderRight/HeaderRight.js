@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import searchIcon from "../../../assets/searchIcon.svg";
 import bellIcon from "../../../assets/bellIcon.svg";
 
@@ -6,11 +6,13 @@ import { HeaderRightContainer, SettingContainer, Caret, HeaderRightButton, Heade
 import HeaderInput from "./HeaderInput/HeaderInput";
 
 export default function HeaderRight() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   return (
     <HeaderRightContainer>
-      <HeaderInput />
+      {isSearchOpen ? <HeaderInput /> : null}
 
-      <HeaderRightButton>
+      <HeaderRightButton onClick={() => setIsSearchOpen((prev) => !prev)}>
         <HeaderRightImg src={searchIcon} />
       </HeaderRightButton>
 

@@ -1,12 +1,13 @@
 import React from "react";
 import logo from "../../../assets/netflixLogo.svg";
 import { HeaderLeftContainer, LogoContainer, LogoImg, UnOrderedList, ListItem } from "./styles.js";
-
+import { useNavigate } from "react-router-dom";
 export default function HeaderLeft() {
+  const navigate = useNavigate();
   return (
     <HeaderLeftContainer>
       <LogoContainer className="logo">
-        <LogoImg src={logo} />
+        <LogoImg src={logo} onClick={() => navigate(`/`)} />
       </LogoContainer>
       <UnOrderedList>
         <ListItem>

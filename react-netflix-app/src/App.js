@@ -11,7 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="" element={<MainPage />} />
-          <Route path="test" element={<SearchResultPage />} />
+          <Route path="search/:keyword" element={<SearchResultPage />} />
+          <Route path="*" element={<MainPage />} />
         </Route>
       </Routes>
     </div>
