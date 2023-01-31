@@ -15,7 +15,6 @@ const routes = [
       { path: '/search', element: <SearchPage /> },
     ],
   },
-  ,
   { path: '/login', element: <LoginPage /> },
 ];
 const router = createBrowserRouter(routes as RouteObject[]);

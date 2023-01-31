@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { SetStateAction, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 import PropTypes from 'prop-types';
 import { ReactComponent as SearchIcon } from '@icons/search.svg';
 import useInput from '@hooks/useInput';
 import useDebounce from '@hooks/useDebounce';
+import { Dispatch } from 'react';
 
 export const Container = tw.div`
   flex items-center h-10  bg-[rgb(0,0,0,40)] border border-white px-2
@@ -17,7 +18,7 @@ const SEARCH_DELAY_MS = 300;
 const useSearch = () => {
   const navigate = useNavigate();
   const { inputValue, handleChange } = useInput();
-  const search = (value) => {
+  const search = (value: string) => {
     const searchKeyword = value.trim();
     if (!searchKeyword) {
       navigate('/', { replace: true });
@@ -40,8 +41,11 @@ const useSearch = () => {
   };
 };
 
-const SearchInput = ({ setCanSearch }) => {
-  const searchInputRef = useRef(null);
+type SearchInputProps = {
+  setCanSearch: Dispatch<SetStateAction<boolean>>;
+};
+const SearchInput = ({ setCanSearch }: SearchInputProps) => {
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
   const { inputValue, handleChange } = useSearch();
 
   useEffect(() => {
@@ -60,7 +64,7 @@ const SearchInput = ({ setCanSearch }) => {
         onChange={handleChange}
         placeholder="제목"
         onBlur={() => {
-          if (searchInputRef.current.value) {
+          if (searchInputRef.current?.value) {
             return;
           }
           setCanSearch(false);

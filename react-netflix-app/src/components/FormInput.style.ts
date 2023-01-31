@@ -3,7 +3,7 @@ import tw, { styled } from 'twin.macro';
 export const InputContainer = tw.div`
   flex w-full flex-col relative pb-4
 `;
-export const InputField = styled.div`
+export const InputField = styled.div<{ isError: boolean }>`
   ${tw`rounded-md relative`}
   ${({ isError }) => (isError ? 'border:none' : 'border-bottom: 2px solid #e87c05')}
 `;
@@ -14,7 +14,7 @@ export const Input = styled.input`
   }
 `;
 
-export const PlaceLabel = styled.label`
+export const PlaceLabel = styled.label<{ hasValue: boolean }>`
   ${tw`absolute top-1/2 left-5 text-[#8c8c8c] text-[16px] -translate-y-1/2`}
   ${({ hasValue }) => (hasValue ? tw`text-[11px] translate-y-0 top-0` : ``)}
   transition: font 0.1s ease, top 0.1s ease, transform 0.1s ease;

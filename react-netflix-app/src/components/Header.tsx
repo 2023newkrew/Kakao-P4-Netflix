@@ -54,9 +54,12 @@ const secondaryMenus = [
 ];
 
 const useHeaderStyle = () => {
-  const headerRef = useRef(null);
+  const headerRef = useRef<HTMLElement | null>(null);
   useEffect(() => {
     const handleHeaderBackground = throttle(() => {
+      if (!headerRef.current) {
+        return;
+      }
       if (window.scrollY > 0) {
         headerRef.current.style.setProperty('background-color', 'rgb(20,20,20)');
       } else {

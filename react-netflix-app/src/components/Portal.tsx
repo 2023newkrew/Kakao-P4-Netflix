@@ -1,16 +1,20 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
-const createPortalWrapper = (id) => {
+const createPortalWrapper = (id: string) => {
   const element = document.createElement('div');
   element.id = id;
   return element;
 };
 
-const Portal = ({ children, portalId }) => {
+type PortalProps = {
+  children: ReactNode;
+  portalId: string;
+};
+const Portal = ({ children, portalId }: PortalProps) => {
   const [mounted, setMounted] = useState(false);
-  const portalEl = useRef(null);
+  const portalEl = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     setMounted(true);
