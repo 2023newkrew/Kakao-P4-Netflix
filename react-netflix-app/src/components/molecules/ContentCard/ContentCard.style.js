@@ -21,5 +21,5 @@ export const ContentTitleWrapper = styled.div`
   left: 5%;
   width: 50%;
   height: 25%;
-  text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+  text-shadow: 1px 1px 2px #000;
 `;

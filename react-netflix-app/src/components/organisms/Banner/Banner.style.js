@@ -48,16 +48,17 @@ export const BannerContent = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   width: 36%;
-  text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
   z-index: 10;
 `;
 
 export const ContentTitle = styled.div`
   margin-bottom: 2vw;
+  text-shadow: 2px 2px 4px #000;
 `;
 
 export const ContentDesc = styled.div`
   margin-bottom: 2.5vw;
+  text-shadow: 1px 1px 2px #000;
 `;
 
 export const ContentButtonBox = styled.div`
