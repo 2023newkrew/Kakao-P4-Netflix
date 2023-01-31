@@ -11,7 +11,7 @@ const MoviePoster = ({movie}: {movie: MovieType}) => {
 
   return (
     <Container>
-      <MovieImage imageType={'themoviedb'} src={backdrop_path}/>
+      <MovieImage alt='메인 랜딩 이미지' isOriginal={true} imageType={'themoviedb'} src={backdrop_path}/>
       <MovieDescription>
         <Text fontSize={FONT_SIZE.xl} fontWeight={FONT_WEIGHT.bold}>{title}</Text>
         <Text fontSize={FONT_SIZE.m}>{overview}</Text>
@@ -23,14 +23,16 @@ export default memo(MoviePoster);
 
 const Container = styled.section`
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 56.25vw;
   overflow: hidden;
   border-bottom: 8px solid ${COLORS.gray700};
 `;
 
 const MovieImage = styled(Image)`
-  width: 100%;
+  position: absolute;
+  width: 100vw;
+  height: 56.25vw;
 `;
 
 const MovieDescription = styled.article`

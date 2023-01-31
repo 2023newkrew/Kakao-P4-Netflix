@@ -10,7 +10,7 @@ interface MovieModalProps {
 }
 export function MovieModal ({ movie }: MovieModalProps) {
   const { isYoutube, path } = movie;
-  console.log(path);
+  
   return (
     <Modal>
       <Container>

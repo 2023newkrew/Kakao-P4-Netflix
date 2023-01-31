@@ -2,10 +2,11 @@ import { ImgHTMLAttributes, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 interface Props extends ImgHTMLAttributes<HTMLImageElement> {
-  imageType: 'normal' | 'themoviedb' | undefined
+  imageType: 'normal' | 'themoviedb' | undefined,
+  isOriginal?: boolean
 }
 
-export const Image = ({ imageType, className, src, ...rest }: Props) => {
+export const Image = ({ imageType, className, src, isOriginal, ...rest }: Props) => {
   const [isPreview, setIsPreview] = useState(true);
   
   const imgRef = useRef<HTMLImageElement>(null);
@@ -16,7 +17,10 @@ export const Image = ({ imageType, className, src, ...rest }: Props) => {
       if (isPreview === true) {
         return `${process.env.REACT_APP_IMAGE_BASE_URL}/w92${src}`;  
       }
-      return `${process.env.REACT_APP_IMAGE_BASE_URL}/original${src}`;
+      if (isOriginal) {
+        return `${process.env.REACT_APP_IMAGE_BASE_URL}/original${src}`;  
+      }
+      return `${process.env.REACT_APP_IMAGE_BASE_URL}/w500${src}`;
     }
     return src;
   }, [src, isPreview]);

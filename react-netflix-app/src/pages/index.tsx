@@ -3,7 +3,6 @@ import MoviePoster from '@components/movie/MoviePoster';
 import { TOTAL_SHOWN } from '@constants/movies.constant';
 import useCarousel from '@hooks/useCarousel';
 import { MovieType } from '@models/movies.model';
-import styled from 'styled-components';
 import { useFetchMovies } from '@/hooks/useFetchMovies';
 import { useRandomValue } from '@/hooks/useRandomValue';
 
@@ -38,9 +37,3 @@ export default function Main() {
     </>
   );
 }
-
-const Test = styled.div`
-  background: #000;
-  height: 100vh;
-  width: 100vw;
-`;

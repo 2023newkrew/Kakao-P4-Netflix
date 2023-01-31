@@ -47,7 +47,7 @@ const MovieList = ({title, movies, page, handlePrevPage, handleNextPage}: MovieL
           const { id, title, poster_path } = movie;
           return (
             <ListCard key={id} onClick={() => handleSelectMovie(movie)}>
-              <Poster src={poster_path} imageType={'themoviedb'}/>
+              <Poster alt={`${title} 영화 포스터`} src={poster_path} imageType={'themoviedb'}/>
               <Text color={COLORS.gray300} textAlign='center'>{title}</Text>
             </ListCard>
           );
