@@ -130,6 +130,6 @@ const useMovieDetailModal = (movieId) => {
         setSearchParams(searchParams);
       },
     });
-  }, [data, error, isLoading]);
+  }, [movieId, data, error, isLoading]);
 };
 export default useMovieDetailModal;
