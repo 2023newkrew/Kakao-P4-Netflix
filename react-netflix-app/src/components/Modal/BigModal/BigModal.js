@@ -14,7 +14,7 @@ export default function BigModal({ movieId, toggle, title, voteAverage, overView
       setVideoKey(videoKey);
     };
     fetchMovieInfo(movieId);
-  }, []);
+  }, [movieId]);
   return (
     <BigModalBackground>
       <BigModalContainer id="bigModalContainer">

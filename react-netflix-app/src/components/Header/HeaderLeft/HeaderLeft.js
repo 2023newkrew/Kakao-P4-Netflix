@@ -11,22 +11,22 @@ export default function HeaderLeft() {
       </LogoContainer>
       <UnOrderedList>
         <ListItem>
-          <a>홈</a>
+          <a href="#!">홈</a>
         </ListItem>
         <ListItem>
-          <a>시리즈</a>
+          <a href="#!">시리즈</a>
         </ListItem>
         <ListItem>
-          <a>영화</a>
+          <a href="#!">영화</a>
         </ListItem>
         <ListItem>
-          <a>New! 요즘 대세 콘텐츠</a>
+          <a href="#!">New! 요즘 대세 콘텐츠</a>
         </ListItem>
         <ListItem>
-          <a>내가 찜한 콘텐츠</a>
+          <a href="#!">내가 찜한 콘텐츠</a>
         </ListItem>
         <ListItem>
-          <a>언어별로 찾아보기</a>
+          <a href="#!">언어별로 찾아보기</a>
         </ListItem>
       </UnOrderedList>
     </HeaderLeftContainer>

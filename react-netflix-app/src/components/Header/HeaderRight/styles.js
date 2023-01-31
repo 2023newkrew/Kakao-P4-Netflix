@@ -4,6 +4,10 @@ const HeaderRightContainer = styled.div`
   display: flex;
   margin-left: auto;
   align-items: center;
+  & a {
+    text-decoration: none;
+    color: white;
+  }
 `;
 
 const Caret = styled.span`

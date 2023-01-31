@@ -15,10 +15,11 @@ export default function Header() {
   );
 
   useEffect(() => {
-    observerRef.current.observe(topCheckerRef.current);
+    const target = observerRef.current;
+    target.observe(topCheckerRef.current);
 
     return () => {
-      observerRef.current.disconnect();
+      target.disconnect();
     };
   }, []);
 

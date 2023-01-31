@@ -26,14 +26,6 @@ const getPopUpLeftOffset = (containerLeft, containerWidth, index, separateCount)
     return containerLeft - (containerWidth * (POPUP_MULTIPLE_VALUE - 1)) / 2;
   }
 };
-const getHandleClick = (bigModalToggle) => (event) => {
-  /* 클릭 이벤트가 모달 외부로 전파되어 다시 toggle 되는 현상을 막기 위함 */
-  event.stopPropagation();
-  bigModalToggle();
-};
-const getHandleResize = (setImageContainerSize, imageContainerRef) => () => {
-  setImageContainerSize(imageContainerRef.current.clientWidth);
-};
 
 export default function MainColumnItem({
   movieId,
@@ -56,8 +48,18 @@ export default function MainColumnItem({
 
   useTimeOutEvent(imageContainerRef, "mouseenter", smallModalToggle, "mouseleave", MOUSE_OVER_DELAY);
 
-  const handleClick = useCallback(getHandleClick(bigModalToggle), []);
-  const handleResize = useCallback(getHandleResize(setImageContainerSize, imageContainerRef), []);
+  const handleClick = useCallback(
+    (event) => {
+      /* 클릭 이벤트가 모달 외부로 전파되어 다시 toggle 되는 현상을 막기 위함 */
+      event.stopPropagation();
+      bigModalToggle();
+    },
+    [bigModalToggle]
+  );
+  const handleResize = useCallback(
+    () => setImageContainerSize(imageContainerRef.current.clientWidth),
+    [setImageContainerSize]
+  );
   useAddEventListener(imageContainerRef, "click", handleClick);
   useAddEventListener(windowRef, "resize", handleResize, setImageContainerSize, handleResize);
 

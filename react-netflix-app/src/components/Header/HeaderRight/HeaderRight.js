@@ -16,14 +16,14 @@ export default function HeaderRight() {
         <HeaderRightImg src={searchIcon} />
       </HeaderRightButton>
 
-      <a>키즈</a>
+      <a href="#!">키즈</a>
 
       <HeaderRightButton>
         <HeaderRightImg src={bellIcon} />
       </HeaderRightButton>
 
       <SettingContainer className="header-right__setting">
-        <a>프로필사진</a>
+        <a href="#!">프로필사진</a>
         <Caret className="caret"></Caret>
       </SettingContainer>
     </HeaderRightContainer>

@@ -40,6 +40,7 @@ export default function MainRow({ fetchMethod, itemCount }) {
         );
 
   useAddEventListener(windowRef, "resize", mainRowDebouncedHandler);
+
   useEffect(() => {
     /* 데이터 fetch */
     const fetchTopRatedMovie = async () => {
@@ -47,7 +48,7 @@ export default function MainRow({ fetchMethod, itemCount }) {
       setSeparatedList(Util.separateList(topRatedMovieList, SEPARATE_COUNT));
     };
     fetchTopRatedMovie();
-  }, []);
+  }, [SEPARATE_COUNT, fetchMethod]);
 
   return (
     <MainRowContainer>

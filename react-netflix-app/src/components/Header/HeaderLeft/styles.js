@@ -3,6 +3,10 @@ import styled from "styled-components";
 const HeaderLeftContainer = styled.div`
   display: flex;
   align-items: center;
+  & a {
+    text-decoration: none;
+    color: white;
+  }
 `;
 
 const LogoContainer = styled.a`
