@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useSearchParam from '../../hooks/useSearchParam';
 
 const StyledDiv = styled.div`
-  position: sticky;
+  position: fixed;
   top: 0px;
   width: 100%;
   padding: 1rem var(--lr-padding);

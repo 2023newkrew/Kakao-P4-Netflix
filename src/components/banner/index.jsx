@@ -6,7 +6,6 @@ const StyledDiv = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
-  margin-top: -3.5rem;
   margin-bottom: -6.25%;
   background: no-repeat url(${({ url }) => url});
   background-size: cover;
