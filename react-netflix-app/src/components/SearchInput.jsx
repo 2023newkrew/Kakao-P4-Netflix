@@ -20,10 +20,10 @@ const useSearch = () => {
   const search = (value) => {
     const searchKeyword = value.trim();
     if (!searchKeyword) {
-      navigate('/browse', { replace: true });
+      navigate('/browse');
       return;
     }
-    navigate(`/search?q=${searchKeyword}`, { replace: true });
+    navigate(`/search?q=${searchKeyword}`);
   };
 
   useDebounce(
