@@ -3,10 +3,10 @@ import TheMovieDBAPI from "../../../../../../util/class/TheMovieDBAPI";
 import useModal from "../../../../../../util/hooks/useModal";
 import SmallModal from "../../../../../Modal/SmallModal/SmallModal";
 import { MainColumnItemContainer, MainColumnItemImg } from "./styles";
-import ModalPortal from "../../../../../../util/components/ModalPortal";
 import BigModal from "../../../../../Modal/BigModal/BigModal";
 import useTimeOutEvent from "../../../../../../util/hooks/useTimeOutEvent";
 import useAddEventListener from "../../../../../../util/hooks/useAddEventListener";
+import ModalPortal from "../../../../../Modal/ModalPortal/ModalPortal";
 
 const POPUP_MULTIPLE_VALUE = 1.3;
 const POPUP_INFO_HEIGHT = 70;
