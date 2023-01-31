@@ -5,7 +5,7 @@
     "node": true
   },
   "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime", "google", "plugin:prettier/recommended"],
-
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "ecmaFeatures": {
@@ -13,12 +13,13 @@
     },
     "sourceType": "module"
   },
-  "plugins": ["react", "eslint-plugin-react"],
+  "plugins": ["react", "eslint-plugin-react", "@typescript-eslint"],
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "require-jsdoc": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "no-unused-vars": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
   },
   "settings": {
     "import/resolver": {
