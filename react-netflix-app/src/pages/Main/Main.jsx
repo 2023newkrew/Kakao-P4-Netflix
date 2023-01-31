@@ -26,12 +26,9 @@ export default function Main() {
   };
 
   return (
-    <>
-      <main>
-        <Banner />
-        <ContentCardLists genres={genres} />
-      </main>
-      <Footer />
-    </>
+    <main>
+      <Banner />
+      <ContentCardLists genres={genres} />
+    </main>
   );
 }
