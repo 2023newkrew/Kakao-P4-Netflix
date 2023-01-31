@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const useIntersectionObserver = (observeCallback, unObserveCallback) => {
+const useIntersectionObserver = (observeCallback, unObserveCallback, threshold) => {
   const observer = useRef(
     new IntersectionObserver(
       (entries, observer) => {
@@ -12,7 +12,7 @@ const useIntersectionObserver = (observeCallback, unObserveCallback) => {
           }
         });
       },
-      { threshold: 0.8 }
+      { threshold: threshold }
     )
   );
 
