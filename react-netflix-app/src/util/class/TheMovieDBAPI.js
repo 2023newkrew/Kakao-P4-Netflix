@@ -57,6 +57,7 @@ export default class TheMovieDBAPI {
       );
       return json.data.results;
     } catch (error) {
+      console.log(error);
       return [];
     }
   }

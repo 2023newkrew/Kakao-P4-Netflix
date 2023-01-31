@@ -24,11 +24,7 @@ export default function SearchResultPage() {
     <Container>
       {separatedMovieList.map((subList, idx) => (
         <ColumContainer key={idx}>
-          <MainColumn
-            imgList={subList}
-            setImageContainerSize={idx === 0 ? setImageContainerSize : null}
-            separateCount={SEPARATE_COUNT}
-          />
+          <MainColumn imgList={subList} separateCount={SEPARATE_COUNT} />
         </ColumContainer>
       ))}
     </Container>
