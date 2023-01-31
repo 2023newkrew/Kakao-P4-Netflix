@@ -28,6 +28,12 @@ export const HeaderContent = styled.div`
   padding: 0 16px;
 `;
 
+export const HeaderRightContent = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+`;
+
 export const HeaderLogo = styled.img``;
 
 export const HeaderProfile = styled.img``;
