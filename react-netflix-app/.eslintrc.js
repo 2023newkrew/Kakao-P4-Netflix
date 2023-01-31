@@ -13,5 +13,6 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': ['error', { ignorePackages: true }],
     camelcase: 'off',
+    'react/forbid-prop-types': ['warn'],
   },
 };
