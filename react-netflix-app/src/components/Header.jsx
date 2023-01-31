@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderContainer, HeaderContent, LogoLink, PrimaryMenus, SecondaryMenus, MenuItem } from './Header.style';
-import SearchIcon from '@icons/search.svg';
-import AlarmIcon from '@icons/alarm.svg';
+import { ReactComponent as SearchIcon } from '@icons/search.svg';
+import { ReactComponent as AlarmIcon } from '@icons/alarm.svg';
 import Logo from '@icons/logo.png';
 import throttle from '@utils/throttle';
+import SearchInput from '@components/SearchInput';
 
 const primaryMenus = [
   {
@@ -31,18 +32,10 @@ const primaryMenus = [
 
 const secondaryMenus = [
   {
-    id: 1,
-    content: (
-      <button>
-        <img src={SearchIcon} alt="검색 아이콘" />
-      </button>
-    ),
-  },
-  {
     id: 2,
     content: (
       <button>
-        <img src={AlarmIcon} alt="알람 아이콘" />
+        <AlarmIcon />
       </button>
     ),
   },
@@ -83,6 +76,7 @@ const useHeaderStyle = () => {
 
 const Header = () => {
   const headerRef = useHeaderStyle();
+  const [canSearch, setCanSearch] = useState(false);
 
   return (
     <HeaderContainer>
@@ -101,6 +95,17 @@ const Header = () => {
           ))}
         </PrimaryMenus>
         <SecondaryMenus>
+          {!canSearch && (
+            <button
+              type="button"
+              onClick={() => {
+                setCanSearch(true);
+              }}
+            >
+              <SearchIcon />
+            </button>
+          )}
+          {canSearch && <SearchInput setCanSearch={setCanSearch} />}
           {secondaryMenus.map((menu) => (
             <MenuItem key={menu.id}>{menu.content}</MenuItem>
           ))}

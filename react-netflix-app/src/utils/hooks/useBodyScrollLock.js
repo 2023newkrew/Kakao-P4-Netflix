@@ -1,12 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const useBodyScrollLock = (isLocked) => {
-  const root = useRef(document.body.querySelector('#root'));
   useEffect(() => {
     if (!isLocked) {
-      root.current.style.removeProperty('overflow-y');
+      document.body.style.removeProperty('overflow-y');
     } else {
-      root.current.style.setProperty('overflow-y', 'hidden');
+      document.body.style.setProperty('overflow-y', 'hidden');
     }
   }, [isLocked]);
 };

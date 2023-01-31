@@ -3,7 +3,6 @@ import { getPopularMovies, getTopRatedMovies } from '@api/movies';
 
 export const useTopRatedMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
   const [error, setError] = useState(null);
   const [movies, setMovies] = useState({});
 
@@ -14,7 +13,6 @@ export const useTopRatedMovies = () => {
         setMovies(response.data);
       } catch (error) {
         console.error('Fetch Error: top rated movies', error);
-        setIsError(true);
         setError(error);
       } finally {
         setIsLoading(false);
@@ -24,14 +22,12 @@ export const useTopRatedMovies = () => {
 
   return {
     isLoading,
-    isError,
     error,
     data: movies,
   };
 };
 export const usePopularMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
   const [error, setError] = useState(null);
   const [movies, setMovies] = useState({});
 
@@ -42,7 +38,6 @@ export const usePopularMovies = () => {
         setMovies(response.data);
       } catch (error) {
         console.error('Fetch Error: popular movies', error);
-        setIsError(true);
         setError(error);
       } finally {
         setIsLoading(false);
@@ -52,25 +47,24 @@ export const usePopularMovies = () => {
 
   return {
     isLoading,
-    isError,
     error,
     data: movies,
   };
 };
 export const useMovieList = () => {
-  const { isLoading: isTopRatedLoading, data: topRatedMovies, isError: isTopRatedError } = useTopRatedMovies();
-  const { isLoading: isPopularLoading, data: popularMovies, isError: isPopularError } = usePopularMovies();
+  const { isLoading: isTopRatedLoading, data: topRatedMovies, error: topRatedError } = useTopRatedMovies();
+  const { isLoading: isPopularLoading, data: popularMovies, error: popularError } = usePopularMovies();
   const isLoading = {
     topRated: isTopRatedLoading,
     popular: isPopularLoading,
   };
-  const isError = {
-    topRated: isTopRatedError,
-    popular: isPopularError,
+  const errors = {
+    topRated: topRatedError,
+    popular: popularError,
   };
   return {
     isLoading,
-    isError,
+    errors,
     topRatedMovies,
     popularMovies,
   };

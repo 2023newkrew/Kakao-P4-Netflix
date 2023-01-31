@@ -7,7 +7,7 @@ const httpClient = axios.create({
 });
 
 const handleRequest = (config) => {
-  config.params = { ...config.params, api_key: process.env.REACT_APP_TMDB_API_KEY, language: 'ko-KR' };
+  config.params = { api_key: process.env.REACT_APP_TMDB_API_KEY, language: 'ko-KR', ...config.params };
   return config;
 };
 const handleError = (error) => Promise.reject(error);

@@ -2,7 +2,7 @@ import httpClient from '@api/http';
 
 const MOVIE_URL = '/movie';
 
-const fetcher = (path, params) => httpClient.get(MOVIE_URL + path, params);
+const fetcher = (path, params) => httpClient.get(MOVIE_URL + path, { params });
 
 export const getPopularMovies = () => fetcher('/popular');
 export const getTopRatedMovies = () => fetcher('/top_rated');

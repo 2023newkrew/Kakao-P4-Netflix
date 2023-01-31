@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Container,
@@ -13,14 +13,15 @@ import {
   UtilButton,
   PlayButton,
   MoreButton,
-} from '@pages/Main/components/MovieCard.style';
-import useMovieDetail from '@pages/Main/hooks/useMovieDetail';
+  NoImage,
+} from '@components/Movie/MovieCard.style';
+import useMovieDetail from '@components/Movie/useMovieDetail';
 import MovieDetail from '@pages/Main/[id]';
 
 import { useModal } from '@components/Modal';
 
 import { BACKDROP_W300_URL, BACKDROP_W780_URL } from '@constants/tmdb';
-import usePreviewImage from '@utils/hooks/usePreviewImage';
+import usePreviewImage from '@hooks/usePreviewImage';
 
 import { ReactComponent as PlayIcon } from '@assets/icons/play.svg';
 import { ReactComponent as PlusIcon } from '@assets/icons/plus.svg';
@@ -29,21 +30,19 @@ import { ReactComponent as ArrowDownIcon } from '@assets/icons/arrowDown.svg';
 
 const DetailMovieCard = ({ movie }) => {
   const { data: detail, isLoading } = useMovieDetail(movie.id);
+  const cardRef = useRef(null);
   const openModal = useModal();
 
   const showMovieDetailModal = () => {
-    openModal({ node: <MovieDetail movie={detail} /> });
+    const position = cardRef.current.getBoundingClientRect();
+    openModal({ node: <MovieDetail movie={detail} />, position });
   };
 
   return (
-    <DetailContainer className="movie-detail" onClick={showMovieDetailModal}>
+    <DetailContainer ref={cardRef} className="movie-detail" onClick={showMovieDetailModal}>
       <DetailInfos>
         <h4>{movie.title}</h4>
-        <UtilsWrapper
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
+        <UtilsWrapper>
           <PlayButton>
             <PlayIcon width={18} height={18} />
           </PlayButton>
@@ -58,9 +57,9 @@ const DetailMovieCard = ({ movie }) => {
           </MoreButton>
         </UtilsWrapper>
         <InfoRow>
-          {!isLoading && detail?.vote_average && <UserVote>{Math.round(detail.vote_average * 10)}점</UserVote>}
+          {!isLoading && detail.vote_average > 0 && <UserVote>{Math.round(detail.vote_average * 10)}점</UserVote>}
         </InfoRow>
-        <Genres>{!isLoading && detail?.genres.map((genre) => genre.name).join(' / ')}</Genres>
+        <Genres>{!isLoading && detail.genres.map((genre) => genre.name).join(' / ')}</Genres>
       </DetailInfos>
     </DetailContainer>
   );
@@ -74,7 +73,7 @@ const MovieCard = ({ movie }) => {
   const thumbnailUrl = usePreviewImage({
     previewUrl: BACKDROP_W300_URL + movie.backdrop_path,
     originalUrl: BACKDROP_W780_URL + movie.backdrop_path,
-    load: isHover,
+    load: isHover && movie.backdrop_path,
   });
 
   return (
@@ -84,7 +83,8 @@ const MovieCard = ({ movie }) => {
       }}
     >
       <ThumbnailContainer>
-        <ThumbnailImage src={thumbnailUrl} alt="썸네일" />
+        {movie.backdrop_path && <ThumbnailImage src={thumbnailUrl} alt="썸네일" />}
+        {!movie.backdrop_path && <NoImage>{movie.title}</NoImage>}
       </ThumbnailContainer>
       {isHover && <DetailMovieCard movie={movie} />}
     </Container>
