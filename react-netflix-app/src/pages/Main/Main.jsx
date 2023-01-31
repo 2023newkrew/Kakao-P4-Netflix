@@ -4,8 +4,18 @@ import { ContentListsWrapper } from "./Main.style";
 
 import api from "utils/API";
 
+const ContentCardLists = ({ genres }) => {
+  return (
+    <ContentListsWrapper>
+      {genres.map((genre) => (
+        <ContentCardList key={genre.id} id={genre.id} genreName={genre.name} />
+      ))}
+    </ContentListsWrapper>
+  );
+};
+
 export default function Main() {
-  const [genres, setGenres] = useState([{ id: "", name: "" }]);
+  const [genres, setGenres] = useState([]);
   useEffect(() => {
     getContentGenres();
   }, []);
@@ -15,23 +25,12 @@ export default function Main() {
     setGenres(res.genres.slice(0, 5));
   };
 
-  // 아예 다른 컴포넌트로 분리..?
-  const ContentCardLists = React.memo(() => {
-    return (
-      <ContentListsWrapper>
-        {genres.map((genre) => (
-          <ContentCardList key={genre.id} id={genre.id} genrename={genre.name} />
-        ))}
-      </ContentListsWrapper>
-    );
-  });
-
   return (
     <>
       <Header />
       <main>
         <Banner />
-        <ContentCardLists />
+        <ContentCardLists genres={genres} />
       </main>
       <Footer />
     </>

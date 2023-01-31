@@ -11,7 +11,7 @@ export const HeaderContainer = styled.header`
   z-index: 100;
 `;
 
-export const HaderContent = styled.div`
+export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

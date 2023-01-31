@@ -1,5 +1,9 @@
 import React from "react";
-import { NavTabContainer } from "./NavTab.style";
+import styled from "styled-components";
+
+export const NavTabContainer = styled.li`
+  margin: 0 10px;
+`;
 
 const NavTab = ({ path, tabText }) => {
   return (
