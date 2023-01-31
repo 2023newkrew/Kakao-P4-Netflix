@@ -59,16 +59,16 @@ export default function useModal() {
   };
 
   function ModalContainer({ children }) {
-    if (!isOpened) return null;
-
     return ReactDOM.createPortal(
-      <ModalWrapper
-        isClosing={isClosing}
-        onClick={closeModal}
-        onAnimationEnd={handleAnimationEnd}
-      >
-        {children}
-      </ModalWrapper>,
+      isOpened && (
+        <ModalWrapper
+          isClosing={isClosing}
+          onClick={closeModal}
+          onAnimationEnd={handleAnimationEnd}
+        >
+          {children}
+        </ModalWrapper>
+      ),
       document.body
     );
   }
