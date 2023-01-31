@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 
 const useOutsideClick = (ref, callback) => {
   useEffect(() => {
-    const handleClick = (event) => {
-      if (!ref.current || ref.current.contains(event.target)) return;
+    if (!ref.current || typeof callback !== 'function') return undefined;
 
-      callback?.();
+    const handleClick = (event) => {
+      if (ref.current.contains(event.target)) return;
+
+      callback();
     };
 
     window.addEventListener('mousedown', handleClick);
