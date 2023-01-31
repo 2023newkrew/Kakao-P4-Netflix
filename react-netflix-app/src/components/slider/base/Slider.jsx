@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Swiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 
 import 'swiper/css';
@@ -51,6 +51,8 @@ const List = styled(Swiper)`
   }
 `;
 
+const Item = styled(SwiperSlide)``;
+
 export default function Slider({ name, children }) {
   return (
     <SliderLayout>
@@ -75,7 +77,9 @@ export default function Slider({ name, children }) {
           },
         }}
       >
-        {children}
+        {children.map((child) => (
+          <Item key={child.key}>{child}</Item>
+        ))}
       </List>
     </SliderLayout>
   );

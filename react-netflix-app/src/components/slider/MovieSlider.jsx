@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MovieItem from '@components/slider/MovieItem';
-import Slider from '@/components/slider/base/Slider';
+import Slider from '@components/slider/base/Slider';
+import MovieCard from '@components/card/MovieCard';
 
 export default function MovieSlider({ name, movies }) {
   return (
     <Slider name={name}>
       {movies.map((movie) => {
-        return <MovieItem key={movie.id} movie={movie} />;
+        return <MovieCard key={movie.id} movie={movie} />;
       })}
     </Slider>
   );
