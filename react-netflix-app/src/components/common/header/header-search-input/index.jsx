@@ -1,26 +1,19 @@
-import styled from '@emotion/styled';
 import { useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
-// import useQueryParams from '@/hooks/use-query-params';
-
-export const SearchInput = styled.input`
-  height: 100%;
-  max-height: 32px;
-  color: var(--primary-text-color);
-  background-color: var(--card-background-color);
-  border: 1px solid var(--divider-color);
-  border-radius: 4px;
-`;
+import { useNavigate } from 'react-router-dom';
+import { ROUTE, ROUTE_PATH } from '@/constants/route';
+import { SearchInput } from './styles';
+import { SEARCH_URL_PARAM } from '@/constants/param';
 
 const HeaderSearchInput = () => {
-  const [_, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const onChange = useCallback(
     (event) => {
       const { value } = event?.target || {};
-      setSearchParams({ q: value }, { replace: true });
+
+      navigate(`${ROUTE_PATH[ROUTE.SEARCH]}?${SEARCH_URL_PARAM}=${value}`, { replace: true });
     },
-    [setSearchParams],
+    [navigate],
   );
 
   return <SearchInput type="text" placeholder="Search" onChange={onChange} />;
