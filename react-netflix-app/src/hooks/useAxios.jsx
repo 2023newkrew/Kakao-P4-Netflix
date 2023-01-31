@@ -7,7 +7,8 @@ axios.defaults.params = {
   language: 'ko-KR',
 };
 
-export default function useAxios(method, url, config) {
+export default function useAxios(method, url, config = null) {
+  const configString = JSON.stringify(config);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
@@ -16,14 +17,14 @@ export default function useAxios(method, url, config) {
     setIsLoading(true);
 
     try {
-      const res = await axios[method](url, config);
+      const res = await axios[method](url, JSON.parse(configString));
       setData(res.data);
     } catch (err) {
       setError(err);
     } finally {
       setIsLoading(false);
     }
-  }, [method, url, config]);
+  }, [method, url, configString]);
 
   useEffect(() => {
     fetch();
