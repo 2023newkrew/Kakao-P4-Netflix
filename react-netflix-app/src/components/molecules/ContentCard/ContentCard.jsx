@@ -8,22 +8,22 @@ const ContentCard = ({ content }) => {
   const { openModal } = React.useContext(ModalDispatchContext);
 
   return (
-    <ContentCardContainer>
-      <article
-        onClick={() =>
-          openModal(
-            <ContentDetail
-              title={content.title}
-              desc={content.overview}
-              imageURL={content.backdrop_path}
-            />
-          )
-        }
-      >
+    <ContentCardContainer
+      onClick={() =>
+        openModal(
+          <ContentDetail
+            title={content.title}
+            desc={content.overview}
+            imageURL={content.backdrop_path ?? content.poster_path}
+          />
+        )
+      }
+    >
+      <article>
         <div>
           <ContentCardImage
-            alt={`${content.title}의 컨텐츠 썸네일 이미지`}
-            src={api.getImageSeverURL() + content.backdrop_path}
+            alt={`<${content.title}>의 썸네일 이미지`}
+            src={api.getImageSeverURL() + (content.backdrop_path ?? content.poster_path)}
             loading="lazy"
           />
         </div>

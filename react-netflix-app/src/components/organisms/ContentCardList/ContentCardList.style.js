@@ -10,8 +10,6 @@ export const ContentListContainer = styled.li`
 `;
 
 export const ContentListWrapper = styled.ul`
-  display: flex;
-  gap: 5px;
   padding: 10px 0px;
 
   &::-webkit-scrollbar {

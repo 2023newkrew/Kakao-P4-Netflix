@@ -16,6 +16,7 @@ export const ContentDetailBackground = styled.div`
   & > img {
     position: absolute;
     width: 100%;
+    max-height: 30vw;
     top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);

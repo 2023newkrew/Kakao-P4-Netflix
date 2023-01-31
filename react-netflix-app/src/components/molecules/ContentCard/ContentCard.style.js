@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ContentCardContainer = styled.li`
+  position: relative;
   width: 15vw;
   height: 9vw;
   z-index: 10;
