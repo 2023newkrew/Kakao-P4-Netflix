@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ContentCard } from "components";
 import { SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
+import api from "utils/API";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -13,28 +15,29 @@ import {
   ContentListSlider,
 } from "./ContentCardList.style";
 
-import api from "utils/API";
-
 const ContentCards = ({ contents }) => {
   return (
     <ContentListWrapper>
-      <ContentListSlider
-        slidesPerView={6}
-        spaceBetween={3}
-        slidesPerGroup={6}
-        touchRatio={0}
-        loopFillGroupWithBlank={false}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-      >
-        {contents?.map((content) => {
-          return (
-            <SwiperSlide key={content.id}>
-              <ContentCard key={content.id} content={content} />
-            </SwiperSlide>
-          );
-        })}
-      </ContentListSlider>
+      {contents?.length && (
+        <ContentListSlider
+          slidesPerView={6}
+          spaceBetween={3}
+          slidesPerGroup={6}
+          touchRatio={0}
+          loop={true}
+          loopFillGroupWithBlank={false}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+        >
+          {contents?.map((content) => {
+            return (
+              <SwiperSlide key={content.id}>
+                <ContentCard key={content.id} content={content} />
+              </SwiperSlide>
+            );
+          })}
+        </ContentListSlider>
+      )}
     </ContentListWrapper>
   );
 };
