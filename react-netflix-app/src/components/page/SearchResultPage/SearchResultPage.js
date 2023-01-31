@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TheMovieDBAPI from "../../../util/class/TheMovieDBAPI";
 import Util from "../../../util/class/Util";
-import MainColumn from "../Main/MainRow/MainColumn/MainColumn";
-import MainColumnItem from "../Main/MainRow/MainColumn/MainColumnItem/MainColumnItem";
+import MainColumn from "../MainPage/MainRow/MainColumn/MainColumn";
+import MainColumnItem from "../MainPage/MainRow/MainColumn/MainColumnItem/MainColumnItem";
 import { Container, ColumContainer } from "./styles";
 
 const SEPARATE_COUNT = 5;
