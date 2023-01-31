@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Util from "../../../../util/class/Util";
 import useAddEventListener from "../../../../util/hooks/useAddEventListener";
+import useDebounce from "../../../../util/hooks/useDebounce";
 import MainColumn from "./MainColumn/MainColumn";
 import { MainRowContainer, MainRowSlider, MainRowLeftArrow, MainRowRightArrow } from "./styles";
 
@@ -11,16 +12,6 @@ const handleClickArrow = (setColIndex, dir) => {
   setColIndex((prev) => prev + value);
 };
 
-const getMainRowDebouncedHandler = (mainRowSliderRef) => {
-  const handleResize = (event) => {
-    mainRowSliderRef.current.style.transition = "transform 1s";
-  };
-  const handleResizeStart = () => {
-    mainRowSliderRef.current.style.transition = "none";
-  };
-  return Util.makeDebounceHandler(handleResize, DELAY, handleResizeStart, null);
-};
-
 export default function MainRow({ fetchMethod, itemCount }) {
   const [imageContainerSize, setImageContainerSize] = useState(null);
   const [separatedList, setSeparatedList] = useState([]);
@@ -28,6 +19,16 @@ export default function MainRow({ fetchMethod, itemCount }) {
   const mainRowSliderRef = useRef(null);
   const windowRef = useRef(window);
   const SEPARATE_COUNT = itemCount;
+  const mainRowDebouncedHandler = useDebounce(
+    () => {
+      mainRowSliderRef.current.style.transition = "transform 1s";
+    },
+    DELAY,
+    () => {
+      mainRowSliderRef.current.style.transition = "none";
+    },
+    null
+  );
   const translateValue =
     imageContainerSize === null
       ? 0
@@ -38,7 +39,7 @@ export default function MainRow({ fetchMethod, itemCount }) {
             separatedList[separatedList.length - 1].length * imageContainerSize
         );
 
-  useAddEventListener(windowRef, "resize", getMainRowDebouncedHandler(mainRowSliderRef));
+  useAddEventListener(windowRef, "resize", mainRowDebouncedHandler);
   useEffect(() => {
     /* 데이터 fetch */
     const fetchTopRatedMovie = async () => {
