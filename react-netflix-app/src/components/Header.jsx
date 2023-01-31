@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as LogoImage } from '@assets/logo.svg';
@@ -10,7 +10,8 @@ const HeaderLayout = styled.header`
   top: 0;
   width: 100%;
   height: 72px;
-  background: linear-gradient(black, transparent);
+  background: ${({ isScrolled }) =>
+    isScrolled ? 'black' : 'linear-gradient(black, transparent)'};
   z-index: 1;
 `;
 
@@ -77,8 +78,18 @@ const menus = [
 
 export default function Header() {
   const navigate = useNavigate();
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchBoxOpened, setIsSearchBoxOpened] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const openSearchBox = () => setIsSearchBoxOpened(true);
   const closeSearchBox = () => setIsSearchBoxOpened(false);
@@ -95,7 +106,7 @@ export default function Header() {
   };
 
   return (
-    <HeaderLayout>
+    <HeaderLayout isScrolled={isScrolled}>
       <Navigation>
         <Logo>
           <LogoImage />
