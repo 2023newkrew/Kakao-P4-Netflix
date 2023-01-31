@@ -1,20 +1,24 @@
 import { BannerContainer } from "@styles/banner/Banner.style";
 
-import BannerMovie from "./BannerMovie";
-import BannerInfo from "./BannerInfo";
-
 import { API } from "@utils/axios";
 import useFetch from "@hooks/useFetch";
+
+import React, { lazy, Suspense } from "react";
+
+import BannerInfo from "./BannerInfo";
+const BannerMovie = lazy(() => import("./BannerMovie"));
 
 const Banner = () => {
   const { data: bannerMovie, loading, LoadingComponent } = useFetch(API.fetchBannerMovie());
 
-  if (loading === true) return <LoadingComponent />;
+  if (loading) return <LoadingComponent />;
 
   return (
     <BannerContainer>
-      <BannerMovie bannerMovie={bannerMovie} />
-      <BannerInfo bannerMovie={bannerMovie} />
+      <Suspense fallback={null}>
+        <BannerMovie bannerMovie={bannerMovie} />
+        <BannerInfo bannerMovie={bannerMovie} />
+      </Suspense>
     </BannerContainer>
   );
 };

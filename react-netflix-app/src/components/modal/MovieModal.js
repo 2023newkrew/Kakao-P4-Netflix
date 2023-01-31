@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API } from "@utils/axios";
+import YouTube from "react-youtube";
 
 import { MovieCardSubInfoContainer, MovieCardInfoContainer, MovieCardTitle, MovieCardSubTitle, MovieCardOverviewWrapper, MovieCardOverview, MovieModalContainer, ModalMovieCard } from "@styles/modal/MovieModal.style";
 
@@ -30,7 +31,6 @@ const MovieModal = ({ movie }) => {
   const [movieURL, setMovieURL] = useState();
   const [movieInfo, setMovieInfo] = useState();
 
-  // TODO : 2개의 API가 호출되는 부분 useFetch로 변경하기
   useEffect(() => {
     fetchMovieInfo(movie);
 
@@ -45,13 +45,22 @@ const MovieModal = ({ movie }) => {
 
   if (movieInfo === undefined) return <div></div>;
 
-  const movieYoutubeURL = `https://www.youtube.com/embed/${movieURL}?autoplay=1&mute=1`;
   const movieImageURL = process.env.REACT_APP_IMAGE_API_URL + `/${movie.poster_path || movie.backdrop_path}`;
+
+  const options = {
+    width: "100%",
+    height: "100%",
+    playerVars: {
+      autoplay: 1,
+      mute: 1,
+      rel: 0,
+    },
+  };
 
   return (
     <MovieModalContainer>
       {/* 영상의 주소가 없다면 이미지 띄어주기 */}
-      {movieURL !== null ? <iframe src={movieYoutubeURL} title="YouTube video player" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" allowFullScreen /> : <img src={movieImageURL} alt={movie.title} />}
+      {movieURL !== null ? <YouTube className="youtube" videoId={movieURL} opts={options} /> : <img src={movieImageURL} alt={movie.title} />}
       <ModalMovieCard>
         <MovieCardInfo movieInfo={movieInfo} />
         <MovieCardSubInfo movieInfo={movieInfo} />

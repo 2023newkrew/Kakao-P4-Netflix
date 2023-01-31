@@ -49,11 +49,12 @@ export const MovieModalContainer = styled.div`
   width: 100%;
   height: 100%;
 
-  iframe {
+  .youtube {
     width: 100%;
     height: 600px;
     position: relative;
     z-index: 1;
+    background-color: rgb(24, 24, 24);
   }
 
   img {

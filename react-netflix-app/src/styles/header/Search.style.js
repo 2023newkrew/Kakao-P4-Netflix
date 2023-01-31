@@ -40,6 +40,7 @@ export const InputImage = styled.div`
 
   img {
     height: 30px;
+    width: 30px;
     cursor: pointer;
   }
 `;
