@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as LogoImage } from '@assets/logo.svg';
 import { ReactComponent as SearchIcon } from '@assets/search.svg';
 import { ReactComponent as NotificationsIcon } from '@assets/notifications.svg';
@@ -33,7 +33,11 @@ const MenuList = styled.ul`
   flex: 1;
 `;
 
-const MenuItem = styled.li``;
+const MenuItem = styled.li`
+  &:hover {
+    opacity: 0.8;
+  }
+`;
 
 const Button = styled.button`
   width: 36px;
@@ -68,7 +72,7 @@ const SearchInput = styled.input`
 `;
 
 const menus = [
-  { path: '/hot', name: '홈' },
+  { path: '/', name: '홈' },
   { path: '/series', name: '시리즈' },
   { path: '/movie', name: '영화' },
   { path: '/latest', name: 'NEW! 요즘 대세 콘텐츠' },
@@ -108,18 +112,23 @@ export default function Header() {
   return (
     <HeaderLayout isScrolled={isScrolled}>
       <Navigation>
-        <Logo>
-          <LogoImage />
-        </Logo>
+        <Link to="/">
+          <Logo>
+            <LogoImage />
+          </Logo>
+        </Link>
         <MenuList>
           {menus.map(({ path, name }) => (
-            <MenuItem key={path}>{name}</MenuItem>
+            <MenuItem key={path}>
+              <Link to={path}>{name}</Link>
+            </MenuItem>
           ))}
         </MenuList>
         {isSearchBoxOpened ? (
           <SearchBox>
             <SearchIcon />
             <SearchInput
+              autoFocus
               placeholder="제목, 사람, 장르"
               value={searchQuery}
               onChange={handleSearchInputChange}
