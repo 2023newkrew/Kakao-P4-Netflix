@@ -1,11 +1,4 @@
-interface ThrottleFunction<F extends (...args: any[]) => any> {
-  cancel: () => void;
-}
-
-export default function throttle<F extends (...args: any[]) => any>(
-  func: F,
-  waitMilliseconds = 50,
-): ThrottleFunction<F> {
+export default function throttle<F extends (...args: any[]) => any>(func: F, waitMilliseconds = 50) {
   let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
   function throttledFunction(...args: Parameters<F>) {

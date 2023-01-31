@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import MainPage from '@pages/Main/MainPage';
 import ErrorPage from '@pages/Error';
 import LoginPage from '@pages/Login';
@@ -18,6 +18,6 @@ const routes = [
   ,
   { path: '/login', element: <LoginPage /> },
 ];
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes as RouteObject[]);
 
 export default router;
