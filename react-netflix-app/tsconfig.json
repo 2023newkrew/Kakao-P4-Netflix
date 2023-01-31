@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig to read more about this file */
-    "target": "es2016",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react-jsx",
     "module": "ESNext",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@components/*": ["./components/*"],
-      "@pages/*": ["./pages/*"],
-      "@styles/*": ["./styles/*"],
-      "@assets/*": ["./assets/*"],
-      "@icons/*": ["./assets/icons/*"],
-      "@api/*": ["./api/*"],
-      "@constants/*": ["./constants/*"],
-      "@utils/*": ["./utils/*"],
-      "@/*": ["./*"]
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@icons/*": ["./src/assets/icons/*"],
+      "@api/*": ["./src/api/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@hooks/*": ["./src/utils/hooks/*"],
+      "@/*": ["./src/*"]
     },
 
     "allowJs": true,
@@ -25,7 +26,8 @@
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noEmit": true
   },
-  "include": ["src"]
+  "include": ["src", "craco.config.js", "babel.config.js", "tailwind.config.js"]
 }
