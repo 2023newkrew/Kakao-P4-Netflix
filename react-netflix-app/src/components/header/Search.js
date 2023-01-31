@@ -2,11 +2,11 @@ import { SearchContainer, InputContainer, InputImage } from "@styles/header/Sear
 
 import magnifyGlass from "@assets/magnifying-glass.svg";
 import { useNavigate } from "react-router-dom";
+import debounce from "@utils/debounce";
 
 const Search = () => {
   const navigate = useNavigate();
 
-  // TODO : debounce 적용하기
   const onChange = (e) => {
     navigate(`/search?q=${e.target.value}`);
   };
@@ -17,7 +17,7 @@ const Search = () => {
         <InputImage>
           <img src={magnifyGlass} alt="입력 돋보기 이미지" />
         </InputImage>
-        <input placeholder="제목, 사람, 장르" onChange={onChange} />
+        <input placeholder="제목, 사람, 장르" onChange={debounce(onChange, 200)} />
       </InputContainer>
     </SearchContainer>
   );

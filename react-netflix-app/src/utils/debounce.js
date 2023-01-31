@@ -1,4 +1,4 @@
-const useDebounce = (callback, delay) => {
+const debounce = (callback, delay) => {
   let timer;
   return (...args) => {
     // 실행한 함수(setTimeout())를 취소
@@ -8,4 +8,4 @@ const useDebounce = (callback, delay) => {
   };
 };
 
-export default useDebounce;
+export default debounce;

@@ -2,30 +2,10 @@ import { useEffect, useState } from "react";
 import { API } from "@utils/axios";
 import YouTube from "react-youtube";
 
-import { MovieCardSubInfoContainer, MovieCardInfoContainer, MovieCardTitle, MovieCardSubTitle, MovieCardOverviewWrapper, MovieCardOverview, MovieModalContainer, ModalMovieCard } from "@styles/modal/MovieModal.style";
+import MovieCardSubInfo from "./MovieCardSubInfo";
+import MovieCardInfo from "./MovieCardInfo";
 
-const MovieCardSubInfo = ({ movieInfo }) => {
-  return (
-    <MovieCardSubInfoContainer>
-      <div>평점 : {Math.round(movieInfo.vote_average, 1)}점</div>
-      <div>장르 : [ {movieInfo.genres && movieInfo.genres.map((genre) => genre.name + " ")}]</div>
-      <div>개봉일 : {movieInfo.release_date}</div>
-      <div>러닝타임 : {movieInfo.runtime}분</div>
-    </MovieCardSubInfoContainer>
-  );
-};
-
-const MovieCardInfo = ({ movieInfo }) => {
-  return (
-    <MovieCardInfoContainer>
-      <MovieCardTitle>{movieInfo.title}</MovieCardTitle>
-      <MovieCardSubTitle>{movieInfo.tagline}</MovieCardSubTitle>
-      <MovieCardOverviewWrapper>
-        <MovieCardOverview>{movieInfo.overview}</MovieCardOverview>
-      </MovieCardOverviewWrapper>
-    </MovieCardInfoContainer>
-  );
-};
+import { MovieModalContainer, ModalMovieCard } from "@styles/modal/MovieModal.style";
 
 const MovieModal = ({ movie }) => {
   const [movieURL, setMovieURL] = useState();
@@ -59,7 +39,6 @@ const MovieModal = ({ movie }) => {
 
   return (
     <MovieModalContainer>
-      {/* 영상의 주소가 없다면 이미지 띄어주기 */}
       {movieURL !== null ? <YouTube className="youtube" videoId={movieURL} opts={options} /> : <img src={movieImageURL} alt={movie.title} />}
       <ModalMovieCard>
         <MovieCardInfo movieInfo={movieInfo} />
