@@ -8,16 +8,18 @@ const StyledDiv = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
 
-  will-change: transform;
-  animation: 0.4s ease ${({ animationName }) => animationName} forwards;
+  will-change: opacity, transform;
+  animation: 0.6s ease ${({ animationName }) => animationName} forwards;
   @keyframes swip-out {
     to {
+      opacity: 0;
       transform: translateX(-100%);
     }
   }
 
   @keyframes swip-in {
     from {
+      opacity: 0;
       transform: translateX(100%);
     }
   }
