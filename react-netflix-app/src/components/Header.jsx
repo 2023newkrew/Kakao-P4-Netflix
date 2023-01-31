@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as LogoImage } from '@assets/logo.svg';
 import { ReactComponent as SearchIcon } from '@assets/search.svg';
@@ -9,6 +9,7 @@ const HeaderLayout = styled.header`
   width: 100%;
   height: 72px;
   background: linear-gradient(black, transparent);
+  z-index: 1;
 `;
 
 const Navigation = styled.nav`
@@ -37,6 +38,30 @@ const Button = styled.button`
   border: none;
   background: none;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+const SearchBox = styled.div`
+  width: 200px;
+  box-sizing: border-box;
+  height: 36px;
+  margin-right: 12px;
+  padding: 4px 8px;
+  display: flex;
+  gap: 4px;
+  background-color: black;
+  border: 1px solid white;
+`;
+
+const SearchInput = styled.input`
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
 `;
 
 const menus = [
@@ -49,6 +74,11 @@ const menus = [
 ];
 
 export default function Header() {
+  const [isSearchBoxOpened, setIsSearchBoxOpened] = useState(false);
+
+  const openSearchBox = () => setIsSearchBoxOpened(true);
+  const closeSearchBox = () => setIsSearchBoxOpened(false);
+
   return (
     <HeaderLayout>
       <Navigation>
@@ -60,9 +90,19 @@ export default function Header() {
             <MenuItem key={path}>{name}</MenuItem>
           ))}
         </MenuList>
-        <Button>
-          <SearchIcon />
-        </Button>
+        {isSearchBoxOpened ? (
+          <SearchBox>
+            <SearchIcon />
+            <SearchInput
+              placeholder="제목, 사람, 장르"
+              onBlur={closeSearchBox}
+            />
+          </SearchBox>
+        ) : (
+          <Button onClick={openSearchBox}>
+            <SearchIcon />
+          </Button>
+        )}
         <Button>
           <NotificationsIcon />
         </Button>
