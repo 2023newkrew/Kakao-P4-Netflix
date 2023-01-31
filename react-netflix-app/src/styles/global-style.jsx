@@ -6,6 +6,7 @@ const style = css`
     --background-card-color: #181818;
     --primary-text-color: white;
     --secondary-text-color: #808080;
+    --divider-color: #303030;
   }
 
   body {
