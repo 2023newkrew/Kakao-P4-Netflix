@@ -48,8 +48,8 @@ const Login = () => {
     });
   };
   const onValidSubmit = async () => {
-    const { data } = await login();
-    console.log(data);
+    await login();
+
     navigate('/', { replace: true });
   };
 

@@ -10,6 +10,9 @@ module.exports = {
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@icons': path.resolve(__dirname, 'src/assets/icons'),
       '@api': path.resolve(__dirname, 'src/api'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@constants': path.resolve(__dirname, 'src/constants'),
+      '@hooks': path.resolve(__dirname, 'src/utils/hooks'),
     },
   },
 };

@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderContainer, HeaderContent, LogoLink, PrimaryMenus, SecondaryMenus, MenuItem } from './Header.style';
-import SearchIcon from '@icons/search.svg';
-import AlarmIcon from '@icons/alarm.svg';
+import { ReactComponent as SearchIcon } from '@icons/search.svg';
+import { ReactComponent as AlarmIcon } from '@icons/alarm.svg';
 import Logo from '@icons/logo.png';
+import throttle from '@utils/throttle';
+import SearchInput from '@components/SearchInput';
 
 const primaryMenus = [
   {
@@ -28,16 +30,40 @@ const primaryMenus = [
   },
 ];
 
+const secondaryMenus = [
+  {
+    id: 2,
+    content: (
+      <button>
+        <AlarmIcon />
+      </button>
+    ),
+  },
+  {
+    id: 3,
+    content: <button>프로필</button>,
+  },
+  {
+    id: 4,
+    content: (
+      <Link to="/login" replace>
+        로그아웃
+      </Link>
+    ),
+  },
+];
+
 const useHeaderStyle = () => {
   const headerRef = useRef(null);
   useEffect(() => {
-    const handleHeaderBackground = () => {
+    const handleHeaderBackground = throttle(() => {
       if (window.scrollY > 0) {
         headerRef.current.style.setProperty('background-color', 'rgb(20,20,20)');
       } else {
         headerRef.current.style.setProperty('background-color', 'transparent');
       }
-    };
+    }, 100);
+
     window.addEventListener('scroll', handleHeaderBackground);
 
     return () => {
@@ -50,6 +76,7 @@ const useHeaderStyle = () => {
 
 const Header = () => {
   const headerRef = useHeaderStyle();
+  const [canSearch, setCanSearch] = useState(false);
 
   return (
     <HeaderContainer>
@@ -68,24 +95,20 @@ const Header = () => {
           ))}
         </PrimaryMenus>
         <SecondaryMenus>
-          <MenuItem>
-            <button>
-              <img src={SearchIcon} alt="검색 아이콘" />
+          {!canSearch && (
+            <button
+              type="button"
+              onClick={() => {
+                setCanSearch(true);
+              }}
+            >
+              <SearchIcon />
             </button>
-          </MenuItem>
-          <MenuItem>
-            <button>
-              <img src={AlarmIcon} alt="알람 아이콘" />
-            </button>
-          </MenuItem>
-          <MenuItem>
-            <button>프로필</button>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/login" replace>
-              로그아웃
-            </Link>
-          </MenuItem>
+          )}
+          {canSearch && <SearchInput setCanSearch={setCanSearch} />}
+          {secondaryMenus.map((menu) => (
+            <MenuItem key={menu.id}>{menu.content}</MenuItem>
+          ))}
         </SecondaryMenus>
       </HeaderContent>
     </HeaderContainer>
