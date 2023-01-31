@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
+import useDebouncedState from '@hooks/useDebouncedState';
 import { ReactComponent as LogoImage } from '@assets/logo.svg';
 import { ReactComponent as SearchIcon } from '@assets/search.svg';
 import { ReactComponent as NotificationsIcon } from '@assets/notifications.svg';
@@ -84,7 +85,8 @@ export default function Header() {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchBoxOpened, setIsSearchBoxOpened] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, debouncedSearchQuery, setSearchQuery] =
+    useDebouncedState('');
 
   const handleScroll = () => {
     setIsScrolled(window.scrollY > 0);
@@ -100,14 +102,16 @@ export default function Header() {
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
+  };
 
-    if (!e.target.value) {
+  useEffect(() => {
+    if (!debouncedSearchQuery) {
       navigate('/');
       return;
     }
 
-    navigate(`/search?q=${e.target.value}`);
-  };
+    navigate(`/search?q=${debouncedSearchQuery}`);
+  }, [debouncedSearchQuery, navigate]);
 
   return (
     <HeaderLayout isScrolled={isScrolled}>
