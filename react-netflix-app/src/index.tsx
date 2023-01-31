@@ -7,7 +7,7 @@ import GlobalStyles from '@/GlobalStyles';
 import '@/index.css';
 import { ModalProvider } from '@components/Modal';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <ModalProvider id="movie-detail">

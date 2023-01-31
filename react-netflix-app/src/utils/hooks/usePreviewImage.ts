@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const usePreviewImage = ({ previewUrl, originalUrl, load }) => {
+type Props = {
+  previewUrl: string;
+  originalUrl: string;
+  load: boolean;
+};
+const usePreviewImage = ({ previewUrl, originalUrl, load }: Props) => {
   const [srcUrl, setSrcUrl] = useState(previewUrl);
 
   useEffect(() => {

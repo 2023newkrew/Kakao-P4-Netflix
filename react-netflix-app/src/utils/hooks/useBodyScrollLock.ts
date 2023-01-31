@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useBodyScrollLock = (isLocked) => {
+const useBodyScrollLock = (isLocked: boolean) => {
   useEffect(() => {
     if (!isLocked) {
       document.body.style.removeProperty('overflow-y');

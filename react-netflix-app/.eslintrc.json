@@ -19,5 +19,10 @@
     "react/jsx-uses-vars": "error",
     "require-jsdoc": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
   }
 }

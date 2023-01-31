@@ -3,9 +3,9 @@ import { useEffect, useCallback } from 'react';
 const ESCAPE_KEY_CODE = 'Escape';
 const KEY_EVENT_TYPE = 'keydown';
 
-const useEscapeKey = (onEscape) => {
+const useEscapeKey = (onEscape: () => void) => {
   const handleEscKey = useCallback(
-    (event) => {
+    (event: KeyboardEvent) => {
       if (event.code === ESCAPE_KEY_CODE) {
         onEscape();
       }

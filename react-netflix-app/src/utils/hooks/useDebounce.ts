@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 const DEBOUNCE_DELAY = 200;
-const useDebounce = (value, handler, delay = DEBOUNCE_DELAY) => {
-  const timer = useRef(null);
+const useDebounce = (value: any, handler: () => void, delay = DEBOUNCE_DELAY) => {
+  const timer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     clearTimeout(timer.current);

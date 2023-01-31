@@ -1,0 +1,27 @@
+interface ThrottleFunction<F extends (...args: any[]) => any> {
+  cancel: () => void;
+}
+
+export default function throttle<F extends (...args: any[]) => any>(
+  func: F,
+  waitMilliseconds = 50,
+): ThrottleFunction<F> {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+  function throttledFunction(...args: Parameters<F>) {
+    if (!timeoutId) {
+      timeoutId = setTimeout(() => {
+        func(...args);
+        timeoutId = undefined;
+      }, waitMilliseconds);
+    }
+  }
+
+  throttledFunction.cancel = function cancel() {
+    if (timeoutId !== undefined) {
+      clearTimeout(timeoutId);
+    }
+  };
+
+  return throttledFunction;
+}
