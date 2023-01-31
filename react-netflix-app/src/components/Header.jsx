@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as LogoImage } from '@assets/logo.svg';
 import { ReactComponent as SearchIcon } from '@assets/search.svg';
 import { ReactComponent as NotificationsIcon } from '@assets/notifications.svg';
 
 const HeaderLayout = styled.header`
   position: fixed;
+  top: 0;
   width: 100%;
   height: 72px;
   background: linear-gradient(black, transparent);
@@ -74,6 +76,7 @@ const menus = [
 ];
 
 export default function Header() {
+  const navigate = useNavigate();
   const [isSearchBoxOpened, setIsSearchBoxOpened] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -82,6 +85,13 @@ export default function Header() {
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
+
+    if (!e.target.value) {
+      navigate('/');
+      return;
+    }
+
+    navigate(`/search?q=${e.target.value}`);
   };
 
   return (
