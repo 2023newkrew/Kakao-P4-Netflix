@@ -52,7 +52,10 @@ function SearchPage() {
   };
 
   useEffect(() => {
-    if (debouncedQuery === '') return;
+    if (debouncedQuery === '') {
+      lastPromiseRef.current = null;
+      return;
+    }
 
     setIsLoading(true);
     (async () => {
