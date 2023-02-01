@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ContentCard } from "components";
 import { SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-import api from "utils/API";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,54 +9,54 @@ import "swiper/css/navigation";
 
 import {
   ContentListContainer,
-  ContentListWrapper,
+  ContentGroupListWrapper,
+  ContentGroupWrapper,
   ContentListTitle,
-  ContentListSlider,
+  ContentGroupListSlider,
 } from "./ContentCardList.style";
 
-const ContentCards = ({ contents }) => {
+const ContentCardGroup = ({ contents }) => {
   return (
-    <ContentListWrapper>
-      {contents?.length && (
-        <ContentListSlider
-          slidesPerView={6}
-          spaceBetween={3}
-          slidesPerGroup={6}
-          touchRatio={0}
-          loop={true}
-          loopFillGroupWithBlank={false}
-          navigation={true}
-          modules={[Pagination, Navigation]}
-        >
-          {contents?.map((content) => {
-            return (
-              <SwiperSlide key={content.id}>
-                <ContentCard key={content.id} content={content} />
-              </SwiperSlide>
-            );
-          })}
-        </ContentListSlider>
-      )}
-    </ContentListWrapper>
+    <ContentGroupWrapper>
+      {contents.map((content) => (
+        <ContentCard key={content.id} content={content} />
+      ))}
+    </ContentGroupWrapper>
   );
 };
 
-const ContentCardList = ({ id, genreName }) => {
-  const [contents, setContents] = useState([]);
+const ContentCardGroups = ({ contents, cardsPerGroup, type }) => {
+  const cardGroupList = [];
+  for (let i = 0; i < contents.length; i += cardsPerGroup) {
+    // key값 괜찮나..?
+    cardGroupList.push(
+      <SwiperSlide key={i}>
+        <ContentCardGroup key={i} contents={contents.slice(i, i + cardsPerGroup)} />
+      </SwiperSlide>
+    );
+  }
+  return (
+    <ContentGroupListWrapper>
+      {type === "slide" ? (
+        <ContentGroupListSlider
+          touchRatio={0}
+          loop={true}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          children={cardGroupList}
+        />
+      ) : (
+        cardGroupList
+      )}
+    </ContentGroupListWrapper>
+  );
+};
 
-  useEffect(() => {
-    getContentsByGenre();
-  }, []);
-
-  const getContentsByGenre = async () => {
-    const res = await api.get(`/discover/movie`, { with_genres: id, language: "ko-KR" });
-    setContents(res.results);
-  };
-
+const ContentCardList = ({ contents, title, type = "slide" }) => {
   return (
     <ContentListContainer>
-      <ContentListTitle>{genreName}</ContentListTitle>
-      <ContentCards contents={contents} />
+      {type === "slide" && <ContentListTitle>{title}</ContentListTitle>}
+      {contents?.length && <ContentCardGroups cardsPerGroup={6} contents={contents} type={type} />}
     </ContentListContainer>
   );
 };
