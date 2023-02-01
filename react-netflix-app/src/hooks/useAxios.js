@@ -15,6 +15,7 @@ export default function useAxios(method, url, config = null) {
 
   const fetch = useCallback(async () => {
     setIsLoading(true);
+    setError('');
 
     try {
       const res = await axios[method](url, JSON.parse(configString));
