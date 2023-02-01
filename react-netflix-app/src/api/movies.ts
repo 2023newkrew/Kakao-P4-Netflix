@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios';
 
 const MOVIE_URL = '/movie';
 
-const fetcher = (path: string, params?: object) => httpClient.get(MOVIE_URL + path, { params });
+const fetcher = (path: string, params?: { [key: string]: any }) => httpClient.get(MOVIE_URL + path, { params });
 
 interface PagedResponse {
   page: number;
