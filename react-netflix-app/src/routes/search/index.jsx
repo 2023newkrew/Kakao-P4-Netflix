@@ -15,7 +15,7 @@ const NoResult = styled.div`
 
 export default function Search() {
   const [searchParams] = useSearchParams();
-  const [, data] = useAxios('get', '/search/movie', {
+  const [isLoading, data] = useAxios('get', '/search/movie', {
     params: {
       query: searchParams.get('q'),
     },
@@ -28,6 +28,8 @@ export default function Search() {
     const { results } = data;
     setSearchResults(results);
   }, [data]);
+
+  if (isLoading) return null;
 
   return (
     <SearchLayout>
