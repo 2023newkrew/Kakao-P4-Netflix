@@ -50,5 +50,5 @@ export const getSearchMovieList = async (title, page = 1) => {
       page,
     },
   });
-  return response.data.results;
+  return response.data;
 };
