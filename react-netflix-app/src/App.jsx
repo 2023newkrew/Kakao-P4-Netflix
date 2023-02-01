@@ -2,8 +2,33 @@ import { useEffect } from 'react';
 import { useSearchParams, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
+import { useModal } from '@components/Modal';
 import { useModalContext } from '@components/Modal/ModalContext';
-import useMovieDetailModal from '@pages/Main/[id]';
+import MovieDetail from '@pages/Main/[id]';
+import useMovieDetail from '@components/Movie/useMovieDetail';
+
+const useMovieDetailModal = (movieId) => {
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const position = location.state?.position;
+  const openModal = useModal();
+  const { data, error, isLoading } = useMovieDetail(movieId);
+
+  useEffect(() => {
+    if (!movieId || isLoading || error || !data) {
+      return;
+    }
+
+    openModal({
+      node: <MovieDetail movie={data} />,
+      position,
+      onClose() {
+        searchParams.delete('movie');
+        setSearchParams(searchParams);
+      },
+    });
+  }, [movieId, data, error, isLoading]);
+};
 
 const useMovieDetailRoutes = () => {
   const [searchParams] = useSearchParams();
