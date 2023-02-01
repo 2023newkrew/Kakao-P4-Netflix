@@ -1,12 +1,12 @@
 import React from "react";
-import MainColumnItem from "./MainColumnItem/MainColumnItem";
-import { MainColumnContainer } from "./styles";
+import CarouselItem from "../CarouselItem/CarouselItem";
+import { CarouselColumnContainer } from "./styles";
 
-export default function MainColumn({ imgList, setImageContainerSize, separateCount }) {
+export default function CarouselColumn({ imgList, setImageContainerSize, separateCount }) {
   return (
-    <MainColumnContainer>
+    <CarouselColumnContainer>
       {imgList.map((item, idx) => (
-        <MainColumnItem
+        <CarouselItem
           key={item.id}
           title={item.title}
           movieId={item.id}
@@ -20,6 +20,6 @@ export default function MainColumn({ imgList, setImageContainerSize, separateCou
           overViewInfo={item.overview}
         />
       ))}
-    </MainColumnContainer>
+    </CarouselColumnContainer>
   );
 }

@@ -1,16 +1,26 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import TheMovieDBAPI from "../../../../../../util/class/TheMovieDBAPI";
-import useModal from "../../../../../../util/hooks/useModal";
-import SmallModal from "../../../../../Modal/SmallModal/SmallModal";
-import { MainColumnItemContainer, MainColumnItemImg } from "./styles";
-import BigModal from "../../../../../Modal/BigModal/BigModal";
-import useTimeOutEvent from "../../../../../../util/hooks/useTimeOutEvent";
-import useAddEventListener from "../../../../../../util/hooks/useAddEventListener";
-import ModalPortal from "../../../../../Modal/ModalPortal/ModalPortal";
+import useModal from "../../../../util/hooks/useModal";
+import SmallModal from "../../../Modal/SmallModal/SmallModal";
+import { CarouselItemContainer, CarouselItemImg } from "./styles";
+import BigModal from "../../../Modal/BigModal/BigModal";
+import useTimeOutEvent from "../../../../util/hooks/useTimeOutEvent";
+import useAddEventListener from "../../../../util/hooks/useAddEventListener";
+import ModalPortal from "../../../Modal/ModalPortal/ModalPortal";
+import TheMovieDBAPI from "../../../../util/class/TheMovieDBAPI";
+import skeletonUI from "../../../../assets/skeletonUI.json";
+import Lottie from "react-lottie";
 
 const POPUP_MULTIPLE_VALUE = 1.3;
 const POPUP_INFO_HEIGHT = 70;
 
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: skeletonUI,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 const getPopUpTopOffset = (containerTop, containerHeight, scrollY) => {
   return containerTop + scrollY - (containerHeight * (POPUP_MULTIPLE_VALUE - 1)) / 2 - POPUP_INFO_HEIGHT / 2;
 };
@@ -27,7 +37,7 @@ const getPopUpLeftOffset = (containerLeft, containerWidth, index, separateCount)
   }
 };
 
-export default function MainColumnItem({
+export default function CarouselItem({
   movieId,
   title,
   imgSrc,
@@ -43,6 +53,7 @@ export default function MainColumnItem({
   const imageContainerRef = useRef(null);
   const windowRef = useRef(window);
   const [imageContainerRectInfo, setImageContainerRectInfo] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { isModalOpen: isSmallModalOpen, toggle: smallModalToggle } = useModal();
   const { isModalOpen: isBigModalOpen, toggle: bigModalToggle } = useModal();
 
@@ -64,17 +75,22 @@ export default function MainColumnItem({
   useAddEventListener(windowRef, "resize", handleResize, setImageContainerSize, handleResize);
 
   useEffect(() => {
-    if (isSmallModalOpen === false) return;
+    if (!isSmallModalOpen) return;
     setImageContainerRectInfo(imageContainerRef.current.getBoundingClientRect());
   }, [isSmallModalOpen]);
 
   return (
     <>
-      <MainColumnItemContainer ref={imageContainerRef} separateCount={separateCount}>
-        <MainColumnItemImg src={imgSrc ? TheMovieDBAPI.IMG_BASE_URL + imgSrc : "https://via.placeholder.com/200x100"} />
-      </MainColumnItemContainer>
+      <CarouselItemContainer ref={imageContainerRef} separateCount={separateCount}>
+        <Lottie options={defaultOptions} style={isLoading ? {} : { display: "none" }} />
+        <CarouselItemImg
+          style={!isLoading ? {} : { display: "none" }}
+          src={imgSrc ? TheMovieDBAPI.IMG_BASE_URL + imgSrc : "https://via.placeholder.com/200x100"}
+          onLoad={() => setIsLoading(false)}
+        />
+      </CarouselItemContainer>
 
-      {isSmallModalOpen && imageContainerRectInfo ? (
+      {isSmallModalOpen && imageContainerRectInfo && !isLoading ? (
         <ModalPortal>
           <SmallModal
             imgSrc={imgSrc ? TheMovieDBAPI.IMG_BASE_URL + imgSrc : "https://via.placeholder.com/200x100"}
@@ -103,7 +119,7 @@ export default function MainColumnItem({
           />
         </ModalPortal>
       ) : null}
-      {isBigModalOpen ? (
+      {isBigModalOpen && !isLoading ? (
         <ModalPortal>
           <BigModal
             movieId={movieId}

@@ -11,6 +11,7 @@ const Container = styled.div`
 const ColumContainer = styled.div`
   margin-top: 0.2vh;
   margin-bottom: 0.2vh;
+  width: 100%;
 `;
 
 export { Container, ColumContainer };

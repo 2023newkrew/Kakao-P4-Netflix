@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import MainPage from "./components/page/MainPage/MainPage";
-import SearchResultPage from "./components/page/SearchResultPage/SearchResultPage";
+import Main from "./components/Main/Main";
+import SearchResult from "./components/SearchResult/SearchResult";
+
 import MainLayout from "./layout/MainLayout";
 
 function App() {
@@ -8,9 +9,9 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route path="" element={<MainPage />} />
-          <Route path="search/:keyword" element={<SearchResultPage />} />
-          <Route path="*" element={<MainPage />} />
+          <Route path="" element={<Main />} />
+          <Route path="search/:keyword" element={<SearchResult />} />
+          <Route path="*" element={<Main />} />
         </Route>
       </Routes>
     </div>

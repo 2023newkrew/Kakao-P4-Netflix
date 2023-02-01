@@ -10,8 +10,8 @@ export default function BigModal({ movieId, toggle, title, voteAverage, overView
   useEffect(() => {
     const fetchMovieInfo = async (movieId) => {
       const movieVideoInfo = await TheMovieDBAPI.getMovieVideoInfo(movieId);
-      const videoKey = movieVideoInfo?.key;
-      setVideoKey(videoKey);
+      const fetchedVideoKey = movieVideoInfo?.key;
+      setVideoKey(fetchedVideoKey);
     };
     fetchMovieInfo(movieId);
   }, [movieId]);

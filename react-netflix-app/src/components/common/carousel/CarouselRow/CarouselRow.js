@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Util from "../../../../util/class/Util";
 import useAddEventListener from "../../../../util/hooks/useAddEventListener";
 import useDebounce from "../../../../util/hooks/useDebounce";
-import MainColumn from "./MainColumn/MainColumn";
-import { MainRowContainer, MainRowSlider, MainRowLeftArrow, MainRowRightArrow } from "./styles";
+import CarouselColumn from "../CarouselColumn/CarouselColumn";
+import { CarouselRowContainer, CarouselRowSlider, CarouselRowLeftArrow, CarouselRowRightArrow } from "./styles";
 
 const DELAY = 500;
 const handleClickArrow = (setColIndex, dir) => {
@@ -12,7 +12,7 @@ const handleClickArrow = (setColIndex, dir) => {
   setColIndex((prev) => prev + value);
 };
 
-export default function MainRow({ fetchMethod, itemCount }) {
+export default function CarouselRow({ fetchMethod, itemCount }) {
   const [imageContainerSize, setImageContainerSize] = useState(null);
   const [separatedList, setSeparatedList] = useState([]);
   const [colIndex, setColIndex] = useState(0);
@@ -51,12 +51,12 @@ export default function MainRow({ fetchMethod, itemCount }) {
   }, [SEPARATE_COUNT, fetchMethod]);
 
   return (
-    <MainRowContainer>
-      <MainRowSlider translateValue={translateValue !== null ? translateValue : 0} ref={mainRowSliderRef}>
+    <CarouselRowContainer>
+      <CarouselRowSlider translateValue={translateValue !== null ? translateValue : 0} ref={mainRowSliderRef}>
         {/* 생성 및 삭제와 같은 변화가 없을 것이라고 예상하기에 key에 인덱스 값으로 부여 */}
         {separatedList !== null
           ? separatedList.map((subList, idx) => (
-              <MainColumn
+              <CarouselColumn
                 key={idx}
                 imgList={subList}
                 setImageContainerSize={idx === 0 ? setImageContainerSize : null}
@@ -64,12 +64,12 @@ export default function MainRow({ fetchMethod, itemCount }) {
               />
             ))
           : null}
-      </MainRowSlider>
-      <MainRowLeftArrow isLeftEnd={colIndex === 0} onClick={() => handleClickArrow(setColIndex, "left")} />
-      <MainRowRightArrow
+      </CarouselRowSlider>
+      <CarouselRowLeftArrow isLeftEnd={colIndex === 0} onClick={() => handleClickArrow(setColIndex, "left")} />
+      <CarouselRowRightArrow
         isRightEnd={colIndex === separatedList.length - 1}
         onClick={() => handleClickArrow(setColIndex, "right")}
       />
-    </MainRowContainer>
+    </CarouselRowContainer>
   );
 }

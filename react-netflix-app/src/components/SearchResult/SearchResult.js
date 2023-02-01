@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import TheMovieDBAPI from "../../../util/class/TheMovieDBAPI";
-import Util from "../../../util/class/Util";
-import MainColumn from "../MainPage/MainRow/MainColumn/MainColumn";
+import Util from "../../util/class/Util.js";
+import TheMovieDBAPI from "../../util/class/TheMovieDBAPI";
+import CarouselColumn from "../common/carousel/CarouselColumn/CarouselColumn";
 import { Container, ColumContainer } from "./styles";
+import skeletonUI from "../../assets/skeletonUI.json";
+import Lottie from "react-lottie";
 
 const SEPARATE_COUNT = 5;
 
-export default function SearchResultPage() {
+export default function SearchResult() {
   const [separatedMovieList, setSeparatedMovieList] = useState([]);
 
   const { keyword } = useParams();
@@ -23,7 +25,7 @@ export default function SearchResultPage() {
     <Container>
       {separatedMovieList.map((subList, idx) => (
         <ColumContainer key={idx}>
-          <MainColumn imgList={subList} separateCount={SEPARATE_COUNT} />
+          <CarouselColumn imgList={subList} separateCount={SEPARATE_COUNT} />
         </ColumContainer>
       ))}
     </Container>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TheMovieDBAPI from "../../../../util/class/TheMovieDBAPI";
+import TheMovieDBAPI from "../../../util/class/TheMovieDBAPI";
 import {
   MainPostBottomShadow,
   MainPostContainer,

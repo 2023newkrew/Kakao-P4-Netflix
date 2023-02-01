@@ -2,13 +2,13 @@ import styled from "styled-components";
 import leftArrowIcon from "../../../../assets/leftArrow.svg";
 import rightArrowIcon from "../../../../assets/rightArrow.svg";
 
-const MainRowContainer = styled.div`
+const CarouselRowContainer = styled.div`
   position: relative;
   width: 100%;
   height: calc(100% - 30px);
   overflow-x: hidden;
 `;
-const MainRowSlider = styled.div`
+const CarouselRowSlider = styled.div`
   position: relative;
   z-index: 5;
   display: flex;
@@ -22,7 +22,7 @@ const MainRowSlider = styled.div`
   transition: transform 1s;
 `;
 
-const MainRowLeftArrow = styled.div`
+const CarouselRowLeftArrow = styled.div`
   position: absolute;
   width: 4%;
   background-image: url(${leftArrowIcon});
@@ -34,10 +34,10 @@ const MainRowLeftArrow = styled.div`
   display: ${(props) => (props.isLeftEnd ? "none" : "unset")};
 `;
 
-const MainRowRightArrow = styled(MainRowLeftArrow)`
+const CarouselRowRightArrow = styled(CarouselRowLeftArrow)`
   background-image: url(${rightArrowIcon});
   right: 0px;
   display: ${(props) => (props.isRightEnd ? "none" : "unset")};
 `;
 
-export { MainRowContainer, MainRowSlider, MainRowLeftArrow, MainRowRightArrow };
+export { CarouselRowContainer, CarouselRowSlider, CarouselRowLeftArrow, CarouselRowRightArrow };
