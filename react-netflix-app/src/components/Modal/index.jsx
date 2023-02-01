@@ -36,19 +36,25 @@ export const ModalProvider = ({ children, id }) => {
     setIsOpen(true);
   }, []);
 
-  const close = useCallback(() => {
-    if (containerEl) {
-      containerEl.style.setProperty('--scale', '0');
-    }
-    setTimeout(() => {
-      setNode(null);
-      setIsOpen(false);
-      if (handleClose.current && typeof handleClose.current === 'function') {
-        handleClose.current();
+  const close = useCallback(
+    (onClose) => {
+      if (containerEl) {
+        containerEl.style.setProperty('--scale', '0');
       }
-      handleClose.current = null;
-    }, 250);
-  }, [containerEl]);
+      setTimeout(() => {
+        setNode(null);
+        setIsOpen(false);
+        if (onClose && typeof onClose === 'function') {
+          onClose();
+        }
+        // if (handleClose.current && typeof handleClose.current === 'function') {
+        //   handleClose.current();
+        // }
+        handleClose.current = null;
+      }, 250);
+    },
+    [containerEl],
+  );
 
   const setPosition = useCallback((position) => {
     const x = position?.x ?? window.innerWidth / 2;
@@ -60,7 +66,9 @@ export const ModalProvider = ({ children, id }) => {
   }, []);
 
   useBodyScrollLock(isOpen);
-  useEscapeKey(close);
+  useEscapeKey(() => {
+    close(handleClose.current);
+  });
 
   const context = useMemo(() => {
     return {
@@ -81,7 +89,7 @@ export const ModalProvider = ({ children, id }) => {
               <CloseButton
                 onClick={(e) => {
                   e.stopPropagation();
-                  close();
+                  close(handleClose.current);
                 }}
               >
                 X
