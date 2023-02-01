@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Skeleton from '@components/Skeleton';
-import TMDBImage from '@components/TMDBImage';
+import MovieImage from '@components/image/MovieImage';
 import SquareButton from '@components/button/SquareButton';
 import InfoModal from '@components/modal/InfoModal';
 import useModal from '@hooks/useModal';
@@ -20,10 +20,12 @@ const BannerLayout = styled.section`
   gap: 16px;
 `;
 
-const Backdrop = styled(TMDBImage).attrs({ type: 'backdrop' })`
+const Backdrop = styled(MovieImage).attrs({ type: 'backdrop' })`
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   mask-image: linear-gradient(black, transparent);
   z-index: -1;
 `;

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NoMovieImage from '@components/NoMovieImage';
 
 function getSrcSet(type, path) {
   const widths = {
@@ -15,13 +16,19 @@ function getSrcSet(type, path) {
     .join(', ');
 }
 
-export default function TMDBImage({ className, type, path, alt }) {
+export default function MovieImage({ className, type, path, alt }) {
+  if (!path) return <NoMovieImage className={className} />;
+
   return <img className={className} srcSet={getSrcSet(type, path)} alt={alt} />;
 }
 
-TMDBImage.propTypes = {
+MovieImage.propTypes = {
   className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+  path: PropTypes.string,
   alt: PropTypes.string.isRequired,
+};
+
+MovieImage.defaultProps = {
+  path: null,
 };

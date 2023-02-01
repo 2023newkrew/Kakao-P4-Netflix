@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import TMDBImage from '@components/TMDBImage';
+import MovieImage from '@components/image/MovieImage';
 import CircleButton from '@components/button/CircleButton';
 import { ReactComponent as CloseIcon } from '@assets/x.svg';
 
@@ -21,7 +21,7 @@ const CloseButton = styled(CircleButton)`
   z-index: 1;
 `;
 
-const Backdrop = styled(TMDBImage).attrs({ type: 'backdrop' })`
+const Backdrop = styled(MovieImage).attrs({ type: 'backdrop' })`
   height: 45vw;
   mask-image: linear-gradient(black, transparent);
 `;
@@ -66,8 +66,14 @@ export default function InfoModal({ close, movie }) {
 InfoModal.propTypes = {
   close: PropTypes.func.isRequired,
   movie: PropTypes.shape({
-    backdrop_path: PropTypes.string.isRequired,
+    backdrop_path: PropTypes.string,
     title: PropTypes.string.isRequired,
     overview: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
+};
+
+InfoModal.defaultProps = {
+  movie: {
+    backdrop_path: null,
+  },
 };
