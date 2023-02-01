@@ -1,9 +1,9 @@
 import { Pagination, Controller, Navigation } from 'swiper';
-import PropTypes from 'prop-types';
 
 import { CarouselContainer, MovieSwiper, MovieSwiperSlide } from '@pages/Main/components/MovieCarousel.style';
 import MovieCard from '@components/Movie/MovieCard';
 import { breakpoints } from '@styles/theme';
+import { Movie } from '@/types/movie';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -38,7 +38,10 @@ const swiperOptions = {
   modules: [Pagination, Controller, Navigation],
 };
 
-const MovieCarousel = ({ movies }) => {
+type Props = {
+  movies: Movie[];
+};
+const MovieCarousel = ({ movies }: Props) => {
   return (
     <CarouselContainer>
       <MovieSwiper {...swiperOptions}>
@@ -50,8 +53,5 @@ const MovieCarousel = ({ movies }) => {
       </MovieSwiper>
     </CarouselContainer>
   );
-};
-MovieCarousel.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object),
 };
 export default MovieCarousel;

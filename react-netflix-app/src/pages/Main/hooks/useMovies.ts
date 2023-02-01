@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getPopularMovies, getTopRatedMovies } from '@api/movies';
+import { MoviesResponse, getPopularMovies, getTopRatedMovies } from '@api/movies';
 
 export const useTopRatedMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [movies, setMovies] = useState({});
+  const [error, setError] = useState<any>(null);
+  const [movies, setMovies] = useState<MoviesResponse | undefined>();
 
   useEffect(() => {
     (async function () {
@@ -28,8 +28,8 @@ export const useTopRatedMovies = () => {
 };
 export const usePopularMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [movies, setMovies] = useState({});
+  const [error, setError] = useState<any>(null);
+  const [movies, setMovies] = useState<MoviesResponse | undefined>();
 
   useEffect(() => {
     (async function () {

@@ -2,10 +2,14 @@ import PropTypes from 'prop-types';
 import { Banner } from '@pages/Main/MainPage.style';
 import playIcon from '@icons/play.svg';
 import { THUMBNAIL_BASE_URL } from '@constants/tmdb';
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
+import { Movie } from '@/types/movie';
 
-const MovieBanner = ({ movie }) => {
-  const [titleStyle, setTitleStyle] = useState();
+type Props = {
+  movie: Movie;
+};
+const MovieBanner = ({ movie }: Props) => {
+  const [titleStyle, setTitleStyle] = useState<CSSProperties>({});
   useEffect(() => {
     setTitleStyle({ transform: 'scale(0.6)' });
   }, []);
@@ -17,7 +21,7 @@ const MovieBanner = ({ movie }) => {
         <Banner.Content>
           <Banner.MovieInfo>
             <h3 style={titleStyle}>{movie.title}</h3>
-            <p>{movie.overview.split('.')[0]}</p>
+            {movie.overview && <p>{movie.overview.split('.')[0]}</p>}
             <div>
               <Banner.Button className="primary">
                 <img src={playIcon} alt="재생 아이콘" />
