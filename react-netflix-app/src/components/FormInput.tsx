@@ -1,5 +1,4 @@
 import { HTMLInputTypeAttribute, MouseEvent, memo } from 'react';
-import PropTypes from 'prop-types';
 import { ErrorMessage, Input, InputContainer, InputField, PlaceLabel } from '@components/FormInput.style';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
@@ -32,13 +31,6 @@ const FormInput = ({ type = 'text', placeholder, errorMessage, rules, value }: P
   );
 };
 
-FormInput.propTypes = {
-  placeholder: PropTypes.string,
-  errorMessage: PropTypes.string,
-  type: PropTypes.string,
-  rules: PropTypes.object,
-  value: PropTypes.string,
-};
 export default memo(FormInput, (prevProps, nextProps) => {
   if (prevProps.value !== nextProps.value) {
     return false;

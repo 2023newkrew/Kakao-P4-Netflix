@@ -1,6 +1,5 @@
 import { ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 
 const createPortalWrapper = (id: string) => {
   const element = document.createElement('div');
@@ -33,9 +32,5 @@ const Portal = ({ children, portalId }: PortalProps) => {
   }
 
   return createPortal(children, portalEl.current);
-};
-Portal.propTypes = {
-  children: PropTypes.node,
-  portalId: PropTypes.string,
 };
 export default Portal;

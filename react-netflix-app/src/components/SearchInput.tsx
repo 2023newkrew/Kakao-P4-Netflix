@@ -1,7 +1,6 @@
 import { SetStateAction, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
-import PropTypes from 'prop-types';
 import { ReactComponent as SearchIcon } from '@icons/search.svg';
 import useInput from '@hooks/useInput';
 import useDebounce from '@hooks/useDebounce';
@@ -72,8 +71,5 @@ const SearchInput = ({ setCanSearch }: SearchInputProps) => {
       />
     </Container>
   );
-};
-SearchInput.propTypes = {
-  setCanSearch: PropTypes.func.isRequired,
 };
 export default SearchInput;
