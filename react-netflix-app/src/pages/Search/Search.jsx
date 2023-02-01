@@ -11,7 +11,7 @@ const ContentCards = ({ contents }) => {
   return (
     <ContentListWrapper>
       {contents.map((content) => (
-        <ContentCard key={content.id} content={content} />
+        <ContentCard key={content.id} content={content} type="page" />
       ))}
     </ContentListWrapper>
   );

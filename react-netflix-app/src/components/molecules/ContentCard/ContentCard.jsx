@@ -1,23 +1,32 @@
 import React from "react";
-import { EllipsisText, ContentDetail, ModalDispatchContext } from "components";
+import { EllipsisText, ContentInfo, ModalDispatchContext } from "components";
 import { ContentCardContainer, ContentCardImage, ContentTitleWrapper } from "./ContentCard.style";
 
 import api from "utils/API";
+import { useNavigate } from "react-router-dom";
 
-const ContentCard = ({ content }) => {
+const ContentCard = ({ content, type = "modal" }) => {
+  const navigate = useNavigate();
   const { openModal } = React.useContext(ModalDispatchContext);
 
+  const handleOnClick = () => {
+    if (type === "modal") {
+      openModal(
+        <ContentInfo
+          title={content.title}
+          desc={content.overview}
+          imageURL={content.backdrop_path ?? content.poster_path}
+        />
+      );
+    } else {
+      navigate(`/detail/${content.id}`);
+    }
+  };
   return (
     <ContentCardContainer
-      onClick={() =>
-        openModal(
-          <ContentDetail
-            title={content.title}
-            desc={content.overview}
-            imageURL={content.backdrop_path ?? content.poster_path}
-          />
-        )
-      }
+      onClick={() => {
+        handleOnClick();
+      }}
     >
       <article>
         <div>

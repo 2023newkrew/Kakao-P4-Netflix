@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { EllipsisText } from "components";
 import api from "utils/API";
 import {
@@ -8,9 +8,9 @@ import {
   ContentDetailContent,
   ContentTitle,
   ContentDesc,
-} from "./ContentDetail.style";
+} from "./ContentInfo.style";
 
-const ContentDetail = ({ title, desc, imageURL }) => {
+const ContentInfo = ({ title, desc, imageURL }) => {
   return (
     <ContentDetailContainer>
       <ContentDetailBackground>
@@ -29,4 +29,4 @@ const ContentDetail = ({ title, desc, imageURL }) => {
   );
 };
 
-export default ContentDetail;
+export default ContentInfo;

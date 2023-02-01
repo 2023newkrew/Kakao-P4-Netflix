@@ -11,7 +11,7 @@ export { default as NavTab } from "components/atoms/NavTab/NavTab";
 export { default as NavTabList } from "components/molecules/NavTabList/NavTabList";
 export { default as IconButton } from "components/atoms/IconButton/IconButton";
 export { default as EllipsisText } from "components/atoms/EllipsisText/EllipsisText";
-export { default as ContentDetail } from "components/molecules/ContentDetail/ContentDetail";
+export { default as ContentInfo } from "components/molecules/ContentInfo/ContentInfo";
 export { default as SearchBar } from "components/molecules/SearchBar/SearchBar";
 export { ModalStateContext as ModalStateContext } from "components/molecules/Modal/ModalContext";
 export { ModalDispatchContext as ModalDispatchContext } from "components/molecules/Modal/ModalContext";
