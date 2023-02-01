@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
-import useDebouncedState from '@hooks/useDebouncedState';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useDebouncedCallback from '@hooks/useDebouncedCallback';
 import { ReactComponent as LogoImage } from '@assets/logo.svg';
 import { ReactComponent as SearchIcon } from '@assets/search.svg';
 import { ReactComponent as NotificationsIcon } from '@assets/notifications.svg';
@@ -82,11 +82,11 @@ const menus = [
 ];
 
 export default function Header() {
+  const location = useLocation();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchBoxOpened, setIsSearchBoxOpened] = useState(false);
-  const [searchQuery, debouncedSearchQuery, setSearchQuery] =
-    useDebouncedState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleScroll = () => {
     setIsScrolled(window.scrollY > 0);
@@ -100,18 +100,24 @@ export default function Header() {
   const openSearchBox = () => setIsSearchBoxOpened(true);
   const closeSearchBox = () => setIsSearchBoxOpened(false);
 
-  const handleSearchInputChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  useEffect(() => {
-    if (!debouncedSearchQuery) {
-      navigate('/');
+  const search = useDebouncedCallback((query) => {
+    if (!query) {
+      navigate(location.state?.from || '/');
       return;
     }
 
-    navigate(`/search?q=${debouncedSearchQuery}`);
-  }, [debouncedSearchQuery, navigate]);
+    navigate(`/search?q=${query}`, {
+      replace: location.pathname === '/search',
+      state: {
+        from: `${location.pathname}${location.search}`,
+      },
+    });
+  });
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    search(e.target.value);
+  };
 
   return (
     <HeaderLayout isScrolled={isScrolled}>
