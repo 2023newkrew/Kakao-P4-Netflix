@@ -9,6 +9,10 @@ const SearchLayout = styled.main`
   padding: 4vw;
 `;
 
+const NoResult = styled.div`
+  text-align: center;
+`;
+
 export default function Search() {
   const [searchParams] = useSearchParams();
   const [, data] = useAxios('get', '/search/movie', {
@@ -27,7 +31,14 @@ export default function Search() {
 
   return (
     <SearchLayout>
-      <MovieGrid movies={searchResults} />
+      {searchResults.length ? (
+        <MovieGrid movies={searchResults} />
+      ) : (
+        <NoResult>
+          입력하신 검색어 &quot;{searchParams.get('q')}&quot;(와)과 일치하는
+          결과가 없습니다.
+        </NoResult>
+      )}
     </SearchLayout>
   );
 }
