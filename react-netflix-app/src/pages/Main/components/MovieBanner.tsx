@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Banner } from '@pages/Main/MainPage.style';
-import playIcon from '@icons/play.svg';
+import { ReactComponent as PlayIcon } from '@assets/icons/play.svg';
 import { THUMBNAIL_BASE_URL } from '@constants/tmdb';
 import { CSSProperties, useEffect, useState } from 'react';
 import { Movie } from '@/types/movie';
@@ -24,7 +24,7 @@ const MovieBanner = ({ movie }: Props) => {
             {movie.overview && <p>{movie.overview.split('.')[0]}</p>}
             <div>
               <Banner.Button className="primary">
-                <img src={playIcon} alt="재생 아이콘" height="24" width="24" />
+                <PlayIcon height={24} width={24} />
                 재생
               </Banner.Button>
               <Banner.Button className="secondary">상세 정보</Banner.Button>

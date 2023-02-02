@@ -1,6 +1,6 @@
 import tw, { styled } from 'twin.macro';
 import { PageContainer as DefaultContainer, SmallButton } from '../styles/common';
-import backgroundImageSrc from '../assets/login-background.jpeg';
+import backgroundImageSrc from '@assets/login-background.jpeg';
 
 export const PageContainer = styled(DefaultContainer)`
   background-image: url(${backgroundImageSrc});

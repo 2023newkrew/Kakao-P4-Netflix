@@ -30,5 +30,5 @@
     "resolveJsonModule": true,
     "noEmit": true
   },
-  "include": ["src", "craco.config.js", "babel.config.js", "tailwind.config.js"]
+  "include": ["src", "craco.config.js", "babel.config.js", "tailwind.config.js", "twin.d.ts", "assets.d.ts"]
 }
