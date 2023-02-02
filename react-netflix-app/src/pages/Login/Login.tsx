@@ -2,6 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import FormInput from '@components/FormInput';
 import { PageContainer, PageContent, PageTitle, SubmitButton } from './Login.style';
+import GoogleLoginButton from './GoogleLoginButton';
+import useUser from '@hooks/useUser';
+import { useEffect } from 'react';
 
 const loginForm = {
   email: {
@@ -25,7 +28,9 @@ const loginForm = {
     },
   },
 };
+
 const Login = () => {
+  const { isLoggedIn } = useUser();
   const navigate = useNavigate();
   const {
     register,
@@ -53,6 +58,13 @@ const Login = () => {
     navigate('/browse', { replace: true });
   };
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
+    navigate('/browse', { replace: true });
+  }, [isLoggedIn]);
+
   return (
     <PageContainer>
       <PageContent>
@@ -74,6 +86,9 @@ const Login = () => {
           />
           <SubmitButton>로그인</SubmitButton>
         </form>
+        <div>
+          <GoogleLoginButton />
+        </div>
       </PageContent>
     </PageContainer>
   );

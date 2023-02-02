@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HeaderContainer, HeaderContent, LogoLink, PrimaryMenus, SecondaryMenus, MenuItem } from './Header.style';
 import { ReactComponent as SearchIcon } from '@icons/search.svg';
 import { ReactComponent as AlarmIcon } from '@icons/alarm.svg';
 import Logo from '@icons/logo.png';
 import throttle from '@utils/throttle';
 import SearchInput from '@components/SearchInput';
+import useUser from '@hooks/useUser';
+import useAuth from '@hooks/useAuth';
 
 const primaryMenus = [
   {
@@ -39,18 +41,6 @@ const secondaryMenus = [
       </button>
     ),
   },
-  {
-    id: 3,
-    content: <button>프로필</button>,
-  },
-  {
-    id: 4,
-    content: (
-      <Link to="/login" replace>
-        로그아웃
-      </Link>
-    ),
-  },
 ];
 
 const useHeaderStyle = () => {
@@ -78,8 +68,11 @@ const useHeaderStyle = () => {
 };
 
 const Header = () => {
+  const navigate = useNavigate();
   const headerRef = useHeaderStyle();
   const [canSearch, setCanSearch] = useState(false);
+  const { isLoggedIn } = useUser();
+  const { handleSignOut } = useAuth();
 
   return (
     <HeaderContainer>
@@ -112,6 +105,19 @@ const Header = () => {
           {secondaryMenus.map((menu) => (
             <MenuItem key={menu.id}>{menu.content}</MenuItem>
           ))}
+          {isLoggedIn && <MenuItem>프로필</MenuItem>}
+          <MenuItem>
+            <button
+              onClick={async () => {
+                if (isLoggedIn) {
+                  await handleSignOut();
+                }
+                navigate('/login', { replace: true });
+              }}
+            >
+              로그아웃
+            </button>
+          </MenuItem>
         </SecondaryMenus>
       </HeaderContent>
     </HeaderContainer>

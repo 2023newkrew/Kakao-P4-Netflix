@@ -15,6 +15,7 @@
       "@constants/*": ["./src/constants/*"],
       "@utils/*": ["./src/utils/*"],
       "@utilHooks/*": ["./src/utils/hooks/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@/*": ["./src/*"]
     },
 
