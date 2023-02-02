@@ -19,33 +19,36 @@ const Message = styled.div`
 export default function Search() {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('q');
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLastPage, setIsLastPage] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, data] = useAxios('get', '/search/movie', {
     params: {
       query: searchQuery,
-      page,
+      page: currentPage,
     },
   });
   const [isIntersecting, setObserveTarget] = useInfiniteScroll();
 
   useEffect(() => {
-    setPage(1);
+    setCurrentPage(1);
+    setIsLastPage(false);
     setSearchResults([]);
   }, [searchQuery]);
 
   useEffect(() => {
     if (!data) return;
 
-    const { results } = data;
+    const { page, total_pages, results } = data;
+    if (page === total_pages) setIsLastPage(true);
     setSearchResults((prev) => [...prev, ...results]);
   }, [data]);
 
   useEffect(() => {
-    if (!isIntersecting) return;
+    if (!isIntersecting || isLastPage) return;
 
-    setPage((prev) => prev + 1);
-  }, [isIntersecting]);
+    setCurrentPage((prev) => prev + 1);
+  }, [isIntersecting, isLastPage]);
 
   if (!isLoading && !searchResults.length) {
     return (
@@ -66,7 +69,7 @@ export default function Search() {
         <MovieGrid movies={searchResults} />
         <Message ref={setObserveTarget}>
           {isLoading && '로딩중'}
-          {!isLoading && '검색 결과가 더이상 없습니다.'}
+          {isLastPage && '검색 결과가 더이상 없습니다.'}
         </Message>
       </SearchPage>
     </PageLayout>
