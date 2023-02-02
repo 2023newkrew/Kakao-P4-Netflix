@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -29,29 +29,23 @@ const StyledDiv = styled.div`
 function Transition({ children }) {
   const ref = useRef(children);
 
-  const [currentChildren, setCurrentChildren] = useState(children);
   const [previousChildren, setPreviousChildren] = useState(null);
   const [isSwiping, setIsSwiping] = useState(false);
 
-  useEffect(() => {
-    if (ref.current.key !== children.key) {
-      setCurrentChildren(children);
-      setPreviousChildren(ref.current);
-      setIsSwiping(true);
-    }
-
-    return () => {
-      ref.current = children;
-    };
-  }, [children]);
+  // getDerivedStateFromProps (https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops)
+  if (ref.current.key !== children.key) {
+    setPreviousChildren(ref.current);
+    setIsSwiping(true);
+    ref.current = children;
+  }
 
   return (
     <>
       <StyledDiv
         animationName={isSwiping ? 'swip-in' : 'none'}
-        key={currentChildren.key}
+        key={children.key}
       >
-        {currentChildren}
+        {children}
       </StyledDiv>
       {isSwiping ? (
         <StyledDiv
