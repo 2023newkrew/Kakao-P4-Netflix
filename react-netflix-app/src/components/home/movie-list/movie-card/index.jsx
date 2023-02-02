@@ -17,7 +17,7 @@ const MovieCard = ({ movie }) => {
     return data;
   }, []);
 
-  const handleMouseEnter = useCallback(async () => {
+  const onMouseEnter = useCallback(async () => {
     setIsShowDetail(true);
 
     if (detailedMovie === null) {
@@ -25,22 +25,22 @@ const MovieCard = ({ movie }) => {
     }
   }, [detailedMovie, fetchMovieDetail, id]);
 
-  const handleMouseLeave = useCallback(() => setIsShowDetail(false), []);
+  const onMouseLeave = useCallback(() => setIsShowDetail(false), []);
 
-  const handleOnClick = () => setIsShowModal(true);
-  const handleOnClose = () => setIsShowModal(false);
+  const onClick = useCallback(() => setIsShowModal(true), []);
+  const onClose = useCallback(() => setIsShowModal(false), []);
 
   return (
     <>
       <MovieCardContainer
         backdropPath={backdropPath}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleOnClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onClick={onClick}
       >
         <MovieCardDetail isShow={isShowDetail} movie={detailedMovie} />
       </MovieCardContainer>
-      {isShowModal && <MovieModal onClose={handleOnClose} movie={detailedMovie} />}
+      {isShowModal && <MovieModal onClose={onClose} movie={detailedMovie} />}
     </>
   );
 };
