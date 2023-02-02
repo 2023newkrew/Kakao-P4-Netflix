@@ -9,9 +9,14 @@ const HeaderSearchInput = () => {
 
   const onChange = useCallback(
     (event) => {
-      const { value } = event?.target || {};
+      const { value } = event?.target || { value: '' };
+      const trimmedValue = value.trim();
 
-      navigate(`${ROUTE_PATH[ROUTE.SEARCH]}?${SEARCH_URL_PARAM}=${value}`, { replace: true });
+      if (trimmedValue === '') return;
+
+      navigate(`${ROUTE_PATH[ROUTE.SEARCH]}?${SEARCH_URL_PARAM}=${trimmedValue}`, {
+        replace: true,
+      });
     },
     [navigate],
   );
