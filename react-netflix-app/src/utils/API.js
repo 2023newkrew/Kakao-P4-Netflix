@@ -5,7 +5,7 @@ const server = "https://api.themoviedb.org/3";
 
 const setCommonParams = (param) => {
   const key = process.env.REACT_APP_THEMOVIEDB_API_KEY;
-  return { ...param, api_key: key };
+  return { ...param, language: "ko-KR", api_key: key };
 };
 
 const api = {

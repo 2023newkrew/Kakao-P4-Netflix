@@ -14,9 +14,7 @@ const ContentDetail = () => {
   });
 
   const getContentDetail = async () => {
-    const res = await api.get(`/movie/${id}`, {
-      language: "ko-KR",
-    });
+    const res = await api.get(`/movie/${id}`);
     setContent(res);
   };
   useEffect(() => {

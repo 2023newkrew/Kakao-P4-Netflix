@@ -15,7 +15,6 @@ const Search = () => {
   const searchContents = async () => {
     const res = await api.get(`/search/movie`, {
       query: debouncedSearchValue,
-      language: "ko-KR",
     });
     setContents(res.results);
   };

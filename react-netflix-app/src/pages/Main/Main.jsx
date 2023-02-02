@@ -31,14 +31,13 @@ export default function Main() {
   }, [genres]);
 
   const getContentGenres = async () => {
-    const res = await api.get(`/genre/movie/list`, { language: "ko-KR" });
+    const res = await api.get(`/genre/movie/list`);
     setGenres(res.genres);
   };
   const getContentsListByGenre = async () => {
     const promiseList = genres
       .slice(contentsList.length, contentsList.length + 5)
-
-      .map((genre) => api.get(`/discover/movie`, { with_genres: genre.id, language: "ko-KR" }));
+      .map((genre) => api.get(`/discover/movie`, { with_genres: genre.id }));
     const res = await Promise.all(promiseList);
     setContentsList([...contentsList, ...res]);
   };
