@@ -1,6 +1,5 @@
 import tw from 'twin.macro';
 import PropTypes from 'prop-types';
-
 import useMovieVideos from '@pages/Main/hooks/useMovieVideos';
 import { POSTER_BASE_URL } from '@constants/tmdb';
 import { getTrailingComma } from '@utils/getTrailingComma';
@@ -44,7 +43,7 @@ const useTrailer = (movieId) => {
   return { data: trailer, error, isLoading };
 };
 
-const MovieDetail = ({ movie }) => {
+export const MovieDetail = ({ movie }) => {
   const { data, isLoading, error } = useTrailer(movie.id);
   const youtubeKey = data?.key;
 

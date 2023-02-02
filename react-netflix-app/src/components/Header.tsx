@@ -10,22 +10,22 @@ import SearchInput from '@components/SearchInput';
 const primaryMenus = [
   {
     id: 1,
-    path: '/',
+    path: '/browse',
     label: '홈',
   },
   {
     id: 2,
-    path: '/',
+    path: '/browse',
     label: '시리즈',
   },
   {
     id: 3,
-    path: '/',
+    path: '/browse',
     label: '영화',
   },
   {
     id: 4,
-    path: '/',
+    path: '/browse',
     label: '찜한 콘텐츠',
   },
 ];
@@ -84,7 +84,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderContent ref={headerRef}>
-        <LogoLink aria-label="넷플릭스" to="/">
+        <LogoLink aria-label="넷플릭스" to="/browse">
           <img src={Logo} alt="넷플릭스 로고" height="24" width="88" />
         </LogoLink>
         <PrimaryMenus>

@@ -7,12 +7,13 @@ const useMovieDetail = (movieId) => {
   const [detail, setDetail] = useState(null);
 
   useEffect(() => {
-    if (detail || !movieId) {
+    if (!movieId) {
       return;
     }
 
     (async function () {
       try {
+        setIsLoading(true);
         const { data } = await getMovieDetail(movieId);
         setDetail(data);
       } catch (error) {
@@ -21,7 +22,7 @@ const useMovieDetail = (movieId) => {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [movieId]);
 
   return {
     isLoading,
