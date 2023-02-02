@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
 import { TotalResultsContainer, TotalResultsTitle } from './styles';
 
-const TotalResults = ({ totalResults }) => {
-  if (totalResults === null) return null;
-
-  return (
-    <TotalResultsContainer>
-      <TotalResultsTitle>{totalResults} result(s) found.</TotalResultsTitle>
-    </TotalResultsContainer>
-  );
-};
+const TotalResults = ({ totalResults }) => (
+  <TotalResultsContainer>
+    <TotalResultsTitle>
+      {{
+        null: '영화를 검색해주세요.',
+        0: '검색 결과가 없습니다.',
+      }[totalResults] || `${totalResults}개의 영화가 검색되었습니다.`}
+    </TotalResultsTitle>
+  </TotalResultsContainer>
+);
 
 TotalResults.propTypes = {
   totalResults: PropTypes.number,

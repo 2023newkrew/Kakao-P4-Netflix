@@ -4,6 +4,8 @@ import SearchGrid from '@/components/search/search-grid';
 import useDebounce from '@/hooks/use-debounce';
 import { getSearchMovieList } from '@/apis/movie';
 import TotalResults from '@/components/search/total-results';
+import CommonLayout from '@/layout/common-layout';
+import { SEARCH_URL_PARAM } from '@/constants/param';
 
 const Search = () => {
   const [totalResults, setTotalResults] = useState(null);
@@ -11,7 +13,7 @@ const Search = () => {
   const location = useLocation();
 
   useDebounce(() => {
-    const searchQuery = new URLSearchParams(location.search).get('q');
+    const searchQuery = new URLSearchParams(location.search).get(SEARCH_URL_PARAM);
 
     if (!searchQuery) return;
 
@@ -28,10 +30,10 @@ const Search = () => {
   }, [location.search]);
 
   return (
-    <>
+    <CommonLayout>
       <TotalResults totalResults={totalResults} />
       <SearchGrid movieList={movieList} />
-    </>
+    </CommonLayout>
   );
 };
 

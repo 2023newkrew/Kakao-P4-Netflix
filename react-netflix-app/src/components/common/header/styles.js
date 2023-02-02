@@ -34,6 +34,8 @@ export const HeaderRightContent = styled.div`
   align-items: center;
 `;
 
-export const HeaderLogo = styled.img``;
+export const HeaderLogo = styled.img`
+  cursor: pointer;
+`;
 
 export const HeaderProfile = styled.img``;

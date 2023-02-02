@@ -3,8 +3,7 @@ import SearchGridItem from './search-grid-item';
 import { SearchGridContainer, SearchGridContent, SearchGridInner } from './styles';
 
 const SearchGrid = ({ movieList }) => {
-  /* TODO: Add loading state */
-  if (movieList.length === 0) return <h1>No Result Found.</h1>;
+  if (movieList.length === 0) return null;
 
   return (
     <SearchGridContainer>
