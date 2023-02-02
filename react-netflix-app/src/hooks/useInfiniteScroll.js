@@ -7,9 +7,12 @@ export default function useInfiniteScroll() {
   useEffect(() => {
     if (!observeTarget) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      setIntersecting(entry.isIntersecting);
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIntersecting(entry.isIntersecting);
+      },
+      { threshold: 1 }
+    );
 
     observer.observe(observeTarget);
 
