@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+// 컴포넌트 말고 위치 옮기기
+import React from "react";
 import useModal from "hooks/useModal";
 import { Modal } from "components";
 import { useState } from "react";

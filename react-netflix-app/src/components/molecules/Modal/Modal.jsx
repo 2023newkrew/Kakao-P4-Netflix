@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ModalStateContext, ModalDispatchContext } from "./ModalContext"; // 경로 변경
+import { ModalStateContext, ModalDispatchContext } from "contexts";
 
 import { ModalContainer, ModalBackground, ModalContentWrapper, ModalContent } from "./Modal.style";
 
