@@ -45,7 +45,7 @@ const Title = styled.div`
   }
 `;
 
-export default function MovieCard({ movie }) {
+function MovieCard({ movie }) {
   const { poster_path, title } = movie;
   const [ModalContainer, openModal, closeModal] = useModal();
 
@@ -74,3 +74,8 @@ MovieCard.defaultProps = {
     poster_path: null,
   },
 };
+
+export default React.memo(
+  MovieCard,
+  (prev, next) => prev.movie.id === next.movie.id
+);
