@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Slider from '@components/slider/base/Slider';
+import Grid from '@components/grid/base/Grid';
 import MovieCard from '@components/card/MovieCard';
 
-export default function MovieSlider({ name, movies }) {
+export default function MovieGrid({ movies }) {
   return (
-    <Slider name={name}>
+    <Grid>
       {movies.map((movie) => {
         return <MovieCard key={movie.id} movie={movie} />;
       })}
-    </Slider>
+    </Grid>
   );
 }
 
-MovieSlider.propTypes = {
-  name: PropTypes.string.isRequired,
+MovieGrid.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

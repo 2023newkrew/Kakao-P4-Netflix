@@ -19,4 +19,9 @@ export default createGlobalStyle`
     height: ${(props) => props.height || '100%'};
     fill: ${(props) => props.fill || 'white'};
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;

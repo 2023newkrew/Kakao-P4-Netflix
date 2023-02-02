@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { SwiperSlide } from 'swiper/react';
+import MovieImage from '@components/image/MovieImage';
 import InfoModal from '@components/modal/InfoModal';
 import useModal from '@hooks/useModal';
-import TMDBImage from '../TMDBImage';
 
-const MovieItemLayout = styled(SwiperSlide)`
+const MovieCardLayout = styled.div`
   box-sizing: border-box;
   padding: 0 0.4vw;
 `;
@@ -17,10 +16,12 @@ const ContentContainer = styled.div`
   cursor: pointer;
 `;
 
-const Poster = styled(TMDBImage).attrs({ type: 'poster' })`
+const Poster = styled(MovieImage).attrs({ type: 'poster' })`
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
 `;
 
@@ -44,12 +45,12 @@ const Title = styled.div`
   }
 `;
 
-export default function MovieItem({ movie }) {
+export default function MovieCard({ movie }) {
   const { poster_path, title } = movie;
   const [ModalContainer, openModal, closeModal] = useModal();
 
   return (
-    <MovieItemLayout>
+    <MovieCardLayout>
       <ContentContainer onClick={openModal}>
         <Poster path={poster_path} alt={title} />
         <Title>{title}</Title>
@@ -57,16 +58,19 @@ export default function MovieItem({ movie }) {
       <ModalContainer>
         <InfoModal close={closeModal} movie={movie} />
       </ModalContainer>
-    </MovieItemLayout>
+    </MovieCardLayout>
   );
 }
 
-MovieItem.propTypes = {
+MovieCard.propTypes = {
   movie: PropTypes.shape({
-    poster_path: PropTypes.string.isRequired,
+    poster_path: PropTypes.string,
     title: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
 };
 
-// https://github.com/nolimits4web/swiper/issues/4413#issuecomment-1021387492
-MovieItem.displayName = 'SwiperSlide';
+MovieCard.defaultProps = {
+  movie: {
+    poster_path: null,
+  },
+};
