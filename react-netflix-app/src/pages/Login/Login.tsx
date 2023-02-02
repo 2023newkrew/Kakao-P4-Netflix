@@ -30,7 +30,6 @@ const loginForm = {
 };
 
 const Login = () => {
-  const { isLoggedIn } = useUser();
   const navigate = useNavigate();
   const {
     register,
@@ -57,13 +56,6 @@ const Login = () => {
 
     navigate('/browse', { replace: true });
   };
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      return;
-    }
-    navigate('/browse', { replace: true });
-  }, [isLoggedIn]);
 
   return (
     <PageContainer>

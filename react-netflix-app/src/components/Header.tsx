@@ -1,9 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { HeaderContainer, HeaderContent, LogoLink, PrimaryMenus, SecondaryMenus, MenuItem } from './Header.style';
+import {
+  HeaderContainer,
+  HeaderContent,
+  LogoLink,
+  PrimaryMenus,
+  SecondaryMenus,
+  MenuItem,
+  Profile,
+  ProfileThumbnail,
+  ProfileMenuContainer,
+  ProfileMenu,
+  ProfileMenuItem,
+  LogoutButton,
+} from './Header.style';
 import { ReactComponent as SearchIcon } from '@icons/search.svg';
 import { ReactComponent as AlarmIcon } from '@icons/alarm.svg';
 import Logo from '@icons/logo.png';
+import defaultProfile from '@icons/netflix_profile.png';
 import throttle from '@utils/throttle';
 import SearchInput from '@components/SearchInput';
 import useUser from '@hooks/useUser';
@@ -68,10 +82,10 @@ const useHeaderStyle = () => {
 };
 
 const Header = () => {
-  const navigate = useNavigate();
+  const profileImgRef = useRef<HTMLImageElement>(null);
   const headerRef = useHeaderStyle();
   const [canSearch, setCanSearch] = useState(false);
-  const { isLoggedIn } = useUser();
+  const { isLoggedIn, userData } = useUser();
   const { handleSignOut } = useAuth();
 
   return (
@@ -105,19 +119,41 @@ const Header = () => {
           {secondaryMenus.map((menu) => (
             <MenuItem key={menu.id}>{menu.content}</MenuItem>
           ))}
-          {isLoggedIn && <MenuItem>프로필</MenuItem>}
-          <MenuItem>
-            <button
-              onClick={async () => {
-                if (isLoggedIn) {
-                  await handleSignOut();
-                }
-                navigate('/login', { replace: true });
-              }}
-            >
-              로그아웃
-            </button>
-          </MenuItem>
+          {isLoggedIn && (
+            <Profile>
+              {userData?.photoURL && (
+                <ProfileThumbnail
+                  ref={profileImgRef}
+                  src={'userData.photoURL'}
+                  alt="프로필 사진"
+                  width="36"
+                  onError={() => {
+                    if (!profileImgRef.current) {
+                      return;
+                    }
+                    profileImgRef.current.src = defaultProfile;
+                  }}
+                />
+              )}
+              <ProfileMenuContainer>
+                <ProfileMenu>
+                  <ProfileMenuItem>
+                    <Link to="/browse">프로필 관리</Link>
+                  </ProfileMenuItem>
+                  <ProfileMenuItem>
+                    <Link to="/browse">프로필 이전</Link>
+                  </ProfileMenuItem>
+                  <ProfileMenuItem>
+                    <Link to="/browse">프로필 계정</Link>
+                  </ProfileMenuItem>
+                  <ProfileMenuItem>
+                    <Link to="/browse">고객 센터</Link>
+                  </ProfileMenuItem>
+                </ProfileMenu>
+                <LogoutButton onClick={handleSignOut}>로그아웃</LogoutButton>
+              </ProfileMenuContainer>
+            </Profile>
+          )}
         </SecondaryMenus>
       </HeaderContent>
     </HeaderContainer>

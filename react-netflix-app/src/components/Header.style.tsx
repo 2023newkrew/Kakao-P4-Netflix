@@ -44,3 +44,21 @@ export const SecondaryMenus = styled.ul`
 export const MenuItem = tw.li`
   ml-6 block
 `;
+export const Profile = tw(MenuItem)`
+  relative hover:[&>div]:block
+`;
+export const ProfileMenuContainer = tw.div`
+ z-10 w-32 absolute top-10 right-0 hidden bg-black opacity-90 
+`;
+export const ProfileMenu = tw.ul`
+  z-10 flex flex-col w-full h-full py-2 border-b border-b-[#ffffff80]
+`;
+export const ProfileMenuItem = tw.li`
+  w-full h-8 p-4 flex items-center cursor-pointer hover:[&>a]:underline
+`;
+export const ProfileThumbnail = tw.img`
+  w-10 h-10 rounded-md cursor-pointer
+`;
+export const LogoutButton = tw.button`
+  w-full text-center h-10 
+`;
