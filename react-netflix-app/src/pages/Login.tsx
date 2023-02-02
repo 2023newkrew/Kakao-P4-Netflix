@@ -63,14 +63,14 @@ const Login = () => {
             placeholder="이메일 주소나 전화번호를 입력하세요"
             value={email}
             rules={register(loginForm.email.key, loginForm.email.rules)}
-            errorMessage={errors.email?.message}
+            errorMessage={errors.email?.message as string}
           />
           <FormInput
             type="password"
             placeholder="비밀번호를 입력해주세요"
             rules={register(loginForm.password.key, loginForm.password.rules)}
             value={password}
-            errorMessage={errors.password?.message}
+            errorMessage={errors.password?.message as string}
           />
           <SubmitButton>로그인</SubmitButton>
         </form>

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import useMovieVideos from '@pages/Main/hooks/useMovieVideos';
 import { POSTER_BASE_URL } from '@constants/tmdb';
 import { getTrailingComma } from '@utils/getTrailingComma';
+import { MovieDetail } from '@/types/movie';
+import { ReactNode } from 'react';
 
 const Container = tw.div`w-full h-full bg-[#222222] z-0 box-border`;
 const ContentSection = tw.section`p-10 w-full bg-transparent rounded-sm text-white text-sm overflow-hidden z-[2] will-change-transform mb-4`;
@@ -22,7 +24,11 @@ const Tag = tw.span`text-[#ddd] cursor-pointer m-0 mr-1 outline-[#fff]`;
 
 const YOUTUBE_EMBED_BASE_URL = 'https://www.youtube.com/embed/';
 
-const AboutRow = ({ title, tags }) => {
+type AboutRowProps = {
+  title: string;
+  tags: ReactNode;
+};
+const AboutRow = ({ title, tags }: AboutRowProps) => {
   return (
     <TagsWrapper>
       <Title>{title}:</Title>
@@ -36,14 +42,17 @@ AboutRow.propTypes = {
 };
 
 const VIDEO_TYPE = 'Trailer';
-const useTrailer = (movieId) => {
+const useTrailer = (movieId: number) => {
   const { data: movieVideos, isLoading, error } = useMovieVideos(movieId);
   const trailer = Array.isArray(movieVideos) ? movieVideos.find((video) => video.type === VIDEO_TYPE) : null;
 
   return { data: trailer, error, isLoading };
 };
 
-export const MovieDetail = ({ movie }) => {
+type MovieDetailProps = {
+  movie: MovieDetail;
+};
+export const MovieDetailTemplate = ({ movie }: MovieDetailProps) => {
   const { data, isLoading, error } = useTrailer(movie.id);
   const youtubeKey = data?.key;
 
@@ -54,7 +63,7 @@ export const MovieDetail = ({ movie }) => {
           src={YOUTUBE_EMBED_BASE_URL + youtubeKey}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
+          allowFullScreen
         ></YoutubeEmbedFrame>
       )}
 
@@ -102,7 +111,4 @@ export const MovieDetail = ({ movie }) => {
     </Container>
   );
 };
-MovieDetail.propTypes = {
-  movie: PropTypes.object,
-};
-export default MovieDetail;
+export default MovieDetailTemplate;

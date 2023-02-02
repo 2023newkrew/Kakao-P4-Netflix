@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getMovieDetail } from '@api/movies';
+import { MovieDetail } from '@/types/movie';
 
-const useMovieDetail = (movieId) => {
+const useMovieDetail = (movieId: number | null) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [detail, setDetail] = useState(null);
+  const [error, setError] = useState<any>(null);
+  const [detail, setDetail] = useState<MovieDetail | null>(null);
 
   useEffect(() => {
     if (!movieId) {

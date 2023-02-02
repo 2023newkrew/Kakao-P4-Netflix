@@ -1,22 +1,26 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Portal from '@components/Portal';
 import { CloseButton, Container, Content } from '@components/Modal/Modal.style';
-import { ModalContext, useModalContext } from '@components/Modal/ModalContext';
+import { ModalContext, ModalOpenParameters, useModalContext } from '@components/Modal/ModalContext';
 
 import useBodyScrollLock from '@hooks/useBodyScrollLock';
 import useEscapeKey from '@hooks/useEscapeKey';
 
-export const ModalProvider = ({ children, id }) => {
+type ModalProviderProps = {
+  children: ReactNode;
+  id: string;
+};
+export const ModalProvider = ({ children, id }: ModalProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [node, setNode] = useState(null);
-  const [containerEl, setContainerEl] = useState(null);
-  const [transformOrigin, setTransformOrigin] = useState({ x: null, y: null });
-  const handleClose = useRef(null);
+  const [node, setNode] = useState<ReactNode | null>(null);
+  const [containerEl, setContainerEl] = useState<HTMLElement | null>(null);
+  const [transformOrigin, setTransformOrigin] = useState<{ x: number | null; y: number | null }>({ x: null, y: null });
+  const handleClose = useRef<() => void>();
 
   const callbackContainerRef = useCallback(
-    (ref) => {
+    (ref: HTMLDialogElement) => {
       setContainerEl(ref);
       if (ref) {
         ref.style.setProperty('transform-origin', `${transformOrigin.x}px ${transformOrigin.y}px`);
@@ -28,16 +32,14 @@ export const ModalProvider = ({ children, id }) => {
     [transformOrigin],
   );
 
-  const open = useCallback(({ node, onClose }) => {
-    if (onClose && typeof onClose === 'function') {
-      handleClose.current = onClose;
-    }
+  const open = useCallback(({ node, onClose }: { node: ReactNode; onClose?: () => void }) => {
+    handleClose.current = onClose;
     setNode(node);
     setIsOpen(true);
   }, []);
 
   const close = useCallback(
-    (onClose) => {
+    (onClose?: () => void) => {
       if (containerEl) {
         containerEl.style.setProperty('--scale', '0');
       }
@@ -47,16 +49,12 @@ export const ModalProvider = ({ children, id }) => {
         if (onClose && typeof onClose === 'function') {
           onClose();
         }
-        // if (handleClose.current && typeof handleClose.current === 'function') {
-        //   handleClose.current();
-        // }
-        handleClose.current = null;
       }, 250);
     },
     [containerEl],
   );
 
-  const setPosition = useCallback((position) => {
+  const setPosition = useCallback((position: DOMRect) => {
     const x = position?.x ?? window.innerWidth / 2;
     const y = position?.y ?? window.innerHeight / 2;
     const width = position?.width ?? 0;
@@ -111,7 +109,7 @@ export const useModal = () => {
   const { open, close } = useModalContext();
 
   const openModal = useCallback(
-    (payload) => {
+    (payload: ModalOpenParameters) => {
       open(payload);
     },
     [open, close],

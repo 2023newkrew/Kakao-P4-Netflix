@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { getMovieVideos } from '@api/movies';
 import { MovieVideo } from '@/types/movie';
 
-const useMovieVideos = (movieId: string) => {
+const useMovieVideos = (movieId: number) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<unknown | null>(null);
+  const [error, setError] = useState<any>(null);
   const [data, setData] = useState<MovieVideo[]>([]);
 
   useEffect(() => {

@@ -26,6 +26,6 @@ export const getPopularMovies = (): MoviesApiResponse => fetcher('/popular');
 export const getTopRatedMovies = (): MoviesApiResponse => fetcher('/top_rated');
 export const getUpcomingMovies = (page = 1): MovieApiResponse => fetcher('/upcoming', { page });
 
-export const getMovieDetail = (movieId: string) => fetcher(`/${movieId}`);
-export const getSimilarMovie = (movieId: string) => fetcher(`/${movieId}/similar`);
-export const getMovieVideos = (movieId: string) => fetcher(`/${movieId}/videos`);
+export const getMovieDetail = (movieId: number) => fetcher(`/${movieId}`);
+export const getSimilarMovie = (movieId: number) => fetcher(`/${movieId}/similar`);
+export const getMovieVideos = (movieId: number) => fetcher(`/${movieId}/videos`);
