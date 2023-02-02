@@ -50,7 +50,7 @@ const Login = () => {
   const onValidSubmit = async () => {
     await login();
 
-    navigate('/', { replace: true });
+    navigate('/browse', { replace: true });
   };
 
   return (
