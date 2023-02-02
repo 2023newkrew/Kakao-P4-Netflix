@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const NotFoundLayout = styled.main`
+const NotFoundPage = styled.main`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -11,5 +11,5 @@ const NotFoundLayout = styled.main`
 `;
 
 export default function NotFound() {
-  return <NotFoundLayout>해당 페이지를 찾을 수 없습니다.</NotFoundLayout>;
+  return <NotFoundPage>해당 페이지를 찾을 수 없습니다.</NotFoundPage>;
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import PageLayout from '@layouts/PageLayout';
 import Banner from '@components/Banner';
 import MovieSlider from '@components/slider/MovieSlider';
 import useAxios from '@hooks/useAxios';
 
-const MainLayout = styled.main``;
+const MainPage = styled.main``;
 
 const SliderContainer = styled.section`
   margin-top: -10%;
@@ -28,11 +29,13 @@ export default function Main() {
   }, [data]);
 
   return (
-    <MainLayout>
-      <Banner isLoading={isLoading} movie={bannerMovie} />
-      <SliderContainer>
-        <MovieSlider name="지금 뜨는 콘텐츠" movies={popularMovies} />
-      </SliderContainer>
-    </MainLayout>
+    <PageLayout>
+      <MainPage>
+        <Banner isLoading={isLoading} movie={bannerMovie} />
+        <SliderContainer>
+          <MovieSlider name="지금 뜨는 콘텐츠" movies={popularMovies} />
+        </SliderContainer>
+      </MainPage>
+    </PageLayout>
   );
 }

@@ -7,7 +7,7 @@
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@routes/*": ["src/routes/*"],
+      "@pages/*": ["src/pages/*"],
       "@styles/*": ["src/styles/*"]
     }
   }

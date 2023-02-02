@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
+import PageLayout from '@layouts/PageLayout';
 import MovieGrid from '@components/grid/MovieGrid';
 import useAxios from '@hooks/useAxios';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 
-const SearchLayout = styled.main`
+const SearchPage = styled.main`
   margin-top: 72px;
   padding: 4vw;
 `;
@@ -48,22 +49,26 @@ export default function Search() {
 
   if (!isLoading && !searchResults.length) {
     return (
-      <SearchLayout>
-        <Message>
-          입력하신 검색어 &quot;{searchParams.get('q')}&quot;(와)과 일치하는
-          결과가 없습니다.
-        </Message>
-      </SearchLayout>
+      <PageLayout>
+        <SearchPage>
+          <Message>
+            입력하신 검색어 &quot;{searchParams.get('q')}&quot;(와)과 일치하는
+            결과가 없습니다.
+          </Message>
+        </SearchPage>
+      </PageLayout>
     );
   }
 
   return (
-    <SearchLayout>
-      <MovieGrid movies={searchResults} />
-      <Message ref={setObserveTarget}>
-        {isLoading && '로딩중'}
-        {!isLoading && '검색 결과가 더이상 없습니다.'}
-      </Message>
-    </SearchLayout>
+    <PageLayout>
+      <SearchPage>
+        <MovieGrid movies={searchResults} />
+        <Message ref={setObserveTarget}>
+          {isLoading && '로딩중'}
+          {!isLoading && '검색 결과가 더이상 없습니다.'}
+        </Message>
+      </SearchPage>
+    </PageLayout>
   );
 }
