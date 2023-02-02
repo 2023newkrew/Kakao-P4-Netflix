@@ -17,9 +17,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <Header />
       <MovieList search={search} />
-      <Footer />
     </>
   );
 };

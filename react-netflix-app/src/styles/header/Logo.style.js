@@ -5,6 +5,7 @@ export const LogoContainer = styled.div`
   flex: 0.06;
 
   margin-right: 25px;
+  cursor: pointer;
 
   img {
     width: 100px;

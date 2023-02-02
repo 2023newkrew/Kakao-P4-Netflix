@@ -19,7 +19,7 @@ const Search = () => {
       const query = qs.parse(location.search, {
         ignoreQueryPrefix: true, //* 이 설정을 통해 문자열 맨 앞의 ? 를 생략합니다
       });
-      searchElement.current.value = query.q;
+      searchElement.current.value = query.q || "";
       searchElement.current.focus();
     }
   }, []);

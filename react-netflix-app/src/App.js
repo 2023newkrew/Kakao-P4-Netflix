@@ -3,9 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import React, { lazy, Suspense } from "react";
 
 import { getCookie } from "@utils/cookie";
+import MainRoute from "./routes/MainRoute";
 
-const MainPage = lazy(() => import("@pages/MainPage"));
-const SearchPage = lazy(() => import("@pages/SearchPage"));
 const LoginPage = lazy(() => import("@pages/LoginPage"));
 
 const App = () => {
@@ -13,8 +12,7 @@ const App = () => {
     <>
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/" element={getCookie("accessToken") ? <MainPage /> : <LoginPage />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/*" element={getCookie("accessToken") ? <MainRoute /> : <LoginPage />} />
         </Routes>
       </Suspense>
     </>
