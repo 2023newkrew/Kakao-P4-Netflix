@@ -55,8 +55,10 @@ const ContentCardGroups = ({ contents, cardsPerGroup, type }) => {
 const ContentCardList = ({ contents, title, type = "slide" }) => {
   return (
     <ContentListContainer>
-      {type === "slide" && <ContentListTitle>{title}</ContentListTitle>}
-      {contents?.length && <ContentCardGroups cardsPerGroup={6} contents={contents} type={type} />}
+      {title && <ContentListTitle>{title}</ContentListTitle>}
+      {contents?.length > 0 && (
+        <ContentCardGroups cardsPerGroup={6} contents={contents} type={type} />
+      )}
     </ContentListContainer>
   );
 };

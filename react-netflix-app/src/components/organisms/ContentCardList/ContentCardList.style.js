@@ -21,7 +21,6 @@ export const ContentGroupWrapper = styled.div`
   display: grid;
   row-gap: 2vw;
   grid-template-columns: repeat(6, 1fr);
-  /* padding: 2vw; */
 `;
 
 export const ContentListTitle = styled.h3`

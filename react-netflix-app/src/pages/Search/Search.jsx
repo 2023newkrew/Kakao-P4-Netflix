@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useDebounce from "hooks/useDebounce";
-import { ContentCard } from "components";
+import { ContentCardList } from "components";
 import api from "utils/API";
 
-import { SearchContainer, ContentListWrapper } from "./Search.style";
-
-// ContentCardList 컴포넌트 정리하기
-const ContentCards = ({ contents }) => {
-  return (
-    <ContentListWrapper>
-      {contents.map((content) => (
-        <ContentCard key={content.id} content={content} type="page" />
-      ))}
-    </ContentListWrapper>
-  );
-};
+import { SearchContainer } from "./Search.style";
 
 const Search = () => {
   const searchValue = new URLSearchParams(useLocation().search).get("q");
@@ -41,7 +30,7 @@ const Search = () => {
 
   return (
     <SearchContainer>
-      <ContentCards contents={contents} />
+      <ContentCardList contents={contents} type="grid" />
     </SearchContainer>
   );
 };
