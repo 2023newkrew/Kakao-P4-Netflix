@@ -7,20 +7,10 @@ import useTimeOutEvent from "../../../../util/hooks/useTimeOutEvent";
 import useAddEventListener from "../../../../util/hooks/useAddEventListener";
 import ModalPortal from "../../../Modal/ModalPortal/ModalPortal";
 import TheMovieDBAPI from "../../../../util/class/TheMovieDBAPI";
-import skeletonUI from "../../../../assets/skeletonUI.json";
-import Lottie from "react-lottie";
 
 const POPUP_MULTIPLE_VALUE = 1.3;
 const POPUP_INFO_HEIGHT = 70;
 
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: skeletonUI,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
 const getPopUpTopOffset = (containerTop, containerHeight, scrollY) => {
   return containerTop + scrollY - (containerHeight * (POPUP_MULTIPLE_VALUE - 1)) / 2 - POPUP_INFO_HEIGHT / 2;
 };
@@ -53,7 +43,7 @@ export default function CarouselItem({
   const imageContainerRef = useRef(null);
   const windowRef = useRef(window);
   const [imageContainerRectInfo, setImageContainerRectInfo] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
   const { isModalOpen: isSmallModalOpen, toggle: smallModalToggle } = useModal();
   const { isModalOpen: isBigModalOpen, toggle: bigModalToggle } = useModal();
 
@@ -82,15 +72,10 @@ export default function CarouselItem({
   return (
     <>
       <CarouselItemContainer ref={imageContainerRef} separateCount={separateCount}>
-        <Lottie options={defaultOptions} style={isLoading ? {} : { display: "none" }} />
-        <CarouselItemImg
-          style={!isLoading ? {} : { display: "none" }}
-          src={imgSrc ? TheMovieDBAPI.IMG_BASE_URL + imgSrc : "https://via.placeholder.com/200x100"}
-          onLoad={() => setIsLoading(false)}
-        />
+        <CarouselItemImg src={imgSrc ? TheMovieDBAPI.IMG_BASE_URL + imgSrc : "https://via.placeholder.com/200x100"} />
       </CarouselItemContainer>
 
-      {isSmallModalOpen && imageContainerRectInfo && !isLoading ? (
+      {isSmallModalOpen && imageContainerRectInfo ? (
         <ModalPortal>
           <SmallModal
             imgSrc={imgSrc ? TheMovieDBAPI.IMG_BASE_URL + imgSrc : "https://via.placeholder.com/200x100"}
@@ -119,7 +104,7 @@ export default function CarouselItem({
           />
         </ModalPortal>
       ) : null}
-      {isBigModalOpen && !isLoading ? (
+      {isBigModalOpen ? (
         <ModalPortal>
           <BigModal
             movieId={movieId}

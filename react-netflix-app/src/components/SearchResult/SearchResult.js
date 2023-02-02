@@ -4,8 +4,6 @@ import Util from "../../util/class/Util.js";
 import TheMovieDBAPI from "../../util/class/TheMovieDBAPI";
 import CarouselColumn from "../common/carousel/CarouselColumn/CarouselColumn";
 import { Container, ColumContainer } from "./styles";
-import skeletonUI from "../../assets/skeletonUI.json";
-import Lottie from "react-lottie";
 
 const SEPARATE_COUNT = 5;
 
