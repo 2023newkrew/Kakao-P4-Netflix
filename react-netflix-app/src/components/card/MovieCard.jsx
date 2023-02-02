@@ -45,6 +45,17 @@ const Title = styled.div`
   }
 `;
 
+const NoPoster = styled(Title)`
+  justify-content: center;
+  font-size: 2.4vw;
+  background-color: #808080;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 function MovieCard({ movie }) {
   const { poster_path, title } = movie;
   const [ModalContainer, openModal, closeModal] = useModal();
@@ -52,8 +63,13 @@ function MovieCard({ movie }) {
   return (
     <MovieCardLayout>
       <ContentContainer onClick={openModal}>
-        <Poster path={poster_path} alt={title} />
-        <Title>{title}</Title>
+        {!poster_path && <NoPoster>{title}</NoPoster>}
+        {poster_path && (
+          <>
+            <Poster path={poster_path} alt={title} />
+            <Title>{title}</Title>
+          </>
+        )}
       </ContentContainer>
       <ModalContainer>
         <InfoModal close={closeModal} movie={movie} />
