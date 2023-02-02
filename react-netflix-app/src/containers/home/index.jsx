@@ -1,6 +1,4 @@
 import MovieList from '@components/home/movie-list';
-import Footer from '@components/common/footer';
-import Header from '@components/common/header';
 import Hero from '@components/home/hero';
 import { useEffect, useState } from 'react';
 import {
@@ -11,13 +9,15 @@ import {
 } from '@/apis/movie';
 import { rand } from '@/utils/math';
 import { MOVIE_LIST, MOVIE_LIST_TITLE } from '@/constants/movie';
-import { MovieListSection } from './styles';
+import { MovieListSection, SpinnerContainer } from './styles';
+import Spinner from '@/components/common/spinner';
 
 const Home = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [popular, setPopular] = useState([]);
   const [toprated, setToprated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [heroMovie, setHeroMovie] = useState({});
 
@@ -42,20 +42,28 @@ const Home = () => {
       setToprated(topratedData);
       setUpcoming(upcomingData);
       setHeroMovie(nowPlayingData[rand({ max: nowPlayingData.length - 1 }) || 0]);
+
+      setIsLoading(false);
     };
     fetchNowPlaying();
   }, []);
 
+  if (isLoading) {
+    return (
+      <SpinnerContainer>
+        <Spinner />
+      </SpinnerContainer>
+    );
+  }
+
   return (
     <>
-      <Header />
       <Hero movie={heroMovie} />
       <MovieListSection>
         {movieLists.map(([title, movies]) => (
           <MovieList key={title} title={MOVIE_LIST_TITLE[title]} movies={movies} />
         ))}
       </MovieListSection>
-      <Footer />
     </>
   );
 };

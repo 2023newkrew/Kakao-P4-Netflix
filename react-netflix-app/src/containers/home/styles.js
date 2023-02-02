@@ -7,3 +7,11 @@ export const MovieListSection = styled.section`
   flex-direction: column;
   gap: 32px;
 `;
+
+export const SpinnerContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
