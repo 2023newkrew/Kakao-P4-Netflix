@@ -39,3 +39,7 @@ export const HeaderLogo = styled.img`
 `;
 
 export const HeaderProfile = styled.img``;
+
+export const HeaderUsername = styled.span`
+  font-size: 16px;
+`;

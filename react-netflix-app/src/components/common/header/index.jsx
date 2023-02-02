@@ -9,12 +9,15 @@ import {
   HeaderLogo,
   HeaderProfile,
   HeaderRightContent,
+  HeaderUsername,
 } from './styles';
 import HeaderSearchInput from './header-search-input';
 import { ROUTE, ROUTE_PATH } from '@/constants/route';
+import useUserStore from '@/stores/use-user-store';
 
 const Header = () => {
   const isTop = useIsTop();
+  const { user } = useUserStore();
   const navigate = useNavigate();
 
   const navigateToHome = useCallback(() => {
@@ -28,6 +31,7 @@ const Header = () => {
         <HeaderRightContent>
           <HeaderSearchInput />
           <HeaderProfile src={ProfileIconImg} />
+          <HeaderUsername>{user.userName}</HeaderUsername>
         </HeaderRightContent>
       </HeaderContent>
     </HeaderContainer>
