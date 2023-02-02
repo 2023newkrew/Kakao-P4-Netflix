@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const CarouselItemContainer = styled.div`
-  width: calc(100% / ${(props) => props.separateCount});
-  height: calc(calc(100vw / ${(props) => props.separateCount}) / 2);
+  width: calc(100% / ${(props : {separateCount:number}) => props.separateCount});
+  height: calc(calc(100vw / ${(props : {separateCount:number}) => props.separateCount}) / 2);
   padding-left: 0.2vw;
   padding-right: 0.2vw;
   object-fit: fill;

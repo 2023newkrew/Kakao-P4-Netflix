@@ -11,10 +11,10 @@ import TheMovieDBAPI from "../../../../util/class/TheMovieDBAPI";
 const POPUP_MULTIPLE_VALUE = 1.3;
 const POPUP_INFO_HEIGHT = 70;
 
-const getPopUpTopOffset = (containerTop, containerHeight, scrollY) => {
+const getPopUpTopOffset = (containerTop: number, containerHeight: number, scrollY: number) => {
   return containerTop + scrollY - (containerHeight * (POPUP_MULTIPLE_VALUE - 1)) / 2 - POPUP_INFO_HEIGHT / 2;
 };
-const getPopUpLeftOffset = (containerLeft, containerWidth, index, separateCount) => {
+const getPopUpLeftOffset = (containerLeft: number, containerWidth: number, index: number, separateCount: number) => {
   if (index % separateCount === 0) {
     // left end
     return containerLeft;
@@ -38,11 +38,22 @@ export default function CarouselItem({
   releaseDate,
   index,
   overViewInfo,
+}: {
+  movieId: number;
+  title: string;
+  imgSrc: string;
+  setImageContainerSize: React.Dispatch<React.SetStateAction<number>> | null;
+  separateCount: number;
+  voteAverage: number;
+  voteCount: number;
+  releaseDate: string;
+  index: number;
+  overViewInfo: string;
 }) {
   const MOUSE_OVER_DELAY = 300;
-  const imageContainerRef = useRef(null);
+  const imageContainerRef = useRef<HTMLDivElement | null>(null);
   const windowRef = useRef(window);
-  const [imageContainerRectInfo, setImageContainerRectInfo] = useState(null);
+  const [imageContainerRectInfo, setImageContainerRectInfo] = useState<DOMRect | null>(null);
 
   const { isModalOpen: isSmallModalOpen, toggle: smallModalToggle } = useModal();
   const { isModalOpen: isBigModalOpen, toggle: bigModalToggle } = useModal();
@@ -50,22 +61,23 @@ export default function CarouselItem({
   useTimeOutEvent(imageContainerRef, "mouseenter", smallModalToggle, "mouseleave", MOUSE_OVER_DELAY);
 
   const handleClick = useCallback(
-    (event) => {
+    (event: Event) => {
       /* 클릭 이벤트가 모달 외부로 전파되어 다시 toggle 되는 현상을 막기 위함 */
       event.stopPropagation();
       bigModalToggle();
     },
     [bigModalToggle]
   );
-  const handleResize = useCallback(
-    () => setImageContainerSize(imageContainerRef.current.clientWidth),
-    [setImageContainerSize]
-  );
+  const handleResize = useCallback(() => {
+    if (setImageContainerSize && imageContainerRef.current)
+      setImageContainerSize(imageContainerRef.current.clientWidth);
+  }, [setImageContainerSize]);
   useAddEventListener(imageContainerRef, "click", handleClick);
-  useAddEventListener(windowRef, "resize", handleResize, setImageContainerSize, handleResize);
+  useAddEventListener(windowRef, "resize", handleResize, Boolean(setImageContainerSize), handleResize);
 
   useEffect(() => {
     if (!isSmallModalOpen) return;
+    if (!imageContainerRef.current) return;
     setImageContainerRectInfo(imageContainerRef.current.getBoundingClientRect());
   }, [isSmallModalOpen]);
 

@@ -1,7 +1,7 @@
 import React from "react";
 import TheMovieDBAPI from "../../util/class/TheMovieDBAPI.js";
 import CarouselRow from "../common/carousel/CarouselRow/CarouselRow.js";
-import MainPost from "./MainPost/MainPost.js";
+import MainPost from "./MainPost/MainPost";
 
 import { Category } from "./styles.js";
 

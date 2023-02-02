@@ -11,7 +11,7 @@ import {
 } from "./styles";
 
 export default function MainPost() {
-  const [postInfo, setPostInfo] = useState("");
+  const [postInfo, setPostInfo] = useState<any>("");
 
   useEffect(() => {
     const fetchMainPost = async () => {
