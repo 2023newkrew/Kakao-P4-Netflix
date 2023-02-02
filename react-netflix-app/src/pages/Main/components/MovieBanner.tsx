@@ -24,7 +24,7 @@ const MovieBanner = ({ movie }: Props) => {
             {movie.overview && <p>{movie.overview.split('.')[0]}</p>}
             <div>
               <Banner.Button className="primary">
-                <img src={playIcon} alt="재생 아이콘" />
+                <img src={playIcon} alt="재생 아이콘" height="24" width="24" />
                 재생
               </Banner.Button>
               <Banner.Button className="secondary">상세 정보</Banner.Button>

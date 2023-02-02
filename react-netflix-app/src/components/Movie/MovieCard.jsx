@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Container,
@@ -93,4 +93,6 @@ const MovieCard = ({ movie }) => {
 MovieCard.propTypes = {
   movie: PropTypes.object,
 };
-export default MovieCard;
+export default memo(MovieCard, (prev, current) => {
+  return prev.movie.id === current.movie.id;
+});

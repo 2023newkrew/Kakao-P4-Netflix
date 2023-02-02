@@ -85,7 +85,7 @@ const Header = () => {
     <HeaderContainer>
       <HeaderContent ref={headerRef}>
         <LogoLink aria-label="넷플릭스" to="/">
-          <img src={Logo} alt="넷플릭스 로고" />
+          <img src={Logo} alt="넷플릭스 로고" height="24" width="88" />
         </LogoLink>
         <PrimaryMenus>
           <MenuItem>

@@ -5,13 +5,13 @@ export const PageContainer = tw(DefaultContainer)`relative`;
 export const PageTitle = tw.h1`hidden`;
 
 export const BannerContainer = tw.div`
-  w-full pb-[68%] sm:pb-[50%] md:pb-[40%] mb-10 bg-black relative select-none touch-pan-y
+  w-full pb-[64%] sm:pb-[55%] md:pb-[40%] mb-10 bg-black relative select-none touch-pan-y
 `;
 export const BannerBackgroundLayer = tw.div`
-  h-[42vh] md:h-[56vh] lg:h-[70vh] xl:h-[80vh] absolute top-0 w-full [& > img]:object-cover [& >img]:w-full [&>img]:h-full
+  h-[42vh] md:h-[56vh] lg:h-[64vh] xl:h-[7vh] absolute top-0 w-full pb-[64%] sm:pb-[55%] [&>img]:absolute [& > img]:object-cover [& >img]:w-full [&>img]:h-full
 `;
 export const BannerContent = tw.div`
-  absolute top-0 left-0 right-0 bottom-[24%] flex items-end justify-center
+  absolute top-0 left-0 right-0 bottom-[20%] sm:-bottom-10 md:bottom-[25%] flex items-end justify-center
 `;
 export const BannerMovieInfo = styled.div`
   ${tw`break-words absolute bottom-5 flex flex-col justify-end left-[4%] top-0 w-[80%] md:w-[40%] sm:bottom-10`}
