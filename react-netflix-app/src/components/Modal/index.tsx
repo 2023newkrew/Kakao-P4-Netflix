@@ -5,8 +5,8 @@ import Portal from '@components/Portal';
 import { CloseButton, Container, Content } from '@components/Modal/Modal.style';
 import { ModalContext, ModalOpenParameters, useModalContext } from '@components/Modal/ModalContext';
 
-import useBodyScrollLock from '@hooks/useBodyScrollLock';
-import useEscapeKey from '@hooks/useEscapeKey';
+import useBodyScrollLock from '@utilHooks/useBodyScrollLock';
+import useEscapeKey from '@utilHooks/useEscapeKey';
 
 type ModalProviderProps = {
   children: ReactNode;

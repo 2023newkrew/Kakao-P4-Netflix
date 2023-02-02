@@ -2,8 +2,8 @@ import { SetStateAction, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 import { ReactComponent as SearchIcon } from '@icons/search.svg';
-import useInput from '@hooks/useInput';
-import useDebounce from '@hooks/useDebounce';
+import useInput from '@utilHooks/useInput';
+import useDebounce from '@utilHooks/useDebounce';
 import { Dispatch } from 'react';
 
 export const Container = tw.div`

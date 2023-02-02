@@ -14,7 +14,7 @@
       "@api/*": ["./src/api/*"],
       "@constants/*": ["./src/constants/*"],
       "@utils/*": ["./src/utils/*"],
-      "@hooks/*": ["./src/utils/hooks/*"],
+      "@utilHooks/*": ["./src/utils/hooks/*"],
       "@/*": ["./src/*"]
     },
 
