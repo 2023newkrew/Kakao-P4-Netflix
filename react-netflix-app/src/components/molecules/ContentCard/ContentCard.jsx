@@ -32,7 +32,7 @@ const ContentCard = ({ content, type = "modal" }) => {
         <div>
           <ContentCardImage
             alt={`<${content.title}>의 썸네일 이미지`}
-            src={api.getImageSeverURL() + (content.backdrop_path ?? content.poster_path)}
+            src={api.getImageSeverURL("low") + (content.backdrop_path ?? content.poster_path)}
             loading="lazy"
           />
         </div>

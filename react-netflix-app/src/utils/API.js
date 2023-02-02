@@ -1,7 +1,7 @@
 import axios from "axios";
+import { imageResolutionType } from "utils/constants";
 
 const server = "https://api.themoviedb.org/3";
-const imageServer = "https://image.tmdb.org/t/p/original";
 
 const setCommonParams = (param) => {
   const key = process.env.REACT_APP_THEMOVIEDB_API_KEY;
@@ -9,8 +9,8 @@ const setCommonParams = (param) => {
 };
 
 const api = {
-  getImageSeverURL() {
-    return imageServer;
+  getImageSeverURL(resolutionType = "original") {
+    return `https://image.tmdb.org/t/p/${imageResolutionType[resolutionType]}`;
   },
   async get(endpoint, param) {
     const params = setCommonParams(param);
