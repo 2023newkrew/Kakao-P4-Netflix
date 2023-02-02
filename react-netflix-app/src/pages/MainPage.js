@@ -1,7 +1,6 @@
+import Header from "@components/header/Header";
 import Footer from "@components/footer/Footer";
-
 import Banner from "@components/banner/Banner";
-
 import CardSlide from "@components/cardSlide/CardSlide";
 
 import React from "react";
@@ -10,6 +9,7 @@ import LazyLoad from "react-lazyload";
 const MainPage = () => {
   return (
     <>
+      <Header />
       <Banner />
       <LazyLoad>
         <CardSlide category={"액션"} />

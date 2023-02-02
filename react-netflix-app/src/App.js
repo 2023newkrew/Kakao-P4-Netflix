@@ -2,20 +2,18 @@ import { Routes, Route } from "react-router-dom";
 
 import React, { lazy, Suspense } from "react";
 
-import Header from "@components/header/Header";
+import { getCookie } from "@utils/cookie";
 
-// import MainPage from "@pages/MainPage";
-// import SearchPage from "@pages/SearchPage";
 const MainPage = lazy(() => import("@pages/MainPage"));
 const SearchPage = lazy(() => import("@pages/SearchPage"));
+const LoginPage = lazy(() => import("@pages/LoginPage"));
 
 const App = () => {
   return (
     <>
-      <Header />
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={getCookie("accessToken") ? <MainPage /> : <LoginPage />} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>
       </Suspense>

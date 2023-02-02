@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import qs from "qs";
 
+import Header from "@components/header/Header";
 import MovieList from "@components/movieList/MovieList";
 import Footer from "@components/footer/Footer";
 
@@ -16,6 +17,7 @@ const SearchPage = () => {
 
   return (
     <>
+      <Header />
       <MovieList search={search} />
       <Footer />
     </>
