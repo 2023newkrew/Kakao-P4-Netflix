@@ -19,7 +19,7 @@ const MovieCard = ({ movie }) => {
   return (
     <MovieCardContainer>
       <MovieCardWrapper onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-        <ImageWrapper>
+        <ImageWrapper className="AAA">
           <LazyLoad>
             <MovieCardImage onClick={open} className={classNames("movieCard_image", { hover: hover })} src={movieImageURL} alt={movie.title} loading="lazy" />
           </LazyLoad>

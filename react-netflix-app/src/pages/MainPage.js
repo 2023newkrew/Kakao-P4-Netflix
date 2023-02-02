@@ -17,7 +17,6 @@ const MainPage = () => {
         <CardSlide category={"애니메이션"} />
         <CardSlide category={"SF"} />
         <CardSlide category={"공포"} />
-
         <CardSlide category={"코미디"} />
         <CardSlide category={"음악"} />
       </LazyLoad>

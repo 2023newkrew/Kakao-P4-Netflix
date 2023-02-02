@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const MovieCardInfoContainer = styled.div`
   position: absolute;
-  transform: scaleX(1.2) translateY(5px);
+
+  transform: scaleX(1.2);
   background-color: rgb(24, 24, 24);
   width: 100%;
-  height: 40%;
+  height: 30%;
   bottom: 0;
   padding: 10px;
 
