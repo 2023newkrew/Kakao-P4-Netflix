@@ -30,8 +30,6 @@ const Home = () => {
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
-      setIsLoading(true);
-
       const [nowPlayingData, popularData, topratedData, upcomingData] = await Promise.all([
         getNowPlayingMovieList(),
         getPopularMovieList(),
