@@ -29,8 +29,6 @@ export const MovieCardImage = styled.img`
   transition: transform 0.1s ease-out;
   cursor: pointer;
 
-  margin-bottom: 20px;
-
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 

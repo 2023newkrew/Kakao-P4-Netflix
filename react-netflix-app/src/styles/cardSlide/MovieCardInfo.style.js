@@ -6,7 +6,7 @@ export const MovieCardInfoContainer = styled.div`
   transform: scale(1.2);
   background-color: rgb(24, 24, 24);
   width: 100%;
-  height: 30%;
+  height: 20%;
   bottom: 0;
   padding: 10px;
 
