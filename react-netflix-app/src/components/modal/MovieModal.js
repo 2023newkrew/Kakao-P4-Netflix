@@ -5,7 +5,7 @@ import YouTube from "react-youtube";
 import MovieCardSubInfo from "./MovieCardSubInfo";
 import MovieCardInfo from "./MovieCardInfo";
 
-import { MovieModalContainer, ModalMovieCard } from "@styles/modal/MovieModal.style";
+import { MovieModalContainer, MovieModalImageWrapper, ModalMovieCard } from "@styles/modal/MovieModal.style";
 
 const MovieModal = ({ movie }) => {
   const [movieURL, setMovieURL] = useState();
@@ -25,7 +25,9 @@ const MovieModal = ({ movie }) => {
 
   if (movieInfo === undefined) return <div></div>;
 
-  const movieImageURL = process.env.REACT_APP_IMAGE_API_URL + `/${movie.poster_path || movie.backdrop_path}`;
+  const movieImageURL = process.env.REACT_APP_ORIGINAL_IMAGE_API_URL + `/${movie.poster_path || movie.backdrop_path}`;
+
+  console.log(movieImageURL);
 
   const options = {
     width: "100%",
@@ -39,7 +41,7 @@ const MovieModal = ({ movie }) => {
 
   return (
     <MovieModalContainer>
-      {movieURL !== null ? <YouTube className="youtube" videoId={movieURL} opts={options} /> : <img src={movieImageURL} alt={movie.title} />}
+      <MovieModalImageWrapper>{movieURL !== null ? <YouTube className="youtube" videoId={movieURL} opts={options} /> : <img src={movieImageURL} alt={movie.title} />}</MovieModalImageWrapper>
       <ModalMovieCard>
         <MovieCardInfo movieInfo={movieInfo} />
         <MovieCardSubInfo movieInfo={movieInfo} />

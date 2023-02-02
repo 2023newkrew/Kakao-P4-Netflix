@@ -11,7 +11,9 @@ const MovieList = ({ search }) => {
 
   if (loading) return <LoadingComponent />;
 
-  const movieList = searchMovieList.map((movie) => <MovieCard key={movie.id} movie={movie} />);
+  const movieList = searchMovieList.map((movie) => {
+    return <MovieCard key={movie.id} movie={movie} />;
+  });
   return <MovieListContainer>{movieList}</MovieListContainer>;
 };
 

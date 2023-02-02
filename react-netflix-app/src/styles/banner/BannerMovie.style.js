@@ -14,6 +14,5 @@ export const BannerMovieContainer = styled.div`
   img {
     width: 100%;
     height: 100%;
-    filter: blur(3px);
   }
 `;

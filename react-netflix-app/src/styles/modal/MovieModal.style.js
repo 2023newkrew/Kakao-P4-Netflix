@@ -48,6 +48,12 @@ export const MovieCardOverview = styled.div`
 export const MovieModalContainer = styled.div`
   width: 100%;
   height: 100%;
+  padding-top: 200px;
+`;
+
+export const MovieModalImageWrapper = styled.div`
+  width: 100%;
+  height: 600px;
 
   .youtube {
     width: 100%;
@@ -73,7 +79,6 @@ export const ModalMovieCard = styled.div`
   color: white;
 
   position: absolute;
-  top: 590px;
 
   display: flex;
   gap: 40px;
