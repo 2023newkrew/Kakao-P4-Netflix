@@ -12,18 +12,13 @@ const MovieCard = ({ movie }) => {
 
   const { backdrop_path: backdropPath, id } = movie;
 
-  const fetchMovieDetail = useCallback(async (movidId) => {
-    const data = await getMovieDetail(movidId);
-    return data;
-  }, []);
-
   const onMouseEnter = useCallback(async () => {
     setIsShowDetail(true);
 
     if (detailedMovie === null) {
-      setDetailedMovie(await fetchMovieDetail(id));
+      setDetailedMovie(await getMovieDetail(id));
     }
-  }, [detailedMovie, fetchMovieDetail, id]);
+  }, [detailedMovie, id]);
 
   const onMouseLeave = useCallback(() => setIsShowDetail(false), []);
 
