@@ -8,7 +8,7 @@ export const createAccount = async (username, email, password, passwordCheck) =>
     password1: password,
     password2: passwordCheck,
   });
-  return response.data;
+  return response;
 };
 
 export const loginAccount = async (email, password) => {
@@ -16,26 +16,27 @@ export const loginAccount = async (email, password) => {
     email,
     password,
   });
-  return response.data;
+
+  return response;
 };
 
 export const logoutAccount = async () => {
   const response = await Account.post('/api/v1/account/logout/');
-  return response.data;
+  return response;
 };
 
 export const verifyAccount = async (accessToken) => {
   const response = await Account.post('/api/v1/account/token/verify/', {
     token: accessToken,
   });
-  return response.data;
+  return response;
 };
 
 export const refreshAccount = async (refreshToken) => {
   const response = await Account.post('/api/v1/account/token/refresh/', {
     refresh: refreshToken,
   });
-  return response.data;
+  return response;
 };
 
 export const getAccount = async (accessToken) => {
@@ -44,7 +45,7 @@ export const getAccount = async (accessToken) => {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  return response.data;
+  return response;
 };
 
 export const updateAccount = async (accessToken, firstName, lastName) => {
@@ -60,7 +61,7 @@ export const updateAccount = async (accessToken, firstName, lastName) => {
       },
     },
   );
-  return response.data;
+  return response;
 };
 
 export const changePassword = async (accessToken, newPassword, newPasswordCheck) => {
@@ -76,5 +77,5 @@ export const changePassword = async (accessToken, newPassword, newPasswordCheck)
       },
     },
   );
-  return response.data;
+  return response;
 };
