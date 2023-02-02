@@ -6,18 +6,15 @@ const MOVIE_URL = '/movie';
 
 const fetcher = (path: string, params?: { [key: string]: any }) => httpClient.get(MOVIE_URL + path, { params });
 
-interface PagedResponse {
+interface PagedResponse<T> {
   page: number;
-  results: any;
+  results: T;
   total_pages: number;
   total_results: number;
 }
-export interface MovieResponse extends PagedResponse {
-  results: Movie;
-}
-export interface MoviesResponse extends PagedResponse {
-  results: Movie[];
-}
+export type MovieResponse = PagedResponse<Movie>;
+export type MoviesResponse = PagedResponse<Movie[]>;
+
 type ApiResponse<T> = Promise<AxiosResponse<T>>;
 export type MoviesApiResponse = ApiResponse<MoviesResponse>;
 export type MovieApiResponse = ApiResponse<MovieResponse>;
