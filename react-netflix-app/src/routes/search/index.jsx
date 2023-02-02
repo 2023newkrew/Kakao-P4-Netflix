@@ -3,44 +3,67 @@ import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 import MovieGrid from '@components/grid/MovieGrid';
 import useAxios from '@hooks/useAxios';
+import useInfiniteScroll from '@hooks/useInfiniteScroll';
 
 const SearchLayout = styled.main`
   margin-top: 72px;
   padding: 4vw;
 `;
 
-const NoResult = styled.div`
+const Message = styled.div`
+  padding: 4vw;
   text-align: center;
 `;
 
 export default function Search() {
   const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('q');
+  const [page, setPage] = useState(1);
+  const [searchResults, setSearchResults] = useState([]);
   const [isLoading, data] = useAxios('get', '/search/movie', {
     params: {
-      query: searchParams.get('q'),
+      query: searchQuery,
+      page,
     },
   });
-  const [searchResults, setSearchResults] = useState([]);
+  const [isIntersecting, setObserveTarget] = useInfiniteScroll();
+
+  useEffect(() => {
+    setPage(1);
+    setSearchResults([]);
+  }, [searchQuery]);
 
   useEffect(() => {
     if (!data) return;
 
     const { results } = data;
-    setSearchResults(results);
+    setSearchResults((prev) => [...prev, ...results]);
   }, [data]);
 
-  if (isLoading) return null;
+  useEffect(() => {
+    if (!isIntersecting) return;
+
+    setPage((prev) => prev + 1);
+  }, [isIntersecting]);
+
+  if (!isLoading && !searchResults.length) {
+    return (
+      <SearchLayout>
+        <Message>
+          입력하신 검색어 &quot;{searchParams.get('q')}&quot;(와)과 일치하는
+          결과가 없습니다.
+        </Message>
+      </SearchLayout>
+    );
+  }
 
   return (
     <SearchLayout>
-      {searchResults.length ? (
-        <MovieGrid movies={searchResults} />
-      ) : (
-        <NoResult>
-          입력하신 검색어 &quot;{searchParams.get('q')}&quot;(와)과 일치하는
-          결과가 없습니다.
-        </NoResult>
-      )}
+      <MovieGrid movies={searchResults} />
+      <Message ref={setObserveTarget}>
+        {isLoading && '로딩중'}
+        {!isLoading && '검색 결과가 더이상 없습니다.'}
+      </Message>
     </SearchLayout>
   );
 }
