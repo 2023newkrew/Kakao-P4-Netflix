@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Banner, Header, ContentCardList, Footer } from "components";
+import { Banner, ContentCardList, Footer } from "components";
 import { ContentListsWrapper } from "./Main.style";
 
 import api from "utils/API";
@@ -27,7 +27,6 @@ export default function Main() {
 
   return (
     <>
-      <Header />
       <main>
         <Banner />
         <ContentCardLists genres={genres} />

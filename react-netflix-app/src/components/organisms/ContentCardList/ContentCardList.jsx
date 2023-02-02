@@ -40,14 +40,7 @@ const ContentCards = ({ contents }) => {
 };
 
 const ContentCardList = ({ id, genreName }) => {
-  const [contents, setContents] = useState([
-    // {
-    //   id: "",
-    //   backdrop_path: "",
-    //   title: "",
-    //   overview: "",
-    // },
-  ]);
+  const [contents, setContents] = useState([]);
 
   useEffect(() => {
     getContentsByGenre();

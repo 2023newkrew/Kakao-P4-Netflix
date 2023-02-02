@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const HeaderContainer = styled.header`
   position: fixed;
@@ -28,7 +29,7 @@ export const NavItem = styled.div`
   margin: 0 10px;
 `;
 
-export const Logo = styled.a`
+export const Logo = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;

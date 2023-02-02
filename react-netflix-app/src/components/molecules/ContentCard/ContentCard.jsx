@@ -1,27 +1,29 @@
 import React from "react";
-import useModal from "hooks/useModal";
-import { EllipsisText, ContentDetail } from "components";
+import { EllipsisText, ContentDetail, ModalDispatchContext } from "components";
 import { ContentCardContainer, ContentCardImage, ContentTitleWrapper } from "./ContentCard.style";
 
 import api from "utils/API";
 
 const ContentCard = ({ content }) => {
-  const { Modal, open } = useModal();
+  const { openModal } = React.useContext(ModalDispatchContext);
 
   return (
-    <ContentCardContainer>
-      <Modal>
-        <ContentDetail
-          title={content.title}
-          desc={content.overview}
-          imageURL={content.backdrop_path}
-        />
-      </Modal>
-      <article onClick={open}>
+    <ContentCardContainer
+      onClick={() =>
+        openModal(
+          <ContentDetail
+            title={content.title}
+            desc={content.overview}
+            imageURL={content.backdrop_path ?? content.poster_path}
+          />
+        )
+      }
+    >
+      <article>
         <div>
           <ContentCardImage
-            alt="컨텐츠 썸네일 이미지"
-            src={api.getImageSeverURL() + content.backdrop_path}
+            alt={`<${content.title}>의 썸네일 이미지`}
+            src={api.getImageSeverURL() + (content.backdrop_path ?? content.poster_path)}
             loading="lazy"
           />
         </div>
