@@ -63,12 +63,13 @@ function MovieCard({ movie }) {
   return (
     <MovieCardLayout>
       <ContentContainer onClick={openModal}>
-        {!poster_path && <NoPoster>{title}</NoPoster>}
-        {poster_path && (
+        {poster_path ? (
           <>
             <Poster path={poster_path} alt={title} />
             <Title>{title}</Title>
           </>
+        ) : (
+          <NoPoster>{title}</NoPoster>
         )}
       </ContentContainer>
       <ModalContainer>
