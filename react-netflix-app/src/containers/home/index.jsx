@@ -11,6 +11,7 @@ import { rand } from '@/utils/math';
 import { MOVIE_LIST, MOVIE_LIST_TITLE } from '@/constants/movie';
 import { MovieListSection, SpinnerContainer } from './styles';
 import Spinner from '@/components/common/spinner';
+import CommonLayout from '@/layout/common-layout';
 
 const Home = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
@@ -57,14 +58,14 @@ const Home = () => {
   }
 
   return (
-    <>
+    <CommonLayout>
       <Hero movie={heroMovie} />
       <MovieListSection>
         {movieLists.map(([title, movies]) => (
           <MovieList key={title} title={MOVIE_LIST_TITLE[title]} movies={movies} />
         ))}
       </MovieListSection>
-    </>
+    </CommonLayout>
   );
 };
 
