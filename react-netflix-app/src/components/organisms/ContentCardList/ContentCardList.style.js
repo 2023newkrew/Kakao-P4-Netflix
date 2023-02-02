@@ -10,8 +10,6 @@ export const ContentListContainer = styled.li`
 `;
 
 export const ContentGroupListWrapper = styled.ul`
-  padding: 10px 0px;
-
   &::-webkit-scrollbar {
     display: none;
   }
@@ -20,17 +18,18 @@ export const ContentGroupListWrapper = styled.ul`
 export const ContentGroupWrapper = styled.div`
   display: grid;
   row-gap: 2vw;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(${(props) => props.cardsPerGroup}, 1fr);
+  padding: 10px 0px;
 `;
 
 export const ContentListTitle = styled.h3`
-  padding: 10px 30px;
+  padding: 10px 2vw;
   font-size: 20px;
   font-weight: bold;
 `;
 
 export const ContentGroupListSlider = styled(Swiper)`
-  padding: 0 30px;
+  padding: 0 2vw;
 
   .swiper-button-prev {
     background: url(${arrowLeft}) no-repeat;

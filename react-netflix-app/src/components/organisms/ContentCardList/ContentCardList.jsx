@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ContentCard } from "components";
+import { ResponsiveContext } from "contexts";
 import { SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 
@@ -16,8 +17,9 @@ import {
 } from "./ContentCardList.style";
 
 const ContentCardGroup = ({ contents }) => {
+  const { cardsPerGroup } = useContext(ResponsiveContext);
   return (
-    <ContentGroupWrapper>
+    <ContentGroupWrapper cardsPerGroup={cardsPerGroup}>
       {contents.map((content) => (
         <ContentCard key={content.id} content={content} />
       ))}
@@ -53,10 +55,11 @@ const ContentCardGroups = ({ contents, cardsPerGroup, type }) => {
 };
 
 const ContentCardList = ({ contents, title, type = "slide" }) => {
+  const { cardsPerGroup } = useContext(ResponsiveContext);
   return (
     <ContentListContainer>
       {title && <ContentListTitle>{title}</ContentListTitle>}
-      {<ContentCardGroups cardsPerGroup={6} contents={contents} type={type} />}
+      {<ContentCardGroups cardsPerGroup={cardsPerGroup} contents={contents} type={type} />}
     </ContentListContainer>
   );
 };

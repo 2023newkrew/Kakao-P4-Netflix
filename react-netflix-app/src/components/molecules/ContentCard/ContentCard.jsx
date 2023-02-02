@@ -1,13 +1,15 @@
-import React from "react";
-import { EllipsisText, ContentInfo, ModalDispatchContext } from "components";
-import { ContentCardContainer, ContentCardImage, ContentTitleWrapper } from "./ContentCard.style";
-
-import api from "utils/API";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { EllipsisText, ContentInfo } from "components";
+import { ModalDispatchContext, ResponsiveContext } from "contexts";
+import api from "utils/API";
+
+import { ContentCardContainer, ContentCardImage, ContentTitleWrapper } from "./ContentCard.style";
 
 const ContentCard = ({ content, type = "modal" }) => {
   const navigate = useNavigate();
   const { openModal } = React.useContext(ModalDispatchContext);
+  const { cardsPerGroup } = useContext(ResponsiveContext);
 
   const handleOnClick = () => {
     if (type === "modal") {
@@ -24,6 +26,7 @@ const ContentCard = ({ content, type = "modal" }) => {
   };
   return (
     <ContentCardContainer
+      cardsPerGroup={cardsPerGroup}
       onClick={() => {
         handleOnClick();
       }}
@@ -31,6 +34,7 @@ const ContentCard = ({ content, type = "modal" }) => {
       <article>
         <div>
           <ContentCardImage
+            cardsPerGroup={cardsPerGroup}
             alt={`<${content.title}>의 썸네일 이미지`}
             src={api.getImageSeverURL("low") + (content.backdrop_path ?? content.poster_path)}
             loading="lazy"
