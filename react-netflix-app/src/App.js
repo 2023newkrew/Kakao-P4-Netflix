@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+import React, { lazy, Suspense } from "react";
+
+import { getCookie } from "@utils/cookie";
+import MainRoute from "./routes/MainRoute";
+
+const LoginPage = lazy(() => import("@pages/LoginPage"));
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/*" element={getCookie("accessToken") ? <MainRoute /> : <LoginPage />} />
+        </Routes>
+      </Suspense>
+    </>
   );
-}
+};
 
 export default App;
