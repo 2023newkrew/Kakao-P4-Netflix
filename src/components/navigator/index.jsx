@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useSearchParam from '../../hooks/useSearchParam';
 
@@ -49,6 +49,7 @@ const SearchInput = styled.input`
 const rootElement = document.body.querySelector('#root');
 
 function Navigator() {
+  const location = useLocation();
   const navigate = useNavigate();
   const [isTop, setIsTop] = useState(!window.scrollY);
   const query = useSearchParam('query') ?? '';
@@ -57,7 +58,9 @@ function Navigator() {
     const { value } = event.target;
 
     if (value) {
-      navigate(`/search?query=${encodeURIComponent(value)}`);
+      navigate(`/search?query=${encodeURIComponent(value)}`, {
+        replace: location.pathname === '/search',
+      });
     } else {
       navigate('/');
     }
