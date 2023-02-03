@@ -26,10 +26,14 @@ export const logoutAccount = async () => {
 };
 
 export const verifyAccount = async (accessToken) => {
-  const response = await Account.post('/api/v1/account/token/verify/', {
-    token: accessToken,
-  });
-  return response;
+  try {
+    await Account.post('/api/v1/account/token/verify/', {
+      token: accessToken,
+    });
+    return true;
+  } catch (err) {
+    return false;
+  }
 };
 
 export const refreshAccount = async (refreshToken) => {
@@ -40,7 +44,7 @@ export const refreshAccount = async (refreshToken) => {
 };
 
 export const getAccount = async (accessToken) => {
-  const response = await Account.get('/api/v1/account/', {
+  const response = await Account.get('/api/v1/account/user/', {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -50,7 +54,7 @@ export const getAccount = async (accessToken) => {
 
 export const updateAccount = async (accessToken, firstName, lastName) => {
   const response = await Account.patch(
-    '/api/v1/account/',
+    '/api/v1/account/user/',
     {
       first_name: firstName,
       last_name: lastName,

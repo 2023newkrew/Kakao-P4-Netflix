@@ -4,6 +4,7 @@ import { loginAccount } from '@/apis/account';
 import { LoginFormButton, LoginFormContainer, LoginFormInput, LoginFormLabel } from './styles';
 import useUserStore from '@/stores/use-user-store';
 import { ROUTE, ROUTE_PATH } from '@/constants/route';
+import { LOCAL_STORAGE_ACCESS_TOKEN, LOCAL_STORAGE_REFRESH_TOKEN } from '@/constants/storage';
 
 const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -23,8 +24,8 @@ const LoginForm = () => {
 
       const { user, access_token: accessToken, refresh_token: refreshToken } = response.data;
 
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
+      localStorage.setItem(LOCAL_STORAGE_ACCESS_TOKEN, accessToken);
+      localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN, refreshToken);
       setUser({
         email: user.email,
         userName: user.username,
