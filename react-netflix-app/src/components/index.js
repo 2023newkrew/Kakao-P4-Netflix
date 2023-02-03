@@ -1,12 +1,11 @@
-import { ModalContent } from "./molecules/Modal/Modal.style";
-
 export { default as Banner } from "components/organisms/Banner/Banner";
 export { default as Footer } from "components/organisms/Footer/Footer";
 export { default as Header } from "components/organisms/Header/Header";
 export { default as Modal } from "components/molecules/Modal/Modal";
 export { default as Slider } from "components/molecules/Slider/Slider";
 export { default as ContentCard } from "components/molecules/ContentCard/ContentCard";
-export { default as ContentCardList } from "components/organisms/ContentCardList/ContentCardList";
+export { default as SliderContentList } from "components/organisms/SliderContentList/SliderContentList";
+export { default as GridContentList } from "components/organisms/GridContentList/GridContentList";
 export { default as NavTab } from "components/atoms/NavTab/NavTab";
 export { default as NavTabList } from "components/molecules/NavTabList/NavTabList";
 export { default as IconButton } from "components/atoms/IconButton/IconButton";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useDebounce from "hooks/useDebounce";
-import { ContentCardList } from "components";
+import { GridContentList } from "components";
 import api from "utils/API";
 
 import { SearchContainer } from "./Search.style";
@@ -29,7 +29,7 @@ const Search = () => {
 
   return (
     <SearchContainer>
-      <ContentCardList contents={contents} type="grid" />
+      <GridContentList contents={contents} type="grid" />
     </SearchContainer>
   );
 };

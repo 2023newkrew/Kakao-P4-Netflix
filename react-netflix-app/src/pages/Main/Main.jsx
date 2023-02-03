@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Banner, ContentCardList, Footer } from "components";
+import { Banner, SliderContentList } from "components";
 import { ContentListsWrapper } from "./Main.style";
 
 import api from "utils/API";
@@ -8,7 +8,7 @@ const ContentCardLists = ({ genres, contentsList }) => {
   return (
     <ContentListsWrapper>
       {contentsList.map((contents, index) => (
-        <ContentCardList
+        <SliderContentList
           key={genres[index].id}
           contents={contents.results}
           title={genres[index].name}
