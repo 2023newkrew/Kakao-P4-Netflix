@@ -14,10 +14,11 @@ import {
 import HeaderSearchInput from './header-search-input';
 import { ROUTE, ROUTE_PATH } from '@/constants/route';
 import useUserStore from '@/stores/use-user-store';
+import HeaderLogoutButton from './header-logout-button';
 
 const Header = () => {
   const isTop = useIsTop();
-  const { user } = useUserStore();
+  const { user, isLoggedIn } = useUserStore();
   const navigate = useNavigate();
 
   const navigateToHome = useCallback(() => {
@@ -32,6 +33,7 @@ const Header = () => {
           <HeaderSearchInput />
           <HeaderProfile src={ProfileIconImg} />
           <HeaderUsername>{user.userName}</HeaderUsername>
+          {isLoggedIn && <HeaderLogoutButton />}
         </HeaderRightContent>
       </HeaderContent>
     </HeaderContainer>

@@ -10,6 +10,16 @@ const useUserStore = create((set) => ({
     lastName: null,
   },
   setUser: (user) => set({ user }),
+  logoutUser: () =>
+    set({
+      isLoggedIn: false,
+      user: {
+        email: null,
+        userName: null,
+        firstName: null,
+        lastName: null,
+      },
+    }),
 }));
 
 export default useUserStore;
