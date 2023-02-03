@@ -13,18 +13,21 @@ const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
-  const requestRegister = useCallback((email, username, password, password2) => {
-    createAccount(username, email, password, password2)
-      .then(() => {
-        navigate(`${ROUTE_PATH[ROUTE.ACCOUNT]}${ROUTE_PATH[ROUTE.LOGIN]}`);
-      })
-      .catch((error) => {
-        const errorMessages = Object.entries(error.response.data).map(
-          ([key, value]) => `${key}: ${value}`,
-        );
-        setErrorMessage(errorMessages.join(' '));
-      });
-  }, []);
+  const requestRegister = useCallback(
+    (email, username, password, password2) => {
+      createAccount(username, email, password, password2)
+        .then(() => {
+          navigate(`${ROUTE_PATH[ROUTE.ACCOUNT]}${ROUTE_PATH[ROUTE.LOGIN]}`);
+        })
+        .catch((error) => {
+          const errorMessages = Object.entries(error.response.data).map(
+            ([key, value]) => `${key}: ${value}`,
+          );
+          setErrorMessage(errorMessages.join(' '));
+        });
+    },
+    [navigate],
+  );
 
   const onSubmit = useCallback(
     (event) => {
