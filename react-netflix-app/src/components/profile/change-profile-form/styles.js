@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ChangeProfileFormContainer = styled.div`
+export const ChangeProfileFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 500px;
