@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import Account from '@/utils/account';
 
 export const createAccount = async (username, email, password, passwordCheck) => {
@@ -21,8 +20,12 @@ export const loginAccount = async (email, password) => {
 };
 
 export const logoutAccount = async () => {
-  const response = await Account.post('/api/v1/account/logout/');
-  return response;
+  try {
+    await Account.post('/api/v1/account/logout/');
+    return true;
+  } catch (_) {
+    return false;
+  }
 };
 
 export const verifyAccount = async (accessToken) => {
@@ -31,7 +34,7 @@ export const verifyAccount = async (accessToken) => {
       token: accessToken,
     });
     return true;
-  } catch (err) {
+  } catch (_) {
     return false;
   }
 };
