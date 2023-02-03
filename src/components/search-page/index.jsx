@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
+import axios, { CanceledError } from 'axios';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useDebounce from '../../hooks/useDebounce';
 import useSearchParam from '../../hooks/useSearchParam';
@@ -39,7 +39,6 @@ function SearchPage() {
   const [movies, setMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const lastPromiseRef = useRef(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -52,28 +51,32 @@ function SearchPage() {
   };
 
   useEffect(() => {
-    if (debouncedQuery === '') {
-      lastPromiseRef.current = null;
-      return;
-    }
+    setIsLoading(true);
+  }, [query]);
+
+  useEffect(() => {
+    if (debouncedQuery === '') return undefined;
 
     setIsLoading(true);
-    (async () => {
-      try {
-        const currentPromise = axios.get(
-          `https://api.themoviedb.org/3/search/movie?api_key=c14724951e1843e630f68881a3192a57&language=ko&query=${debouncedQuery}`
-        );
-        lastPromiseRef.current = currentPromise;
-        const res = await currentPromise;
+    const controller = new AbortController();
 
-        if (lastPromiseRef.current === currentPromise) {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=c14724951e1843e630f68881a3192a57&language=ko&query=${debouncedQuery}`,
+        { signal: controller.signal }
+      )
+      .then(
+        (res) => {
           setMovies(res.data.results);
           setIsLoading(false);
+        },
+        (err) => {
+          if (err instanceof CanceledError) return;
+          setError(err);
         }
-      } catch (err) {
-        setError(err);
-      }
-    })();
+      );
+
+    return () => controller.abort();
   }, [debouncedQuery]);
 
   if (error) return <ErrorView error={error} />;
@@ -82,10 +85,7 @@ function SearchPage() {
     <>
       <StyledDiv>
         <div>
-          {query}{' '}
-          {!query || query !== debouncedQuery || isLoading
-            ? '검색 중...'
-            : `검색 결과: ${movies.length}개`}
+          {query} {isLoading ? '검색 중...' : `검색 결과: ${movies.length}개`}
         </div>
         {movies ? (
           <StyledList>
