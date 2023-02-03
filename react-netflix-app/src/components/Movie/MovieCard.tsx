@@ -17,6 +17,7 @@ import {
   NoImage,
 } from '@components/Movie/MovieCard.style';
 import useMovieDetail from '@components/Movie/useMovieDetail';
+import { useModalContext } from '@components/Modal/ModalContext';
 
 import { BACKDROP_W300_URL, BACKDROP_W780_URL } from '@constants/tmdb';
 import usePreviewImage from '@utilHooks/usePreviewImage';
@@ -25,7 +26,6 @@ import { ReactComponent as PlayIcon } from '@assets/icons/play.svg';
 import { ReactComponent as PlusIcon } from '@assets/icons/plus.svg';
 import { ReactComponent as ThumbsUpIcon } from '@assets/icons/thumbsUp.svg';
 import { ReactComponent as ArrowDownIcon } from '@assets/icons/arrowDown.svg';
-import { useModalContext } from '../Modal/ModalContext';
 import { Movie } from '@/types/movie';
 
 type DetailMovieCardProps = {

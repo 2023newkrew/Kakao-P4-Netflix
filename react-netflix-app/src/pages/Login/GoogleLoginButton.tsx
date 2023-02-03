@@ -1,6 +1,6 @@
 import { GoogleButton } from './Login.style';
 import { ReactComponent as GoogleIcon } from '@icons/google_normal.svg';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '@hooks/useAuth';
 
 const GoogleLoginButton = () => {
   const { handleSignIn } = useAuth();
