@@ -58,8 +58,8 @@ export default function Search() {
       <PageLayout>
         <SearchPage>
           <Message>
-            입력하신 검색어 &quot;{searchParams.get('q')}&quot;(와)과 일치하는
-            결과가 없습니다.
+            입력하신 검색어 &quot;{searchQuery}&quot;(와)과 일치하는 결과가
+            없습니다.
           </Message>
         </SearchPage>
       </PageLayout>
