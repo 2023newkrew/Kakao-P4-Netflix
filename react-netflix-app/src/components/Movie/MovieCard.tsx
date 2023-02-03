@@ -1,5 +1,4 @@
 import { MouseEvent, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
 import {
   Container,
@@ -78,9 +77,6 @@ const DetailMovieCard = ({ movie }: DetailMovieCardProps) => {
     </DetailContainer>
   );
 };
-DetailMovieCard.propTypes = {
-  movie: PropTypes.object,
-};
 
 type MovieCardProps = {
   movie: Movie;
@@ -106,9 +102,6 @@ const MovieCard = ({ movie }: MovieCardProps) => {
       {isHover && <DetailMovieCard movie={movie} />}
     </Container>
   );
-};
-MovieCard.propTypes = {
-  movie: PropTypes.object,
 };
 export default memo(MovieCard, (prev, current) => {
   return prev.movie.id === current.movie.id;

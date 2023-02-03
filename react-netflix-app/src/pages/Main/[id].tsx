@@ -1,5 +1,4 @@
 import tw from 'twin.macro';
-import PropTypes from 'prop-types';
 import useMovieVideos from '@pages/Main/hooks/useMovieVideos';
 import { POSTER_BASE_URL } from '@constants/tmdb';
 import { getTrailingComma } from '@utils/getTrailingComma';
@@ -35,10 +34,6 @@ const AboutRow = ({ title, tags }: AboutRowProps) => {
       <Tags>{tags}</Tags>
     </TagsWrapper>
   );
-};
-AboutRow.propTypes = {
-  title: PropTypes.string,
-  tags: PropTypes.node,
 };
 
 const VIDEO_TYPE = 'Trailer';

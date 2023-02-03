@@ -5,7 +5,7 @@ export type ModalOpenParameters = { node: ReactNode; onClose?: () => void };
 export type ModalContextType = {
   isOpen: boolean;
   close: (onClose?: () => void) => void;
-  open: ({ node, onClose }: ModalOpenParameters) => void;
+  open: (payload: ModalOpenParameters) => void;
   setPosition: (position: DOMRect) => void;
 };
 const initModalContext: ModalContextType = {

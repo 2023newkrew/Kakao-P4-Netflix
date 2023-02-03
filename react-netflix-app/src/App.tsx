@@ -3,14 +3,12 @@ import { useSearchParams, Outlet, useLocation, useNavigate } from 'react-router-
 import Header from '@components/Header';
 import Footer from '@components/Footer';
 import { useModal } from '@components/Modal';
-import { ModalOpenParameters, useModalContext } from '@components/Modal/ModalContext';
+import { useModalContext } from '@components/Modal/ModalContext';
 import MovieDetail from '@pages/Main/[id]';
 import useMovieDetail from '@components/Movie/useMovieDetail';
 
 const useMovieDetailModal = (movieId: number | null) => {
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const position = location.state?.position as DOMRect;
   const openModal = useModal();
   const { data, error, isLoading } = useMovieDetail(movieId);
 
@@ -21,12 +19,11 @@ const useMovieDetailModal = (movieId: number | null) => {
 
     openModal({
       node: <MovieDetail movie={data} />,
-      position,
       onClose() {
         searchParams.delete('movie');
         setSearchParams(searchParams);
       },
-    } as ModalOpenParameters);
+    });
   }, [movieId, data, error, isLoading]);
 };
 

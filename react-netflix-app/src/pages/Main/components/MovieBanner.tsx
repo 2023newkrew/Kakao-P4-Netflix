@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Banner } from '@pages/Main/MainPage.style';
 import { ReactComponent as PlayIcon } from '@assets/icons/play.svg';
 import { THUMBNAIL_BASE_URL } from '@constants/tmdb';
@@ -38,8 +37,5 @@ const MovieBanner = ({ movie }: Props) => {
       </Banner.BackgroundLayer>
     </Banner.Container>
   );
-};
-MovieBanner.propTypes = {
-  movie: PropTypes.object,
 };
 export default MovieBanner;

@@ -3,11 +3,11 @@ import { ErrorMessage, Input, InputContainer, InputField, PlaceLabel } from '@co
 import { UseFormRegisterReturn } from 'react-hook-form';
 
 type Props = {
+  rules: UseFormRegisterReturn;
+  value: string;
   type?: HTMLInputTypeAttribute;
   placeholder?: string;
   errorMessage?: string;
-  rules: UseFormRegisterReturn;
-  value: string;
 };
 const FormInput = ({ type = 'text', placeholder, errorMessage, rules, value }: Props) => {
   const setInputFocus = (event: MouseEvent<HTMLElement>) => {

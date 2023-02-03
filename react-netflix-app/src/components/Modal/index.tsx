@@ -1,6 +1,4 @@
 import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-
 import Portal from '@components/Portal';
 import { CloseButton, Container, Content } from '@components/Modal/Modal.style';
 import { ModalContext, ModalOpenParameters, useModalContext } from '@components/Modal/ModalContext';
@@ -46,6 +44,7 @@ export const ModalProvider = ({ children, id }: ModalProviderProps) => {
       setTimeout(() => {
         setNode(null);
         setIsOpen(false);
+        setTransformOrigin({ x: null, y: null });
         if (onClose && typeof onClose === 'function') {
           onClose();
         }
@@ -99,10 +98,6 @@ export const ModalProvider = ({ children, id }: ModalProviderProps) => {
       ) : null}
     </ModalContext.Provider>
   );
-};
-ModalProvider.propTypes = {
-  id: PropTypes.string,
-  children: PropTypes.node,
 };
 
 export const useModal = () => {

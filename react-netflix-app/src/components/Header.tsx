@@ -124,7 +124,7 @@ const Header = () => {
               {userData?.photoURL && (
                 <ProfileThumbnail
                   ref={profileImgRef}
-                  src={'userData.photoURL'}
+                  src={userData.photoURL}
                   alt="프로필 사진"
                   width="36"
                   onError={() => {
