@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import NetflixLogoImg from '@assets/netflix-logo.svg';
 import ProfileIconImg from '@assets/profile-icon.png';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +28,10 @@ const Header = () => {
     navigate(ROUTE_PATH[ROUTE.HOME]);
   }, [navigate]);
 
+  const onClickName = useCallback(() => {
+    navigate(`${ROUTE_PATH[ROUTE.ACCOUNT]}${ROUTE_PATH[ROUTE.PROFILE]}`);
+  }, []);
+
   return (
     <HeaderContainer isTop={isTop}>
       <HeaderContent>
@@ -34,7 +39,7 @@ const Header = () => {
         <HeaderRightContent>
           <HeaderSearchInput />
           <HeaderProfile src={ProfileIconImg} />
-          <HeaderNameContainer>
+          <HeaderNameContainer onClick={onClickName}>
             <HeaderNameSpan>{user.userName}</HeaderNameSpan>
             <HeaderNameSpan>{userFullName}</HeaderNameSpan>
           </HeaderNameContainer>

@@ -44,4 +44,6 @@ export const HeaderNameSpan = styled.span`
   font-size: 16px;
 `;
 
-export const HeaderNameContainer = styled.div``;
+export const HeaderNameContainer = styled.div`
+  cursor: pointer;
+`;
