@@ -33,7 +33,8 @@ const useLoginCheck = ({ loggedInCallback, loggedOutCallback, refresh = true } =
     };
 
     checkLogin();
-  }, [loggedInCallback, loggedOutCallback, refresh]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refresh]);
 };
 
 export default useLoginCheck;
