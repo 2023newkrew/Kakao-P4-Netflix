@@ -9,7 +9,7 @@ const useUserStore = create((set) => ({
     firstName: null,
     lastName: null,
   },
-  setUser: (user) => set({ user }),
+  setUser: (newUser) => set((state) => ({ user: { ...state.user, ...newUser } })),
   logoutUser: () =>
     set({
       isLoggedIn: false,
