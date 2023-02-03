@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { MovieInfo } from "../../../../util/class/TheMovieDBAPIType";
 import Util from "../../../../util/class/Util";
 import useAddEventListener from "../../../../util/hooks/useAddEventListener";
 import useDebounce from "../../../../util/hooks/useDebounce";
@@ -6,26 +7,32 @@ import CarouselColumn from "../CarouselColumn/CarouselColumn";
 import { CarouselRowContainer, CarouselRowSlider, CarouselRowLeftArrow, CarouselRowRightArrow } from "./styles";
 
 const DELAY = 500;
-const handleClickArrow = (setColIndex, dir) => {
+const handleClickArrow = (setColIndex: React.Dispatch<React.SetStateAction<number>>, dir: "left" | "right") => {
   const value = dir === "left" ? -1 : 1;
 
   setColIndex((prev) => prev + value);
 };
 
-export default function CarouselRow({ fetchMethod, itemCount }) {
-  const [imageContainerSize, setImageContainerSize] = useState(null);
-  const [separatedList, setSeparatedList] = useState([]);
+export default function CarouselRow({
+  fetchMethod,
+  itemCount,
+}: {
+  fetchMethod: () => Promise<MovieInfo[]>;
+  itemCount: number;
+}) {
+  const [imageContainerSize, setImageContainerSize] = useState<number | null>(null);
+  const [separatedList, setSeparatedList] = useState<MovieInfo[][]>([]);
   const [colIndex, setColIndex] = useState(0);
-  const mainRowSliderRef = useRef(null);
+  const mainRowSliderRef = useRef<HTMLDivElement>(null);
   const windowRef = useRef(window);
   const SEPARATE_COUNT = itemCount;
   const mainRowDebouncedHandler = useDebounce(
     () => {
-      mainRowSliderRef.current.style.transition = "transform 1s";
+      (mainRowSliderRef.current as HTMLElement).style.transition = "transform 1s";
     },
     DELAY,
     () => {
-      mainRowSliderRef.current.style.transition = "none";
+      (mainRowSliderRef.current as HTMLElement).style.transition = "none";
     },
     null
   );

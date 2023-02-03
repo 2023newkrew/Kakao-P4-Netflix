@@ -9,7 +9,7 @@ export default function HeaderInput() {
   const navigate = useNavigate();
 
   const debouncedHandler = useDebounce((event) => {
-    navigate(`/search/${event.target.value}`);
+    navigate(`/search/${(event.target as HTMLInputElement).value}`);
   }, DEBOUNCE_DELAY);
 
   return (
@@ -17,7 +17,7 @@ export default function HeaderInput() {
       ref={inputRef}
       onChange={(event) => {
         setText(event.target.value);
-        debouncedHandler(event);
+        debouncedHandler(event as unknown as Event);
       }}
       value={text}
     />

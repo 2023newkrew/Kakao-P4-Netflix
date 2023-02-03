@@ -10,11 +10,11 @@ const HeaderContainer = styled.div`
   height: 68px;
   padding: 0 5%;
   background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent);
-  background-color: ${(props) => (props.isTop ? "transparent" : "rgb(20, 20, 20)")};
+  background-color: ${(props: { isTop: boolean }) => (props.isTop ? "transparent" : "rgb(20, 20, 20)")};
   color: white;
   font-size: 11px;
   width: 100%;
-  position: ${(props) => (props.isTop ? "absolute" : "fixed")};
+  position: ${(props: { isTop: boolean }) => (props.isTop ? "absolute" : "fixed")};
   transition: background-color 0.4s;
   z-index: 50;
 `;

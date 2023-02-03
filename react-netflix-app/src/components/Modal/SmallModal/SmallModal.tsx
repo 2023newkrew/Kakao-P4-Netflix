@@ -15,11 +15,24 @@ export default function SmallModal({
   popupLeftOffset,
   popupInfoHeight,
   onClickPost,
+}: {
+  imgSrc: string;
+  toggle: () => void;
+  info: string;
+  width: number;
+  height: number;
+  offsetLeft: number;
+  offsetTop: number;
+  popupWidth: number;
+  popupTopOffset: number;
+  popupLeftOffset: number;
+  popupInfoHeight: number;
+  onClickPost: () => void;
 }) {
   const modalContainerRef = useRef(null);
   useAddEventListener(modalContainerRef, "mouseleave", toggle);
 
-  const handleClick = useCallback(
+  const handleClick: React.MouseEventHandler<HTMLImageElement> = useCallback(
     (event) => {
       /* 클릭 이벤트가 모달 외부로 전파되어 다시 toggle 되는 현상을 막기 위함 */
       event.stopPropagation();
@@ -35,7 +48,7 @@ export default function SmallModal({
         ref={modalContainerRef}
       >
         <SmallModalImg src={imgSrc} onClick={handleClick} />
-        <SmallModalInfo>{info}</SmallModalInfo>
+        <SmallModalInfo popupInfoHeight={popupInfoHeight}>{info}</SmallModalInfo>
       </SmallModalContainer>
     </SmallModalWrapper>
   );

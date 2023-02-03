@@ -1,7 +1,16 @@
 import styled, { keyframes } from "styled-components";
 
+interface PropsType {
+  width: number;
+  offsetTop: number;
+  offsetLeft: number;
+  popupWidth: number;
+  popupTopOffset: number;
+  popupLeftOffset: number;
+  popupInfoHeight: number;
+}
 const SmallModalWrapper = styled.div``;
-const popup = (props) => keyframes`
+const popup = (props: PropsType) => keyframes`
     0% {
       width: ${props.width}px;
       top: ${props.offsetTop}px;
@@ -14,9 +23,9 @@ const popup = (props) => keyframes`
     }
 `;
 const SmallModalContainer = styled.div`
-  width: ${(props) => props.width}px;
-  top: ${(props) => props.offsetTop}px;
-  left: ${(props) => props.offsetLeft}px;
+  width: ${(props: PropsType) => props.width}px;
+  top: ${(props: PropsType) => props.offsetTop}px;
+  left: ${(props: PropsType) => props.offsetLeft}px;
   transform-origin: center center;
   transform: none;
   z-index: 30;
@@ -34,7 +43,7 @@ const SmallModalImg = styled.img`
   width: 100%;
 `;
 const SmallModalInfo = styled.div`
-  height: ${(props) => props.popupInfoHeight}px;
+  height: ${(props: { popupInfoHeight: number }) => props.popupInfoHeight}px;
   color: white;
   white-space: pre-line;
 `;

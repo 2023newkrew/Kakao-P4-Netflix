@@ -18,7 +18,7 @@ const CarouselRowSlider = styled.div`
   padding-right: 30px;
 
   margin-bottom: 30px;
-  transform: translateX(${(props) => props.translateValue * -1}px);
+  transform: translateX(${(props: { translateValue: number }) => props.translateValue * -1}px);
   transition: transform 1s;
 `;
 
@@ -31,13 +31,20 @@ const CarouselRowLeftArrow = styled.div`
   filter: invert(1);
   top: 0;
   z-index: 10;
-  display: ${(props) => (props.isLeftEnd ? "none" : "unset")};
+  display: ${(props: { isLeftEnd: boolean }) => (props.isLeftEnd ? "none" : "unset")};
 `;
 
-const CarouselRowRightArrow = styled(CarouselRowLeftArrow)`
+const CarouselRowRightArrow = styled.div`
+  position: absolute;
+  width: 4%;
+  background-size: 100% 100%;
+  height: 100%;
+  filter: invert(1);
+  top: 0;
+  z-index: 10;
   background-image: url(${rightArrowIcon});
   right: 0px;
-  display: ${(props) => (props.isRightEnd ? "none" : "unset")};
+  display: ${(props: { isRightEnd: boolean }) => (props.isRightEnd ? "none" : "unset")};
 `;
 
 export { CarouselRowContainer, CarouselRowSlider, CarouselRowLeftArrow, CarouselRowRightArrow };

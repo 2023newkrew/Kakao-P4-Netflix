@@ -42,7 +42,7 @@ export default function CarouselItem({
   movieId: number;
   title: string;
   imgSrc: string;
-  setImageContainerSize: React.Dispatch<React.SetStateAction<number>> | null;
+  setImageContainerSize: React.Dispatch<React.SetStateAction<number | null>> | null;
   separateCount: number;
   voteAverage: number;
   voteCount: number;

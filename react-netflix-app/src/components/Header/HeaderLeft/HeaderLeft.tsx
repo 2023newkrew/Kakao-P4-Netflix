@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../../assets/netflixLogo.svg";
-import { HeaderLeftContainer, LogoContainer, LogoImg, UnOrderedList, ListItem } from "./styles.js";
+import { HeaderLeftContainer, LogoContainer, LogoImg, UnOrderedList, ListItem } from "./styles";
 import { useNavigate } from "react-router-dom";
 export default function HeaderLeft() {
   const navigate = useNavigate();

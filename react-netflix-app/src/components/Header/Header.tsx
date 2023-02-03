@@ -5,7 +5,7 @@ import { CheckTopDiv, HeaderContainer } from "./styles";
 
 export default function Header() {
   const [isTop, setIsTop] = useState(true);
-  const topCheckerRef = useRef(null);
+  const topCheckerRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef(
     new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
@@ -16,7 +16,7 @@ export default function Header() {
 
   useEffect(() => {
     const target = observerRef.current;
-    target.observe(topCheckerRef.current);
+    target.observe(topCheckerRef.current as HTMLDivElement);
 
     return () => {
       target.disconnect();
