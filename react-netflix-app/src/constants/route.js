@@ -5,6 +5,7 @@ export const ROUTE = {
   ACCOUNT: 'account',
   LOGIN: 'login',
   REGISTER: 'register',
+  PROFILE: 'profile',
 };
 
 export const ROUTE_PATH = {
@@ -14,4 +15,5 @@ export const ROUTE_PATH = {
   [ROUTE.ACCOUNT]: '/account',
   [ROUTE.LOGIN]: '/login',
   [ROUTE.REGISTER]: '/register',
+  [ROUTE.PROFILE]: '/profile',
 };
