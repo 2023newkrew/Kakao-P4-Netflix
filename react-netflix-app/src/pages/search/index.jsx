@@ -41,7 +41,10 @@ export default function Search() {
 
     const { page, total_pages, results } = data;
     if (page === total_pages) setIsLastPage(true);
-    setSearchResults((prev) => [...prev, ...results]);
+    setSearchResults((prev) => [
+      ...prev,
+      ...results.filter((result) => !prev.find(({ id }) => id === result.id)),
+    ]);
   }, [data]);
 
   useEffect(() => {
