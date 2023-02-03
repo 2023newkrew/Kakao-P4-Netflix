@@ -40,6 +40,8 @@ export const HeaderLogo = styled.img`
 
 export const HeaderProfile = styled.img``;
 
-export const HeaderUsername = styled.span`
+export const HeaderNameSpan = styled.span`
   font-size: 16px;
 `;
+
+export const HeaderNameContainer = styled.div``;

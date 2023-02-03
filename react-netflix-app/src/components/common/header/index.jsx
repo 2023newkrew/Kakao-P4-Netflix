@@ -1,15 +1,16 @@
 import NetflixLogoImg from '@assets/netflix-logo.svg';
 import ProfileIconImg from '@assets/profile-icon.png';
 import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import useIsTop from '@/hooks/use-is-top';
 import {
   HeaderContainer,
   HeaderContent,
   HeaderLogo,
+  HeaderNameContainer,
   HeaderProfile,
   HeaderRightContent,
-  HeaderUsername,
+  HeaderNameSpan,
 } from './styles';
 import HeaderSearchInput from './header-search-input';
 import { ROUTE, ROUTE_PATH } from '@/constants/route';
@@ -20,6 +21,7 @@ const Header = () => {
   const isTop = useIsTop();
   const { user, isLoggedIn } = useUserStore();
   const navigate = useNavigate();
+  const userFullName = useMemo(() => `(${user.firstName} ${user.lastName})`, [user]);
 
   const navigateToHome = useCallback(() => {
     navigate(ROUTE_PATH[ROUTE.HOME]);
@@ -32,7 +34,10 @@ const Header = () => {
         <HeaderRightContent>
           <HeaderSearchInput />
           <HeaderProfile src={ProfileIconImg} />
-          <HeaderUsername>{user.userName}</HeaderUsername>
+          <HeaderNameContainer>
+            <HeaderNameSpan>{user.userName}</HeaderNameSpan>
+            <HeaderNameSpan>{userFullName}</HeaderNameSpan>
+          </HeaderNameContainer>
           {isLoggedIn && <HeaderLogoutButton />}
         </HeaderRightContent>
       </HeaderContent>
