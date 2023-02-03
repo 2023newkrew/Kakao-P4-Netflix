@@ -1,24 +1,24 @@
 import { useEffect, useState } from 'react';
 
 export default function useInfiniteScroll() {
-  const [isIntersecting, setIntersecting] = useState(false);
-  const [observeTarget, setObserveTarget] = useState(null);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [observingTarget, setObservingTarget] = useState(null);
 
   useEffect(() => {
-    if (!observeTarget) return;
+    if (!observingTarget) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIntersecting(entry.isIntersecting);
+        setIsIntersecting(entry.isIntersecting);
       },
       { threshold: 1 }
     );
 
-    observer.observe(observeTarget);
+    observer.observe(observingTarget);
 
     // eslint-disable-next-line consistent-return
     return () => observer.disconnect();
-  }, [observeTarget]);
+  }, [observingTarget]);
 
-  return [isIntersecting, setObserveTarget];
+  return [isIntersecting, setObservingTarget];
 }

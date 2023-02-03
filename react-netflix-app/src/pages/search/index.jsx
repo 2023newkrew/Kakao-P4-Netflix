@@ -28,7 +28,7 @@ export default function Search() {
       page: currentPage,
     },
   });
-  const [isIntersecting, setObserveTarget] = useInfiniteScroll();
+  const [isIntersecting, setObservingTarget] = useInfiniteScroll();
 
   useEffect(() => {
     setCurrentPage(1);
@@ -70,7 +70,7 @@ export default function Search() {
     <PageLayout>
       <SearchPage>
         <MovieGrid movies={searchResults} />
-        <Message ref={setObserveTarget}>
+        <Message ref={setObservingTarget}>
           {isLoading && '로딩중'}
           {isLastPage && '검색 결과가 더이상 없습니다.'}
         </Message>
