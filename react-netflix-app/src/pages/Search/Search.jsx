@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import useDebounce from "hooks/useDebounce";
+import { useLocation } from "react-router-dom";
 import { GridContentList } from "components";
 import api from "utils/API";
 
@@ -8,28 +7,22 @@ import { SearchContainer } from "./Search.style";
 
 const Search = () => {
   const searchValue = new URLSearchParams(useLocation().search).get("q");
-  const navigate = useNavigate();
   const [contents, setContents] = useState([]);
-  const debouncedSearchValue = useDebounce(searchValue, 1000);
 
   const searchContents = async () => {
     const res = await api.get(`/search/movie`, {
-      query: debouncedSearchValue,
+      query: searchValue,
     });
     setContents(res.results);
   };
 
   useEffect(() => {
-    if (debouncedSearchValue) {
-      navigate("/", { replace: true });
-      navigate({ pathname: "/search", search: `?q=${searchValue}` });
-      searchContents();
-    }
-  }, [debouncedSearchValue]);
+    searchContents();
+  }, [searchValue]);
 
   return (
     <SearchContainer>
-      <GridContentList contents={contents} type="grid" />
+      <GridContentList contents={contents} />
     </SearchContainer>
   );
 };

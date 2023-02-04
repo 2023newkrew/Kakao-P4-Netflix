@@ -1,19 +1,34 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import useDebounce from "hooks/useDebounce";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { SearchBarContainer, SearchBarIcon, SearchBarInput } from "./SearchBar.style";
 import searchImg from "assets/search.svg";
 
 const SearchBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchValue, setSearchValue] = useState();
+  const debouncedSearchValue = useDebounce(searchValue, 1000);
 
-  const handleOnChange = (searchValue) => {
-    if (searchValue) {
-      navigate({ pathname: "/search", search: `?q=${searchValue}` }, { replace: true });
-    } else {
-      navigate("/", { replace: true });
+  const prevPage = location?.state?.prevPage;
+
+  useEffect(() => {
+    if (debouncedSearchValue) {
+      navigate(
+        {
+          pathname: "/search",
+          search: `?q=${debouncedSearchValue}`,
+        },
+        {
+          replace: prevPage === "search",
+          state: {
+            prevPage: "search",
+          },
+        }
+      );
     }
-  };
+  }, [debouncedSearchValue]);
 
   return (
     <SearchBarContainer>
@@ -21,7 +36,10 @@ const SearchBar = () => {
       <SearchBarInput
         placeholder="제목"
         onChange={({ target }) => {
-          handleOnChange(target.value);
+          setSearchValue(target.value);
+          if (prevPage === "search" && !target.value) {
+            navigate("/");
+          }
         }}
       ></SearchBarInput>
     </SearchBarContainer>
