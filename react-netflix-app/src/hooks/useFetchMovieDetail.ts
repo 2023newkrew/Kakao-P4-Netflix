@@ -13,6 +13,7 @@ export function useFetchMovieDetail(): [(movie: MovieType) => void, MovieDetailT
     try {
       const { data: { results } } = await getMovieVideo(movie.id);
       setMovieInfo({
+        id: movie.id,
         isYoutube: results.length > 0,
         path: results.length > 0 ? results[0].key : movie.poster_path
       });

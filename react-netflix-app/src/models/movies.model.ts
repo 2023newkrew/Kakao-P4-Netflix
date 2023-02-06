@@ -16,6 +16,7 @@ export type MovieType = {
 }
 export type MovieSortType = 'popular' | 'upcoming';
 export type MovieDetailType = {
+  id: number,
   isYoutube: boolean,
   path: string,
 }

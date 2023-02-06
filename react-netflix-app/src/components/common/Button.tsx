@@ -12,14 +12,15 @@ interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
-  font-size: ${props => props.fontSize || FONT_SIZE.s};
-  font-weight: ${props => props.fontWeight || FONT_WEIGHT.regular};
-  background-color: ${props => props.backgroundColor || COLORS.red};
-  color: ${props => props.color || COLORS.white};
-  
+  cursor: pointer;
   padding: 0px 17px;
   box-shadow: 0 1px 0 rgb(0 0 0 / 45%);
   appearance: none;
   border: none;
   border-radius: 3px;
+
+  font-size: ${props => props.fontSize || FONT_SIZE.s};
+  font-weight: ${props => props.fontWeight || FONT_WEIGHT.regular};
+  background-color: ${props => props.backgroundColor || COLORS.red};
+  color: ${props => props.color || COLORS.white};
 `;
