@@ -1,29 +1,40 @@
-import { COLORS } from '@constants/colors.contant';
-import { PropsWithChildren } from 'react';
+
+import { forwardRef, HTMLAttributes, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-const List = ({ children }: PropsWithChildren) => {
+const List = forwardRef(function List(
+  { children, className, ...rest }: PropsWithChildren & HTMLAttributes<HTMLUListElement>,
+  ref: ((instance: HTMLUListElement | null) => void) | React.RefObject<HTMLUListElement> | null | undefined
+) {
   return (
-    <ListContainer>
+    <ListContainer
+      className={className}
+      ref={ref}
+      {...rest}
+    >
       {children}
     </ListContainer>
   );
-};
+});
 
-List.Card = function ListCard({children}: PropsWithChildren) {
+const ListCard = ({ children, className, ...rest }: PropsWithChildren & HTMLAttributes<HTMLLIElement>) => {
   return (
-    <CardContainer>
+    <CardContainer
+      className={className}
+      {...rest}
+    >
       {children}
     </CardContainer>
   );
 };
 
-export default List;
+export {
+  List,
+  ListCard
+};
 
 const ListContainer = styled.ul`
   display: flex;
-  border-bottom: 8px solid ${COLORS.gray500};
-  gap: 8px;
 `;
 
 const CardContainer = styled.li`

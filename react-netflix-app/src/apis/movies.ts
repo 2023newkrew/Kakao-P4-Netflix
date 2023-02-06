@@ -1,11 +1,14 @@
+import { MovieSortType } from '@/models/movies.model';
+import { obj2queryString } from '@utils/queryString';
 import { customAxios } from './customAxios';
-const apiKey = process.env.REACT_APP_ACCESS_TOKEN;
 
-export const getPopularMovies = async () => {
-  return await customAxios.get(`/movie/popular?language=ko-KR&api_key=${apiKey}`);
+export const getMovies = async (sortType: MovieSortType) => {
+  return await customAxios.get(`/movie/${sortType}`);
 };
-
-export const getLatestMovies = async () => {
-  return await customAxios.get(`/movie/latest?api_key=${apiKey}&language=ko-KR`);
+export const getMovie = async (movieID: number) => {
+  return await customAxios.get(`/movie/${movieID}`);
+};
+export const getMovieVideo = async (movieID: number) => {
+  return await customAxios.get(`/movie/${movieID}/videos`);
 };
 
