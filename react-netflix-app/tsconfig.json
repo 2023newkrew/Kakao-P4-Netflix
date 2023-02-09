@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@icons/*": ["./src/assets/icons/*"],
+      "@api/*": ["./src/api/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@utilHooks/*": ["./src/utils/hooks/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@/*": ["./src/*"]
+    },
+
+    "allowJs": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true
+  },
+  "include": ["src", "craco.config.js", "babel.config.js", "tailwind.config.js", "twin.d.ts", "assets.d.ts"]
+}
