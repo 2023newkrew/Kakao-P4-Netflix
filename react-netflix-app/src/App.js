@@ -1,13 +1,14 @@
 import "App.css";
-import { ModalProvider } from "components";
-import Main from "pages/Main/Main";
+import { ModalProvider, ResponsiveProvider } from "contexts";
 import Router from "Router";
 
 function App() {
   return (
-    <ModalProvider>
-      <Router />
-    </ModalProvider>
+    <ResponsiveProvider>
+      <ModalProvider>
+        <Router />
+      </ModalProvider>
+    </ResponsiveProvider>
   );
 }
 

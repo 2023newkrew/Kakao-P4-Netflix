@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Banner, ContentCardList, Footer } from "components";
+import { Banner, SliderContentList } from "components";
 import { ContentListsWrapper } from "./Main.style";
 
 import api from "utils/API";
 
-const ContentCardLists = ({ genres }) => {
+const ContentCardLists = ({ genres, contentsList }) => {
   return (
     <ContentListsWrapper>
-      {genres.map((genre) => (
-        <ContentCardList key={genre.id} id={genre.id} genreName={genre.name} />
+      {contentsList.map((contents, index) => (
+        <SliderContentList
+          key={genres[index].id}
+          contents={contents.results}
+          title={genres[index].name}
+        />
       ))}
     </ContentListsWrapper>
   );
@@ -16,22 +20,32 @@ const ContentCardLists = ({ genres }) => {
 
 export default function Main() {
   const [genres, setGenres] = useState([]);
+  const [contentsList, setContentsList] = useState([]);
+
   useEffect(() => {
     getContentGenres();
   }, []);
 
+  useEffect(() => {
+    getContentsListByGenre();
+  }, [genres]);
+
   const getContentGenres = async () => {
-    const res = await api.get(`/genre/movie/list`, { language: "ko-KR" });
-    setGenres(res.genres.slice(0, 5));
+    const res = await api.get(`/genre/movie/list`);
+    setGenres(res.genres);
+  };
+  const getContentsListByGenre = async () => {
+    const promiseList = genres
+      .slice(contentsList.length, contentsList.length + 5)
+      .map((genre) => api.get(`/discover/movie`, { with_genres: genre.id }));
+    const res = await Promise.all(promiseList);
+    setContentsList([...contentsList, ...res]);
   };
 
   return (
-    <>
-      <main>
-        <Banner />
-        <ContentCardLists genres={genres} />
-      </main>
-      <Footer />
-    </>
+    <main>
+      <Banner />
+      <ContentCardLists genres={genres} contentsList={contentsList} />
+    </main>
   );
 }

@@ -27,7 +27,7 @@ const Banner = () => {
   }, []);
 
   const getPopularContent = async () => {
-    const res = await api.get(`/movie/popular`, { language: "ko-KR" });
+    const res = await api.get(`/movie/popular`);
     const randomNumber = getRandomNumber(0, res.results.length);
     setContent(res.results[randomNumber]);
   };

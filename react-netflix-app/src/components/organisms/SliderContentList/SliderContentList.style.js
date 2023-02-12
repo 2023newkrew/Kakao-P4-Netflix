@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper } from "swiper/react";
 
 import arrowLeft from "assets/arrow-left.svg";
 import arrowRight from "assets/arrow-right.svg";
@@ -9,22 +9,20 @@ export const ContentListContainer = styled.li`
   z-index: 5;
 `;
 
-export const ContentListWrapper = styled.ul`
-  padding: 10px 0px;
-
+export const ContentSliderWrapper = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
 export const ContentListTitle = styled.h3`
-  padding: 10px 30px;
+  padding: 10px 2vw;
   font-size: 20px;
   font-weight: bold;
 `;
 
-export const ContentListSlider = styled(Swiper)`
-  padding: 0 30px;
+export const Slider = styled(Swiper)`
+  padding: 0 2vw;
 
   .swiper-button-prev {
     background: url(${arrowLeft}) no-repeat;
