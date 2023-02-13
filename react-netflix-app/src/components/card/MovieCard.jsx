@@ -45,15 +45,32 @@ const Title = styled.div`
   }
 `;
 
-export default function MovieCard({ movie }) {
+const NoPoster = styled(Title)`
+  justify-content: center;
+  font-size: 2.4vw;
+  background-color: #808080;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+function MovieCard({ movie }) {
   const { poster_path, title } = movie;
   const [ModalContainer, openModal, closeModal] = useModal();
 
   return (
     <MovieCardLayout>
       <ContentContainer onClick={openModal}>
-        <Poster path={poster_path} alt={title} />
-        <Title>{title}</Title>
+        {poster_path ? (
+          <>
+            <Poster path={poster_path} alt={title} />
+            <Title>{title}</Title>
+          </>
+        ) : (
+          <NoPoster>{title}</NoPoster>
+        )}
       </ContentContainer>
       <ModalContainer>
         <InfoModal close={closeModal} movie={movie} />
@@ -74,3 +91,8 @@ MovieCard.defaultProps = {
     poster_path: null,
   },
 };
+
+export default React.memo(
+  MovieCard,
+  (prev, next) => prev.movie.id === next.movie.id
+);
