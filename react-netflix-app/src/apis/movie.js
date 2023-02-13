@@ -41,3 +41,14 @@ export const getMovieDetail = async (id) => {
   const response = await Client.get(`/movie/${id}`);
   return response.data;
 };
+
+export const getSearchMovieList = async (title, page = 1) => {
+  const response = await Client.get('/search/movie', {
+    params: {
+      query: title,
+      include_adult: false,
+      page,
+    },
+  });
+  return response.data;
+};

@@ -1,14 +1,25 @@
 import PropTypes from 'prop-types';
+import SearchGridItem from './search-grid-item';
+import { SearchGridContainer, SearchGridContent, SearchGridInner } from './styles';
 
-// eslint-disable-next-line no-unused-vars
-const SearchGrid = ({ movieList }) => <div>Hello</div>;
+const SearchGrid = ({ movieList }) => {
+  if (movieList.length === 0) return null;
 
-SearchGrid.propTypes = {
-  movieList: PropTypes.arrayOf(PropTypes.object),
+  return (
+    <SearchGridContainer>
+      <SearchGridContent>
+        <SearchGridInner>
+          {movieList.map((movie) => (
+            <SearchGridItem key={movie.id} movie={movie} />
+          ))}
+        </SearchGridInner>
+      </SearchGridContent>
+    </SearchGridContainer>
+  );
 };
 
-SearchGrid.defaultProps = {
-  movieList: [],
+SearchGrid.propTypes = {
+  movieList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default SearchGrid;

@@ -2,7 +2,7 @@ import { ThemeProvider } from '@emotion/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import AppRouter from './routes/app-router';
+import App from './containers/app';
 import GlobalStyle from './styles/global-style';
 import theme from './styles/theme';
 
@@ -12,7 +12,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-        <AppRouter />
+        <App />
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,

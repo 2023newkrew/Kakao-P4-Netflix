@@ -34,6 +34,16 @@ export const HeaderRightContent = styled.div`
   align-items: center;
 `;
 
-export const HeaderLogo = styled.img``;
+export const HeaderLogo = styled.img`
+  cursor: pointer;
+`;
 
 export const HeaderProfile = styled.img``;
+
+export const HeaderNameSpan = styled.span`
+  font-size: 16px;
+`;
+
+export const HeaderNameContainer = styled.div`
+  cursor: pointer;
+`;
